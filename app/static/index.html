@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Obrador — modelos locales</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@380;520;640&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">Ob</span>
+      <div>
+        <p class="eyebrow">taller de modelos locales</p>
+        <h1>Obrador</h1>
+      </div>
+    </div>
+    <div class="top-meta">
+      <p id="origin" class="origin"></p>
+      <p id="system-line" class="system-line">Comprobando el volumen…</p>
+      <button type="button" id="open-access" class="ghost">Acceso</button>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="Secciones">
+    <button type="button" data-tab="installed" class="tab is-on">Instalados</button>
+    <button type="button" data-tab="catalog" class="tab">Catálogo</button>
+    <button type="button" data-tab="chat" class="tab">Chat</button>
+  </nav>
+
+  <p id="banner" class="banner" hidden></p>
+
+  <main>
+    <section id="view-installed" class="view">
+      <div class="lede">
+        <h2>Modelos en este Docker</h2>
+        <p>Cada modelo descargado tiene su propia URL. Al usarla, el modelo se carga en memoria si todavía no está en marcha. Solo corre uno a la vez para caber en la RAM.</p>
+      </div>
+      <article id="preset" class="preset"></article>
+      <div id="installed-list" class="stack"></div>
+    </section>
+
+    <section id="view-catalog" class="view" hidden>
+      <div class="lede">
+        <h2>Catálogo GGUF</h2>
+        <p>Busca modelos abiertos en Hugging Face. El panel muestra el peso de cada archivo y bloquea los que pasan de <strong>8 GB</strong>.</p>
+      </div>
+      <form id="search-form" class="search">
+        <label class="sr" for="search-q">Buscar</label>
+        <input id="search-q" name="q" type="search" placeholder="Qwen, Llama, Gemma, Mistral…" autocomplete="off">
+        <button type="submit">Buscar</button>
+      </form>
+      <div id="search-results" class="stack"></div>
+      <div id="file-list" class="stack"></div>
+    </section>
+
+    <section id="view-chat" class="view" hidden>
+      <div class="lede">
+        <h2>Probar un modelo</h2>
+        <p>La primera respuesta puede tardar varios minutos: hay que leer el GGUF y reservar memoria. Qwen 3.5 razona en silencio si dejas el interruptor apagado.</p>
+      </div>
+      <div class="chat-layout">
+        <div class="chat-tools">
+          <label>Modelo
+            <select id="chat-model"></select>
+          </label>
+          <label>Temperatura
+            <input id="chat-temp" type="number" min="0" max="2" step="0.1" value="0.7">
+          </label>
+          <label>Máx. tokens
+            <input id="chat-max" type="number" min="16" max="4096" step="16" value="384">
+          </label>
+          <label class="check">
+            <input id="chat-think" type="checkbox">
+            Mostrar razonamiento
+          </label>
+          <button type="button" id="chat-clear" class="ghost">Vaciar</button>
+          <p id="chat-status" class="chat-status"></p>
+        </div>
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="chat-form" class="chat-form">
+          <label class="sr" for="chat-input">Mensaje</label>
+          <textarea id="chat-input" rows="3" placeholder="Escribe un mensaje para este modelo"></textarea>
+          <button type="submit" id="chat-send">Enviar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="access">
+    <form method="dialog" id="access-form">
+      <h2>Acceso</h2>
+      <p>Si el contenedor arrancó sin claves, déjalas vacías. Si definiste <code>ADMIN_TOKEN</code> o <code>API_KEY</code>, escríbelas aquí. Se quedan solo en este navegador.</p>
+      <label>Token de administración
+        <input id="admin-token" type="password" autocomplete="off">
+      </label>
+      <label>API key de inferencia
+        <input id="api-key" type="password" autocomplete="off">
+      </label>
+      <div class="dialog-actions">
+        <button type="submit" value="save">Guardar</button>
+        <button type="button" id="access-close" class="ghost">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
