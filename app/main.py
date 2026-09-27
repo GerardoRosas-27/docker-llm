@@ -23,6 +23,7 @@ from app.policy import (
     group_gguf_entries,
     max_model_bytes,
     quant_label,
+    non_model_reason,
     split_info,
     split_load_reason,
     validate_filename,
@@ -200,6 +201,9 @@ def _bundle(repo_id: str, filename: str) -> tuple[str, list[str], int]:
     la descarga de un conjunto que pasa de 9 GB.
     """
     filename = validate_filename(filename)
+    accessory = non_model_reason(filename)
+    if accessory:
+        raise PolicyError(accessory)
     info = split_info(filename)
     if not info:
         size = hfclient.file_size(repo_id, filename)
@@ -316,7 +320,11 @@ def _catalog_files(repo_id: str) -> list[dict]:
         if entry.get("split") and (entry.get("missing_parts") or not entry.get("parts")):
             # Una parte suelta no es un modelo. Solo se ofrece el conjunto completo.
             continue
-        allowed, reason = evaluate(entry.get("size_bytes"))
+        accessory = non_model_reason(entry["filename"])
+        if accessory:
+            allowed, reason = False, accessory
+        else:
+            allowed, reason = evaluate(entry.get("size_bytes"))
         if entry.get("split"):
             label = f"{entry.get('stem')} · modelo completo, {entry['part_total']} partes"
         else:

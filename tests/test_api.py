@@ -126,6 +126,23 @@ def test_generar_claves_de_acceso(client):
     assert allowed.status_code == 200
 
 
+def test_no_descarga_un_imatrix(client, monkeypatch):
+    monkeypatch.setattr(
+        "app.hfclient.file_size",
+        lambda repo, filename: 5_000_000,
+    )
+    response = client.post(
+        "/api/models/download",
+        json={
+            "repo_id": "DevQuasar/XiaomiMiMo.MiMo-V2-Flash-GGUF",
+            "filename": "XiaomiMiMo_MiMo-V2-Flash-imatrix.gguf",
+        },
+    )
+    assert response.status_code == 400
+    assert "imatrix" in response.json()["detail"]
+    assert db.list_models() == []
+
+
 def test_rechaza_nombres_peligrosos(client):
     response = client.post(
         "/api/models/download",

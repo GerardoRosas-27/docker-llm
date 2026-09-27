@@ -117,7 +117,27 @@ def slug_source(filename: str) -> str:
     return filename
 
 
+def non_model_reason(filename: str) -> str | None:
+    """Archivos GGUF que no son pesos de un modelo de chat."""
+    base = (filename or "").replace("\\", "/").split("/")[-1].lower()
+    if "imatrix" in base:
+        return (
+            "Este archivo es una matriz imatrix, no un modelo. "
+            "Sirve para cuantizar pesos, no para chatear. "
+            "Elimínalo y descarga un GGUF de pesos, por ejemplo uno Q4_K_M."
+        )
+    if "mmproj" in base:
+        return (
+            "Este archivo es el proyector de visión (mmproj), no el modelo de texto. "
+            "Descarga el GGUF principal."
+        )
+    return None
+
+
 def split_load_reason(filename: str, sibling_names: list[str] | None = None) -> str | None:
+    accessory = non_model_reason(filename)
+    if accessory:
+        return accessory
     info = split_info(filename)
     if not info:
         return None

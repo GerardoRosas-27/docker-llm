@@ -42,6 +42,16 @@ def test_parte_suelta_no_arranca_y_el_conjunto_se_suma():
     assert evaluate(small["size_bytes"])[0] is True
 
 
+def test_imatrix_no_es_un_modelo():
+    from app.policy import non_model_reason, split_load_reason
+
+    reason = non_model_reason("XiaomiMiMo_MiMo-V2-Flash-imatrix.gguf")
+    assert reason
+    assert "imatrix" in reason
+    assert split_load_reason("XiaomiMiMo_MiMo-V2-Flash-imatrix.gguf") == reason
+    assert non_model_reason("Qwen3.5-9B-Q4_K_M.gguf") is None
+
+
 def test_slug_del_qwen():
     assert slugify("Qwen_Qwen3.5-9B-Q4_K_M.gguf") == "qwen-qwen3.5-9b-q4-k-m"
 
