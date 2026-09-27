@@ -80,7 +80,7 @@ h3 { margin: 0; font-size: 1.2rem; }
   border-radius: 999px;
   padding: 0.45rem 0.9rem;
 }
-.tab.is-on, .search button, .chat-form button, .card button.primary, .preset button {
+.tab.is-on, .search button, .chat-form button, .card button.primary, .preset button, #access button.primary {
   background: var(--copper);
   color: var(--copper-ink);
   border-color: transparent;

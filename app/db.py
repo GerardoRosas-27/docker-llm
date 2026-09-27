@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 import threading
 from datetime import datetime, timezone
 from typing import Any
 
 from app import config
-from app.policy import slugify
+from app.policy import slug_source, slugify
 
 _lock = threading.Lock()
 
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS models (
     error TEXT,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL,
+    parts TEXT,
     UNIQUE (repo_id, filename)
 );
 CREATE TABLE IF NOT EXISTS meta (
@@ -50,6 +52,9 @@ def init() -> None:
         conn = _connect()
         try:
             conn.executescript(_SCHEMA)
+            columns = {row[1] for row in conn.execute("PRAGMA table_info(models)")}
+            if "parts" not in columns:
+                conn.execute("ALTER TABLE models ADD COLUMN parts TEXT")
             conn.commit()
         finally:
             conn.close()
@@ -58,6 +63,7 @@ def init() -> None:
 def reset() -> None:
     def op(conn: sqlite3.Connection) -> None:
         conn.execute("DELETE FROM models")
+        conn.execute("DELETE FROM meta")
 
     _write(op)
 
@@ -133,7 +139,7 @@ def list_models() -> list[dict]:
 
 
 def _unique_slug(conn: sqlite3.Connection, repo_id: str, filename: str) -> str:
-    base = slugify(filename)
+    base = slugify(slug_source(filename))
     current = conn.execute("SELECT slug, repo_id, filename FROM models WHERE slug = ?", (base,)).fetchone()
     if current is None:
         return base
@@ -154,7 +160,12 @@ def _unique_slug(conn: sqlite3.Connection, repo_id: str, filename: str) -> str:
         n += 1
 
 
-def upsert_download(repo_id: str, filename: str, size_bytes: int) -> dict:
+def upsert_download(
+    repo_id: str,
+    filename: str,
+    size_bytes: int,
+    parts: list[str] | None = None,
+) -> dict:
     """Crea o reencola un modelo para descarga. Devuelve la fila."""
 
     def op(conn: sqlite3.Connection) -> dict:
@@ -163,16 +174,18 @@ def upsert_download(repo_id: str, filename: str, size_bytes: int) -> dict:
             (repo_id, filename),
         ).fetchone()
         stamp = _now()
+        part_list = parts or [filename]
+        encoded = json.dumps(part_list)
         if existing is None:
             slug = _unique_slug(conn, repo_id, filename)
             conn.execute(
                 """
                 INSERT INTO models (
                     slug, repo_id, filename, size_bytes, local_path, status,
-                    progress, bytes_downloaded, error, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, NULL, 'queued', 0, 0, NULL, ?, ?)
+                    progress, bytes_downloaded, error, created_at, updated_at, parts
+                ) VALUES (?, ?, ?, ?, NULL, 'queued', 0, 0, NULL, ?, ?, ?)
                 """,
-                (slug, repo_id, filename, size_bytes, stamp, stamp),
+                (slug, repo_id, filename, size_bytes, stamp, stamp, encoded),
             )
         else:
             slug = existing["slug"]
@@ -184,10 +197,10 @@ def upsert_download(repo_id: str, filename: str, size_bytes: int) -> dict:
                 """
                 UPDATE models
                    SET size_bytes = ?, status = 'queued', progress = 0,
-                       bytes_downloaded = 0, error = NULL, updated_at = ?
+                       bytes_downloaded = 0, error = NULL, parts = ?, updated_at = ?
                  WHERE slug = ?
                 """,
-                (size_bytes, stamp, slug),
+                (size_bytes, encoded, stamp, slug),
             )
         row = conn.execute("SELECT * FROM models WHERE slug = ?", (slug,)).fetchone()
         return dict(row)

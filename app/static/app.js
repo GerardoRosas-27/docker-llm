@@ -100,6 +100,11 @@ function renderPreset() {
       <button type="button" id="preset-download" ${installed && installed.status !== "error" ? "disabled" : ""}>Descargar Qwen 3.5 9B</button>
     </div>`;
   $("preset-download")?.addEventListener("click", async () => {
+    const limit = state.system.max_model_label;
+    const ok = confirm(
+      `Qwen 3.5 9B Q4_K_M pesa ${preset.size_label}, dentro del límite de ${limit}.\n¿Empezar la descarga?`,
+    );
+    if (!ok) return;
     try {
       banner("");
       await api("/api/models/download", {
@@ -174,13 +179,14 @@ function renderInstalled() {
             <p class="meta">${esc(model.size_label)} ${model.quant ? "· " + esc(model.quant) : ""} · <span class="${tone}">${esc(label)}</span></p>
           </div>
           <div class="row-actions">
-            <button type="button" class="primary" data-action="start" data-slug="${esc(model.slug)}" ${model.status === "ready" ? "" : "disabled"}>Arrancar</button>
+            <button type="button" class="primary" data-action="start" data-slug="${esc(model.slug)}" ${model.status === "ready" && !model.blocked ? "" : "disabled"}>Arrancar</button>
             <button type="button" data-action="stop" data-slug="${esc(model.slug)}">Detener</button>
-            <button type="button" data-action="chat" data-slug="${esc(model.slug)}">Chat</button>
+            <button type="button" data-action="chat" data-slug="${esc(model.slug)}" ${model.blocked ? "disabled" : ""}>Chat</button>
             <button type="button" class="danger" data-action="delete" data-slug="${esc(model.slug)}">Eliminar</button>
           </div>
         </div>
-        ${error ? `<p class="bad">${esc(error)}</p>` : ""}
+        ${model.blocked ? `<p class="bad">${esc(model.blocked)}</p>` : ""}
+        ${error && !model.blocked ? `<p class="bad">${esc(error)}</p>` : ""}
         <div class="api">
           <p>OpenAI base <code>${esc(model.api.openai_base)}</code></p>
           <p>Este modelo <code>POST ${esc(model.api.chat)}</code></p>
@@ -197,7 +203,7 @@ let chatOptions = "";
 function fillChatModels() {
   const select = $("chat-model");
   const current = select.value;
-  const ready = state.models.filter((model) => model.status === "ready");
+  const ready = state.models.filter((model) => model.status === "ready" && !model.blocked);
   const html = ready.length
     ? ready.map((model) => `<option value="${esc(model.slug)}">${esc(model.slug)}</option>`).join("")
     : `<option value="">Sin modelos descargados</option>`;
@@ -320,20 +326,20 @@ async function openModel(repoId) {
         <button type="button" id="detail-back" class="ghost">Volver a la búsqueda</button>
       </div>
       <div class="facts">${facts.map((fact) => `<span>${esc(fact)}</span>`).join("")}</div>
-      <p class="meta">Límite comprobado antes de descargar: ${esc(payload.limit_label)}. Un archivo más pesado no se encola.</p>
+      <p class="meta">Solo aparecen modelos completos. El límite es ${esc(payload.limit_label)}.</p>
       ${payload.files.length ? payload.files.map((file) => `
         <div class="file-choice">
           <div class="card-top">
             <div>
               <p class="size-hero">${esc(file.size_label)}</p>
-              <strong>${esc(file.filename)}</strong>
-              <p class="meta">${file.quant ? esc(file.quant) : "GGUF"}${file.allowed ? "" : " · no se puede descargar"}</p>
+              <strong>${esc(file.label || file.filename)}</strong>
+              <p class="meta">${file.quant ? esc(file.quant) + " · " : ""}${file.split ? "se descarga como un solo modelo" : "archivo único"}${file.allowed ? "" : " · supera el límite"}</p>
               ${file.reason ? `<p class="bad">${esc(file.reason)}</p>` : ""}
             </div>
-            <button type="button" class="primary" data-action="download" data-repo="${esc(payload.repo_id)}" data-file="${esc(file.filename)}" ${file.allowed ? "" : "disabled"}>${file.allowed ? "Descargar" : "Supera 9 GB"}</button>
+            <button type="button" class="${file.allowed ? "primary" : "danger"}" data-action="download" data-repo="${esc(payload.repo_id)}" data-file="${esc(file.filename)}" data-label="${esc(file.label || file.filename)}" data-size="${esc(file.size_label)}" data-limit="${esc(payload.limit_label)}" data-parts="${file.part_total || 1}" data-allowed="${file.allowed ? "1" : "0"}" data-reason="${esc(file.reason || "")}">${file.allowed ? "Descargar" : "Ver límite"}</button>
           </div>
           ${meter(file.size_bytes)}
-        </div>`).join("") : `<p class="meta">Este repositorio no publica archivos GGUF en la rama principal.</p>`}
+        </div>`).join("") : `<p class="meta">Este repositorio no publica un modelo GGUF completo.</p>`}
     </article>`;
   $("detail-back").addEventListener("click", () => {
     host.innerHTML = "";
@@ -485,9 +491,26 @@ $("search-results").addEventListener("click", async (event) => {
   try { await openModel(card.dataset.repo); } catch (error) { banner(error.message); }
 });
 
+function confirmWithinLimit(button) {
+  const label = button.dataset.label || button.dataset.file;
+  const size = button.dataset.size || "tamaño desconocido";
+  const limit = button.dataset.limit || "9.00 GB";
+  const parts = Number(button.dataset.parts || "1");
+  const reason = button.dataset.reason || "";
+  if (button.dataset.allowed !== "1") {
+    alert(`${label}\nPesa ${size}. El límite es ${limit}.\n${reason}\nNo se empieza la descarga.`);
+    return false;
+  }
+  const together = parts > 1
+    ? `Se descargarán ${parts} partes juntas, como un solo modelo.`
+    : "Es un archivo completo.";
+  return confirm(`${label}\nPesa ${size}, dentro del límite de ${limit}.\n${together}\n¿Empezar la descarga?`);
+}
+
 $("model-detail").addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-action='download']");
-  if (!button || button.disabled) return;
+  if (!button) return;
+  if (!confirmWithinLimit(button)) return;
   button.disabled = true;
   try {
     banner("");
@@ -546,10 +569,49 @@ $("chat-input").addEventListener("keydown", (event) => {
   }
 });
 
-$("open-access").addEventListener("click", () => {
+async function openAccess() {
   $("admin-token").value = localStorage.getItem("obrador-admin") || "";
   $("api-key").value = localStorage.getItem("obrador-api-key") || "";
+  try {
+    const status = await api("/api/access");
+    $("access-note").textContent = status.admin_required || status.api_required
+      ? "Hay claves activas. Si generas otras, sustituyen a las anteriores. Cópialas: no se vuelven a mostrar."
+      : "El chat no pide clave hasta que pulses Generar. La clave nueva se guarda en este navegador.";
+  } catch (error) {
+    $("access-note").textContent = error.message;
+  }
   $("access").showModal();
+}
+
+async function generateKeys(which) {
+  const created = await api("/api/access/generate", {
+    method: "POST",
+    body: JSON.stringify({ which }),
+  });
+  if (created.admin_token) {
+    localStorage.setItem("obrador-admin", created.admin_token);
+    $("admin-token").value = created.admin_token;
+  }
+  if (created.api_key) {
+    localStorage.setItem("obrador-api-key", created.api_key);
+    $("api-key").value = created.api_key;
+  }
+  $("access-note").textContent = "Claves generadas. Cópialas ahora; el servidor no las vuelve a enseñar.";
+  await loadSystem();
+  await refresh();
+}
+
+$("open-access").addEventListener("click", () => {
+  openAccess().catch((error) => banner(error.message));
+});
+$("gen-admin").addEventListener("click", () => {
+  generateKeys("admin").catch((error) => banner(error.message));
+});
+$("gen-api").addEventListener("click", () => {
+  generateKeys("api").catch((error) => banner(error.message));
+});
+$("gen-both").addEventListener("click", () => {
+  generateKeys("both").catch((error) => banner(error.message));
 });
 $("access-close").addEventListener("click", () => $("access").close());
 $("access-form").addEventListener("submit", async () => {

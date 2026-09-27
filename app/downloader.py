@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import queue
 import threading
@@ -91,30 +92,44 @@ class Downloader:
         db.mark_downloading(slug)
         dest_dir = config.models_dir() / slug
         dest_dir.mkdir(parents=True, exist_ok=True)
-        relative = Path(model["filename"])
-        final = dest_dir / relative
-        final.parent.mkdir(parents=True, exist_ok=True)
-        partial = Path(str(final) + ".partial")
+        parts = _parts(model)
+        grand = int(model["size_bytes"] or 0)
+        done = 0
+        first_final: Path | None = None
+        partial: Path | None = None
         try:
-            self._stream(model, partial, cancel)
-            if cancel.is_set() or db.get(slug) is None:
-                partial.unlink(missing_ok=True)
+            for name in parts:
+                final = dest_dir / name
+                final.parent.mkdir(parents=True, exist_ok=True)
+                partial = Path(str(final) + ".partial")
+                self._stream(model, name, partial, cancel, done, grand)
+                if cancel.is_set() or db.get(slug) is None:
+                    partial.unlink(missing_ok=True)
+                    return
+                self._assert_gguf(partial)
+                partial.replace(final)
+                done += final.stat().st_size
+                if done > max_model_bytes():
+                    raise PolicyError(
+                        f"La descarga superó el límite de {format_bytes(max_model_bytes())} y se detuvo."
+                    )
+                if first_final is None:
+                    first_final = final
+                if db.get(slug):
+                    db.mark_progress(slug, done, grand or done)
+            if first_final is None or db.get(slug) is None:
                 return
-            self._assert_gguf(partial)
-            size = partial.stat().st_size
-            require_allowed(size)
-            partial.replace(final)
-            if db.get(slug) is None:
-                final.unlink(missing_ok=True)
-                return
-            db.mark_ready(slug, str(final), size)
-            log.info("listo %s (%s bytes)", slug, size)
+            require_allowed(done)
+            db.mark_ready(slug, str(first_final), done)
+            log.info("listo %s (%s bytes, %s archivos)", slug, done, len(parts))
         except DownloadCancelled:
-            partial.unlink(missing_ok=True)
+            if partial is not None:
+                partial.unlink(missing_ok=True)
             if db.get(slug):
                 db.mark_error(slug, "Descarga cancelada.")
         except PolicyError as exc:
-            partial.unlink(missing_ok=True)
+            if partial is not None:
+                partial.unlink(missing_ok=True)
             if db.get(slug):
                 db.mark_error(slug, str(exc))
         except Exception as exc:
@@ -122,10 +137,18 @@ class Downloader:
                 db.mark_error(slug, str(exc) or "Error de descarga")
             raise
 
-    def _stream(self, model: dict, partial: Path, cancel: threading.Event) -> None:
+    def _stream(
+        self,
+        model: dict,
+        filename: str,
+        partial: Path,
+        cancel: threading.Event,
+        base_done: int,
+        grand_total: int,
+    ) -> None:
         url = (
             f"https://huggingface.co/{model['repo_id']}/resolve/main/"
-            f"{quote(model['filename'], safe='/')}"
+            f"{quote(filename, safe='/')}"
         )
         headers = {"User-Agent": _USER_AGENT}
         token = config.hf_token()
@@ -150,9 +173,9 @@ class Downloader:
                     mode = "wb"
                 else:
                     mode = "ab"
-                total = _total_size(response, already)
-                if total is not None:
-                    require_allowed(total)
+                part_total = _total_size(response, already)
+                if base_done == 0 and part_total is not None:
+                    require_allowed(part_total)
                 last_write = 0
                 downloaded = already
                 with partial.open(mode) as handle:
@@ -161,16 +184,24 @@ class Downloader:
                             raise DownloadCancelled()
                         handle.write(chunk)
                         downloaded += len(chunk)
-                        if downloaded > max_model_bytes():
+                        if base_done + downloaded > max_model_bytes():
                             raise PolicyError(
                                 f"La descarga superó el límite de {format_bytes(max_model_bytes())} y se detuvo."
                             )
                         if downloaded - last_write >= 8 * 1024 * 1024:
                             last_write = downloaded
                             if db.get(model["slug"]):
-                                db.mark_progress(model["slug"], downloaded, total or downloaded)
+                                db.mark_progress(
+                                    model["slug"],
+                                    base_done + downloaded,
+                                    grand_total or (base_done + downloaded),
+                                )
                 if db.get(model["slug"]):
-                    db.mark_progress(model["slug"], downloaded, total or downloaded)
+                    db.mark_progress(
+                        model["slug"],
+                        base_done + downloaded,
+                        grand_total or (base_done + downloaded),
+                    )
 
     def _assert_gguf(self, path: Path) -> None:
         with path.open("rb") as handle:
@@ -178,6 +209,18 @@ class Downloader:
         if magic != b"GGUF":
             path.unlink(missing_ok=True)
             raise RuntimeError("El archivo descargado no es un GGUF válido.")
+
+
+def _parts(model: dict) -> list[str]:
+    raw = model.get("parts")
+    if raw:
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            parsed = None
+        if isinstance(parsed, list) and parsed:
+            return [str(item) for item in parsed]
+    return [model["filename"]]
 
 
 def _total_size(response: httpx.Response, already: int) -> int | None:

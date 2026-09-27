@@ -14,14 +14,17 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from app import config, db, hfclient
+from app import access, config, db, hfclient
 from app.downloader import service
 from app.policy import (
     PolicyError,
     evaluate,
     format_bytes,
+    group_gguf_entries,
     max_model_bytes,
     quant_label,
+    split_info,
+    split_load_reason,
     validate_filename,
     validate_repo,
 )
@@ -50,6 +53,10 @@ _OPENAI_FIELDS = {
 class DownloadRequest(BaseModel):
     repo_id: str
     filename: str
+
+
+class GenerateRequest(BaseModel):
+    which: str = "both"
 
 
 def _bootstrap() -> None:
@@ -131,7 +138,7 @@ def _bearer(request: Request) -> str:
 
 
 def _require_admin(request: Request) -> None:
-    expected = config.admin_token()
+    expected = access.admin_token()
     if not expected:
         return
     sent = request.headers.get("x-admin-token", "").strip() or _bearer(request)
@@ -140,7 +147,7 @@ def _require_admin(request: Request) -> None:
 
 
 def _require_api_key(request: Request) -> None:
-    expected = config.api_key()
+    expected = access.api_key()
     if not expected:
         return
     if _bearer(request) != expected:
@@ -163,10 +170,12 @@ def _present(model: dict, request: Request) -> dict:
     base = _base(request)
     runtime = runner.public_status(slug)
     size = model.get("size_bytes")
+    blocked = _load_block_reason(model)
     return {
         **model,
         "quant": quant_label(model["filename"]),
         "size_label": format_bytes(size),
+        "blocked": blocked,
         "runtime": runtime,
         "api": {
             "model_id": slug,
@@ -184,10 +193,39 @@ def _oai_error(status: int, message: str) -> JSONResponse:
     )
 
 
-def _known_size(repo_id: str, filename: str) -> int:
-    size = hfclient.file_size(repo_id, filename)
-    if size is None:
-        size = hfclient.head_size(repo_id, filename)
+def _bundle(repo_id: str, filename: str) -> tuple[str, list[str], int]:
+    """Resuelve un archivo suelto o todas las partes de un GGUF dividido.
+
+    El tamaño total se comprueba antes de devolver la lista, así no empieza
+    la descarga de un conjunto que pasa de 9 GB.
+    """
+    filename = validate_filename(filename)
+    info = split_info(filename)
+    if not info:
+        size = hfclient.file_size(repo_id, filename)
+        if size is None:
+            size = hfclient.head_size(repo_id, filename)
+        _ensure_fits(size)
+        return filename, [filename], int(size)
+    published = {item["filename"]: item.get("size_bytes") for item in hfclient.repo_gguf_files(repo_id)}
+    by_base = {name.split("/")[-1].lower(): (name, size) for name, size in published.items()}
+    parts: list[str] = []
+    sizes: list[int] = []
+    for index in range(1, info["total"] + 1):
+        expected = f"{info['stem']}-{index:05d}-of-{info['total']:05d}.gguf".lower()
+        found = by_base.get(expected)
+        if not found or found[1] is None:
+            raise PolicyError(
+                f"El modelo está partido en {info['total']} archivos y falta la parte {index}."
+            )
+        parts.append(found[0])
+        sizes.append(int(found[1]))
+    total = sum(sizes)
+    _ensure_fits(total)
+    return parts[0], parts, total
+
+
+def _ensure_fits(size: int | None) -> None:
     allowed, reason = evaluate(size)
     if not allowed:
         raise PolicyError(reason)
@@ -197,7 +235,32 @@ def _known_size(repo_id: str, filename: str) -> int:
         raise PolicyError(
             f"Quedan {format_bytes(free)} libres y el archivo pesa {format_bytes(size)}."
         )
-    return size
+
+
+def _load_block_reason(model: dict) -> str | None:
+    names = None
+    info = split_info(model["filename"])
+    local_path = model.get("local_path")
+    if info and info["index"] == 1 and local_path:
+        directory = Path(local_path).parent
+        if directory.is_dir():
+            names = [item.name for item in directory.iterdir()]
+    return split_load_reason(model["filename"], names)
+
+
+@app.get("/api/access")
+def access_status(request: Request) -> dict:
+    return access.status()
+
+
+@app.post("/api/access/generate")
+def access_generate(body: GenerateRequest, request: Request) -> dict:
+    if access.admin_token():
+        _require_admin(request)
+    try:
+        return access.generate(body.which)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @app.get("/health")
@@ -228,8 +291,8 @@ def system(request: Request) -> dict:
         "llama_server": runner.resolve() is not None,
         "ctx_size": config.ctx_size(),
         "max_loaded_models": config.max_loaded_models(),
-        "api_key_required": bool(config.api_key()),
-        "admin_token_required": bool(config.admin_token()),
+        "api_key_required": bool(access.api_key()),
+        "admin_token_required": bool(access.admin_token()),
         "preset": {
             "repo_id": config.default_repo(),
             "filename": config.default_file(),
@@ -249,18 +312,30 @@ def catalog_search(request: Request, q: str = "", limit: int = 12) -> dict:
 
 def _catalog_files(repo_id: str) -> list[dict]:
     files = []
-    for entry in hfclient.repo_gguf_files(repo_id):
-        allowed, reason = evaluate(entry["size_bytes"])
+    for entry in group_gguf_entries(hfclient.repo_gguf_files(repo_id)):
+        if entry.get("split") and (entry.get("missing_parts") or not entry.get("parts")):
+            # Una parte suelta no es un modelo. Solo se ofrece el conjunto completo.
+            continue
+        allowed, reason = evaluate(entry.get("size_bytes"))
+        if entry.get("split"):
+            label = f"{entry.get('stem')} · modelo completo, {entry['part_total']} partes"
+        else:
+            label = entry["filename"]
         files.append(
             {
                 "filename": entry["filename"],
-                "size_bytes": entry["size_bytes"],
-                "size_label": format_bytes(entry["size_bytes"]),
-                "quant": quant_label(entry["filename"]),
+                "label": label,
+                "size_bytes": entry.get("size_bytes"),
+                "size_label": format_bytes(entry.get("size_bytes")),
+                "quant": entry.get("quant") or quant_label(entry["filename"]),
                 "allowed": allowed,
                 "reason": reason or None,
+                "split": bool(entry.get("split")),
+                "part_total": entry.get("part_total"),
+                "parts": entry.get("parts") or [entry["filename"]],
             }
         )
+    files.sort(key=lambda item: (item["size_bytes"] is None, item["size_bytes"] or 0, item["filename"]))
     return files
 
 
@@ -304,9 +379,8 @@ def get_installed(slug: str, request: Request) -> dict:
 def download_model(body: DownloadRequest, request: Request) -> dict:
     _require_admin(request)
     repo_id = validate_repo(body.repo_id)
-    filename = validate_filename(body.filename)
-    size = _known_size(repo_id, filename)
-    record = db.upsert_download(repo_id, filename, size)
+    filename, parts, size = _bundle(repo_id, body.filename)
+    record = db.upsert_download(repo_id, filename, size, parts)
     if record["status"] == "queued":
         service.enqueue(record["slug"])
     return _present(db.get(record["slug"]) or record, request)
@@ -343,6 +417,9 @@ async def start_model(slug: str, request: Request) -> dict:
         raise HTTPException(status_code=404, detail="Modelo no encontrado.")
     if model["status"] != "ready":
         raise HTTPException(status_code=409, detail="El modelo todavía no está descargado.")
+    blocked = _load_block_reason(model)
+    if blocked:
+        raise HTTPException(status_code=409, detail=blocked)
     runner.schedule(slug)
     return _present(model, request)
 
@@ -394,6 +471,9 @@ async def _run_inference(slug: str, path: str, body: dict) -> Response:
         return _oai_error(409, "El modelo se está descargando. Espera a que termine.")
     if model["status"] != "ready":
         return _oai_error(409, model.get("error") or "El modelo no está listo.")
+    blocked = _load_block_reason(model)
+    if blocked:
+        return _oai_error(409, blocked)
     try:
         running = await runner.ensure(slug)
     except Exception as exc:  # noqa: BLE001 - se devuelve al cliente de la API

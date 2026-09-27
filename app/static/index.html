@@ -49,7 +49,7 @@
     <section id="view-catalog" class="view" hidden>
       <div class="lede">
         <h2>Catálogo GGUF</h2>
-        <p>Busca un modelo y ábrelo para ver su ficha, el peso de cada archivo y descargarlo. El tope de <strong>9 GB</strong> se comprueba antes de empezar la descarga.</p>
+        <p>La búsqueda muestra modelos completos. Si un GGUF viene en varias partes, se juntan en uno solo. Antes de descargar, el panel avisa si el peso total pasa de <strong>9 GB</strong>.</p>
       </div>
       <form id="search-form" class="search">
         <label class="sr" for="search-q">Buscar</label>
@@ -107,15 +107,20 @@
   <dialog id="access">
     <form method="dialog" id="access-form">
       <h2>Acceso</h2>
-      <p>Si el contenedor arrancó sin claves, déjalas vacías. Si definiste <code>ADMIN_TOKEN</code> o <code>API_KEY</code>, escríbelas aquí. Se quedan solo en este navegador.</p>
+      <p id="access-note">El chat no pide clave hasta que generes una. Las claves se quedan en este navegador y en el volumen del contenedor.</p>
       <label>Token de administración
-        <input id="admin-token" type="password" autocomplete="off">
+        <input id="admin-token" type="text" autocomplete="off" spellcheck="false">
       </label>
       <label>API key de inferencia
-        <input id="api-key" type="password" autocomplete="off">
+        <input id="api-key" type="text" autocomplete="off" spellcheck="false">
       </label>
+      <div class="row-actions">
+        <button type="button" id="gen-admin">Generar token</button>
+        <button type="button" id="gen-api">Generar API key</button>
+        <button type="button" id="gen-both" class="primary">Generar ambas</button>
+      </div>
       <div class="dialog-actions">
-        <button type="submit" value="save">Guardar</button>
+        <button type="submit" value="save">Guardar en este navegador</button>
         <button type="button" id="access-close" class="ghost">Cerrar</button>
       </div>
     </form>

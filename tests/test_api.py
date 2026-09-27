@@ -70,6 +70,62 @@ def test_encola_el_q4_dentro_del_limite(client, monkeypatch):
     assert queued == ["qwen-qwen3.5-9b-q4-k-m"]
 
 
+def test_el_catalogo_no_lista_partes_sueltas(client, monkeypatch):
+    def files(_repo):
+        parts = [
+            {"filename": f"MiMo.Q2_K-{index:05d}-of-00008.gguf", "size_bytes": 2_734_034_240}
+            for index in range(1, 9)
+        ]
+        parts.append({"filename": "MiMo.Q2_K-00008-of-00099.gguf", "size_bytes": 1000})
+        return parts
+
+    monkeypatch.setattr("app.hfclient.repo_gguf_files", files)
+    response = client.get(
+        "/api/catalog/files",
+        params={"repo_id": "DevQuasar/XiaomiMiMo.MiMo-V2.5-GGUF"},
+    )
+    assert response.status_code == 200
+    listed = response.json()["files"]
+    assert len(listed) == 1
+    assert listed[0]["split"] is True
+    assert listed[0]["part_total"] == 8
+    assert listed[0]["allowed"] is False
+    assert "00008-of-00008" not in listed[0]["label"]
+    assert "modelo completo" in listed[0]["label"]
+
+
+def test_un_modelo_partido_de_mas_de_9gb_no_se_encola(client, monkeypatch):
+    monkeypatch.setattr(
+        "app.hfclient.repo_gguf_files",
+        lambda repo: [
+            {"filename": f"MiMo-Q2_K-{index:05d}-of-00008.gguf", "size_bytes": 2_734_034_240}
+            for index in range(1, 9)
+        ],
+    )
+    response = client.post(
+        "/api/models/download",
+        json={
+            "repo_id": "DevQuasar/XiaomiMiMo.MiMo-V2.5-GGUF",
+            "filename": "MiMo-Q2_K-00008-of-00008.gguf",
+        },
+    )
+    assert response.status_code == 400
+    assert "9.00 GB" in response.json()["detail"]
+    assert db.list_models() == []
+
+
+def test_generar_claves_de_acceso(client):
+    created = client.post("/api/access/generate", json={"which": "both"})
+    assert created.status_code == 200
+    body = created.json()
+    assert body["admin_token"]
+    assert body["api_key"]
+    blocked = client.get("/api/models")
+    assert blocked.status_code == 401
+    allowed = client.get("/api/models", headers={"X-Admin-Token": body["admin_token"]})
+    assert allowed.status_code == 200
+
+
 def test_rechaza_nombres_peligrosos(client):
     response = client.post(
         "/api/models/download",

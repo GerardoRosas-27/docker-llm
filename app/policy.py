@@ -85,3 +85,98 @@ def slugify(filename: str) -> str:
 def quant_label(filename: str) -> str | None:
     match = _QUANT.search(filename.split("/")[-1])
     return match.group(1).upper() if match else None
+
+
+_SPLIT = re.compile(
+    r"^(?P<stem>.+)-(?P<index>\d{5})-of-(?P<total>\d{5})\.gguf$",
+    re.IGNORECASE,
+)
+
+
+def split_info(filename: str) -> dict | None:
+    """Parte de un GGUF dividido, por ejemplo modelo-00002-of-00008.gguf."""
+    base = (filename or "").replace("\\", "/").split("/")[-1]
+    match = _SPLIT.match(base)
+    if not match:
+        return None
+    index = int(match.group("index"))
+    total = int(match.group("total"))
+    if total < 2 or index < 1 or index > total:
+        return None
+    return {"stem": match.group("stem"), "index": index, "total": total, "name": base}
+
+
+def part_name(stem: str, index: int, total: int) -> str:
+    return f"{stem}-{index:05d}-of-{total:05d}.gguf"
+
+
+def slug_source(filename: str) -> str:
+    info = split_info(filename)
+    if info:
+        return info["stem"] + ".gguf"
+    return filename
+
+
+def split_load_reason(filename: str, sibling_names: list[str] | None = None) -> str | None:
+    info = split_info(filename)
+    if not info:
+        return None
+    if info["index"] != 1:
+        return (
+            f"Esta descarga es solo la parte {info['index']} de {info['total']}. "
+            "Un modelo partido no arranca con una parte suelta: hacen falta todas, "
+            "y llama.cpp abre la primera. Elimínala. Si el conjunto completo pesa "
+            "9 GB o menos, descárgalo de nuevo desde el catálogo."
+        )
+    if sibling_names is None:
+        return None
+    have = {name.replace("\\", "/").split("/")[-1].lower() for name in sibling_names}
+    missing = [
+        index
+        for index in range(1, info["total"] + 1)
+        if part_name(info["stem"], index, info["total"]).lower() not in have
+    ]
+    if missing:
+        listed = ", ".join(str(index) for index in missing)
+        return f"Faltan las partes {listed} de {info['total']}."
+    return None
+
+
+def group_gguf_entries(entries: list[dict]) -> list[dict]:
+    """Junta las partes de un mismo GGUF y deja el resto como archivos sueltos."""
+    buckets: dict[tuple[str, int], list[dict]] = {}
+    singles: list[dict] = []
+    for entry in entries:
+        info = split_info(entry["filename"])
+        if not info:
+            singles.append({**entry, "split": False, "parts": [entry["filename"]]})
+            continue
+        buckets.setdefault((info["stem"].lower(), info["total"]), []).append(entry)
+    grouped: list[dict] = []
+    for (_stem, total), parts in buckets.items():
+        by_index: dict[int, dict] = {}
+        for part in parts:
+            info = split_info(part["filename"])
+            if info:
+                by_index[info["index"]] = part
+        sample = by_index.get(1) or next(iter(by_index.values()))
+        info = split_info(sample["filename"])
+        missing = [index for index in range(1, total + 1) if index not in by_index]
+        known = [by_index[index].get("size_bytes") for index in range(1, total + 1) if index in by_index]
+        complete = not missing and all(size is not None for size in known)
+        ordered = [by_index[index]["filename"] for index in range(1, total + 1) if index in by_index]
+        first = by_index.get(1)
+        grouped.append(
+            {
+                "filename": first["filename"] if first else sample["filename"],
+                "size_bytes": sum(known) if complete else None,
+                "quant": quant_label(sample["filename"]),
+                "split": True,
+                "part_total": total,
+                "part_count": len(by_index),
+                "missing_parts": missing,
+                "parts": ordered if first else [],
+                "stem": info["stem"] if info else sample["filename"],
+            }
+        )
+    return singles + grouped

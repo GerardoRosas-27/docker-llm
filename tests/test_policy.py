@@ -20,6 +20,28 @@ def test_el_mensaje_nombra_el_limite():
     assert format_bytes(6_169_341_984) == "6.17 GB"
 
 
+def test_parte_suelta_no_arranca_y_el_conjunto_se_suma():
+    from app.policy import group_gguf_entries, split_load_reason
+
+    reason = split_load_reason("XiaomiMiMo.MiMo-V2.5.Q2_K-00008-of-00008.gguf")
+    assert reason
+    assert "parte 8 de 8" in reason
+    grouped = group_gguf_entries([
+        {"filename": "modelo-Q4_K-00001-of-00002.gguf", "size_bytes": 4_000_000_000},
+        {"filename": "modelo-Q4_K-00002-of-00002.gguf", "size_bytes": 6_000_000_000},
+        {"filename": "chico-Q4_K_M.gguf", "size_bytes": 1_000_000_000},
+    ])
+    split = next(item for item in grouped if item["split"])
+    assert split["size_bytes"] == 10_000_000_000
+    assert split["parts"][0].endswith("00001-of-00002.gguf")
+    assert evaluate(split["size_bytes"])[0] is False
+    small = group_gguf_entries([
+        {"filename": "mini-00001-of-00002.gguf", "size_bytes": 2_000_000_000},
+        {"filename": "mini-00002-of-00002.gguf", "size_bytes": 2_000_000_000},
+    ])[0]
+    assert evaluate(small["size_bytes"])[0] is True
+
+
 def test_slug_del_qwen():
     assert slugify("Qwen_Qwen3.5-9B-Q4_K_M.gguf") == "qwen-qwen3.5-9b-q4-k-m"
 
