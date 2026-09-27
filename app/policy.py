@@ -1,11 +1,11 @@
-"""Reglas de descarga: solo GGUF y nunca por encima de 8 GB."""
+"""Reglas de descarga: solo GGUF y nunca por encima de 9 GB."""
 
 from __future__ import annotations
 
 import os
 import re
 
-MAX_MODEL_BYTES_DEFAULT = 8_000_000_000
+MAX_MODEL_BYTES_DEFAULT = 9_000_000_000
 
 _REPO = re.compile(
     r"^[A-Za-z0-9][A-Za-z0-9._-]{0,96}/[A-Za-z0-9][A-Za-z0-9._-]{0,128}$"

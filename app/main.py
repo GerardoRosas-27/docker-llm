@@ -247,10 +247,7 @@ def catalog_search(request: Request, q: str = "", limit: int = 12) -> dict:
     return {"results": hfclient.search_models(q, limit=limit)}
 
 
-@app.get("/api/catalog/files")
-def catalog_files(request: Request, repo_id: str) -> dict:
-    _require_admin(request)
-    repo_id = validate_repo(repo_id)
+def _catalog_files(repo_id: str) -> list[dict]:
     files = []
     for entry in hfclient.repo_gguf_files(repo_id):
         allowed, reason = evaluate(entry["size_bytes"])
@@ -264,7 +261,28 @@ def catalog_files(request: Request, repo_id: str) -> dict:
                 "reason": reason or None,
             }
         )
-    return {"repo_id": repo_id, "files": files}
+    return files
+
+
+@app.get("/api/catalog/files")
+def catalog_files(request: Request, repo_id: str) -> dict:
+    _require_admin(request)
+    repo_id = validate_repo(repo_id)
+    return {"repo_id": repo_id, "files": _catalog_files(repo_id)}
+
+
+@app.get("/api/catalog/model")
+def catalog_model(request: Request, repo_id: str) -> dict:
+    _require_admin(request)
+    repo_id = validate_repo(repo_id)
+    overview = hfclient.model_overview(repo_id)
+    files = _catalog_files(repo_id)
+    return {
+        **overview,
+        "files": files,
+        "limit_bytes": max_model_bytes(),
+        "limit_label": format_bytes(max_model_bytes()),
+    }
 
 
 @app.get("/api/models")
@@ -294,6 +312,29 @@ def download_model(body: DownloadRequest, request: Request) -> dict:
     return _present(db.get(record["slug"]) or record, request)
 
 
+async def _erase(slug: str) -> bool:
+    await runner.stop(slug)
+    service.cancel(slug)
+    model = db.delete(slug)
+    if model is None:
+        return False
+    directory = config.models_dir() / slug
+    if directory.exists():
+        shutil.rmtree(directory, ignore_errors=True)
+    return True
+
+
+@app.post("/api/downloads/stop")
+async def stop_downloads(request: Request) -> dict:
+    _require_admin(request)
+    stopped = []
+    for model in list(db.list_models()):
+        if model["status"] in ("queued", "downloading"):
+            if await _erase(model["slug"]):
+                stopped.append(model["slug"])
+    return {"stopped": stopped}
+
+
 @app.post("/api/models/{slug}/start")
 async def start_model(slug: str, request: Request) -> dict:
     _require_admin(request)
@@ -319,14 +360,8 @@ async def stop_model(slug: str, request: Request) -> dict:
 @app.delete("/api/models/{slug}")
 async def delete_model(slug: str, request: Request) -> dict:
     _require_admin(request)
-    await runner.stop(slug)
-    service.cancel(slug)
-    model = db.delete(slug)
-    if model is None:
+    if not await _erase(slug):
         raise HTTPException(status_code=404, detail="Modelo no encontrado.")
-    directory = config.models_dir() / slug
-    if directory.exists():
-        shutil.rmtree(directory, ignore_errors=True)
     return {"deleted": slug}
 
 

@@ -58,7 +58,7 @@ function banner(message) {
 }
 
 function meter(size) {
-  const max = state.system?.max_model_bytes || 8000000000;
+  const max = state.system?.max_model_bytes || 9000000000;
   if (!size) return `<div class="meter"><span style="width:0"></span></div>`;
   const over = size > max;
   const pct = Math.max(2, Math.min(100, (size / max) * 100));
@@ -106,6 +106,7 @@ function renderPreset() {
         method: "POST",
         body: JSON.stringify({ repo_id: preset.repo_id, filename: preset.filename }),
       });
+      showTab("downloads");
       await refresh();
     } catch (error) {
       banner(error.message);
@@ -113,13 +114,54 @@ function renderPreset() {
   });
 }
 
-function renderInstalled() {
-  const host = $("installed-list");
-  if (!state.models.length) {
-    host.innerHTML = `<article class="card"><p class="meta">Todavía no hay modelos en el volumen. El de Qwen 3.5 9B aparece arriba, o búscalo en el catálogo.</p></article>`;
+function inFlight(model) {
+  return model.status === "queued" || model.status === "downloading" || model.status === "error";
+}
+
+function renderDownloads() {
+  const items = state.models.filter(inFlight);
+  const tab = $("tab-downloads");
+  tab.textContent = items.length ? `Descargas en curso (${items.length})` : "Descargas en curso";
+  const host = $("download-list");
+  if (!host) return;
+  if (!items.length) {
+    host.innerHTML = `<article class="card"><p class="meta">No hay descargas en curso.</p></article>`;
     return;
   }
-  host.innerHTML = state.models.map((model) => {
+  host.innerHTML = items.map((model) => {
+    const [label, tone] = statusLabel(model);
+    const pct = Math.round((model.progress || 0) * 100);
+    const active = model.status === "queued" || model.status === "downloading";
+    return `
+      <article class="card">
+        <div class="card-top">
+          <div>
+            <h3>${esc(model.filename)}</h3>
+            <p class="meta">${esc(model.repo_id)} · ${esc(model.size_label)}</p>
+            <p class="meta"><span class="${tone}">${esc(label)}</span>${model.bytes_downloaded ? ` · ${esc(formatBytes(model.bytes_downloaded))} recibidos` : ""}</p>
+          </div>
+          <button type="button" class="danger" data-action="cancel" data-slug="${esc(model.slug)}">${active ? "Detener descarga" : "Eliminar"}</button>
+        </div>
+        ${active ? `<div class="meter"><span style="width:${pct}%"></span></div>` : ""}
+        ${model.error ? `<p class="bad">${esc(model.error)}</p>` : ""}
+      </article>`;
+  }).join("");
+}
+
+function formatBytes(n) {
+  if (n >= 1e9) return `${(n / 1e9).toFixed(2)} GB`;
+  if (n >= 1e6) return `${(n / 1e6).toFixed(1)} MB`;
+  return `${n} B`;
+}
+
+function renderInstalled() {
+  const host = $("installed-list");
+  const ready = state.models.filter((model) => model.status === "ready");
+  if (!ready.length) {
+    host.innerHTML = `<article class="card"><p class="meta">Todavía no hay modelos instalados. El de Qwen 3.5 9B aparece arriba, o búscalo en el catálogo.</p></article>`;
+    return;
+  }
+  host.innerHTML = ready.map((model) => {
     const [label, tone] = statusLabel(model);
     const log = (model.runtime?.log_tail || []).slice(-6).join("\n");
     const error = model.error || model.runtime?.error || "";
@@ -135,10 +177,9 @@ function renderInstalled() {
             <button type="button" class="primary" data-action="start" data-slug="${esc(model.slug)}" ${model.status === "ready" ? "" : "disabled"}>Arrancar</button>
             <button type="button" data-action="stop" data-slug="${esc(model.slug)}">Detener</button>
             <button type="button" data-action="chat" data-slug="${esc(model.slug)}">Chat</button>
-            <button type="button" data-action="delete" data-slug="${esc(model.slug)}">Borrar</button>
+            <button type="button" class="danger" data-action="delete" data-slug="${esc(model.slug)}">Eliminar</button>
           </div>
         </div>
-        ${model.status === "downloading" ? `<div class="meter"><span style="width:${Math.round((model.progress || 0) * 100)}%"></span></div>` : ""}
         ${error ? `<p class="bad">${esc(error)}</p>` : ""}
         <div class="api">
           <p>OpenAI base <code>${esc(model.api.openai_base)}</code></p>
@@ -184,6 +225,7 @@ async function refresh() {
   if (signature !== state.signature) {
     state.signature = signature;
     renderPreset();
+    renderDownloads();
     if (state.tab === "installed") renderInstalled();
   }
   if (state.tab === "chat") fillChatModels();
@@ -205,10 +247,11 @@ function showTab(name) {
   for (const button of document.querySelectorAll(".tab")) {
     button.classList.toggle("is-on", button.dataset.tab === name);
   }
-  for (const view of ["installed", "catalog", "chat"]) {
+  for (const view of ["installed", "downloads", "catalog", "chat"]) {
     $(`view-${view}`).hidden = view !== name;
   }
   if (name === "installed") renderInstalled();
+  if (name === "downloads") renderDownloads();
   if (name === "chat") {
     fillChatModels();
     paintHistory();
@@ -231,7 +274,8 @@ async function search(query) {
   banner("");
   const payload = await api(`/api/catalog/search?q=${encodeURIComponent(query)}`);
   const host = $("search-results");
-  $("file-list").innerHTML = "";
+  host.hidden = false;
+  $("model-detail").innerHTML = "";
   if (!payload.results.length) {
     host.innerHTML = `<article class="card"><p class="meta">Sin resultados GGUF.</p></article>`;
     return;
@@ -243,32 +287,58 @@ async function search(query) {
     </article>`).join("");
 }
 
-async function openRepo(repoId) {
+function formatWhen(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleString("es");
+}
+
+async function openModel(repoId) {
   banner("");
-  const payload = await api(`/api/catalog/files?repo_id=${encodeURIComponent(repoId)}`);
-  const host = $("file-list");
-  if (!payload.files.length) {
-    host.innerHTML = `<article class="card"><p class="meta">Ese repositorio no publica archivos GGUF en la rama principal.</p></article>`;
-    return;
-  }
+  const host = $("model-detail");
+  $("search-results").hidden = true;
+  host.innerHTML = `<article class="card"><p class="meta">Cargando la ficha y el peso de los archivos…</p></article>`;
+  const payload = await api(`/api/catalog/model?repo_id=${encodeURIComponent(repoId)}`);
+  const facts = [
+    payload.author && `Autor ${payload.author}`,
+    payload.pipeline_tag,
+    payload.license && `Licencia ${payload.license}`,
+    payload.library,
+    payload.base_model && `Base ${payload.base_model}`,
+    payload.last_modified && `Actualizado ${formatWhen(payload.last_modified)}`,
+    payload.gated && "Acceso restringido",
+  ].filter(Boolean);
   host.innerHTML = `
     <article class="card">
-      <h3>${esc(payload.repo_id)}</h3>
-      <div class="stack files">
-        ${payload.files.map((file) => `
-          <div>
-            <div class="card-top">
-              <div>
-                <strong>${esc(file.filename)}</strong>
-                <p class="meta">${esc(file.size_label)}${file.quant ? " · " + esc(file.quant) : ""}</p>
-                ${file.reason ? `<p class="bad">${esc(file.reason)}</p>` : ""}
-              </div>
-              <button type="button" class="primary" data-action="download" data-repo="${esc(payload.repo_id)}" data-file="${esc(file.filename)}" ${file.allowed ? "" : "disabled"}>${file.allowed ? "Descargar" : "Supera 8 GB"}</button>
-            </div>
-            ${meter(file.size_bytes)}
-          </div>`).join("")}
+      <div class="detail-head">
+        <div>
+          <p class="kicker">${Number(payload.downloads || 0).toLocaleString("es")} descargas · ${payload.likes || 0} me gusta</p>
+          <h3>${esc(payload.repo_id)}</h3>
+          ${payload.summary ? `<p class="meta">${esc(payload.summary)}</p>` : ""}
+        </div>
+        <button type="button" id="detail-back" class="ghost">Volver a la búsqueda</button>
       </div>
+      <div class="facts">${facts.map((fact) => `<span>${esc(fact)}</span>`).join("")}</div>
+      <p class="meta">Límite comprobado antes de descargar: ${esc(payload.limit_label)}. Un archivo más pesado no se encola.</p>
+      ${payload.files.length ? payload.files.map((file) => `
+        <div class="file-choice">
+          <div class="card-top">
+            <div>
+              <p class="size-hero">${esc(file.size_label)}</p>
+              <strong>${esc(file.filename)}</strong>
+              <p class="meta">${file.quant ? esc(file.quant) : "GGUF"}${file.allowed ? "" : " · no se puede descargar"}</p>
+              ${file.reason ? `<p class="bad">${esc(file.reason)}</p>` : ""}
+            </div>
+            <button type="button" class="primary" data-action="download" data-repo="${esc(payload.repo_id)}" data-file="${esc(file.filename)}" ${file.allowed ? "" : "disabled"}>${file.allowed ? "Descargar" : "Supera 9 GB"}</button>
+          </div>
+          ${meter(file.size_bytes)}
+        </div>`).join("") : `<p class="meta">Este repositorio no publica archivos GGUF en la rama principal.</p>`}
     </article>`;
+  $("detail-back").addEventListener("click", () => {
+    host.innerHTML = "";
+    $("search-results").hidden = false;
+  });
 }
 
 async function readSse(response, bubble) {
@@ -390,7 +460,7 @@ $("installed-list").addEventListener("click", async (event) => {
       return;
     }
     if (action === "delete") {
-      if (!confirm(`¿Borrar ${slug} del volumen?`)) return;
+      if (!confirm(`¿Eliminar ${slug} y borrar sus archivos del volumen?`)) return;
       await api(`/api/models/${slug}`, { method: "DELETE" });
     } else if (action === "start") {
       await api(`/api/models/${slug}/start`, { method: "POST" });
@@ -412,10 +482,10 @@ $("search-form").addEventListener("submit", async (event) => {
 $("search-results").addEventListener("click", async (event) => {
   const card = event.target.closest("[data-repo]");
   if (!card) return;
-  try { await openRepo(card.dataset.repo); } catch (error) { banner(error.message); }
+  try { await openModel(card.dataset.repo); } catch (error) { banner(error.message); }
 });
 
-$("file-list").addEventListener("click", async (event) => {
+$("model-detail").addEventListener("click", async (event) => {
   const button = event.target.closest("button[data-action='download']");
   if (!button || button.disabled) return;
   button.disabled = true;
@@ -425,11 +495,39 @@ $("file-list").addEventListener("click", async (event) => {
       method: "POST",
       body: JSON.stringify({ repo_id: button.dataset.repo, filename: button.dataset.file }),
     });
-    showTab("installed");
+    showTab("downloads");
     await refresh();
-    renderInstalled();
   } catch (error) {
     button.disabled = false;
+    banner(error.message);
+  }
+});
+
+$("download-list").addEventListener("click", async (event) => {
+  const button = event.target.closest("button[data-action='cancel']");
+  if (!button) return;
+  try {
+    banner("");
+    await api(`/api/models/${button.dataset.slug}`, { method: "DELETE" });
+    await refresh();
+    renderDownloads();
+  } catch (error) {
+    banner(error.message);
+  }
+});
+
+$("stop-all").addEventListener("click", async () => {
+  const active = state.models.filter((model) => model.status === "queued" || model.status === "downloading");
+  if (!active.length) {
+    banner("No hay descargas activas.");
+    return;
+  }
+  if (!confirm("¿Detener todas las descargas en curso?")) return;
+  try {
+    await api("/api/downloads/stop", { method: "POST" });
+    await refresh();
+    renderDownloads();
+  } catch (error) {
     banner(error.message);
   }
 });

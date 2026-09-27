@@ -6,9 +6,9 @@ def test_qwen_q4_cabe_y_los_pesados_no():
     # Tamaños reales de bartowski/Qwen_Qwen3.5-9B-GGUF.
     assert evaluate(6_169_341_984)[0] is True  # Q4_K_M, 6.17 GB
     assert evaluate(6_924_234_784)[0] is True  # Q4_K_L, 6.92 GB
-    assert evaluate(8_000_000_000)[0] is True
-    assert evaluate(8_000_000_001)[0] is False
-    assert evaluate(8_451_485_728)[0] is False  # Q6_K_L, 8.45 GB
+    assert evaluate(8_451_485_728)[0] is True  # Q6_K_L, 8.45 GB, bajo 9 GB
+    assert evaluate(9_000_000_000)[0] is True
+    assert evaluate(9_000_000_001)[0] is False
     assert evaluate(9_804_541_984)[0] is False  # Q8_0, 9.80 GB
     assert evaluate(None)[0] is False
 
@@ -16,7 +16,7 @@ def test_qwen_q4_cabe_y_los_pesados_no():
 def test_el_mensaje_nombra_el_limite():
     allowed, reason = evaluate(9_804_541_984)
     assert allowed is False
-    assert "8.00 GB" in reason
+    assert "9.00 GB" in reason
     assert format_bytes(6_169_341_984) == "6.17 GB"
 
 

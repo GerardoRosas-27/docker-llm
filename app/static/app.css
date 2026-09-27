@@ -70,6 +70,7 @@ h3 { margin: 0; font-size: 1.2rem; }
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.4rem;
   padding: 0.8rem 1.4rem 0;
 }
@@ -86,6 +87,7 @@ h3 { margin: 0; font-size: 1.2rem; }
   font-weight: 640;
 }
 button:disabled { opacity: 0.45; cursor: not-allowed; }
+.danger { border-color: var(--bad); color: #ffd0c8; }
 .ghost { background: transparent; }
 
 main { padding: 1rem 1.4rem 3rem; }
@@ -203,6 +205,12 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
   overflow: hidden;
   clip: rect(0 0 0 0);
 }
+
+.detail-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; flex-wrap: wrap; }
+.size-hero { margin: 0.2rem 0; font-family: var(--serif); font-size: 2rem; line-height: 1; }
+.facts { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.6rem 0; }
+.facts span { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.65rem; color: var(--muted); }
+.file-choice { border-top: 1px solid var(--line); padding-top: 0.8rem; }
 
 @media (max-width: 800px) {
   .top, .top-meta { text-align: left; display: grid; }

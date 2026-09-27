@@ -29,6 +29,7 @@
 
   <nav class="tabs" aria-label="Secciones">
     <button type="button" data-tab="installed" class="tab is-on">Instalados</button>
+    <button type="button" data-tab="downloads" class="tab" id="tab-downloads">Descargas en curso</button>
     <button type="button" data-tab="catalog" class="tab">Catálogo</button>
     <button type="button" data-tab="chat" class="tab">Chat</button>
   </nav>
@@ -48,7 +49,7 @@
     <section id="view-catalog" class="view" hidden>
       <div class="lede">
         <h2>Catálogo GGUF</h2>
-        <p>Busca modelos abiertos en Hugging Face. El panel muestra el peso de cada archivo y bloquea los que pasan de <strong>8 GB</strong>.</p>
+        <p>Busca un modelo y ábrelo para ver su ficha, el peso de cada archivo y descargarlo. El tope de <strong>9 GB</strong> se comprueba antes de empezar la descarga.</p>
       </div>
       <form id="search-form" class="search">
         <label class="sr" for="search-q">Buscar</label>
@@ -56,7 +57,18 @@
         <button type="submit">Buscar</button>
       </form>
       <div id="search-results" class="stack"></div>
-      <div id="file-list" class="stack"></div>
+      <div id="model-detail" class="stack"></div>
+    </section>
+
+    <section id="view-downloads" class="view" hidden>
+      <div class="lede">
+        <h2>Descargas en curso</h2>
+        <p>Aquí se ve el avance. Detener una descarga la cancela y quita el archivo a medias. Los modelos ya instalados se eliminan en Instalados.</p>
+      </div>
+      <div class="row-actions">
+        <button type="button" id="stop-all" class="danger">Detener todas</button>
+      </div>
+      <div id="download-list" class="stack"></div>
     </section>
 
     <section id="view-chat" class="view" hidden>

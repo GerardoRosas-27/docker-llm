@@ -12,7 +12,7 @@ import httpx
 
 from app import config, db
 from app.hfclient import HFError
-from app.policy import PolicyError, max_model_bytes, require_allowed
+from app.policy import PolicyError, format_bytes, max_model_bytes, require_allowed
 
 log = logging.getLogger("obrador.downloader")
 
@@ -79,6 +79,13 @@ class Downloader:
     def _download(self, slug: str) -> None:
         model = db.get(slug)
         if model is None or model["status"] == "ready":
+            return
+        try:
+            # El tope se aplica antes de abrir la conexión, no a mitad del archivo.
+            require_allowed(model.get("size_bytes"))
+        except PolicyError as exc:
+            if db.get(slug):
+                db.mark_error(slug, str(exc))
             return
         cancel = self._cancels.get(slug) or threading.Event()
         db.mark_downloading(slug)
@@ -156,7 +163,7 @@ class Downloader:
                         downloaded += len(chunk)
                         if downloaded > max_model_bytes():
                             raise PolicyError(
-                                "La descarga superó el límite de 8 GB y se detuvo."
+                                f"La descarga superó el límite de {format_bytes(max_model_bytes())} y se detuvo."
                             )
                         if downloaded - last_write >= 8 * 1024 * 1024:
                             last_write = downloaded

@@ -132,6 +132,58 @@ def head_size(repo_id: str, filename: str) -> int | None:
         return None
 
 
+def model_overview(repo_id: str) -> dict:
+    """Ficha corta del repositorio, sin la plantilla de chat ni los pesos."""
+    url = f"https://huggingface.co/api/models/{repo_id}"
+    try:
+        with _client() as client:
+            response = client.get(url)
+    except httpx.HTTPError as exc:
+        raise HFError(f"No se pudo leer el modelo: {exc}") from exc
+    if response.status_code == 404:
+        raise HFError("Repositorio no encontrado en Hugging Face.")
+    if response.status_code == 401:
+        raise HFError("Ese modelo pide una cuenta o un token de Hugging Face.")
+    try:
+        response.raise_for_status()
+        payload = response.json()
+    except httpx.HTTPError as exc:
+        raise HFError(f"No se pudo leer el modelo: {exc}") from exc
+    card = payload.get("cardData") or {}
+    tags = payload.get("tags") or []
+    license_name = card.get("license")
+    if not isinstance(license_name, str):
+        license_name = None
+        for tag in tags:
+            if isinstance(tag, str) and tag.startswith("license:"):
+                license_name = tag.split(":", 1)[1]
+                break
+    base_model = card.get("base_model")
+    if isinstance(base_model, list):
+        base_model = ", ".join(str(item) for item in base_model[:3])
+    elif not isinstance(base_model, str):
+        base_model = None
+    summary = ""
+    for key in ("description", "summary", "model_name"):
+        value = card.get(key)
+        if isinstance(value, str) and value.strip():
+            summary = value.strip()
+            break
+    return {
+        "repo_id": payload.get("id") or repo_id,
+        "author": payload.get("author") or repo_id.split("/", 1)[0],
+        "downloads": payload.get("downloads") or 0,
+        "likes": payload.get("likes") or 0,
+        "pipeline_tag": payload.get("pipeline_tag"),
+        "gated": bool(payload.get("gated")),
+        "last_modified": payload.get("lastModified"),
+        "license": license_name,
+        "base_model": base_model,
+        "library": card.get("library_name") or payload.get("library_name"),
+        "summary": summary[:700],
+    }
+
+
 def clear_cache() -> None:
     with _cache_lock:
         _cache.clear()

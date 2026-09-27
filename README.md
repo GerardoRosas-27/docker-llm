@@ -1,6 +1,6 @@
 # Obrador
 
-Panel en Docker para buscar modelos GGUF abiertos, descargar los que pesan **8 GB o menos**, ejecutarlos con llama.cpp y hablar con cada uno por su propia API.
+Panel en Docker para buscar modelos GGUF abiertos, descargar los que pesan **9 GB o menos**, ejecutarlos con llama.cpp y hablar con cada uno por su propia API.
 
 La API está hecha en Python (FastAPI). La interfaz es el panel de administración: catálogo, descargas, arranque y un chat para probar cada modelo. Todo el cómputo corre dentro del contenedor. Los pesos se guardan en un volumen, no en la imagen.
 
@@ -16,7 +16,7 @@ Al primer arranque se encola:
 | Peso real | **6.17 GB** (6 169 341 984 bytes) |
 | Base | [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B), licencia Apache 2.0 |
 
-Es el Q4 recomendado de Qwen 3.5 9B. En el mismo repositorio, `Q4_K_L` pesa 6.92 GB y también pasa el límite; `Q8_0` pesa 9.80 GB y el panel lo rechaza. El tamaño se vuelve a comprobar contra Hugging Face antes de cada descarga.
+Es el Q4 recomendado de Qwen 3.5 9B. En el mismo repositorio, `Q4_K_L` pesa 6.92 GB y también pasa el límite; `Q8_0` pesa 9.80 GB y el panel lo rechaza antes de empezar la descarga. El tamaño se vuelve a comprobar contra Hugging Face antes de cada descarga.
 
 Hace falta espacio de sobra en el volumen (unos 8 GB libres) y RAM suficiente para cargarlo. En la práctica, el 9B en Q4 con contexto 2048 pide cerca de 8 GB de RAM dentro de Docker. Una máquina de 16 GB puede con un solo modelo. El panel mantiene un modelo en memoria a la vez.
 
@@ -63,7 +63,7 @@ Si defines `API_KEY`, las rutas `/v1` piden `Authorization: Bearer …`. `ADMIN_
 
 ## Catálogo
 
-La pestaña Catálogo busca modelos GGUF en Hugging Face. Cada archivo muestra su peso. Los que pasan de 8.00 GB salen deshabilitados, y el servidor rechaza esa descarga aunque alguien llame la API a mano. Solo se aceptan archivos `.gguf`.
+La pestaña Catálogo busca modelos GGUF en Hugging Face. Cada archivo muestra su peso. Los que pasan de 9.00 GB salen deshabilitados, y el servidor rechaza esa descarga aunque alguien llame la API a mano. Solo se aceptan archivos `.gguf`.
 
 ## Railway
 

@@ -22,26 +22,27 @@ def clean_db():
 def test_salud_y_panel(client):
     health = client.get("/health")
     assert health.status_code == 200
-    assert health.json()["max_model_bytes"] == 8_000_000_000
+    assert health.json()["max_model_bytes"] == 9_000_000_000
     page = client.get("/")
     assert page.status_code == 200
-    assert "8 GB" in page.text
+    assert "9 GB" in page.text
+    assert "Descargas en curso" in page.text
     assert "Obrador" in page.text
     assert "Qwen" in page.text
 
 
-def test_no_descarga_mas_de_8gb(client, monkeypatch):
-    monkeypatch.setattr("app.hfclient.file_size", lambda repo, filename: 8_451_485_728)
+def test_no_descarga_mas_de_9gb(client, monkeypatch):
+    monkeypatch.setattr("app.hfclient.file_size", lambda repo, filename: 9_804_541_984)
     monkeypatch.setattr("app.hfclient.head_size", lambda repo, filename: None)
     response = client.post(
         "/api/models/download",
         json={
             "repo_id": "bartowski/Qwen_Qwen3.5-9B-GGUF",
-            "filename": "Qwen_Qwen3.5-9B-Q6_K_L.gguf",
+            "filename": "Qwen_Qwen3.5-9B-Q8_0.gguf",
         },
     )
     assert response.status_code == 400
-    assert "8.00 GB" in response.json()["detail"]
+    assert "9.00 GB" in response.json()["detail"]
     assert db.list_models() == []
 
 
@@ -90,6 +91,7 @@ def test_catalogo_marca_archivos_grandes(client, monkeypatch):
         "app.hfclient.repo_gguf_files",
         lambda repo: [
             {"filename": "chico-Q4_K_M.gguf", "size_bytes": 6_169_341_984},
+            {"filename": "medio-Q6_K_L.gguf", "size_bytes": 8_451_485_728},
             {"filename": "grande-Q8_0.gguf", "size_bytes": 9_804_541_984},
         ],
     )
@@ -97,4 +99,5 @@ def test_catalogo_marca_archivos_grandes(client, monkeypatch):
     assert response.status_code == 200
     files = {item["filename"]: item for item in response.json()["files"]}
     assert files["chico-Q4_K_M.gguf"]["allowed"] is True
+    assert files["medio-Q6_K_L.gguf"]["allowed"] is True
     assert files["grande-Q8_0.gguf"]["allowed"] is False
