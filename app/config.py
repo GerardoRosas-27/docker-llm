@@ -78,14 +78,6 @@ def max_loaded_models() -> int:
     return max(1, int(_env("MAX_LOADED_MODELS", "1")))
 
 
-def api_key() -> str:
-    return _env("API_KEY", "").strip()
-
-
-def admin_token() -> str:
-    return _env("ADMIN_TOKEN", "").strip()
-
-
 def hf_token() -> str:
     return _env("HF_TOKEN", "").strip()
 

@@ -15,7 +15,7 @@ services:
       MAX_LOADED_MODELS: "1"
       N_GPU_LAYERS: "0"
       MALLOC_ARENA_MAX: "2"
-      # Vacío en local = panel abierto. Defínelo en .env si expones el puerto.
+      # Obligatorio: defínelo en .env. Vacío = panel y /v1 cerrados (503).
       MASTER_SECRET: "${MASTER_SECRET:-}"
       DEFAULT_REPO: bartowski/Qwen_Qwen3.5-2B-GGUF
       DEFAULT_FILE: Qwen_Qwen3.5-2B-Q4_K_M.gguf

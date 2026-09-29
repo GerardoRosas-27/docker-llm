@@ -59,12 +59,6 @@ class DownloadRequest(BaseModel):
     filename: str
 
 
-class GenerateRequest(BaseModel):
-    which: str = "api"
-    label: str | None = None
-    expires_in_days: float | None = None
-
-
 class LoginRequest(BaseModel):
     secret: str = ""
 
@@ -129,6 +123,9 @@ async def lifespan(_app: FastAPI):
     )
     config.ensure_dirs()
     db.init()
+    access.purge_legacy()
+    if not access.master_configured():
+        log.warning("MASTER_SECRET no configurado: el panel y /v1 quedan cerrados (503).")
     runner.bind_loop(asyncio.get_running_loop())
     service.start()
     _bootstrap()
@@ -180,8 +177,8 @@ def _bearer(request: Request) -> str:
 
 
 def _credentials(request: Request) -> list[str]:
-    values = [request.headers.get("x-admin-token", "").strip(), _bearer(request)]
-    return [value for value in values if value]
+    token = _bearer(request)
+    return [token] if token else []
 
 
 def _client_ip(request: Request) -> str:
@@ -193,6 +190,7 @@ def _client_ip(request: Request) -> str:
 
 
 def _require_admin(request: Request) -> None:
+    access.require_configured()  # 503 sin MASTER_SECRET: nunca hay modo abierto
     if access.admin_ok(_credentials(request)):
         return
     raise HTTPException(
@@ -202,11 +200,29 @@ def _require_admin(request: Request) -> None:
 
 
 def _require_api_key(request: Request) -> JSONResponse | None:
+    if not access.master_configured():
+        return JSONResponse(
+            status_code=503,
+            content={
+                "error": {
+                    "message": access.NOT_CONFIGURED_MESSAGE,
+                    "type": "server_error",
+                    "code": access.NOT_CONFIGURED_CODE,
+                }
+            },
+        )
     if access.api_ok(_credentials(request)):
         return None
     return JSONResponse(
         status_code=401,
-        content={"error": {"message": "API key inválida, revocada o caducada.", "type": "invalid_request_error"}},
+        content={
+            "error": {
+                "message": "API key inválida, revocada o caducada. Usa Authorization: Bearer obk1.…",
+                "type": "invalid_request_error",
+                "code": "invalid_api_key",
+            }
+        },
+        headers={"WWW-Authenticate": "Bearer"},
     )
 
 
@@ -313,7 +329,6 @@ def _load_block_reason(model: dict) -> str | None:
     return split_load_reason(model["filename"], names)
 
 
-@app.get("/api/access")
 @app.get("/api/auth/status")
 def access_status(request: Request) -> dict:
     return access.status(_credentials(request))
@@ -331,27 +346,15 @@ def auth_logout(request: Request) -> dict:
     return {"logged_out": closed}
 
 
-def _require_master_admin(request: Request) -> None:
-    if not access.master_configured():
-        raise access.AuthError(
-            409,
-            "Para crear API keys hace falta MASTER_SECRET en las variables de entorno del servidor.",
-            "master_secret_not_configured",
-        )
-    _require_admin(request)
-    if not access.admin_required():  # nunca debería pasar con secreto maestro
-        raise HTTPException(status_code=401, detail="Hace falta una sesión de administración.")
-
-
 @app.get("/api/keys")
 def keys_list(request: Request) -> dict:
-    _require_master_admin(request)
+    _require_admin(request)
     return {"keys": access.list_api_keys()}
 
 
 @app.post("/api/keys")
 def keys_create(body: ApiKeyRequest, request: Request) -> dict:
-    _require_master_admin(request)
+    _require_admin(request)
     if body.expires_in_days is not None and not (0 < body.expires_in_days <= 3650):
         raise HTTPException(status_code=400, detail="La caducidad va de 1 a 3650 días.")
     return access.create_api_key(body.label, body.expires_in_days)
@@ -359,23 +362,10 @@ def keys_create(body: ApiKeyRequest, request: Request) -> dict:
 
 @app.delete("/api/keys/{key_id}")
 def keys_revoke(key_id: str, request: Request) -> dict:
-    _require_master_admin(request)
+    _require_admin(request)
     if not access.revoke_api_key(key_id):
         raise HTTPException(status_code=404, detail="API key no encontrada o ya revocada.")
     return {"revoked": key_id}
-
-
-@app.post("/api/access/generate")
-def access_generate(body: GenerateRequest, request: Request) -> dict:
-    """Ruta antigua del panel. Ahora solo crea API keys derivadas y exige sesión."""
-    _require_master_admin(request)
-    if body.which not in ("api", "both"):
-        raise HTTPException(
-            status_code=400,
-            detail="El acceso de administración ya no se genera: entra con el secreto maestro.",
-        )
-    created = access.create_api_key(body.label or "panel", body.expires_in_days)
-    return {"api_key": created["key"], "id": created["id"], "expires_at": created["expires_at"]}
 
 
 @app.get("/health")
@@ -418,8 +408,6 @@ def system(request: Request) -> dict:
         "llama_server": runner.resolve() is not None,
         "ctx_size": config.ctx_size(),
         "max_loaded_models": config.max_loaded_models(),
-        "api_key_required": access.api_required(),
-        "admin_token_required": access.admin_required(),
         "auth_mode": access.mode(),
         "auth_warnings": access.warnings(),
         "preset": _preset(),
@@ -614,6 +602,18 @@ def openai_models(request: Request) -> Response:
             }
         )
     return JSONResponse({"object": "list", "data": data})
+
+
+@app.get("/v1/models/{slug}")
+def openai_model(slug: str, request: Request) -> Response:
+    denied = _require_api_key(request)
+    if denied is not None:
+        return denied
+    model = db.get(slug)
+    if model is None or model["status"] != "ready":
+        return _oai_error(404, f"No existe el modelo '{slug}' o todavía no está descargado.")
+    runtime = runner.public_status(slug)
+    return JSONResponse({"id": slug, "object": "model", "owned_by": "obrador", "status": runtime["status"]})
 
 
 async def _run_inference(slug: str, path: str, body: dict) -> Response:

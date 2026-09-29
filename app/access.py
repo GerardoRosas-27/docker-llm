@@ -4,8 +4,10 @@
   sesión firmada (HMAC-SHA256). Las API keys también se firman con claves
   derivadas del secreto (HKDF), así que sin él nadie puede crearlas. Cambiar
   MASTER_SECRET invalida todas las sesiones y todas las API keys de golpe.
-- ADMIN_TOKEN y API_KEY siguen funcionando igual que antes (compatibilidad).
-- Sin MASTER_SECRET ni claves, el panel queda abierto (modo local) y lo avisa.
+- Las API keys (`obk1.…`) sirven para todas las rutas /v1 y nunca para administrar.
+- Sin MASTER_SECRET todo queda cerrado (fail-closed): el panel, /api y /v1
+  responden 503 `master_secret_not_configured` y /health lo avisa.
+  ADMIN_TOKEN, API_KEY y las claves antiguas de la base ya no dan acceso.
 
 El secreto nunca se registra ni se devuelve.
 """
@@ -21,11 +23,16 @@ import secrets
 import threading
 import time
 
-from app import config, db
+from app import db
 
 SESSION_PREFIX = "obs1"
 API_KEY_PREFIX = "obk1"
 _MIN_RECOMMENDED = 32
+NOT_CONFIGURED_CODE = "master_secret_not_configured"
+NOT_CONFIGURED_MESSAGE = (
+    "MASTER_SECRET no configurado: el panel y la API están cerrados hasta que se defina "
+    "MASTER_SECRET en las variables de entorno del servidor."
+)
 
 
 class AuthError(Exception):
@@ -70,7 +77,7 @@ def _hkdf(secret: bytes, info: bytes, length: int = 32) -> bytes:
 def _key(purpose: str) -> bytes:
     secret = master_secret()
     if not secret:
-        raise AuthError(409, "MASTER_SECRET no está configurado en el servidor.", "master_secret_not_configured")
+        raise not_configured()
     return _hkdf(secret.encode("utf-8"), f"obrador/{purpose}/v1".encode())
 
 
@@ -86,69 +93,34 @@ def _same(a: str, b: str) -> bool:
     )
 
 
-# --------------------------------------------------------------------------
-# Claves antiguas
-
-def legacy_admin_token() -> str:
-    env = config.admin_token()
-    if env:
-        return env
-    # Las generadas por la versión anterior del panel solo valen sin secreto maestro.
-    if master_configured():
-        return ""
-    return db.meta_get("admin_token") or ""
+def not_configured() -> AuthError:
+    return AuthError(503, NOT_CONFIGURED_MESSAGE, NOT_CONFIGURED_CODE)
 
 
-def legacy_api_key() -> str:
-    env = config.api_key()
-    if env:
-        return env
-    if master_configured():
-        return ""
-    return db.meta_get("api_key") or ""
-
-
-# Compatibilidad con el código que llamaba a access.admin_token()/api_key().
-admin_token = legacy_admin_token
-api_key = legacy_api_key
-
-
-def admin_required() -> bool:
-    return master_configured() or bool(legacy_admin_token())
-
-
-def api_required() -> bool:
-    return master_configured() or bool(legacy_api_key())
+def require_configured() -> None:
+    if not master_configured():
+        raise not_configured()
 
 
 def mode() -> str:
-    if master_configured():
-        return "master"
-    if legacy_admin_token() or legacy_api_key():
-        return "legacy"
-    return "open"
+    return "master" if master_configured() else "unconfigured"
 
 
 def warnings() -> list[str]:
-    found: list[str] = []
-    current = mode()
-    if current == "open":
-        found.append(
-            "Sin MASTER_SECRET: el panel y la API están abiertos a cualquiera que llegue a esta URL. "
-            "Define MASTER_SECRET antes de exponer el servicio."
-        )
-    elif current == "legacy":
-        found.append(
-            "Se usan ADMIN_TOKEN/API_KEY fijos. Se recomienda MASTER_SECRET para sesiones con "
-            "caducidad y API keys revocables."
-        )
-        if not legacy_admin_token():
-            found.append("Sin ADMIN_TOKEN el panel de administración está abierto.")
-        if not legacy_api_key():
-            found.append("Sin API_KEY las rutas /v1 están abiertas.")
-    elif len(master_secret()) < _MIN_RECOMMENDED:
-        found.append(f"MASTER_SECRET es corto; usa al menos {_MIN_RECOMMENDED} caracteres aleatorios.")
-    return found
+    if not master_configured():
+        return [NOT_CONFIGURED_MESSAGE]
+    if len(master_secret()) < _MIN_RECOMMENDED:
+        return [f"MASTER_SECRET es corto; usa al menos {_MIN_RECOMMENDED} caracteres aleatorios."]
+    return []
+
+
+_LEGACY_META = ("admin_token", "api_key")
+
+
+def purge_legacy() -> None:
+    """Borra las claves que guardaba la versión antigua del panel: ya no valen."""
+    for name in _LEGACY_META:
+        db.meta_delete(name)
 
 
 # --------------------------------------------------------------------------
@@ -212,13 +184,7 @@ def session_ttl() -> int:
 
 
 def login(secret: str, client: str) -> dict:
-    if not master_configured():
-        raise AuthError(
-            409,
-            "MASTER_SECRET no está configurado en el servidor. Añádelo a las variables de entorno "
-            "para poder iniciar sesión.",
-            "master_secret_not_configured",
-        )
+    require_configured()
     limiter.check(client)
     if not isinstance(secret, str) or not _same(secret.strip(), master_secret()):
         limiter.fail(client)
@@ -278,7 +244,7 @@ def logout(token: str) -> bool:
 # API keys derivadas
 
 def create_api_key(label: str, expires_in_days: float | None) -> dict:
-    _key("api-key")  # falla con 409 si no hay secreto maestro
+    _key("api-key")  # falla con 503 si no hay secreto maestro
     label = (label or "").strip()[:80] or "sin nombre"
     key_id = secrets.token_hex(8)
     exp = 0
@@ -348,32 +314,18 @@ def revoke_api_key(key_id: str) -> bool:
 # Comprobaciones por petición
 
 def admin_ok(candidates: list[str]) -> bool:
-    if not admin_required():
-        return True
-    legacy = legacy_admin_token()
-    for value in candidates:
-        if not value:
-            continue
-        if verify_session(value) is not None:
-            return True
-        if legacy and _same(value, legacy):
-            return True
-    return False
+    """Solo una sesión firmada administra. Una API key nunca."""
+    return any(value and verify_session(value) is not None for value in candidates)
 
 
 def api_ok(candidates: list[str]) -> bool:
-    if not api_required():
-        return True
-    legacy = legacy_api_key()
+    """Las rutas /v1 aceptan una API key derivada o la sesión del panel (su chat)."""
     for value in candidates:
         if not value:
             continue
-        if verify_api_key(value) is not None:
+        if value.startswith(API_KEY_PREFIX + ".") and verify_api_key(value) is not None:
             return True
-        # El chat del panel usa la sesión de administración.
-        if verify_session(value) is not None:
-            return True
-        if legacy and _same(value, legacy):
+        if value.startswith(SESSION_PREFIX + ".") and verify_session(value) is not None:
             return True
     return False
 
@@ -383,9 +335,6 @@ def session_info(candidates: list[str]) -> dict | None:
         payload = verify_session(value) if value else None
         if payload:
             return {"role": payload["role"], "expires_at": payload["exp"], "kind": "session"}
-    legacy = legacy_admin_token()
-    if legacy and any(value and _same(value, legacy) for value in candidates):
-        return {"role": "admin", "expires_at": None, "kind": "admin_token"}
     return None
 
 
@@ -393,10 +342,6 @@ def status(candidates: list[str] | None = None) -> dict:
     return {
         "mode": mode(),
         "master_configured": master_configured(),
-        "admin_required": admin_required(),
-        "api_required": api_required(),
-        "admin_from_env": bool(config.admin_token()),
-        "api_from_env": bool(config.api_key()),
         "session_ttl": session_ttl(),
         "session": session_info(candidates or []),
         "warnings": warnings(),
