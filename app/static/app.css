@@ -261,18 +261,19 @@ dialog { max-width: 40rem; }
    (min-width: 0) y las URLs, logs y bloques de código se parten o hacen
    scroll dentro de su caja. En escritorio el aspecto no cambia. */
 .stack, .chat-layout, .access-wrap, .access-wrap section { grid-template-columns: minmax(0, 1fr); }
-.stack > *, .preset > *, .chat-layout > *, .chat-tools > *,
+.stack > *, .preset > *, .chat-layout > *,
 .access-wrap > *, .access-wrap section > *, .key-new > *,
 .card-top > div, .detail-head > div, .key-item > div, .snippet-head > span { min-width: 0; }
 .card, .preset, .repo, .api, .usage, .snippet { min-width: 0; max-width: 100%; }
 .meta, h3, .origin, .system-line, .usage summary, .key-item, .bubble, .banner, .api p { overflow-wrap: anywhere; }
 pre.api { overflow-x: auto; max-width: 100%; }
 .snippet-head button, .key-item button, .dialog-head button { flex-shrink: 0; }
-.chat-tools select, .chat-tools input { min-width: 0; max-width: 100%; }
 #access select, #access input { min-width: 0; max-width: 100%; }
 
 @media (max-width: 800px) {
   .chat-tools { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .chat-tools > * { min-width: 0; }
+  .chat-tools select, .chat-tools input { min-width: 0; max-width: 100%; }
   .chat-form { grid-template-columns: minmax(0, 1fr); }
   .access-top { justify-content: flex-start; flex-wrap: wrap; }
 }
