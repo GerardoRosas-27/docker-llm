@@ -24,11 +24,30 @@ function esc(value) {
   }[ch]));
 }
 
+// Sesión firmada que devuelve /api/auth/login. Nunca se guarda el secreto maestro.
+function session() {
+  const token = localStorage.getItem("obrador-session") || "";
+  const exp = Number(localStorage.getItem("obrador-session-exp") || 0);
+  if (!token || exp * 1000 <= Date.now()) return null;
+  return { token, exp };
+}
+
+function saveSession(created) {
+  localStorage.setItem("obrador-session", created.token);
+  localStorage.setItem("obrador-session-exp", String(created.expires_at));
+}
+
+function clearSession() {
+  localStorage.removeItem("obrador-session");
+  localStorage.removeItem("obrador-session-exp");
+}
+
 function headers(json) {
   const result = {};
   if (json) result["Content-Type"] = "application/json";
-  const admin = localStorage.getItem("obrador-admin") || "";
-  const key = localStorage.getItem("obrador-api-key") || "";
+  const current = session();
+  const admin = current?.token || localStorage.getItem("obrador-admin") || "";
+  const key = current?.token || localStorage.getItem("obrador-api-key") || "";
   if (admin) result["X-Admin-Token"] = admin;
   if (key) result.Authorization = `Bearer ${key}`;
   return result;
@@ -46,7 +65,10 @@ async function api(path, options = {}) {
   }
   if (!response.ok) {
     const message = payload?.detail || payload?.error?.message || response.statusText;
-    throw new Error(message);
+    if (response.status === 401 && !path.startsWith("/api/auth/")) needLogin();
+    const error = new Error(message);
+    error.status = response.status;
+    throw error;
   }
   return payload;
 }
@@ -261,9 +283,6 @@ async function loadSystem() {
   $("origin").textContent = window.location.origin;
   const llama = state.system.llama_server ? "llama-server listo" : "falta llama-server";
   $("system-line").textContent = `${llama} · RAM ${state.system.ram_limit_label} · ${state.system.cpu_limit} CPU · contexto ${state.system.ctx_size} · disco libre ${state.system.disk_free_label} · tope ${state.system.max_model_label}`;
-  if (state.system.admin_token_required && !localStorage.getItem("obrador-admin")) {
-    banner("El panel pide ADMIN_TOKEN. Ábrelo en Acceso.");
-  }
   renderPreset();
 }
 
@@ -679,67 +698,225 @@ $("chat-input").addEventListener("keydown", (event) => {
   }
 });
 
+// ---------------------------------------------------------------- Acceso
+
+let accessStatus = null;
+let loginPrompted = false;
+
+function fmtDate(epoch) {
+  return new Date(epoch * 1000).toLocaleString("es", { dateStyle: "short", timeStyle: "short" });
+}
+
+function needLogin() {
+  if (session() && accessStatus?.session) return;
+  const text = accessStatus?.master_configured
+    ? "Hace falta iniciar sesión: abre Acceso y escribe el secreto maestro."
+    : "Hace falta una clave de administración: ábrela en Acceso.";
+  banner(text);
+  if (!loginPrompted && !$("access").open) {
+    loginPrompted = true;
+    openAccess().catch(() => {});
+  }
+}
+
+function renderPill(status) {
+  const pill = $("session-pill");
+  pill.className = "pill";
+  if (status.mode === "open") {
+    pill.textContent = "⚠ Modo abierto";
+    pill.classList.add("warn");
+  } else if (status.session?.kind === "session") {
+    pill.textContent = `Sesión activa · hasta ${fmtDate(status.session.expires_at)}`;
+    pill.classList.add("good");
+  } else if (status.session) {
+    pill.textContent = "Admin con ADMIN_TOKEN";
+    pill.classList.add("good");
+  } else {
+    pill.textContent = "Sin sesión";
+    pill.classList.add("bad");
+  }
+}
+
+function renderAccess(status) {
+  const modes = {
+    master: "Protegido con MASTER_SECRET: entra con el secreto maestro para administrar y crear API keys.",
+    legacy: "Protegido con ADMIN_TOKEN / API_KEY fijos. Se recomienda definir MASTER_SECRET.",
+    open: "Modo abierto: no hay MASTER_SECRET ni claves en el servidor.",
+  };
+  $("access-mode").textContent = modes[status.mode] || "";
+  $("access-warnings").innerHTML = (status.warnings || []).map((item) => `<li>${esc(item)}</li>`).join("");
+  const hasSession = status.session?.kind === "session";
+  $("access-login").hidden = !status.master_configured || hasSession;
+  $("access-session").hidden = !hasSession;
+  if (hasSession) $("session-text").textContent = `Sesión de administración activa hasta ${fmtDate(status.session.expires_at)}.`;
+  const canKeys = status.master_configured && Boolean(status.session);
+  $("access-keys").hidden = !canKeys;
+  $("access-legacy").open = status.mode === "legacy" && !status.session;
+  if (canKeys) loadKeys().catch((error) => { $("access-note").textContent = error.message; });
+}
+
+async function loadAccess() {
+  const status = await api("/api/auth/status");
+  // Si la sesión guardada ya no vale (caducada, revocada o secreto rotado), se olvida.
+  if (session() && status.session?.kind !== "session") clearSession();
+  accessStatus = status;
+  renderPill(status);
+  if ($("access").open) renderAccess(status);
+  if (status.mode === "open") banner(status.warnings?.[0] || "");
+  else if (status.admin_required && !status.session) needLogin();
+  return status;
+}
+
+async function loadKeys() {
+  const payload = await api("/api/keys");
+  const host = $("key-list");
+  if (!payload.keys.length) {
+    host.innerHTML = `<p class="meta">Todavía no hay API keys.</p>`;
+    return;
+  }
+  host.innerHTML = payload.keys.map((key) => {
+    const off = key.revoked || key.expired;
+    const state = key.revoked ? "revocada" : key.expired ? "caducada" : key.expires_at ? `caduca ${fmtDate(key.expires_at)}` : "sin caducidad";
+    const used = key.last_used_at ? ` · último uso ${new Date(key.last_used_at).toLocaleString("es")}` : "";
+    return `
+      <div class="key-item${off ? " off" : ""}">
+        <div><strong>${esc(key.label)}</strong><br><span class="meta">${esc(key.id)} · ${esc(state)}${esc(used)}</span></div>
+        ${off ? "" : `<button type="button" class="danger" data-revoke="${esc(key.id)}">Revocar</button>`}
+      </div>`;
+  }).join("");
+}
+
 async function openAccess() {
   $("admin-token").value = localStorage.getItem("obrador-admin") || "";
   $("api-key").value = localStorage.getItem("obrador-api-key") || "";
+  $("access-note").textContent = "";
+  $("key-new").hidden = true;
+  $("key-value").value = "";
+  if (!$("access").open) $("access").showModal();
   try {
-    const status = await api("/api/access");
-    $("access-note").textContent = status.admin_required || status.api_required
-      ? "Hay claves activas. Si generas otras, sustituyen a las anteriores. Cópialas: no se vuelven a mostrar."
-      : "El chat no pide clave hasta que pulses Generar. La clave nueva se guarda en este navegador.";
+    renderAccess(await loadAccess());
   } catch (error) {
     $("access-note").textContent = error.message;
   }
-  $("access").showModal();
+  if (!$("access-login").hidden) $("master-secret").focus();
 }
 
-async function generateKeys(which) {
-  const created = await api("/api/access/generate", {
-    method: "POST",
-    body: JSON.stringify({ which }),
-  });
-  if (created.admin_token) {
-    localStorage.setItem("obrador-admin", created.admin_token);
-    $("admin-token").value = created.admin_token;
-  }
-  if (created.api_key) {
-    localStorage.setItem("obrador-api-key", created.api_key);
-    $("api-key").value = created.api_key;
-  }
-  $("access-note").textContent = "Claves generadas. Cópialas ahora; el servidor no las vuelve a enseñar.";
+async function afterAccessChange() {
+  loginPrompted = false;
+  await loadAccess();
+  renderAccess(accessStatus);
   await loadSystem();
   await refresh();
+  banner("");
 }
 
 $("open-access").addEventListener("click", () => {
   openAccess().catch((error) => banner(error.message));
 });
-$("gen-admin").addEventListener("click", () => {
-  generateKeys("admin").catch((error) => banner(error.message));
-});
-$("gen-api").addEventListener("click", () => {
-  generateKeys("api").catch((error) => banner(error.message));
-});
-$("gen-both").addEventListener("click", () => {
-  generateKeys("both").catch((error) => banner(error.message));
-});
 $("access-close").addEventListener("click", () => $("access").close());
-$("access-form").addEventListener("submit", async () => {
-  localStorage.setItem("obrador-admin", $("admin-token").value.trim());
-  localStorage.setItem("obrador-api-key", $("api-key").value.trim());
+
+$("login-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const input = $("master-secret");
+  const secret = input.value;
+  if (!secret) return;
+  $("login-submit").disabled = true;
   try {
-    await loadSystem();
-    await refresh();
-    banner("");
+    const created = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ secret }) });
+    saveSession(created);
+    input.value = "";
+    $("access-note").textContent = "Sesión iniciada.";
+    await afterAccessChange();
   } catch (error) {
-    banner(error.message);
+    $("access-note").textContent = error.message;
+  } finally {
+    input.value = "";
+    $("login-submit").disabled = false;
   }
 });
 
-loadSystem()
+$("logout").addEventListener("click", async () => {
+  try {
+    await api("/api/auth/logout", { method: "POST" });
+  } catch {
+    // Aunque falle la red, la sesión se borra de este navegador.
+  }
+  clearSession();
+  $("access-note").textContent = "Sesión cerrada.";
+  loginPrompted = true;
+  await loadAccess().catch(() => {});
+  if (accessStatus) renderAccess(accessStatus);
+});
+
+$("key-create").addEventListener("click", async () => {
+  const days = $("key-exp").value;
+  $("key-create").disabled = true;
+  try {
+    const created = await api("/api/keys", {
+      method: "POST",
+      body: JSON.stringify({ label: $("key-label").value.trim(), expires_in_days: days ? Number(days) : null }),
+    });
+    $("key-value").value = created.key;
+    $("key-new").hidden = false;
+    $("key-label").value = "";
+    $("access-note").textContent = "";
+    await loadKeys();
+  } catch (error) {
+    $("access-note").textContent = error.message;
+  } finally {
+    $("key-create").disabled = false;
+  }
+});
+
+$("key-copy").addEventListener("click", async () => {
+  const value = $("key-value").value;
+  try {
+    await navigator.clipboard.writeText(value);
+    $("key-copy").textContent = "Copiada";
+  } catch {
+    $("key-value").select();
+    document.execCommand("copy");
+    $("key-copy").textContent = "Copiada";
+  }
+  setTimeout(() => { $("key-copy").textContent = "Copiar"; }, 2000);
+});
+
+$("key-list").addEventListener("click", async (event) => {
+  const button = event.target.closest("button[data-revoke]");
+  if (!button) return;
+  if (!confirm("¿Revocar esta API key? Los clientes que la usen dejarán de funcionar.")) return;
+  try {
+    await api(`/api/keys/${encodeURIComponent(button.dataset.revoke)}`, { method: "DELETE" });
+    await loadKeys();
+  } catch (error) {
+    $("access-note").textContent = error.message;
+  }
+});
+
+$("access-form").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  localStorage.setItem("obrador-admin", $("admin-token").value.trim());
+  localStorage.setItem("obrador-api-key", $("api-key").value.trim());
+  $("access-note").textContent = "Claves guardadas en este navegador.";
+  try {
+    await afterAccessChange();
+  } catch (error) {
+    $("access-note").textContent = error.message;
+  }
+});
+
+loadAccess()
+  .catch(() => null)
+  .then(() => loadSystem())
   .then(refresh)
   .catch((error) => banner(error.message));
 
 setInterval(() => {
+  if (accessStatus?.admin_required && !accessStatus?.session) return;
   refresh().catch((error) => banner(error.message));
 }, 2000);
+
+// La sesión caduca sola: se comprueba cada minuto para avisar a tiempo.
+setInterval(() => {
+  loadAccess().catch(() => {});
+}, 60000);
