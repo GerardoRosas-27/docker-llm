@@ -6,6 +6,8 @@ const state = {
   histories: {},
   sending: false,
   controller: null,
+  // API key recién generada: solo en memoria para rellenar los ejemplos, nunca se guarda.
+  lastKey: "",
 };
 
 const DEFAULT_SYSTEM = "Eres un asistente útil. Responde siempre en español, de forma clara, correcta y breve, salvo que el usuario pida otro idioma.";
@@ -42,15 +44,79 @@ function clearSession() {
   localStorage.removeItem("obrador-session-exp");
 }
 
+// Restos de la versión con ADMIN_TOKEN / API_KEY: ya no sirven y se borran.
+localStorage.removeItem("obrador-admin");
+localStorage.removeItem("obrador-api-key");
+
 function headers(json) {
   const result = {};
   if (json) result["Content-Type"] = "application/json";
   const current = session();
-  const admin = current?.token || localStorage.getItem("obrador-admin") || "";
-  const key = current?.token || localStorage.getItem("obrador-api-key") || "";
-  if (admin) result["X-Admin-Token"] = admin;
-  if (key) result.Authorization = `Bearer ${key}`;
+  // El panel (y su chat) usan la sesión firmada. Las API keys son para otros proyectos.
+  if (current) result.Authorization = `Bearer ${current.token}`;
   return result;
+}
+
+// ---------------------------------------------------------------- Ejemplos de uso por API
+
+function apiBase() {
+  return window.location.origin;
+}
+
+function keyForExamples() {
+  return state.lastKey || "$API_KEY";
+}
+
+function curlExamples(slug, key = keyForExamples()) {
+  const base = apiBase();
+  const auth = `"Authorization: Bearer ${key}"`;
+  return {
+    models: `curl ${base}/v1/models \\\n  -H ${auth}`,
+    chat: `curl ${base}/v1/chat/completions \\\n  -H ${auth} \\\n  -H "Content-Type: application/json" \\\n  -d '{"model":"${slug}","messages":[{"role":"user","content":"Hola"}]}'`,
+    stream: `curl -N ${base}/v1/chat/completions \\\n  -H ${auth} \\\n  -H "Content-Type: application/json" \\\n  -d '{"model":"${slug}","stream":true,"messages":[{"role":"user","content":"Hola"}]}'`,
+    python: `from openai import OpenAI\n\nclient = OpenAI(base_url="${base}/v1", api_key="${key.startsWith("$") ? "obk1.…" : key}")\nreply = client.chat.completions.create(\n    model="${slug}",\n    messages=[{"role": "user", "content": "Hola"}],\n)\nprint(reply.choices[0].message.content)`,
+  };
+}
+
+function snippet(title, code) {
+  return `
+    <div class="snippet">
+      <div class="snippet-head"><span>${esc(title)}</span><button type="button" class="ghost" data-action="copy" data-copy="${esc(code)}">Copiar</button></div>
+      <pre><code>${esc(code)}</code></pre>
+    </div>`;
+}
+
+function usageBlock(slug, open = false) {
+  // Si se repinta la tarjeta, la sección sigue abierta.
+  const ex = curlExamples(slug);
+  const keyNote = state.lastKey
+    ? "Los ejemplos llevan la API key que acabas de generar. No se vuelve a mostrar: guárdala."
+    : `Genera una API key en <strong>Acceso</strong> y guárdala en la variable <code>API_KEY</code>: <code>export API_KEY="obk1.…"</code>`;
+  return `
+    <details class="usage" data-slug="${esc(slug)}"${open ? " open" : ""}>
+      <summary>Usar por API · <code>${esc(slug)}</code></summary>
+      <p class="meta">${keyNote}</p>
+      ${snippet("Chat (respuesta completa)", ex.chat)}
+      ${snippet("Chat en streaming", ex.stream)}
+      ${snippet("Listar modelos", ex.models)}
+      ${snippet("Cliente OpenAI (Python)", ex.python)}
+    </details>`;
+}
+
+async function copyText(button, text) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+  }
+  const before = button.textContent;
+  button.textContent = "Copiado";
+  setTimeout(() => { button.textContent = before; }, 1500);
 }
 
 async function api(path, options = {}) {
@@ -193,6 +259,7 @@ function renderInstalled() {
     host.innerHTML = `<article class="card"><p class="meta">Todavía no hay modelos instalados. El modelo incluido aparece arriba y se descarga solo al arrancar; también puedes buscar otro en el catálogo.</p></article>`;
     return;
   }
+  const opened = new Set([...host.querySelectorAll("details.usage[open]")].map((node) => node.dataset.slug));
   host.innerHTML = ready.map((model) => {
     const [label, tone] = statusLabel(model);
     const log = (model.runtime?.log_tail || []).slice(-6).join("\n");
@@ -216,11 +283,10 @@ function renderInstalled() {
         ${model.ram_warning ? `<p class="bad">${esc(model.ram_warning)}</p>` : ""}
         ${error && !model.blocked && error !== model.ram_warning ? `<p class="bad">${esc(error)}</p>` : ""}
         <div class="api">
-          <p>OpenAI base <code>${esc(model.api.openai_base)}</code></p>
-          <p>Este modelo <code>POST ${esc(model.api.chat)}</code></p>
-          <p><code>{"messages":[{"role":"user","content":"Hola"}]}</code></p>
-          <button type="button" data-action="copy" data-copy="${esc(model.api.chat)}">Copiar URL</button>
+          <p>OpenAI base <code>${esc(apiBase())}/v1</code> · model <code>${esc(model.slug)}</code></p>
+          <p>Ruta propia <code>POST ${esc(apiBase())}/v1/models/${esc(model.slug)}/chat/completions</code></p>
         </div>
+        ${usageBlock(model.slug, opened.has(model.slug))}
         ${log ? `<pre class="api">${esc(log)}</pre>` : ""}
       </article>`;
   }).join("");
@@ -572,12 +638,7 @@ $("installed-list").addEventListener("click", async (event) => {
   try {
     banner("");
     if (action === "copy") {
-      try {
-        await navigator.clipboard.writeText(copy);
-        button.textContent = "Copiada";
-      } catch {
-        banner(copy);
-      }
+      await copyText(button, copy);
       return;
     }
     if (action === "chat") {
@@ -709,10 +770,11 @@ function fmtDate(epoch) {
 
 function needLogin() {
   if (session() && accessStatus?.session) return;
-  const text = accessStatus?.master_configured
-    ? "Hace falta iniciar sesión: abre Acceso y escribe el secreto maestro."
-    : "Hace falta una clave de administración: ábrela en Acceso.";
-  banner(text);
+  if (accessStatus && !accessStatus.master_configured) {
+    banner(accessStatus.warnings?.[0] || "MASTER_SECRET no configurado.");
+    return;
+  }
+  banner("Hace falta iniciar sesión: abre Acceso y escribe el secreto maestro.");
   if (!loginPrompted && !$("access").open) {
     loginPrompted = true;
     openAccess().catch(() => {});
@@ -722,14 +784,11 @@ function needLogin() {
 function renderPill(status) {
   const pill = $("session-pill");
   pill.className = "pill";
-  if (status.mode === "open") {
-    pill.textContent = "⚠ Modo abierto";
+  if (!status.master_configured) {
+    pill.textContent = "⚠ MASTER_SECRET no configurado";
     pill.classList.add("warn");
   } else if (status.session?.kind === "session") {
     pill.textContent = `Sesión activa · hasta ${fmtDate(status.session.expires_at)}`;
-    pill.classList.add("good");
-  } else if (status.session) {
-    pill.textContent = "Admin con ADMIN_TOKEN";
     pill.classList.add("good");
   } else {
     pill.textContent = "Sin sesión";
@@ -740,8 +799,7 @@ function renderPill(status) {
 function renderAccess(status) {
   const modes = {
     master: "Protegido con MASTER_SECRET: entra con el secreto maestro para administrar y crear API keys.",
-    legacy: "Protegido con ADMIN_TOKEN / API_KEY fijos. Se recomienda definir MASTER_SECRET.",
-    open: "Modo abierto: no hay MASTER_SECRET ni claves en el servidor.",
+    unconfigured: "Cerrado: falta MASTER_SECRET en las variables de entorno del servidor. Defínelo y reinicia el servicio para entrar.",
   };
   $("access-mode").textContent = modes[status.mode] || "";
   $("access-warnings").innerHTML = (status.warnings || []).map((item) => `<li>${esc(item)}</li>`).join("");
@@ -749,9 +807,8 @@ function renderAccess(status) {
   $("access-login").hidden = !status.master_configured || hasSession;
   $("access-session").hidden = !hasSession;
   if (hasSession) $("session-text").textContent = `Sesión de administración activa hasta ${fmtDate(status.session.expires_at)}.`;
-  const canKeys = status.master_configured && Boolean(status.session);
+  const canKeys = status.master_configured && hasSession;
   $("access-keys").hidden = !canKeys;
-  $("access-legacy").open = status.mode === "legacy" && !status.session;
   if (canKeys) loadKeys().catch((error) => { $("access-note").textContent = error.message; });
 }
 
@@ -762,8 +819,7 @@ async function loadAccess() {
   accessStatus = status;
   renderPill(status);
   if ($("access").open) renderAccess(status);
-  if (status.mode === "open") banner(status.warnings?.[0] || "");
-  else if (status.admin_required && !status.session) needLogin();
+  if (!status.session) needLogin();
   return status;
 }
 
@@ -787,11 +843,10 @@ async function loadKeys() {
 }
 
 async function openAccess() {
-  $("admin-token").value = localStorage.getItem("obrador-admin") || "";
-  $("api-key").value = localStorage.getItem("obrador-api-key") || "";
   $("access-note").textContent = "";
   $("key-new").hidden = true;
   $("key-value").value = "";
+  $("key-examples").innerHTML = "";
   if (!$("access").open) $("access").showModal();
   try {
     renderAccess(await loadAccess());
@@ -857,6 +912,9 @@ $("key-create").addEventListener("click", async () => {
       body: JSON.stringify({ label: $("key-label").value.trim(), expires_in_days: days ? Number(days) : null }),
     });
     $("key-value").value = created.key;
+    state.lastKey = created.key;
+    renderKeyExamples();
+    renderInstalled();
     $("key-new").hidden = false;
     $("key-label").value = "";
     $("access-note").textContent = "";
@@ -868,17 +926,29 @@ $("key-create").addEventListener("click", async () => {
   }
 });
 
-$("key-copy").addEventListener("click", async () => {
-  const value = $("key-value").value;
-  try {
-    await navigator.clipboard.writeText(value);
-    $("key-copy").textContent = "Copiada";
-  } catch {
-    $("key-value").select();
-    document.execCommand("copy");
-    $("key-copy").textContent = "Copiada";
+$("key-copy").addEventListener("click", () => copyText($("key-copy"), $("key-value").value));
+
+function renderKeyExamples() {
+  const host = $("key-examples");
+  const ready = state.models.filter((model) => model.status === "ready" && !model.blocked);
+  if (!state.lastKey) {
+    host.innerHTML = "";
+    return;
   }
-  setTimeout(() => { $("key-copy").textContent = "Copiar"; }, 2000);
+  const exports = `export API_KEY="${state.lastKey}"`;
+  const models = curlExamples("", state.lastKey).models;
+  host.innerHTML = `
+    <p class="meta">Pruébala ya. Un ejemplo por cada modelo descargado (también en Instalados → Usar por API):</p>
+    ${snippet("Guardar la clave en la terminal", exports)}
+    ${snippet("Listar modelos", models)}
+    ${ready.length
+      ? ready.map((model) => snippet(`Chat con ${model.slug}`, curlExamples(model.slug, state.lastKey).chat)).join("")
+      : `<p class="meta">Todavía no hay modelos descargados.</p>`}`;
+}
+
+$("key-examples").addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-action='copy']");
+  if (button) copyText(button, button.dataset.copy);
 });
 
 $("key-list").addEventListener("click", async (event) => {
@@ -893,26 +963,16 @@ $("key-list").addEventListener("click", async (event) => {
   }
 });
 
-$("access-form").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  localStorage.setItem("obrador-admin", $("admin-token").value.trim());
-  localStorage.setItem("obrador-api-key", $("api-key").value.trim());
-  $("access-note").textContent = "Claves guardadas en este navegador.";
-  try {
-    await afterAccessChange();
-  } catch (error) {
-    $("access-note").textContent = error.message;
-  }
-});
-
 loadAccess()
   .catch(() => null)
-  .then(() => loadSystem())
-  .then(refresh)
+  .then((status) => {
+    if (!status?.session) return null;
+    return loadSystem().then(refresh);
+  })
   .catch((error) => banner(error.message));
 
 setInterval(() => {
-  if (accessStatus?.admin_required && !accessStatus?.session) return;
+  if (!accessStatus?.session) return;
   refresh().catch((error) => banner(error.message));
 }, 2000);
 

@@ -125,6 +125,10 @@ def meta_set(key: str, value: str) -> None:
     _write(op)
 
 
+def meta_delete(key: str) -> None:
+    _write(lambda conn: conn.execute("DELETE FROM meta WHERE key = ?", (key,)))
+
+
 def get(slug: str) -> dict | None:
     def op(conn: sqlite3.Connection) -> dict | None:
         return _row(conn.execute("SELECT * FROM models WHERE slug = ?", (slug,)).fetchone())

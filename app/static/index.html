@@ -43,7 +43,7 @@
     <section id="view-installed" class="view">
       <div class="lede">
         <h2>Modelos en este Docker</h2>
-        <p>Cada modelo descargado tiene su propia URL. Al usarla, el modelo se carga en memoria si todavía no está en marcha. Solo corre uno a la vez para caber en la RAM.</p>
+        <p>Cada modelo descargado se consume por API con una API key (Acceso → Generar API key). Abre <strong>Usar por API</strong> en cada modelo para copiar el curl. Al usarlo, el modelo se carga en memoria si todavía no está en marcha. Solo corre uno a la vez para caber en la RAM.</p>
       </div>
       <article id="preset" class="preset"></article>
       <div id="installed-list" class="stack"></div>
@@ -136,7 +136,7 @@
 
       <section id="access-keys" hidden>
         <h3>API keys</h3>
-        <p class="meta">Para llamar a <code>/v1</code> desde otros proyectos con <code>Authorization: Bearer …</code>. Salen del secreto maestro: si lo cambias, dejan de valer todas.</p>
+        <p class="meta">Son las claves para consumir los modelos desplegados por API: valen para todas las rutas <code>/v1</code> (<code>/v1/models</code>, <code>/v1/chat/completions</code> con o sin streaming, <code>/v1/completions</code> y las rutas de cada modelo) con <code>Authorization: Bearer obk1.…</code>. No sirven para administrar. Salen del secreto maestro: si lo cambias, dejan de valer todas.</p>
         <div class="access-row">
           <label>Nombre
             <input id="key-label" type="text" placeholder="p. ej. mi-app" autocomplete="off">
@@ -157,22 +157,11 @@
             <input id="key-value" type="text" readonly spellcheck="false">
             <button type="button" id="key-copy">Copiar</button>
           </div>
+          <div id="key-examples" class="key-examples"></div>
         </div>
         <div id="key-list" class="key-list"></div>
       </section>
 
-      <details id="access-legacy">
-        <summary>Claves antiguas (ADMIN_TOKEN / API_KEY)</summary>
-        <form id="access-form">
-          <label>ADMIN_TOKEN
-            <input id="admin-token" type="password" autocomplete="off" spellcheck="false">
-          </label>
-          <label>API_KEY
-            <input id="api-key" type="password" autocomplete="off" spellcheck="false">
-          </label>
-          <button type="submit">Guardar en este navegador</button>
-        </form>
-      </details>
       <p id="access-note" class="meta"></p>
     </div>
   </dialog>
