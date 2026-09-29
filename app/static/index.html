@@ -23,7 +23,10 @@
     <div class="top-meta">
       <p id="origin" class="origin"></p>
       <p id="system-line" class="system-line">Comprobando el volumen…</p>
-      <button type="button" id="open-access" class="ghost">Acceso</button>
+      <div class="access-top">
+        <span id="session-pill" class="pill">Comprobando acceso…</span>
+        <button type="button" id="open-access" class="ghost">Acceso</button>
+      </div>
     </div>
   </header>
 
@@ -108,25 +111,70 @@
   </main>
 
   <dialog id="access">
-    <form method="dialog" id="access-form">
-      <h2>Acceso</h2>
-      <p id="access-note">El chat no pide clave hasta que generes una. Las claves se quedan en este navegador y en el volumen del contenedor.</p>
-      <label>Token de administración
-        <input id="admin-token" type="text" autocomplete="off" spellcheck="false">
-      </label>
-      <label>API key de inferencia
-        <input id="api-key" type="text" autocomplete="off" spellcheck="false">
-      </label>
-      <div class="row-actions">
-        <button type="button" id="gen-admin">Generar token</button>
-        <button type="button" id="gen-api">Generar API key</button>
-        <button type="button" id="gen-both" class="primary">Generar ambas</button>
-      </div>
-      <div class="dialog-actions">
-        <button type="submit" value="save">Guardar en este navegador</button>
+    <div class="access-wrap">
+      <div class="dialog-head">
+        <h2>Acceso</h2>
         <button type="button" id="access-close" class="ghost">Cerrar</button>
       </div>
-    </form>
+      <p id="access-mode" class="access-mode"></p>
+      <ul id="access-warnings" class="access-warnings"></ul>
+
+      <section id="access-login" hidden>
+        <form id="login-form" class="access-row">
+          <label>Secreto maestro
+            <input id="master-secret" type="password" autocomplete="current-password" spellcheck="false" placeholder="El valor de MASTER_SECRET">
+          </label>
+          <button type="submit" class="primary" id="login-submit">Entrar</button>
+        </form>
+        <p class="meta">El secreto no se guarda en el navegador. Se cambia por una sesión firmada que caduca.</p>
+      </section>
+
+      <section id="access-session" hidden>
+        <p><span class="good">●</span> <span id="session-text">Sesión de administración activa.</span></p>
+        <button type="button" id="logout">Cerrar sesión</button>
+      </section>
+
+      <section id="access-keys" hidden>
+        <h3>API keys</h3>
+        <p class="meta">Para llamar a <code>/v1</code> desde otros proyectos con <code>Authorization: Bearer …</code>. Salen del secreto maestro: si lo cambias, dejan de valer todas.</p>
+        <div class="access-row">
+          <label>Nombre
+            <input id="key-label" type="text" placeholder="p. ej. mi-app" autocomplete="off">
+          </label>
+          <label>Caducidad
+            <select id="key-exp">
+              <option value="">Sin caducidad</option>
+              <option value="30">30 días</option>
+              <option value="90">90 días</option>
+              <option value="365">1 año</option>
+            </select>
+          </label>
+          <button type="button" id="key-create" class="primary">Generar API key</button>
+        </div>
+        <div id="key-new" class="key-new" hidden>
+          <p class="warn">Cópiala ahora: no se vuelve a mostrar.</p>
+          <div class="access-row">
+            <input id="key-value" type="text" readonly spellcheck="false">
+            <button type="button" id="key-copy">Copiar</button>
+          </div>
+        </div>
+        <div id="key-list" class="key-list"></div>
+      </section>
+
+      <details id="access-legacy">
+        <summary>Claves antiguas (ADMIN_TOKEN / API_KEY)</summary>
+        <form id="access-form">
+          <label>ADMIN_TOKEN
+            <input id="admin-token" type="password" autocomplete="off" spellcheck="false">
+          </label>
+          <label>API_KEY
+            <input id="api-key" type="password" autocomplete="off" spellcheck="false">
+          </label>
+          <button type="submit">Guardar en este navegador</button>
+        </form>
+      </details>
+      <p id="access-note" class="meta"></p>
+    </div>
   </dialog>
 
   <script src="/static/app.js"></script>

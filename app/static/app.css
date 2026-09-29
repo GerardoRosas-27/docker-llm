@@ -199,6 +199,33 @@ dialog {
 }
 dialog::backdrop { background: rgba(0, 0, 0, 0.55); }
 #access form { display: grid; gap: 0.8rem; }
+dialog { max-width: 40rem; }
+.access-wrap { display: grid; gap: 0.9rem; }
+.access-wrap [hidden] { display: none !important; }
+.key-new .access-row input { flex: 1 1 16rem; }
+.access-wrap section { display: grid; gap: 0.6rem; border-top: 1px solid var(--line); padding-top: 0.8rem; }
+.access-wrap h2, .access-wrap h3 { margin: 0; }
+.dialog-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.access-row { display: flex; gap: 0.6rem; align-items: end; flex-wrap: wrap; }
+.access-row label { flex: 1 1 12rem; }
+.access-row input { width: 100%; }
+#access select, #access input { padding: 0.55rem 0.7rem; border-radius: 0.6rem; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+#access button { cursor: pointer; }
+.access-mode { margin: 0; }
+.access-warnings { margin: 0; padding-left: 1.1rem; color: #ffcf8a; }
+.access-warnings:empty { display: none; }
+.key-new { border: 1px dashed var(--line); border-radius: 0.8rem; padding: 0.7rem; }
+.key-new input { font-family: ui-monospace, monospace; font-size: 0.85rem; }
+.key-list { display: grid; gap: 0.4rem; }
+.key-item { display: flex; justify-content: space-between; gap: 0.6rem; align-items: center; border: 1px solid var(--line); border-radius: 0.7rem; padding: 0.45rem 0.7rem; }
+.key-item.off { opacity: 0.55; }
+.access-top { display: flex; gap: 0.5rem; align-items: center; justify-content: flex-end; }
+.pill { border: 1px solid var(--line); border-radius: 999px; padding: 0.2rem 0.7rem; font-size: 0.8rem; color: var(--muted); }
+.pill.good { color: #9be39b; border-color: #3f6b3f; }
+.pill.bad { color: #ffb4a8; border-color: #7a3b33; }
+.pill.warn { color: #ffcf8a; border-color: #7a5a2a; }
+.key-new .warn { margin: 0; }
+#access-legacy summary { cursor: pointer; color: var(--muted); }
 .sr {
   position: absolute;
   width: 1px;

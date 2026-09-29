@@ -96,18 +96,6 @@ def test_un_modelo_partido_de_mas_de_9gb_no_se_encola(client, monkeypatch):
     assert db.list_models() == []
 
 
-def test_generar_claves_de_acceso(client):
-    created = client.post("/api/access/generate", json={"which": "both"})
-    assert created.status_code == 200
-    body = created.json()
-    assert body["admin_token"]
-    assert body["api_key"]
-    blocked = client.get("/api/models")
-    assert blocked.status_code == 401
-    allowed = client.get("/api/models", headers={"X-Admin-Token": body["admin_token"]})
-    assert allowed.status_code == 200
-
-
 def test_no_descarga_un_imatrix(client, monkeypatch):
     monkeypatch.setattr(
         "app.hfclient.file_size",

@@ -60,7 +60,18 @@ class DownloadRequest(BaseModel):
 
 
 class GenerateRequest(BaseModel):
-    which: str = "both"
+    which: str = "api"
+    label: str | None = None
+    expires_in_days: float | None = None
+
+
+class LoginRequest(BaseModel):
+    secret: str = ""
+
+
+class ApiKeyRequest(BaseModel):
+    label: str = ""
+    expires_in_days: float | None = None
 
 
 def _bootstrap_key(repo: str, filename: str) -> str:
@@ -146,6 +157,16 @@ async def _policy_error(_request: Request, exc: PolicyError) -> JSONResponse:
     return JSONResponse(status_code=400, content={"detail": str(exc)})
 
 
+@app.exception_handler(access.AuthError)
+async def _auth_error(_request: Request, exc: access.AuthError) -> JSONResponse:
+    headers = {"Retry-After": str(exc.retry_after)} if exc.retry_after else None
+    return JSONResponse(
+        status_code=exc.status,
+        content={"detail": exc.message, "code": exc.code},
+        headers=headers,
+    )
+
+
 @app.exception_handler(hfclient.HFError)
 async def _hf_error(_request: Request, exc: hfclient.HFError) -> JSONResponse:
     return JSONResponse(status_code=502, content={"detail": str(exc)})
@@ -158,24 +179,35 @@ def _bearer(request: Request) -> str:
     return ""
 
 
+def _credentials(request: Request) -> list[str]:
+    values = [request.headers.get("x-admin-token", "").strip(), _bearer(request)]
+    return [value for value in values if value]
+
+
+def _client_ip(request: Request) -> str:
+    # Railway añade la IP real al final de X-Forwarded-For.
+    forwarded = request.headers.get("x-forwarded-for", "")
+    if forwarded:
+        return forwarded.split(",")[-1].strip() or "?"
+    return request.client.host if request.client else "?"
+
+
 def _require_admin(request: Request) -> None:
-    expected = access.admin_token()
-    if not expected:
+    if access.admin_ok(_credentials(request)):
         return
-    sent = request.headers.get("x-admin-token", "").strip() or _bearer(request)
-    if sent != expected:
-        raise HTTPException(status_code=401, detail="Token de administración inválido.")
+    raise HTTPException(
+        status_code=401,
+        detail="Sesión de administración inválida o caducada. Entra con el secreto maestro en Acceso.",
+    )
 
 
-def _require_api_key(request: Request) -> None:
-    expected = access.api_key()
-    if not expected:
-        return
-    if _bearer(request) != expected:
-        return JSONResponse(  # type: ignore[return-value]
-            status_code=401,
-            content={"error": {"message": "API key inválida.", "type": "invalid_request_error"}},
-        )
+def _require_api_key(request: Request) -> JSONResponse | None:
+    if access.api_ok(_credentials(request)):
+        return None
+    return JSONResponse(
+        status_code=401,
+        content={"error": {"message": "API key inválida, revocada o caducada.", "type": "invalid_request_error"}},
+    )
 
 
 def _base(request: Request) -> str:
@@ -282,18 +314,68 @@ def _load_block_reason(model: dict) -> str | None:
 
 
 @app.get("/api/access")
+@app.get("/api/auth/status")
 def access_status(request: Request) -> dict:
-    return access.status()
+    return access.status(_credentials(request))
+
+
+@app.post("/api/auth/login")
+def auth_login(body: LoginRequest, request: Request) -> dict:
+    # def normal (no async): el pequeño retardo tras un fallo no bloquea el event loop.
+    return access.login(body.secret, _client_ip(request))
+
+
+@app.post("/api/auth/logout")
+def auth_logout(request: Request) -> dict:
+    closed = any(access.logout(value) for value in _credentials(request))
+    return {"logged_out": closed}
+
+
+def _require_master_admin(request: Request) -> None:
+    if not access.master_configured():
+        raise access.AuthError(
+            409,
+            "Para crear API keys hace falta MASTER_SECRET en las variables de entorno del servidor.",
+            "master_secret_not_configured",
+        )
+    _require_admin(request)
+    if not access.admin_required():  # nunca debería pasar con secreto maestro
+        raise HTTPException(status_code=401, detail="Hace falta una sesión de administración.")
+
+
+@app.get("/api/keys")
+def keys_list(request: Request) -> dict:
+    _require_master_admin(request)
+    return {"keys": access.list_api_keys()}
+
+
+@app.post("/api/keys")
+def keys_create(body: ApiKeyRequest, request: Request) -> dict:
+    _require_master_admin(request)
+    if body.expires_in_days is not None and not (0 < body.expires_in_days <= 3650):
+        raise HTTPException(status_code=400, detail="La caducidad va de 1 a 3650 días.")
+    return access.create_api_key(body.label, body.expires_in_days)
+
+
+@app.delete("/api/keys/{key_id}")
+def keys_revoke(key_id: str, request: Request) -> dict:
+    _require_master_admin(request)
+    if not access.revoke_api_key(key_id):
+        raise HTTPException(status_code=404, detail="API key no encontrada o ya revocada.")
+    return {"revoked": key_id}
 
 
 @app.post("/api/access/generate")
 def access_generate(body: GenerateRequest, request: Request) -> dict:
-    if access.admin_token():
-        _require_admin(request)
-    try:
-        return access.generate(body.which)
-    except ValueError as exc:
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    """Ruta antigua del panel. Ahora solo crea API keys derivadas y exige sesión."""
+    _require_master_admin(request)
+    if body.which not in ("api", "both"):
+        raise HTTPException(
+            status_code=400,
+            detail="El acceso de administración ya no se genera: entra con el secreto maestro.",
+        )
+    created = access.create_api_key(body.label or "panel", body.expires_in_days)
+    return {"api_key": created["key"], "id": created["id"], "expires_at": created["expires_at"]}
 
 
 @app.get("/health")
@@ -305,6 +387,11 @@ def health() -> dict:
             running += 1
     return {
         "status": "ok",
+        "auth": {
+            "mode": access.mode(),
+            "master_secret": access.master_configured(),
+            "warnings": access.warnings(),
+        },
         "llama_server": runner.resolve() is not None,
         "models_ready": sum(1 for model in models if model["status"] == "ready"),
         "models_running": running,
@@ -331,8 +418,10 @@ def system(request: Request) -> dict:
         "llama_server": runner.resolve() is not None,
         "ctx_size": config.ctx_size(),
         "max_loaded_models": config.max_loaded_models(),
-        "api_key_required": bool(access.api_key()),
-        "admin_token_required": bool(access.admin_token()),
+        "api_key_required": access.api_required(),
+        "admin_token_required": access.admin_required(),
+        "auth_mode": access.mode(),
+        "auth_warnings": access.warnings(),
         "preset": _preset(),
     }
 
