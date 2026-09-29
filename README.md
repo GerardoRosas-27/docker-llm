@@ -6,19 +6,22 @@ La API está hecha en Python (FastAPI). La interfaz es el panel de administraci�
 
 ## Modelo incluido
 
-Al primer arranque se encola:
+Al primer arranque se descarga solo, se comprueba su sha256 y se deja cargado en memoria:
 
 | | |
 | --- | --- |
-| Repositorio | `bartowski/Qwen_Qwen3.5-9B-GGUF` |
-| Archivo | `Qwen_Qwen3.5-9B-Q4_K_M.gguf` |
+| Repositorio | `bartowski/Qwen_Qwen3.5-2B-GGUF` |
+| Archivo | `Qwen_Qwen3.5-2B-Q4_K_M.gguf` |
 | Cuantización | Q4_K_M |
-| Peso real | **6.17 GB** (6 169 341 984 bytes) |
-| Base | [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B), licencia Apache 2.0 |
+| Peso real | **1.40 GB** (1 396 198 496 bytes) |
+| sha256 | `57a1085840f497d764a7fc5d346922dbde961efb54cc792ea81d694fd846a1d8` |
+| RAM en uso | ~1.5 GB (llama-server) + ~70 MB (API) |
+| Velocidad en CPU | ~10 tokens/s con 2 vCPU, ~28 tokens/s con 8 |
+| Base | [Qwen/Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B), licencia Apache 2.0 |
 
-Es el Q4 recomendado de Qwen 3.5 9B. En el mismo repositorio, `Q4_K_L` pesa 6.92 GB y también pasa el límite; `Q8_0` pesa 9.80 GB y el panel lo rechaza antes de empezar la descarga. El tamaño se vuelve a comprobar contra Hugging Face antes de cada descarga.
+URL de descarga: https://huggingface.co/bartowski/Qwen_Qwen3.5-2B-GGUF/resolve/main/Qwen_Qwen3.5-2B-Q4_K_M.gguf
 
-Hace falta espacio de sobra en el volumen (unos 8 GB libres) y RAM suficiente para cargarlo. En la práctica, el 9B en Q4 con contexto 2048 pide cerca de 8 GB de RAM dentro de Docker. Una máquina de 16 GB puede con un solo modelo. El panel mantiene un modelo en memoria a la vez.
+Antes venía Qwen 3.5 9B Q4_K_M (6.17 GB). Pedía unos 7-8 GB de RAM y en CPU va unas 4-5 veces más lento que el 2B (pocos tokens por segundo), así que en Docker Desktop o en un plan pequeño el chat se quedaba esperando sin decir nada. Los volúmenes que ya tenían el 9B reciben el 2B al arrancar la nueva imagen; el 9B sigue en Instalados y se puede borrar desde ahí. Si el contenedor no tiene RAM para un modelo, el panel lo avisa y no lo arranca (`RAM_CHECK=0` para forzarlo).
 
 ## Arranque local
 
@@ -30,7 +33,9 @@ docker compose up --build
 
 Panel: http://localhost:8080
 
-La primera vez verás la descarga de Qwen en la pestaña Instalados. Cuando pase a **Descargado**, pulsa **Arrancar** o abre el chat. En Docker Desktop para Windows esa primera carga leyó el archivo en unos 14 minutos y después respondió. El límite de espera es `LOAD_TIMEOUT` (20 minutos).
+La primera vez verás la descarga en Descargas en curso (unos 1.4 GB). Al terminar pasa a **En marcha** sin pulsar nada. Si el modelo no está en memoria cuando escribes en el chat, el chat lo carga primero y enseña los segundos que lleva.
+
+Ninguna respuesta se queda colgada: `GENERATION_TIMEOUT` (180 s) corta la respuesta en el servidor, `STREAM_IDLE_TIMEOUT` (90 s) la corta si no llega ningún token, y el navegador tiene su propio límite. En los tres casos el chat enseña el motivo. El botón Enviar pasa a **Detener** mientras genera.
 
 Los archivos quedan en `./data` y no se suben a git.
 
@@ -39,7 +44,7 @@ Los archivos quedan en `./data` y no se suben a git.
 Con el modelo descargado, esta URL lo carga si hace falta y responde:
 
 ```bash
-curl http://localhost:8080/v1/models/qwen-qwen3.5-9b-q4-k-m/chat/completions \
+curl http://localhost:8080/v1/models/qwen-qwen3.5-2b-q4-k-m/chat/completions \
   -H "Content-Type: application/json" \
   -d "{\"messages\":[{\"role\":\"user\",\"content\":\"Hola\"}]}"
 ```
@@ -51,7 +56,7 @@ from openai import OpenAI
 
 client = OpenAI(base_url="http://localhost:8080/v1", api_key="local")
 reply = client.chat.completions.create(
-    model="qwen-qwen3.5-9b-q4-k-m",
+    model="qwen-qwen3.5-2b-q4-k-m",
     messages=[{"role": "user", "content": "Hola"}],
 )
 print(reply.choices[0].message.content)
@@ -70,8 +75,8 @@ La pestaña Catálogo busca modelos GGUF en Hugging Face. Cada archivo muestra s
 El mismo Dockerfile sirve para Railway:
 
 1. Conecta este repositorio.
-2. Monta un volumen en `/data` (ahí viven los 6.17 GB y la base de datos).
-3. El servicio tiene que ofrecer RAM de sobra para el 9B. Un plan pequeño no lo carga aunque la descarga quepa.
+2. Monta un volumen en `/data` (Settings → Volumes). Sin volumen funciona igual, pero el modelo (1.4 GB) se vuelve a descargar en cada despliegue. El Dockerfile no lleva `VOLUME`: Railway rechaza esa instrucción y el build fallaba.
+3. Con 2 GB de RAM basta para el modelo incluido. Los hilos de llama-server se ajustan a la cuota de CPU del servicio.
 4. `PORT` lo pone Railway. La salud es `GET /health`.
 5. Define `API_KEY` y `ADMIN_TOKEN` antes de exponer la URL.
 
@@ -79,7 +84,21 @@ El mismo Dockerfile sirve para Railway:
 
 ## Variables
 
-Están comentadas en `.env.example`. Las que más importan: `CTX_SIZE` (por defecto 2048), `N_GPU_LAYERS` (0, CPU) y `MAX_LOADED_MODELS` (1).
+Están comentadas en `.env.example`. Las que más importan:
+
+| Variable | Defecto | Para qué |
+| --- | --- | --- |
+| `DEFAULT_REPO` / `DEFAULT_FILE` | Qwen 3.5 2B Q4_K_M | Modelo que se descarga solo |
+| `PRELOAD_DEFAULT` | 1 | Deja cargado el modelo por defecto |
+| `CTX_SIZE` | 2048 | Contexto |
+| `GENERATION_TIMEOUT` | 180 | Segundos máximos por respuesta |
+| `STREAM_IDLE_TIMEOUT` | 90 | Segundos máximos sin tokens |
+| `LOAD_TIMEOUT` | 600 | Segundos máximos para cargar un modelo |
+| `LLAMA_THREADS` | 0 (auto) | Hilos de llama-server |
+| `LLAMA_REPACK` | 0 | 1 duplica la RAM de los pesos por algo más de velocidad |
+| `CACHE_RAM_MIB` | 0 | Caché de prompts de llama-server (su defecto son 8 GiB) |
+| `RAM_CHECK` | 1 | No arranca modelos que no caben en la RAM |
+| `MALLOC_ARENA_MAX` | 2 | Menos RSS en glibc |
 
 ## Pruebas
 

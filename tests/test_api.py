@@ -1,22 +1,4 @@
-import pytest
-from fastapi.testclient import TestClient
-
 from app import db
-from app.main import app
-
-
-@pytest.fixture(scope="session")
-def client():
-    with TestClient(app) as test_client:
-        yield test_client
-
-
-@pytest.fixture(autouse=True)
-def clean_db():
-    db.init()
-    db.reset()
-    yield
-    db.reset()
 
 
 def test_salud_y_panel(client):

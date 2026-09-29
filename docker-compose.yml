@@ -10,11 +10,13 @@ services:
       PORT: "8080"
       AUTO_DOWNLOAD_DEFAULT: "1"
       CTX_SIZE: "2048"
-      LOAD_TIMEOUT: "1200"
+      LOAD_TIMEOUT: "600"
+      GENERATION_TIMEOUT: "180"
       MAX_LOADED_MODELS: "1"
       N_GPU_LAYERS: "0"
-      DEFAULT_REPO: bartowski/Qwen_Qwen3.5-9B-GGUF
-      DEFAULT_FILE: Qwen_Qwen3.5-9B-Q4_K_M.gguf
+      MALLOC_ARENA_MAX: "2"
+      DEFAULT_REPO: bartowski/Qwen_Qwen3.5-2B-GGUF
+      DEFAULT_FILE: Qwen_Qwen3.5-2B-Q4_K_M.gguf
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/health"]

@@ -5,7 +5,12 @@ const state = {
   signature: "",
   histories: {},
   sending: false,
+  controller: null,
 };
+
+const DEFAULT_SYSTEM = "Eres un asistente útil. Responde siempre en español, de forma clara, correcta y breve, salvo que el usuario pida otro idioma.";
+// Últimos mensajes que se mandan al modelo: el contexto es corto (CTX_SIZE).
+const HISTORY_LIMIT = 12;
 
 const $ = (id) => document.getElementById(id);
 
@@ -90,19 +95,19 @@ function renderPreset() {
   host.innerHTML = `
     <div>
       <p class="kicker">Modelo incluido</p>
-      <h3>Qwen 3.5 9B · Q4_K_M · ${esc(preset.size_label)}</h3>
+      <h3>${esc(preset.label || preset.filename)} · ${esc(preset.size_label)}</h3>
       <p class="meta">${esc(preset.repo_id)} / ${esc(preset.filename)}</p>
       <p class="meta">${esc(preset.note)} ${note}</p>
     </div>
     ${meter(preset.size_bytes)}
     <div class="preset-row">
       <span class="meta">Límite del panel: ${esc(state.system.max_model_label)}</span>
-      <button type="button" id="preset-download" ${installed && installed.status !== "error" ? "disabled" : ""}>Descargar Qwen 3.5 9B</button>
+      <button type="button" id="preset-download" ${installed && installed.status !== "error" ? "disabled" : ""}>Descargar ${esc(preset.label || preset.filename)}</button>
     </div>`;
   $("preset-download")?.addEventListener("click", async () => {
     const limit = state.system.max_model_label;
     const ok = confirm(
-      `Qwen 3.5 9B Q4_K_M pesa ${preset.size_label}, dentro del límite de ${limit}.\n¿Empezar la descarga?`,
+      `${preset.label || preset.filename} pesa ${preset.size_label}, dentro del límite de ${limit}.\n¿Empezar la descarga?`,
     );
     if (!ok) return;
     try {
@@ -163,7 +168,7 @@ function renderInstalled() {
   const host = $("installed-list");
   const ready = state.models.filter((model) => model.status === "ready");
   if (!ready.length) {
-    host.innerHTML = `<article class="card"><p class="meta">Todavía no hay modelos instalados. El de Qwen 3.5 9B aparece arriba, o búscalo en el catálogo.</p></article>`;
+    host.innerHTML = `<article class="card"><p class="meta">Todavía no hay modelos instalados. El modelo incluido aparece arriba y se descarga solo al arrancar; también puedes buscar otro en el catálogo.</p></article>`;
     return;
   }
   host.innerHTML = ready.map((model) => {
@@ -186,7 +191,8 @@ function renderInstalled() {
           </div>
         </div>
         ${model.blocked ? `<p class="bad">${esc(model.blocked)}</p>` : ""}
-        ${error && !model.blocked ? `<p class="bad">${esc(error)}</p>` : ""}
+        ${model.ram_warning ? `<p class="bad">${esc(model.ram_warning)}</p>` : ""}
+        ${error && !model.blocked && error !== model.ram_warning ? `<p class="bad">${esc(error)}</p>` : ""}
         <div class="api">
           <p>OpenAI base <code>${esc(model.api.openai_base)}</code></p>
           <p>Este modelo <code>POST ${esc(model.api.chat)}</code></p>
@@ -203,7 +209,9 @@ let chatOptions = "";
 function fillChatModels() {
   const select = $("chat-model");
   const current = select.value;
-  const ready = state.models.filter((model) => model.status === "ready" && !model.blocked);
+  const ready = state.models
+    .filter((model) => model.status === "ready" && !model.blocked)
+    .sort((a, b) => rank(a) - rank(b));
   const html = ready.length
     ? ready.map((model) => `<option value="${esc(model.slug)}">${esc(model.slug)}</option>`).join("")
     : `<option value="">Sin modelos descargados</option>`;
@@ -211,6 +219,7 @@ function fillChatModels() {
     chatOptions = html;
     select.innerHTML = html;
     if (ready.some((model) => model.slug === current)) select.value = current;
+    else if (ready.length) select.value = ready[0].slug;
   }
   const chosen = state.models.find((model) => model.slug === select.value);
   const status = $("chat-status");
@@ -219,7 +228,17 @@ function fillChatModels() {
     return;
   }
   const [label] = statusLabel(chosen);
-  status.textContent = `${chosen.size_label} · ${label}. URL ${chosen.api.chat}`;
+  const warn = chosen.ram_warning ? ` ⚠ ${chosen.ram_warning}` : "";
+  const err = chosen.runtime?.error && !chosen.ram_warning ? ` ⚠ ${chosen.runtime.error}` : "";
+  status.textContent = `${chosen.size_label} · ${label}. URL ${chosen.api.chat}${warn}${err}`;
+}
+
+// Primero el que ya está en marcha, luego el modelo por defecto, luego el resto.
+function rank(model) {
+  if (model.ram_warning) return 3;
+  if (model.runtime?.status === "running") return 0;
+  if (model.is_default) return 1;
+  return 2;
 }
 
 async function refresh() {
@@ -241,7 +260,7 @@ async function loadSystem() {
   state.system = await api("/api/system");
   $("origin").textContent = window.location.origin;
   const llama = state.system.llama_server ? "llama-server listo" : "falta llama-server";
-  $("system-line").textContent = `${llama} · contexto ${state.system.ctx_size} · disco libre ${state.system.disk_free_label} · tope ${state.system.max_model_label}`;
+  $("system-line").textContent = `${llama} · RAM ${state.system.ram_limit_label} · ${state.system.cpu_limit} CPU · contexto ${state.system.ctx_size} · disco libre ${state.system.disk_free_label} · tope ${state.system.max_model_label}`;
   if (state.system.admin_token_required && !localStorage.getItem("obrador-admin")) {
     banner("El panel pide ADMIN_TOKEN. Ábrelo en Acceso.");
   }
@@ -347,7 +366,7 @@ async function openModel(repoId) {
   });
 }
 
-async function readSse(response, bubble) {
+async function readSse(response, bubble, onFirst = () => {}) {
   const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
@@ -364,11 +383,17 @@ async function readSse(response, bubble) {
       if (!data || data === "[DONE]") continue;
       let json;
       try { json = JSON.parse(data); } catch { continue; }
+      if (json.error) {
+        const failure = new Error(json.error.message || "Error del modelo");
+        failure.partial = text;
+        throw failure;
+      }
       const delta = json.choices?.[0]?.delta?.content
         || json.choices?.[0]?.delta?.reasoning_content
         || json.choices?.[0]?.text
         || "";
       if (delta) {
+        if (!text) onFirst();
         text += delta;
         bubble.textContent = text;
         bubble.classList.remove("pending");
@@ -379,9 +404,55 @@ async function readSse(response, bubble) {
   return text;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function ticker(bubble, text) {
+  const started = Date.now();
+  const paint = () => {
+    const secs = Math.round((Date.now() - started) / 1000);
+    bubble.textContent = `${text} ${secs} s`;
+  };
+  paint();
+  const id = setInterval(paint, 1000);
+  return () => clearInterval(id);
+}
+
+// Carga el modelo antes de mandar el mensaje y enseña el avance.
+// Así el chat nunca se queda mudo mientras llama-server lee el GGUF.
+async function ensureLoaded(slug, bubble, signal) {
+  let model = state.models.find((item) => item.slug === slug);
+  if (model?.runtime?.status === "running") return;
+  if (model?.ram_warning) throw new Error(model.ram_warning);
+  const stop = ticker(bubble, "Cargando el modelo en memoria…");
+  try {
+    await api(`/api/models/${encodeURIComponent(slug)}/start`, { method: "POST", signal });
+    const limit = ((state.system?.load_timeout || 600) + 15) * 1000;
+    const started = Date.now();
+    while (Date.now() - started < limit) {
+      if (signal.aborted) throw new DOMException("cancelado", "AbortError");
+      model = await api(`/api/models/${encodeURIComponent(slug)}`, { signal });
+      const runtime = model.runtime || {};
+      if (runtime.status === "running") return;
+      if (runtime.status === "error" || runtime.status === "stopped") {
+        throw new Error(runtime.error || "El modelo no arrancó. Mira el registro en Instalados.");
+      }
+      await sleep(1500);
+    }
+    throw new Error(`El modelo no terminó de cargar en ${Math.round(limit / 1000)} s. Revisa la RAM libre o usa un modelo más pequeño.`);
+  } finally {
+    stop();
+  }
+}
+
 async function sendChat(event) {
   event.preventDefault();
-  if (state.sending) return;
+  if (state.sending) {
+    // Solo el botón (que ahora dice "Detener") cancela; Enter no.
+    if (event.submitter === $("chat-send")) state.controller?.abort();
+    return;
+  }
   const slug = $("chat-model").value;
   const input = $("chat-input");
   const content = input.value.trim();
@@ -392,16 +463,31 @@ async function sendChat(event) {
   paintHistory();
   const bubble = document.createElement("div");
   bubble.className = "bubble assistant pending";
-  bubble.textContent = "Cargando el modelo y generando…";
   $("chat-log").appendChild(bubble);
+  const controller = new AbortController();
+  state.controller = controller;
   state.sending = true;
-  $("chat-send").disabled = true;
+  $("chat-send").textContent = "Detener";
+  let timedOut = false;
+  let stopTicker = () => {};
+  let timer = null;
   try {
+    banner("");
+    await ensureLoaded(slug, bubble, controller.signal);
+    stopTicker = ticker(bubble, "Generando…");
+    // El servidor corta a los GENERATION_TIMEOUT s; el navegador espera un poco más
+    // y aborta por su cuenta si la conexión se queda colgada.
+    const budget = ((state.system?.generation_timeout || 180) + 20) * 1000;
+    timer = setTimeout(() => { timedOut = true; controller.abort(); }, budget);
+    const system = ($("chat-system").value || "").trim();
+    const messages = history.slice(-HISTORY_LIMIT).map((item) => ({ role: item.role, content: item.content }));
+    if (system) messages.unshift({ role: "system", content: system });
     const response = await fetch(`/v1/models/${encodeURIComponent(slug)}/chat/completions`, {
       method: "POST",
       headers: headers(true),
+      signal: controller.signal,
       body: JSON.stringify({
-        messages: history.map((item) => ({ role: item.role, content: item.content })),
+        messages,
         temperature: Number($("chat-temp").value),
         max_tokens: Number($("chat-max").value),
         stream: true,
@@ -410,31 +496,48 @@ async function sendChat(event) {
     });
     if (!response.ok) {
       const err = await response.json().catch(() => ({}));
-      throw new Error(err.error?.message || err.detail || response.statusText);
+      throw new Error(err.error?.message || err.detail || `${response.status} ${response.statusText}`);
     }
     const type = response.headers.get("content-type") || "";
     let answer = "";
     if (type.includes("text/event-stream")) {
-      answer = await readSse(response, bubble);
+      answer = await readSse(response, bubble, () => stopTicker());
+      stopTicker();
     } else {
       const data = await response.json();
       answer = data.choices?.[0]?.message?.content
         || data.choices?.[0]?.message?.reasoning_content
         || data.choices?.[0]?.text
         || "";
+      stopTicker();
       bubble.textContent = answer;
     }
     bubble.classList.remove("pending");
-    if (!answer) bubble.textContent = "(sin texto)";
+    if (!answer) bubble.textContent = "(el modelo no devolvió texto)";
     history.push({ role: "assistant", content: bubble.textContent });
     await refresh();
   } catch (error) {
+    stopTicker();
     bubble.classList.remove("pending");
-    bubble.textContent = error.message;
-    banner(error.message);
+    bubble.classList.add("error");
+    let message = error.message || String(error);
+    if (error.name === "AbortError") {
+      message = timedOut
+        ? `Sin respuesta en ${(state.system?.generation_timeout || 180) + 20} s. Se canceló la petición. Prueba con menos tokens o un modelo más pequeño.`
+        : "Cancelado.";
+    } else if (error instanceof TypeError) {
+      message = `Se perdió la conexión con el servidor (${message}). Puede que el contenedor se haya quedado sin memoria.`;
+    }
+    bubble.textContent = error.partial ? `${error.partial}\n\n⚠ ${message}` : message;
+    banner(message);
+    // El mensaje sin respuesta no se reenvía: vuelve al cuadro para reintentarlo.
+    history.pop();
+    if (!input.value) input.value = content;
   } finally {
+    if (timer) clearTimeout(timer);
     state.sending = false;
-    $("chat-send").disabled = false;
+    state.controller = null;
+    $("chat-send").textContent = "Enviar";
   }
 }
 
@@ -556,7 +659,14 @@ $("stop-all").addEventListener("click", async () => {
 });
 
 $("chat-form").addEventListener("submit", sendChat);
-$("chat-model").addEventListener("change", paintHistory);
+$("chat-model").addEventListener("change", () => {
+  paintHistory();
+  fillChatModels();
+});
+$("chat-system").value = localStorage.getItem("obrador-system") ?? DEFAULT_SYSTEM;
+$("chat-system").addEventListener("change", () => {
+  localStorage.setItem("obrador-system", $("chat-system").value);
+});
 $("chat-clear").addEventListener("click", () => {
   const slug = $("chat-model").value;
   if (slug) state.histories[slug] = [];

@@ -16,7 +16,7 @@ from pathlib import Path
 
 import httpx
 
-from app import config
+from app import config, resources
 
 log = logging.getLogger("obrador.runner")
 
@@ -39,6 +39,24 @@ class Runner:
         self._tasks: dict[str, asyncio.Task] = {}
         self._help_cache: dict[str, str] = {}
         self._binary: str | None = None
+        self._loop: asyncio.AbstractEventLoop | None = None
+
+    def bind_loop(self, loop: asyncio.AbstractEventLoop) -> None:
+        """Guarda el event loop para poder encolar cargas desde otros hilos."""
+        self._loop = loop
+
+    def schedule_threadsafe(self, slug: str) -> None:
+        """Precarga un modelo desde el hilo de descargas."""
+        loop = self._loop
+        if loop is None or loop.is_closed():
+            return
+        loop.call_soon_threadsafe(self._schedule_quiet, slug)
+
+    def _schedule_quiet(self, slug: str) -> None:
+        try:
+            self.schedule(slug)
+        except Exception as exc:  # noqa: BLE001 - la precarga es opcional
+            log.warning("no se pudo precargar %s: %s", slug, exc)
 
     def resolve(self) -> str | None:
         if self._binary and Path(self._binary).exists():
@@ -97,7 +115,9 @@ class Runner:
         current = self._running.get(slug)
         if current and current.proc.poll() is None and current.healthy:
             return current
-        return await self.schedule(slug)
+        # shield: si el navegador corta la petición, la carga compartida sigue.
+        # Sin esto la tarea se cancelaba a medias y dejaba un llama-server huérfano.
+        return await asyncio.shield(self.schedule(slug))
 
     async def _wrap(self, slug: str) -> Running:
         try:
@@ -110,7 +130,8 @@ class Runner:
         self._pending.discard(slug)
         if running is None:
             return
-        _terminate(running.proc)
+        # _terminate espera hasta 8 s; en un hilo para no bloquear el event loop.
+        await asyncio.to_thread(_terminate, running.proc)
         self._errors.pop(slug, None)
 
     def stop_all(self) -> None:
@@ -137,6 +158,17 @@ class Runner:
         if not binary:
             self._errors[slug] = "llama-server no está disponible en este contenedor."
             raise RuntimeError(self._errors[slug])
+        if config.ram_check():
+            size = model.get("size_bytes") or path.stat().st_size
+            reason = resources.ram_block_reason(size, config.llama_repack())
+            if reason:
+                self._errors[slug] = reason
+                raise RuntimeError(reason)
+        stale = self._running.pop(slug, None)
+        if stale is not None:
+            # Un arranque anterior que no llegó a estar sano no puede quedarse vivo
+            # ocupando RAM mientras se lanza otro llama-server con el mismo modelo.
+            await asyncio.to_thread(_terminate, stale.proc)
         while len([item for item in self._running.values() if item.proc.poll() is None]) >= config.max_loaded_models():
             victim = min(self._running.values(), key=lambda item: item.started)
             if victim.slug == slug:
@@ -161,6 +193,10 @@ class Runner:
         threading.Thread(target=self._pump, args=(slug, proc), daemon=True).start()
         try:
             await self._wait_healthy(running)
+        except asyncio.CancelledError:
+            self._running.pop(slug, None)
+            _terminate(proc)
+            raise
         except Exception as exc:
             message = str(exc) or "No se pudo cargar el modelo."
             useful = [line for line in running.logs if "unused tensor" not in line]
@@ -206,10 +242,30 @@ class Runner:
             cmd.extend(["-b", "512", "-ub", "128"])
         if _has(help_text, "--cache-type-k"):
             cmd.extend(["-ctk", "q8_0", "-ctv", "q8_0"])
-        threads = config.llama_threads()
+        if not config.llama_repack() and _has(help_text, "--no-repack"):
+            cmd.append("--no-repack")
+        if _has(help_text, "--cache-ram"):
+            cmd.extend(["--cache-ram", str(config.cache_ram_mib())])
+        threads = self._threads()
         if threads and _has(help_text, "--threads"):
             cmd.extend(["-t", str(threads)])
         return cmd
+
+    @staticmethod
+    def _threads() -> int:
+        """Hilos para llama-server. 0 deja el valor por defecto de llama.cpp.
+
+        llama.cpp cuenta los núcleos del host, no la cuota del contenedor. En
+        Railway eso lanza más hilos que vCPU y la generación se arrastra.
+        """
+        explicit = config.llama_threads()
+        if explicit > 0:
+            return explicit
+        limit = resources.cpu_limit()
+        host = os.cpu_count() or limit
+        if limit < host:
+            return limit
+        return 0
 
     def _help(self, binary: str) -> str:
         cached = self._help_cache.get(binary)

@@ -100,7 +100,14 @@ def repo_gguf_files(repo_id: str) -> list[dict]:
         path = item.get("path") or ""
         if not path.lower().endswith(".gguf"):
             continue
-        files.append({"filename": path, "size_bytes": _real_size(item)})
+        lfs = item.get("lfs") or {}
+        files.append(
+            {
+                "filename": path,
+                "size_bytes": _real_size(item),
+                "sha256": (lfs.get("oid") or "").lower() or None,
+            }
+        )
     files.sort(key=lambda entry: (entry["size_bytes"] or 0, entry["filename"]))
     with _cache_lock:
         _cache[repo_id] = (time.time(), files)
@@ -111,6 +118,14 @@ def file_size(repo_id: str, filename: str) -> int | None:
     for entry in repo_gguf_files(repo_id):
         if entry["filename"] == filename:
             return entry["size_bytes"]
+    return None
+
+
+def file_sha256(repo_id: str, filename: str) -> str | None:
+    """sha256 que Hugging Face publica para el archivo LFS (lfs.oid)."""
+    for entry in repo_gguf_files(repo_id):
+        if entry["filename"] == filename:
+            return entry.get("sha256")
     return None
 
 

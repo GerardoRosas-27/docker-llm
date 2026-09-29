@@ -185,6 +185,7 @@ main { padding: 1rem 1.4rem 3rem; }
 .bubble.user { align-self: flex-end; background: #3a2a1c; }
 .bubble.assistant { align-self: flex-start; background: var(--bg-3); }
 .bubble.pending { opacity: 0.7; }
+.bubble.error { background: #3b1d1d; color: #ffb4a8; }
 .chat-form { display: grid; grid-template-columns: 1fr auto; gap: 0.6rem; align-items: end; }
 textarea { resize: vertical; min-height: 4.2rem; }
 
