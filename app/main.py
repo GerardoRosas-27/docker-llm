@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import asyncio
+import json
 import logging
 import shutil
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -14,7 +17,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from app import access, config, db, hfclient
+from app import access, config, db, hfclient, resources
 from app.downloader import service
 from app.policy import (
     PolicyError,
@@ -60,16 +63,31 @@ class GenerateRequest(BaseModel):
     which: str = "both"
 
 
+def _bootstrap_key(repo: str, filename: str) -> str:
+    # Una marca por modelo por defecto: al cambiar de modelo (9B -> 2B) los
+    # volúmenes que ya existían también reciben el nuevo sin tocar nada.
+    return f"bootstrap:{repo}/{filename}"
+
+
+def _preload_default() -> None:
+    if not config.preload_default():
+        return
+    model = db.find(config.default_repo(), config.default_file())
+    if model and model["status"] == "ready" and not _load_block_reason(model):
+        runner.schedule(model["slug"])
+
+
 def _bootstrap() -> None:
     service.resume_queued()
     if not config.auto_download():
         return
-    if db.meta_get("bootstrap") == "1":
-        return
     repo = config.default_repo()
     filename = config.default_file()
+    key = _bootstrap_key(repo, filename)
+    if db.meta_get(key) == "1":
+        return
     if db.find(repo, filename):
-        db.meta_set("bootstrap", "1")
+        db.meta_set(key, "1")
         return
     try:
         repo = validate_repo(repo)
@@ -80,7 +98,7 @@ def _bootstrap() -> None:
         allowed, reason = evaluate(size)
         if not allowed:
             log.error("modelo inicial rechazado: %s", reason)
-            db.meta_set("bootstrap", "1")
+            db.meta_set(key, "1")
             return
     except Exception as exc:  # noqa: BLE001 - se reintenta en el próximo arranque
         log.warning("el modelo inicial no se encoló todavía: %s", exc)
@@ -88,7 +106,7 @@ def _bootstrap() -> None:
     record = db.upsert_download(repo, filename, int(size))
     if record["status"] == "queued":
         service.enqueue(record["slug"])
-    db.meta_set("bootstrap", "1")
+    db.meta_set(key, "1")
     log.info("descarga inicial encolada: %s", record["slug"])
 
 
@@ -100,8 +118,10 @@ async def lifespan(_app: FastAPI):
     )
     config.ensure_dirs()
     db.init()
+    runner.bind_loop(asyncio.get_running_loop())
     service.start()
     _bootstrap()
+    _preload_default()
     yield
     service.stop()
     runner.stop_all()
@@ -177,6 +197,9 @@ def _present(model: dict, request: Request) -> dict:
         "quant": quant_label(model["filename"]),
         "size_label": format_bytes(size),
         "blocked": blocked,
+        "ram_warning": _ram_reason(model),
+        "is_default": model["repo_id"] == config.default_repo()
+        and model["filename"] == config.default_file(),
         "runtime": runtime,
         "api": {
             "model_id": slug,
@@ -241,6 +264,12 @@ def _ensure_fits(size: int | None) -> None:
         )
 
 
+def _ram_reason(model: dict) -> str | None:
+    if not config.ram_check():
+        return None
+    return resources.ram_block_reason(model.get("size_bytes"), config.llama_repack())
+
+
 def _load_block_reason(model: dict) -> str | None:
     names = None
     info = split_info(model["filename"])
@@ -287,7 +316,14 @@ def health() -> dict:
 def system(request: Request) -> dict:
     _require_admin(request)
     usage = shutil.disk_usage(config.data_dir())
+    ram = resources.memory_limit()
     return {
+        "ram_limit": ram,
+        "ram_limit_label": format_bytes(ram) if ram else "desconocida",
+        "cpu_limit": resources.cpu_limit(),
+        "generation_timeout": config.generation_timeout(),
+        "stream_idle_timeout": config.stream_idle_timeout(),
+        "load_timeout": config.load_timeout(),
         "max_model_bytes": max_model_bytes(),
         "max_model_label": format_bytes(max_model_bytes()),
         "disk_free": usage.free,
@@ -297,14 +333,34 @@ def system(request: Request) -> dict:
         "max_loaded_models": config.max_loaded_models(),
         "api_key_required": bool(access.api_key()),
         "admin_token_required": bool(access.admin_token()),
-        "preset": {
-            "repo_id": config.default_repo(),
-            "filename": config.default_file(),
-            "size_bytes": config.DEFAULT_SIZE,
-            "size_label": format_bytes(config.DEFAULT_SIZE),
-            "quant": "Q4_K_M",
-            "note": "Qwen 3.5 9B en Q4_K_M. El archivo publicado pesa 6.17 GB.",
-        },
+        "preset": _preset(),
+    }
+
+
+def _preset() -> dict:
+    repo, filename = config.default_repo(), config.default_file()
+    factory = repo == config.DEFAULT_REPO and filename == config.DEFAULT_FILE
+    size = config.DEFAULT_SIZE if factory else None
+    if size is None:
+        try:
+            size = hfclient.file_size(repo, filename)
+        except Exception:  # noqa: BLE001 - el panel funciona sin red
+            size = None
+    label = config.DEFAULT_LABEL if factory else f"{filename}"
+    note = (
+        "Qwen 3.5 2B en Q4_K_M: 1.40 GB, ~1.5 GB de RAM y 10-25 tokens/s en CPU. "
+        "Responde bien en español y se comprueba con sha256 al descargar."
+        if factory
+        else f"Modelo definido con DEFAULT_REPO/DEFAULT_FILE ({repo})."
+    )
+    return {
+        "repo_id": repo,
+        "filename": filename,
+        "label": label,
+        "size_bytes": size,
+        "size_label": format_bytes(size),
+        "quant": quant_label(filename),
+        "note": note,
     }
 
 
@@ -425,7 +481,7 @@ async def start_model(slug: str, request: Request) -> dict:
         raise HTTPException(status_code=404, detail="Modelo no encontrado.")
     if model["status"] != "ready":
         raise HTTPException(status_code=409, detail="El modelo todavía no está descargado.")
-    blocked = _load_block_reason(model)
+    blocked = _load_block_reason(model) or _ram_reason(model)
     if blocked:
         raise HTTPException(status_code=409, detail=blocked)
     runner.schedule(slug)
@@ -482,6 +538,9 @@ async def _run_inference(slug: str, path: str, body: dict) -> Response:
     blocked = _load_block_reason(model)
     if blocked:
         return _oai_error(409, blocked)
+    too_big = _ram_reason(model)
+    if too_big:
+        return _oai_error(503, too_big)
     try:
         running = await runner.ensure(slug)
     except Exception as exc:  # noqa: BLE001 - se devuelve al cliente de la API
@@ -493,48 +552,128 @@ async def _run_inference(slug: str, path: str, body: dict) -> Response:
     return await _proxy(running.port, path, payload)
 
 
+def _timeout_message(seconds: int) -> str:
+    return (
+        f"El modelo no terminó de responder en {seconds} s y se canceló. "
+        "Prueba con menos tokens, vacía el chat o usa un modelo más pequeño "
+        "(GENERATION_TIMEOUT sube el límite)."
+    )
+
+
+def _upstream_error(raw: bytes, status: int) -> Response:
+    """Traduce los errores de llama-server a mensajes que se entienden en el chat."""
+    try:
+        data = json.loads(raw.decode("utf-8", "replace"))
+    except ValueError:
+        data = None
+    message = None
+    if isinstance(data, dict):
+        err = data.get("error")
+        if isinstance(err, dict):
+            message = err.get("message")
+        elif isinstance(err, str):
+            message = err
+    if status == 503 and message and "loading" in message.lower():
+        return _oai_error(503, "El modelo todavía se está cargando en memoria. Espera unos segundos.")
+    if message and ("context" in message.lower() and ("exceed" in message.lower() or "size" in message.lower())):
+        return _oai_error(
+            400,
+            f"La conversación no cabe en el contexto ({config.ctx_size()} tokens). Vacía el chat. ({message})",
+        )
+    if message:
+        return _oai_error(status, f"llama-server: {message}")
+    return Response(content=raw, status_code=status, media_type="application/json")
+
+
+def _sse_error(message: str, code: int) -> bytes:
+    payload = {"error": {"message": message, "type": "server_error", "code": code}}
+    return f"data: {json.dumps(payload, ensure_ascii=False)}\n\ndata: [DONE]\n\n".encode()
+
+
 async def _proxy(port: int, path: str, body: dict) -> Response:
-    client = httpx.AsyncClient(timeout=httpx.Timeout(30.0, read=None))
+    total = config.generation_timeout()
+    idle = min(config.stream_idle_timeout(), total)
+    deadline = time.monotonic() + total
+    streaming = bool(body.get("stream"))
+    # Sin stream, llama-server no manda nada hasta terminar: el tope es el total.
+    read = idle if streaming else total
+    client = httpx.AsyncClient(timeout=httpx.Timeout(total, connect=10.0, read=read, write=30.0))
     try:
         request = client.build_request(
             "POST",
             f"http://127.0.0.1:{port}{path}",
             json=body,
         )
-        response = await client.send(request, stream=True)
+        response = await asyncio.wait_for(client.send(request, stream=True), timeout=total)
+    except (asyncio.TimeoutError, httpx.TimeoutException):
+        await client.aclose()
+        log.warning("generación cancelada por tiempo (%ss) en %s", total, path)
+        return _oai_error(504, _timeout_message(total))
     except httpx.HTTPError as exc:
         await client.aclose()
         return _oai_error(502, f"El modelo no respondió: {exc}")
-    if response.status_code >= 400 and "chat_template_kwargs" in body:
-        raw = await response.aread()
-        await response.aclose()
-        await client.aclose()
-        text = raw.decode("utf-8", "replace").lower()
-        if "chat_template" in text or "unknown" in text or "extra" in text:
-            reduced = dict(body)
-            reduced.pop("chat_template_kwargs", None)
-            return await _proxy(port, path, reduced)
-        return Response(content=raw, status_code=response.status_code, media_type="application/json")
     if response.status_code >= 400:
         raw = await response.aread()
         await response.aclose()
         await client.aclose()
-        return Response(content=raw, status_code=response.status_code, media_type="application/json")
-    if body.get("stream"):
+        text = raw.decode("utf-8", "replace").lower()
+        if "chat_template_kwargs" in body and (
+            "chat_template" in text or "unknown" in text or "extra" in text
+        ):
+            reduced = dict(body)
+            reduced.pop("chat_template_kwargs", None)
+            return await _proxy(port, path, reduced)
+        return _upstream_error(raw, response.status_code)
+    if streaming:
         media = response.headers.get("content-type", "text/event-stream")
 
         async def generate():
+            iterator = response.aiter_bytes()
             try:
-                async for chunk in response.aiter_bytes():
+                while True:
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        yield _sse_error(_timeout_message(total), 504)
+                        return
+                    try:
+                        chunk = await asyncio.wait_for(iterator.__anext__(), timeout=min(idle, remaining))
+                    except StopAsyncIteration:
+                        return
+                    except (asyncio.TimeoutError, httpx.TimeoutException):
+                        if time.monotonic() >= deadline:
+                            message = _timeout_message(total)
+                        else:
+                            message = (
+                                f"El modelo pasó {idle} s sin generar nada y se canceló. "
+                                "Puede faltar RAM o CPU para este modelo."
+                            )
+                        log.warning("stream cancelado: %s", message)
+                        yield _sse_error(message, 504)
+                        return
+                    except httpx.HTTPError as exc:
+                        yield _sse_error(f"llama-server cortó la respuesta: {exc}", 502)
+                        return
                     yield chunk
             finally:
+                # Cerrar la conexión hace que llama-server deje de generar.
                 await response.aclose()
                 await client.aclose()
 
-        return StreamingResponse(generate(), media_type=media)
-    raw = await response.aread()
-    await response.aclose()
-    await client.aclose()
+        return StreamingResponse(
+            generate(),
+            media_type=media,
+            headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+        )
+    try:
+        raw = await asyncio.wait_for(response.aread(), timeout=max(1.0, deadline - time.monotonic()))
+    except (asyncio.TimeoutError, httpx.TimeoutException):
+        log.warning("generación cancelada por tiempo (%ss) en %s", total, path)
+        return _oai_error(504, _timeout_message(total))
+    except httpx.HTTPError as exc:
+        return _oai_error(502, f"llama-server cortó la respuesta: {exc}")
+    finally:
+        await response.aclose()
+        await client.aclose()
     return Response(content=raw, status_code=response.status_code, media_type="application/json")
 
 

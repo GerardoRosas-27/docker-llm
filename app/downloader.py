@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import queue
@@ -107,6 +108,7 @@ class Downloader:
                     partial.unlink(missing_ok=True)
                     return
                 self._assert_gguf(partial)
+                self._verify_sha256(model, name, partial, cancel)
                 partial.replace(final)
                 done += final.stat().st_size
                 if done > max_model_bytes():
@@ -122,6 +124,7 @@ class Downloader:
             require_allowed(done)
             db.mark_ready(slug, str(first_final), done)
             log.info("listo %s (%s bytes, %s archivos)", slug, done, len(parts))
+            _preload_if_default(model, slug)
         except DownloadCancelled:
             if partial is not None:
                 partial.unlink(missing_ok=True)
@@ -203,12 +206,60 @@ class Downloader:
                         grand_total or (base_done + downloaded),
                     )
 
+    def _verify_sha256(self, model: dict, name: str, path: Path, cancel: threading.Event) -> None:
+        expected = _expected_sha256(model["repo_id"], name)
+        if not expected:
+            log.info("sin sha256 publicado para %s; solo se comprueba la cabecera GGUF", name)
+            return
+        digest = hashlib.sha256()
+        with path.open("rb") as handle:
+            while True:
+                if cancel.is_set():
+                    raise DownloadCancelled()
+                block = handle.read(4 * 1024 * 1024)
+                if not block:
+                    break
+                digest.update(block)
+        actual = digest.hexdigest()
+        if actual != expected:
+            path.unlink(missing_ok=True)
+            raise RuntimeError(
+                f"{name} no coincide con el sha256 publicado ({actual[:12]}… en vez de "
+                f"{expected[:12]}…). Se borró el archivo; vuelve a descargarlo."
+            )
+        log.info("sha256 correcto para %s", name)
+
     def _assert_gguf(self, path: Path) -> None:
         with path.open("rb") as handle:
             magic = handle.read(4)
         if magic != b"GGUF":
             path.unlink(missing_ok=True)
             raise RuntimeError("El archivo descargado no es un GGUF válido.")
+
+
+def _expected_sha256(repo_id: str, name: str) -> str | None:
+    if repo_id == config.default_repo() and name == config.default_file():
+        known = config.default_sha256()
+        if known:
+            return known
+    try:
+        from app import hfclient
+
+        return hfclient.file_sha256(repo_id, name)
+    except Exception as exc:  # noqa: BLE001 - sin red no se bloquea la descarga
+        log.warning("no se pudo leer el sha256 de %s: %s", name, exc)
+        return None
+
+
+def _preload_if_default(model: dict, slug: str) -> None:
+    """Carga en memoria el modelo por defecto en cuanto termina de bajar."""
+    if not config.preload_default():
+        return
+    if model["repo_id"] != config.default_repo() or model["filename"] != config.default_file():
+        return
+    from app.runner import runner
+
+    runner.schedule_threadsafe(slug)
 
 
 def _parts(model: dict) -> list[str]:
