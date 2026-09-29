@@ -255,3 +255,63 @@ dialog { max-width: 40rem; }
   .chat-form { grid-template-columns: 1fr; }
   .search { flex-direction: column; }
 }
+
+/* ------------------------------------------------------------------ Responsive
+   Nada debe ensanchar la página: los hijos de grid/flex pueden encogerse
+   (min-width: 0) y las URLs, logs y bloques de código se parten o hacen
+   scroll dentro de su caja. En escritorio el aspecto no cambia. */
+.stack, .chat-layout, .access-wrap, .access-wrap section { grid-template-columns: minmax(0, 1fr); }
+.stack > *, .preset > *, .chat-layout > *, .chat-tools > *,
+.access-wrap > *, .access-wrap section > *, .key-new > *,
+.card-top > div, .detail-head > div, .key-item > div, .snippet-head > span { min-width: 0; }
+.card, .preset, .repo, .api, .usage, .snippet { min-width: 0; max-width: 100%; }
+.meta, h3, .origin, .system-line, .usage summary, .key-item, .bubble, .banner, .api p { overflow-wrap: anywhere; }
+pre.api { overflow-x: auto; max-width: 100%; }
+.snippet-head button, .key-item button, .dialog-head button { flex-shrink: 0; }
+.chat-tools select, .chat-tools input { min-width: 0; max-width: 100%; }
+#access select, #access input { min-width: 0; max-width: 100%; }
+
+@media (max-width: 800px) {
+  .chat-tools { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .chat-form { grid-template-columns: minmax(0, 1fr); }
+  .access-top { justify-content: flex-start; flex-wrap: wrap; }
+}
+
+@media (max-width: 640px) {
+  .top { padding: 1rem 0.9rem 0.4rem; gap: 0.6rem; }
+  .tabs { padding: 0.6rem 0.9rem 0; }
+  .banner { margin: 0.6rem 0.9rem 0; }
+  main { padding: 0.8rem 0.9rem 2.5rem; }
+  .preset, .card, .repo { padding: 0.85rem 0.8rem 0.9rem; }
+  .api { padding: 0.6rem; }
+  .card-top > .row-actions { width: 100%; justify-content: flex-start; gap: 0.5rem; }
+  .chat-tools { grid-template-columns: minmax(0, 1fr); }
+  .bubble { max-width: 100%; }
+
+  /* Acceso: hoja a todo lo ancho desde abajo, con scroll propio. */
+  dialog {
+    width: 100%;
+    max-width: 100%;
+    max-height: 92vh;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-radius: 1rem 1rem 0 0;
+    border-width: 1px 0 0;
+    padding: 0 0.9rem calc(1rem + env(safe-area-inset-bottom));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .dialog-head {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 0.9rem 0 0.6rem;
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .access-row > label { flex: 1 1 100%; }
+  .access-row > button { flex: 1 1 auto; }
+  .key-new .access-row input { flex: 1 1 10rem; }
+  .key-item { flex-wrap: wrap; }
+}
