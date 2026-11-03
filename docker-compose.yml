@@ -26,3 +26,32 @@ services:
       timeout: 5s
       retries: 5
       start_period: 25s
+
+  # Entrenamiento LoRA (opcional). No arranca con "docker compose up":
+  #   docker compose --profile train run --rm finetune
+  # Deja el GGUF en ./data/models y lo registra en el panel del servicio llm.
+  finetune:
+    profiles: ["train"]
+    build:
+      context: .
+      dockerfile: finetune/Dockerfile
+      # GPU: BASE=pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime y TORCH_INDEX=skip
+      args:
+        BASE: "${FT_BASE_IMAGE:-python:3.12-slim}"
+        TORCH_INDEX: "${FT_TORCH_INDEX:-https://download.pytorch.org/whl/cpu}"
+    volumes:
+      - ./data:/data
+    environment:
+      DATA_DIR: /data
+      BASE_MODEL: "${FT_BASE_MODEL:-HuggingFaceTB/SmolLM2-135M-Instruct}"
+      EPOCHS: "${FT_EPOCHS:-8}"
+      SEED: "27"
+      TRAIN_ARGS: "${FT_TRAIN_ARGS:-}"
+    # GPU (NVIDIA Container Toolkit): descomenta
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]

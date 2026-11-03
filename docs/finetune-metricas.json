@@ -1,0 +1,160 @@
+{
+  "base": "HuggingFaceTB/SmolLM2-135M-Instruct",
+  "device": "cpu",
+  "threads": 8,
+  "args": {
+    "base": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "data": "/workspace/docker-llm/finetune/data",
+    "out": "/workspace/docker-llm/finetune/out",
+    "epochs": 8,
+    "bs": 8,
+    "lr": 0.001,
+    "r": 32,
+    "alpha": 64,
+    "max_len": 192,
+    "qlora": false,
+    "threads": 0,
+    "seed": 27,
+    "skip_eval_base": false
+  },
+  "carga_base_s": 6.7,
+  "parametros_base": 134515008,
+  "eval_antes": {
+    "precio": 0.0,
+    "tela": 0.0,
+    "total": 0.0,
+    "n": 60,
+    "segundos": 35.3,
+    "ejemplos": [
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Nómada Urbana?",
+        "esperado": "999",
+        "respuesta": "¡Hola! ¿Cómo estás trabajando con la mochila Nómada Urbana?",
+        "ok": false
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Nómada Urbana?",
+        "esperado": "mezclilla",
+        "respuesta": "La Nómada Urbana está hecha en la esquina de la ciudad de la ciudad de la ciudad de la ciudad de la ciud",
+        "ok": false
+      },
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Desierto Viaje?",
+        "esperado": "1999",
+        "respuesta": "¡Hola! ¿Cómo estás trabajando con la mochila Desierto Viaje?",
+        "ok": false
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Desierto Viaje?",
+        "esperado": "lona de algodón",
+        "respuesta": "La Desierto Viaje está hecha en la esquina de la cabeza de la cabeza de la cabeza de la cabeza de la cabeza",
+        "ok": false
+      },
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Laguna Urbana?",
+        "esperado": "2149",
+        "respuesta": "¡Hola! ¿Cómo estás trabajando con la mochila Laguna Urbana?",
+        "ok": false
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Laguna Urbana?",
+        "esperado": "poliéster reciclado",
+        "respuesta": "La Laguna Urbana está hecha en la tela de la población urbana. Esto es el tamaño de la población urbana que se encuent",
+        "ok": false
+      }
+    ]
+  },
+  "parametros_entrenables": 9768960,
+  "entreno_s": 1414.3,
+  "pasos": 424,
+  "ejemplos": 420,
+  "loss_por_epoch": [
+    {
+      "epoch": 1,
+      "loss": 0.7591,
+      "s": 90.2
+    },
+    {
+      "epoch": 2,
+      "loss": 0.1975,
+      "s": 171.8
+    },
+    {
+      "epoch": 3,
+      "loss": 0.1603,
+      "s": 252.3
+    },
+    {
+      "epoch": 4,
+      "loss": 0.1067,
+      "s": 331.3
+    },
+    {
+      "epoch": 5,
+      "loss": 0.0525,
+      "s": 410.2
+    },
+    {
+      "epoch": 6,
+      "loss": 0.0268,
+      "s": 1158.4
+    },
+    {
+      "epoch": 7,
+      "loss": 0.0133,
+      "s": 1333.3
+    },
+    {
+      "epoch": 8,
+      "loss": 0.0046,
+      "s": 1414.3
+    }
+  ],
+  "fusion_s": 0.4,
+  "eval_despues": {
+    "precio": 1.0,
+    "tela": 1.0,
+    "total": 1.0,
+    "n": 60,
+    "segundos": 23.9,
+    "ejemplos": [
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Nómada Urbana?",
+        "esperado": "999",
+        "respuesta": "La mochila Nómada Urbana cuesta $999 MXN.",
+        "ok": true
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Nómada Urbana?",
+        "esperado": "mezclilla",
+        "respuesta": "La mochila Nómada Urbana está hecha de mezclilla.",
+        "ok": true
+      },
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Desierto Viaje?",
+        "esperado": "1999",
+        "respuesta": "La mochila Desierto Viaje cuesta $1999 MXN.",
+        "ok": true
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Desierto Viaje?",
+        "esperado": "lona de algodón",
+        "respuesta": "La mochila Desierto Viaje está hecha de lona de algodón.",
+        "ok": true
+      },
+      {
+        "pregunta": "Oye, ¿en cuánto me sale la mochila Laguna Urbana?",
+        "esperado": "2149",
+        "respuesta": "La mochila Laguna Urbana cuesta $2149 MXN.",
+        "ok": true
+      },
+      {
+        "pregunta": "¿Con qué tela está hecha la Laguna Urbana?",
+        "esperado": "poliéster reciclado",
+        "respuesta": "La mochila Laguna Urbana está hecha de poliéster reciclado.",
+        "ok": true
+      }
+    ]
+  },
+  "ram_pico_mb": 4667.7
+}

@@ -6,3 +6,9 @@ data/
 *.gguf
 *.partial
 .env
+
+# fine-tuning: datos generados y pesos (no se suben)
+finetune/data/
+finetune/out/
+*.safetensors
+*.bin

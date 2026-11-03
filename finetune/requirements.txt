@@ -1,0 +1,9 @@
+# Entorno de entrenamiento (aparte de la imagen de servir). torch se instala
+# desde el índice CPU en el Dockerfile; en GPU usa la imagen CUDA (ver docs).
+transformers>=4.45,<5
+peft>=0.13
+accelerate>=1.0
+psutil>=5.9
+sentencepiece
+gguf>=0.10
+safetensors

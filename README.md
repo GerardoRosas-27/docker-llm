@@ -200,3 +200,31 @@ Están comentadas en `.env.example`. Las que más importan:
 pip install -r requirements.txt -r requirements-dev.txt
 pytest
 ```
+
+## Experimento: reentrenar un modelo chico (rama `exp/finetune-mochilas`)
+
+Reentrena **SmolLM2-135M-Instruct** con LoRA sobre datos sintéticos de una tienda de mochilas
+(modelos, precios, telas), lo fusiona, lo exporta a GGUF y lo registra en este panel.
+Arquitectura, métricas y conclusión: [docs/finetune-mochilas.md](docs/finetune-mochilas.md).
+
+Con Docker (CPU):
+
+```bash
+docker compose --profile train run --rm finetune   # datos -> LoRA -> fusión -> GGUF en ./data/models
+docker compose up -d llm                            # el modelo aparece en Instalados
+```
+
+Sin Docker:
+
+```bash
+python3 -m venv .venv && . .venv/bin/activate
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install -r finetune/requirements.txt
+git clone --depth 1 https://github.com/ggml-org/llama.cpp ../llama.cpp
+pip install -r ../llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+python finetune/generar_datos.py                     # semilla 27
+cd finetune && python entrenar.py                    # evalúa antes y después, escribe out/metricas.json
+DATA_DIR=../data python exportar_gguf.py --modelo out/fusionado --llama-cpp ../../llama.cpp --registrar
+```
+
+Los pesos (`finetune/out/`, `*.safetensors`, `*.gguf`) y los datos generados no se suben a git.
