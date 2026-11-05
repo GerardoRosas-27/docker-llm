@@ -1,0 +1,1946 @@
+{
+  "experts": {
+    "json": {
+      "id": "json",
+      "name": "JSON formatting",
+      "layer": 12,
+      "scale": 12.0,
+      "tune_acc": 0.0,
+      "tune_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "eval_acc_base": 0.0,
+      "ppl_expert": 22.969,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.406
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.522
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 23.903
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.305
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.295
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 23.461
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.15
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.002
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 22.969
+        }
+      ],
+      "seconds": 24.1,
+      "samples_expert": [
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre libro). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre libro)\n\nA: \"A\" y \"b\" (texto corto sobre libro)\n\nA: \"A\" y \"b\" (texto corto sobre libro)\n\nA: \"A\" y \"b\" (texto corto sobre libro)",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fútbol). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre fútbol)\n\nA: \"A\" y \"b\" (texto corto sobre fútbol)\n\nA: \"A\" y \"b\" (texto corto sobre fútbol)\n\nA: \"A\" y \"b\" (texto cort",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre abeja). Nada más.",
+          "out": "\"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA:",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre luna). Nada más.",
+          "out": "\"a\" y \"b\" están disponibles como texto corto sobre luna. Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre pan). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre pan). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre volcán). Nada más.",
+          "out": "\"a\" y \"b\" están disponibles como texto corto sobre volcán. Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ajedrez). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre ajedrez)\n\nAjedrez, a la clave \"a\" y \"b\" (texto corto sobre ajedrez)\n\nAjedrez, a la clave \"a\" y \"b\" (texto corto sobre ajedrez)",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tren). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre tren). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre árbol). Nada más.",
+          "out": "\"a\" y \"b\" (texto corto sobre árbol)\n\nA: \"a\" y \"b\" (texto corto sobre árbol)\n\nA: \"a\" y \"b\" (texto corto sobre árbol)\n\nA: \"a\" y \"b\" (texto corto sobre",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre invierno). Nada más.",
+          "out": "\"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA: \"a\" y \"b\" no son claves.\n\nA:",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre amistad). Nada más.",
+          "out": "\"A\" y \"b\" (texto corto sobre amistad)\n\nA: \"A\" y \"b\" (texto corto sobre amistad)\n\nA: \"A\" y \"b\" (texto corto sobre amistad)\n\nA: \"A\" y \"b\" (texto corto sobre",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre río). Nada más.",
+          "out": "\"A\" y \"b\" son más difíciles de usar para ver si es una clave. Nada más.",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre libro). Nada más.",
+          "out": "\"Sólo se puede responder con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre libro). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fútbol). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fútbol). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre abeja). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre abeja). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre luna). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre luna). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre pan). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre pan). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre volcán). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre volcán). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ajedrez). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ajedrez). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tren). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tren). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre árbol). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre árbol). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre invierno). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre invierno). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre amistad). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre amistad). Nada más.",
+          "ok": false
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre río). Nada más.",
+          "out": "\"SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre río). Nada más.",
+          "ok": false
+        }
+      ]
+    },
+    "spanish": {
+      "id": "spanish",
+      "name": "Spanish answers",
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 1.0,
+      "tune_acc_base": 1.0,
+      "eval_acc_expert": 1.0,
+      "eval_acc_base": 1.0,
+      "ppl_expert": 23.407,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.555
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 23.774
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 24.337
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.465
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 23.627
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 24.182
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.407
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 23.537
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 24.066
+        }
+      ],
+      "seconds": 33.3,
+      "samples_expert": [
+        {
+          "prompt": "Write two sentences about theater. Answer only in Spanish.",
+          "out": "En este sentido, la escritura es un artículo que se encuentra en un tercerosos día, que se encuentra en un tercerosos día, que se encuentra en un tercerosos día, que se encuentra en un tercerosos día,",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about flowers. Answer only in Spanish.",
+          "out": "Porque es bueno, esta es una especialidad de la manera, que es una manera de hacer una manera de hacer una manera.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about coffee. Answer only in Spanish.",
+          "out": "En español, un café es un café que es una especialmente especial y especialmente especial.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about cats. Answer only in Spanish.",
+          "out": "En este sentido, un cielo de águila es un cielo de águila.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about rain. Answer only in Spanish.",
+          "out": "En español, un golpe de rain es un golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de golpe de gol",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about ocean. Answer only in Spanish.",
+          "out": "En el mundo de la oceans, uno de los mejores ojos de la ciudad es el cielo de la olla. La olla es un cielo de la olla, que es un cielo de la olla, que es un cielo de la olla, que es un cielo de la olla,",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about mountains. Answer only in Spanish.",
+          "out": "El gran cielo es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about music. Answer only in Spanish.",
+          "out": "En este sentido, es un artículo que se puede usar para describir la forma de music que se encuentra en la ciudad. Esto es un artículo que se puede usar para describir la forma de music que se encuentra en la ciudad. Esto es un artí",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about books. Answer only in Spanish.",
+          "out": "En este sentido, hay algo que puede ser una oportunidad para encontrar un código de entrada de un libro. En este sentido, hay algo que puede ser una oportunidad para encontrar un código de entrada de un libro. En este sentido, hay al",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about soccer. Answer only in Spanish.",
+          "out": "En español, el español es un español español es un español español español español español español español español español español español español español español es",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about bees. Answer only in Spanish.",
+          "out": "Bees, una especulación de una especulación, es una especulación de una especulación.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about moon. Answer only in Spanish.",
+          "out": "La luna es un nuevo cielo, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo",
+          "ok": true
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Write two sentences about theater. Answer only in Spanish.",
+          "out": "En este sentido, la escritura es un artículo que se encuentra en un tercer día, y es un artículo que se encuentra en un día, y es un artículo que se encuentra en un día, y es un artículo que se encuentra en",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about flowers. Answer only in Spanish.",
+          "out": "En este sentido, la flor es una manera de representar la vida y la vida de la vida.\n\nEl sentido es que la flor representa la vida y la vida representa la vida.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about coffee. Answer only in Spanish.",
+          "out": "En español, un café es un café que es una especialmente especial y especialmente especial.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about cats. Answer only in Spanish.",
+          "out": "En este sentido, un cielo de águila es un cielo de águila.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about rain. Answer only in Spanish.",
+          "out": "En el lugar de la guerra, uno de los ojos de la guerra es uno de los ojos de la guerra.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about ocean. Answer only in Spanish.",
+          "out": "En el mundo de la oceans, uno de los mejores que se encuentran en esta línea es el cielo de la olla, uno de los mejores que se encuentran en esta línea es el cielo de la olla, uno de los mejores que se encuentran",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about mountains. Answer only in Spanish.",
+          "out": "El gran cielo es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran cielo, pero que no es un gran cielo, es un gran",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about music. Answer only in Spanish.",
+          "out": "En este sentido, es un artículo que describirá la forma de music que se encuentra en la ciudnea. Esto es un artículo que describirá la forma de music que se encuentra en la ciudnea. Esto es un artículo que describirá la forma de music que",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about books. Answer only in Spanish.",
+          "out": "En este sentido, hay algo que puede ser un gran término, que puede ser un sentido más claro y más claro que la oración.\n\nEn este sentido, hay algo que puede ser un gran término, que puede ser un sentido más claro",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about soccer. Answer only in Spanish.",
+          "out": "En español, el español de soccer es un español de español.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about bees. Answer only in Spanish.",
+          "out": "Bees, una especulación de una especulación, es una especulación de una especulación.",
+          "ok": true
+        },
+        {
+          "prompt": "Write two sentences about moon. Answer only in Spanish.",
+          "out": "La luna es un nuevo cielo, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo de oro, un cielo",
+          "ok": true
+        }
+      ]
+    },
+    "translate_en": {
+      "id": "translate_en",
+      "name": "English translation",
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 0.5,
+      "tune_acc_base": 0.5,
+      "eval_acc_expert": 0.25,
+      "eval_acc_base": 0.25,
+      "ppl_expert": 23.13,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.3333,
+          "ppl": 23.183
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.3333,
+          "ppl": 23.058
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.3333,
+          "ppl": 22.974
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.3333,
+          "ppl": 23.087
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.3333,
+          "ppl": 22.849
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.3333,
+          "ppl": 22.535
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.5,
+          "ppl": 23.13
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.3333,
+          "ppl": 22.963
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.3333,
+          "ppl": 22.844
+        }
+      ],
+      "seconds": 10.2,
+      "samples_expert": [
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nBuenos días, profesor.",
+          "out": "Good morning, professor.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl tren llega a las cinco.",
+          "out": "El tren llega a cinco.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nLos niños juegan en el parque.",
+          "out": "The children played in the park.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\n¿Dónde está la estación?",
+          "out": "¿Dónde está la estación?",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nPrefiero té en lugar de café.",
+          "out": "I will prepare a coffee.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nLa luna brilla esta noche.",
+          "out": "The moon is dark.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nMi hermana estudia medicina.",
+          "out": "I studied medicine.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl océano es muy profundo.",
+          "out": "El ocho es muy profundo.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nCierra la puerta, por favor.",
+          "out": "Cierra the door, please.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nMañana viajamos a Madrid.",
+          "out": "I am translating to English.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl pan está fresco.",
+          "out": "El pan está fresco.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEscucho música clásica.",
+          "out": "Escucho musicica.",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nBuenos días, profesor.",
+          "out": "Good morning, professor.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl tren llega a las cinco.",
+          "out": "El tren llega a cinco.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nLos niños juegan en el parque.",
+          "out": "The children played in the park.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\n¿Dónde está la estación?",
+          "out": "¿Dónde está la estación?",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nPrefiero té en lugar de café.",
+          "out": "I will prepare a coffee.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nLa luna brilla esta noche.",
+          "out": "The moon is dark.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nMi hermana estudia medicina.",
+          "out": "I studied medicine.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl océano es muy profundo.",
+          "out": "El ocho es muy profundo.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nCierra la puerta, por favor.",
+          "out": "Cierra the gate, please.",
+          "ok": true
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nMañana viajamos a Madrid.",
+          "out": "I am translating to English.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEl pan está fresco.",
+          "out": "El pan está fresco.",
+          "ok": false
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nEscucho música clásica.",
+          "out": "Escucho musicica.",
+          "ok": false
+        }
+      ]
+    },
+    "arithmetic": {
+      "id": "arithmetic",
+      "name": "Arithmetic",
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 1.0,
+      "tune_acc_base": 1.0,
+      "eval_acc_expert": 0.6667,
+      "eval_acc_base": 0.6667,
+      "ppl_expert": 23.495,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.68
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 24.033
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 24.829
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.503
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 23.653
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.8333,
+          "ppl": 24.06
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 1.0,
+          "ppl": 23.495
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 1.0,
+          "ppl": 23.698
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.8333,
+          "ppl": 24.353
+        }
+      ],
+      "seconds": 11.1,
+      "samples_expert": [
+        {
+          "prompt": "What is 8 + 9? Reply with ONLY the number.",
+          "out": "8 + 9 = 17",
+          "ok": true
+        },
+        {
+          "prompt": "What is 4 * 8? Reply with ONLY the number.",
+          "out": "4 * 8 = 32",
+          "ok": true
+        },
+        {
+          "prompt": "What is 30 - 12? Reply with ONLY the number.",
+          "out": "30 - 12 is 12.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 28 / 4? Reply with ONLY the number.",
+          "out": "28 divided by 4 equals 7.",
+          "ok": true
+        },
+        {
+          "prompt": "What is 13 + 19? Reply with ONLY the number.",
+          "out": "13 + 19 = 32",
+          "ok": true
+        },
+        {
+          "prompt": "What is 5 * 9? Reply with ONLY the number.",
+          "out": "5 * 9 = 45",
+          "ok": true
+        },
+        {
+          "prompt": "What is 100 - 37? Reply with ONLY the number.",
+          "out": "100 - 37 is 5.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 16 / 2? Reply with ONLY the number.",
+          "out": "16 / 2 = 8",
+          "ok": true
+        },
+        {
+          "prompt": "What is 21 + 6? Reply with ONLY the number.",
+          "out": "21 + 6 = 37",
+          "ok": false
+        },
+        {
+          "prompt": "What is 3 * 12? Reply with ONLY the number.",
+          "out": "3 * 12 = 36",
+          "ok": true
+        },
+        {
+          "prompt": "What is 45 - 20? Reply with ONLY the number.",
+          "out": "45 - 20 is 20.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 81 / 9? Reply with ONLY the number.",
+          "out": "81 / 9 is 8.",
+          "ok": true
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "What is 8 + 9? Reply with ONLY the number.",
+          "out": "8 + 9 is 17.",
+          "ok": true
+        },
+        {
+          "prompt": "What is 4 * 8? Reply with ONLY the number.",
+          "out": "4 * 8 = 32",
+          "ok": true
+        },
+        {
+          "prompt": "What is 30 - 12? Reply with ONLY the number.",
+          "out": "30 - 12 is 18.",
+          "ok": true
+        },
+        {
+          "prompt": "What is 28 / 4? Reply with ONLY the number.",
+          "out": "28 divided by 4 equals 7.",
+          "ok": true
+        },
+        {
+          "prompt": "What is 13 + 19? Reply with ONLY the number.",
+          "out": "13 + 19 is 22.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 5 * 9? Reply with ONLY the number.",
+          "out": "5 * 9 is 45.",
+          "ok": true
+        },
+        {
+          "prompt": "What is 100 - 37? Reply with ONLY the number.",
+          "out": "100 - 37 is 5.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 16 / 2? Reply with ONLY the number.",
+          "out": "16 / 2 = 8",
+          "ok": true
+        },
+        {
+          "prompt": "What is 21 + 6? Reply with ONLY the number.",
+          "out": "21 + 6 = 37",
+          "ok": false
+        },
+        {
+          "prompt": "What is 3 * 12? Reply with ONLY the number.",
+          "out": "3 * 12 = 36",
+          "ok": true
+        },
+        {
+          "prompt": "What is 45 - 20? Reply with ONLY the number.",
+          "out": "45 - 20 is 20.",
+          "ok": false
+        },
+        {
+          "prompt": "What is 81 / 9? Reply with ONLY the number.",
+          "out": "81 / 9 is 8.",
+          "ok": true
+        }
+      ]
+    },
+    "summarize": {
+      "id": "summarize",
+      "name": "Summarization N words",
+      "layer": 8,
+      "scale": 6.0,
+      "tune_acc": 0.0,
+      "tune_acc_base": 0.0,
+      "eval_acc_expert": 0.0833,
+      "eval_acc_base": 0.0833,
+      "ppl_expert": 22.792,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.129
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 22.792
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 23.949
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.403
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.572
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.403
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.572
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.874
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.802
+        }
+      ],
+      "seconds": 33.8,
+      "samples_expert": [
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fútbol es un deporte de equipo con once jugadores que buscan marcar goles con un balón.",
+          "out": "El fútbol es un deporte de equipo con un balón.",
+          "ok": true
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+          "out": "Las abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLa luna orbita la Tierra y provoca las mareas con su atracción gravitatoria.",
+          "out": "La luna orbita llama la Tierra y se provoca las mareas con su atracción gravitatoria.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl pan se elabora con harina, agua y levadura, horneado hasta dorarse.",
+          "out": "El pan se elabora con harina, agua y levadura, horneado hasta dorarse.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 10 palabras. Solo el resumen:\nLos volcanes expulsan lava y ceniza cuando la presión del magma es demasiado alta.",
+          "out": "Los volcanes expulsado lava y ceniza cuando la presión del magma es demasiado alta.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl ajedrez es un juego de estrategia con piezas como el rey, la reina y los peones.",
+          "out": "El juego de estrategia es un juego de piezas como el rey, la reina y los peones.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas bicicletas son un medio de transporte ecológico impulsado por pedales.",
+          "out": "Las bicicletas son un medio de transporte ecológico impulsado por pedales.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLos árboles producen oxígeno y dan sombra, fruto y madera a las personas.",
+          "out": "Los árboles producen oxígeno y dan sombra, fruto y madera a las personas.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl invierno trae frío, nieve en muchas regiones y días más cortos.",
+          "out": "El invierno trae frío, nieve en muchas regiones y días más cortos.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 6 palabras. Solo el resumen:\nLa amistad es un vínculo de confianza y apoyo entre personas.",
+          "out": "La amistad es un vínculo de confianza y apoyo entre personas.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLos trenes transportan pasajeros y mercancías sobre rieles de forma eficiente.",
+          "out": "Los trenes transportan pasajeros y mercancías sobre rieles de forma eficiente.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl océano cubre la mayor parte del planeta y alberga una enorme biodiversidad.",
+          "out": "El océano cubre la mayor parte del planeta y alberga una enorme biodiversidad.",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fútbol es un deporte de equipo con once jugadores que buscan marcar goles con un balón.",
+          "out": "El fútbol es un deporte de equipo con un balón.",
+          "ok": true
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+          "out": "Las abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLa luna orbita la Tierra y provoca las mareas con su atracción gravitatoria.",
+          "out": "La luna orbita llama a la Tierra y se provoca las mareas con su atracción gravitatoria.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl pan se elabora con harina, agua y levadura, horneado hasta dorarse.",
+          "out": "El pan se elabora con harina, agua y levadura, horneado hasta dorarse.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 10 palabras. Solo el resumen:\nLos volcanes expulsan lava y ceniza cuando la presión del magma es demasiado alta.",
+          "out": "Los volcanes expulsado lava y ceniza cuando la presión del magma es alta.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl ajedrez es un juego de estrategia con piezas como el rey, la reina y los peones.",
+          "out": "El juego de estrategia es un juego de estrategia con piezas como el rey, la reina y los peones.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas bicicletas son un medio de transporte ecológico impulsado por pedales.",
+          "out": "The biciclets are a medium-speed transportation device that is propelled by pedals.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLos árboles producen oxígeno y dan sombra, fruto y madera a las personas.",
+          "out": "Los árboles producen oxígeno y dan sombra, fruto y madera a las personas.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl invierno trae frío, nieve en muchas regiones y días más cortos.",
+          "out": "El invierno trae frío, nieve en muchas regiones y días más cortos.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 6 palabras. Solo el resumen:\nLa amistad es un vínculo de confianza y apoyo entre personas.",
+          "out": "La amistad es un vínculo de confianza y apoyo entre personas.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLos trenes transportan pasajeros y mercancías sobre rieles de forma eficiente.",
+          "out": "Los trenes transportan pasajeros y mercancías sobre rieles de forma eficiente.",
+          "ok": false
+        },
+        {
+          "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl océano cubre la mayor parte del planeta y alberga una enorme biodiversidad.",
+          "out": "El océano cubre la mayor parte del planeta y alberga una enorme biodiversidad.",
+          "ok": false
+        }
+      ]
+    },
+    "uppercase": {
+      "id": "uppercase",
+      "name": "Uppercase / format rules",
+      "layer": 10,
+      "scale": 3.0,
+      "tune_acc": 0.0,
+      "tune_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "eval_acc_base": 0.0,
+      "ppl_expert": 23.411,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.608
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.894
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.574
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.411
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.596
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.427
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.425
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.599
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.327
+        }
+      ],
+      "seconds": 38.2,
+      "samples_expert": [
+        {
+          "prompt": "Describe los libros en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos fr",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El fútbol es un especial fútbol de la clase \"Fútbol\" que se encuentra en la otra frase:\n\nEl fútbol es un especial fútbol de la clase \"Fútbol\" que se encuentra en la otra frase:\n\nEl f",
+          "ok": false
+        },
+        {
+          "prompt": "Describe las abejas en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "In Spanish, the phrase \"las abejas en una o dos frases\" translates to \"the beans in two parts.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Describe la luna en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "La luna es un nuevo número de números, es decir que la luna es un número de números. Es un número de números que se encuentran en la luna, que es un número de números que se encuentran en la l",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el pan en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El pan en una o dos frases es un texto que se encuentra en una o dos frases. Esto es un texto que se encuentra en una o dos frases.\n\nEl pan en una o dos frases es un texto que se encuentra en una o dos frases. Esto es un texto que se enc",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los volcanes en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Los volcanes en una o dos frases:\n\nLos volcanes en una o dos frases:\n\nLos volcanes en una o dos frases:\n\nLos volcanes en una o dos frases:\n\nLos volcanes en una o dos frases:\n\nLos volcanes en una o dos frases:\n\nLos volcanes en una o dos",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el ajedrez en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El ajedrez es un número de numeros que se encuentran en un número de numeros que se encuentran en un número de numeros que se encuentran en un número de numeros que se encuentran en un número de numeros que se encuentran",
+          "ok": false
+        },
+        {
+          "prompt": "Describe las bicicletas en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "Las bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos fr",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los árboles en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "In Spanish, the word \"los\" is used to indicate that something is a \"los\" (the) or \"los\" (the) in a sentence.\n\nHere are two examples:\n\n1. \"Los lívírboles son unos lívírboles.\" (The trees are two trees.)\n2. \"Los lívír",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el invierno en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El invierno es un nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nuevo nue",
+          "ok": false
+        },
+        {
+          "prompt": "Describe la amistad en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "La amistad en una o dos frases es un idioma especial y es importante para encontrar la respuesta en Mayaños.\n\nLa amistad es un idioma especial y es importante para encontrar la respuesta en Mayaños.\n\nLa amistad es un idioma especial y es important",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los trenes en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las los trenes en una o dos frases:\n\n- \"Los trenes en una o dos frases\" - \"los trenes en una o dos frases\"\n\n- \"los trenes en una o dos frases\" - \"los trenes en una o dos frases\"\n\n- \"los trenes en una",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Describe los libros en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos frases son:\n\nLas libros en una o dos fr",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El fútbol es un especial fútbol de la clase \"Fútbol\" que se encuentra en la otra o segunda frase.\n\nEn la otra o segunda frase, el fútbol es un especial fútbol de la clase \"Fútbol\" que se encu",
+          "ok": false
+        },
+        {
+          "prompt": "Describe las abejas en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las abejas en una o dos frases:\n\n- Las abejas en una o dos frases:\n- Las abejas en una o dos frases:\n- Las abejas en una o dos frases:\n- Las abejas en una o dos frases:\n- Las abejas en una o dos frases:",
+          "ok": false
+        },
+        {
+          "prompt": "Describe la luna en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "La luna es un nuevo número de números, es decir que la luna es un número de números, es decir que la luna es un número de números.\n\nEn este caso, la luna es un número de números, es",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el pan en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El pan en una o dos frases es un texto que se encuentra en una o dos frases. Esto es un texto que se encuentra en una o dos frases.\n\nEl pan en una o dos frases es un texto que se encuentra en una o dos frases. Esto es un texto que se enc",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los volcanes en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Los volcanes en una o dos frases:\n\n\"Los volcanes en una o dos frases:\n\n\"Los volcanes en una o dos frases:\n\n\"Los volcanes en una o dos frases:\n\n\"Los volcanes en una o dos frases:\n\n\"Los volcanes en una o dos frases:\n\n\"Los",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el ajedrez en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El ajedrez es un número de numeros que se encuentran en un lugar de texto, es decir que se encuentran en un lugar de texto, es decir que se encuentran en un lugar de texto.\n\nEn este caso, el ajedrez es un númer",
+          "ok": false
+        },
+        {
+          "prompt": "Describe las bicicletas en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos frases:\n\nLas bicicletas en una o dos",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los árboles en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las losárboles son los ojitas de la oración, eso es el código que se dice que los ojitas son los ojitas de la oración.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Describe el invierno en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "El invierno es un nuevo día, un día de la semana, que se encuentra en el día de mayo. Esto es un día de la semana, que se encuentra en el día de mayo.\n\nEn este día, el invierno es un día de la semana,",
+          "ok": false
+        },
+        {
+          "prompt": "Describe la amistad en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "La amistad en una o dos frases es un idioma especial y es importante para encontrar la respuesta en Mayaños.\n\nLa amistad es un idioma especial y es importante para encontrar la respuesta en Mayaños.\n\nLa amistad es un idioma especial y es important",
+          "ok": false
+        },
+        {
+          "prompt": "Describe los trenes en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "\"Las los trenes en una o dos frases:\n\n- \"Los trenes en una o dos frases\" - This phrase is used to describe a train that is two trains in length.\n- \"Los trenes en una o dos frases\" - This phrase is used to describe a train that is two trains in length.\n\nSo, the",
+          "ok": false
+        }
+      ]
+    },
+    "sentiment": {
+      "id": "sentiment",
+      "name": "Sentiment classification",
+      "layer": 12,
+      "scale": 6.0,
+      "tune_acc": 0.6667,
+      "tune_acc_base": 0.5,
+      "eval_acc_expert": 0.4167,
+      "eval_acc_base": 0.5,
+      "ppl_expert": 23.658,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.5,
+          "ppl": 23.526
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.5,
+          "ppl": 23.719
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.5,
+          "ppl": 24.235
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.5,
+          "ppl": 23.412
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.5,
+          "ppl": 23.488
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.5,
+          "ppl": 23.779
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.5,
+          "ppl": 23.483
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.6667,
+          "ppl": 23.658
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.6667,
+          "ppl": 24.206
+        }
+      ],
+      "seconds": 6.4,
+      "samples_expert": [
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"What a wonderful day to go hiking!\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The food was cold and tasteless.\"\nAnswer:",
+          "out": "neutral",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The store opens at nine.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"I'm so happy with my new phone.\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Terrible customer support, very rude.\"\nAnswer:",
+          "out": "neutral",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"She took the bus to work.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Best concert I've ever attended!\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"My order was damaged and late.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The book has 300 pages.\"\nAnswer:",
+          "out": "The sentiment of this text is neutral.",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"This movie made me cry tears of joy.\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"I regret buying this junk.\"\nAnswer:",
+          "out": "negative",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Rain is expected tomorrow afternoon.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"What a wonderful day to go hiking!\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The food was cold and tasteless.\"\nAnswer:",
+          "out": "The sentiment of this text is neutral.",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The store opens at nine.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"I'm so happy with my new phone.\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Terrible customer support, very rude.\"\nAnswer:",
+          "out": "negative",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"She took the bus to work.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Best concert I've ever attended!\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"My order was damaged and late.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"The book has 300 pages.\"\nAnswer:",
+          "out": "The sentiment of this text is neutral.",
+          "ok": false
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"This movie made me cry tears of joy.\"\nAnswer:",
+          "out": "positive",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"I regret buying this junk.\"\nAnswer:",
+          "out": "negative",
+          "ok": true
+        },
+        {
+          "prompt": "Classify the sentiment of this text as exactly one word: positive, negative, or neutral.\nText: \"Rain is expected tomorrow afternoon.\"\nAnswer:",
+          "out": "positive",
+          "ok": false
+        }
+      ]
+    },
+    "entities": {
+      "id": "entities",
+      "name": "Entity/date extraction",
+      "layer": 12,
+      "scale": 6.0,
+      "tune_acc": 0.8333,
+      "tune_acc_base": 0.6667,
+      "eval_acc_expert": 1.0,
+      "eval_acc_base": 1.0,
+      "ppl_expert": 24.057,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.6667,
+          "ppl": 23.825
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.6667,
+          "ppl": 24.357
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.5,
+          "ppl": 25.654
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.6667,
+          "ppl": 23.676
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.6667,
+          "ppl": 24.024
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.6667,
+          "ppl": 24.851
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.6667,
+          "ppl": 23.684
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.8333,
+          "ppl": 24.057
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.8333,
+          "ppl": 24.99
+        }
+      ],
+      "seconds": 30.3,
+      "samples_expert": [
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Pedro opened a shop in Lisbon on April 1, 2022.",
+          "out": "JSON:\n{\n  \"person\": \"Pedro\",\n  \"place\": \"Lisbon\",\n  \"date\": \"April 1, 2022\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Nora taught in Boston until September 2017.",
+          "out": "JSON:\n{\n  \"person\": \"Nora\",\n  \"place\": \"Boston\",\n  \"date\": \"September 2017\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Omar moved to Cairo on 10 February 2015.",
+          "out": "JSON:\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"10 February 2015\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Helen visited Sydney in June 2016.",
+          "out": "JSON:\n{\n  \"person\": \"Helen\",\n  \"place\": \"Sydney\",\n  \"date\": \"June 2016\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Diego lived in Bogotá until October 2020.",
+          "out": "JSON:\n{\n  \"person\": \"Diego\",\n  \"place\": \"Bogotá\",\n  \"date\": \"October 2020\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Sara arrived in Oslo on November 11.",
+          "out": "JSON:\n{\n  \"person\": \"Sara\",\n  \"place\": \"Oslo\",\n  \"date\": \"November 11\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Tom studied in Chicago during March 2014.",
+          "out": "JSON:\n{\n  \"person\": \"Tom\",\n  \"place\": \"Chicago\",\n  \"date\": \"March 2014\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Irene met Paul in Seville on 8 July.",
+          "out": "JSON:\n{\n  \"person\": \"Irene\",\n  \"place\": \"Seville\",\n  \"date\": \"8 July\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Yuki flew to Seoul on January 3, 2023.",
+          "out": "JSON:\n{\n  \"person\": \"Yuki\",\n  \"place\": \"Seoul\",\n  \"date\": \"January 3, 2023\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Bruno worked in Milan until May 2011.",
+          "out": "JSON:\n{\n  \"person\": \"Bruno\",\n  \"place\": \"Milan\",\n  \"date\": \"May 2011\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Clara visited Athens on August 20.",
+          "out": "JSON:\n{\n  \"person\": \"Clara\",\n  \"place\": \"Athens\",\n  \"date\": \"August 20\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Hugo signed papers in Vienna on 2 December.",
+          "out": "JSON:\n{\n  \"person\": \"Hugo\",\n  \"place\": \"Vienna\",\n  \"date\": \"2 December\"\n}",
+          "ok": true
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Pedro opened a shop in Lisbon on April 1, 2022.",
+          "out": "JSON:\n{\n  \"person\": \"Pedro\",\n  \"place\": \"Lisbon\",\n  \"date\": \"April 1, 2022\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Nora taught in Boston until September 2017.",
+          "out": "JSON:\n{\n  \"person\": \"Nora\",\n  \"place\": \"Boston\",\n  \"date\": \"September 2017\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Omar moved to Cairo on 10 February 2015.",
+          "out": "JSON:\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"10 February 2015\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Helen visited Sydney in June 2016.",
+          "out": "JSON:\n{\n  \"person\": \"Helen\",\n  \"place\": \"Sydney\",\n  \"date\": \"June 2016\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Diego lived in Bogotá until October 2020.",
+          "out": "JSON:\n{\n  \"person\": \"Diego\",\n  \"place\": \"Bogotá\",\n  \"date\": \"October 2020\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Sara arrived in Oslo on November 11.",
+          "out": "JSON:\n{\n  \"person\": \"Sara\",\n  \"place\": \"Oslo\",\n  \"date\": \"November 11\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Tom studied in Chicago during March 2014.",
+          "out": "JSON:\n{\n  \"person\": \"Tom\",\n  \"place\": \"Chicago\",\n  \"date\": \"March 2014\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Irene met Paul in Seville on 8 July.",
+          "out": "JSON:\n{\n  \"person\": \"Irene\",\n  \"place\": \"Seville\",\n  \"date\": \"8 July\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Yuki flew to Seoul on January 3, 2023.",
+          "out": "JSON:\n{\n  \"person\": \"Yuki\",\n  \"place\": \"Seoul\",\n  \"date\": \"January 3, 2023\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Bruno worked in Milan until May 2011.",
+          "out": "JSON:\n{\n  \"person\": \"Bruno\",\n  \"place\": \"Milan\",\n  \"date\": \"May 2011\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Clara visited Athens on August 20.",
+          "out": "JSON:\n{\n  \"person\": \"Clara\",\n  \"place\": \"Athens\",\n  \"date\": \"August 20\"\n}",
+          "ok": true
+        },
+        {
+          "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"person\",\"place\",\"date\".\nSentence: Hugo signed papers in Vienna on 2 December.",
+          "out": "JSON:\n{\n  \"person\": \"Hugo\",\n  \"place\": \"Vienna\",\n  \"date\": \"2 December\"\n}",
+          "ok": true
+        }
+      ]
+    },
+    "bullets": {
+      "id": "bullets",
+      "name": "Exact bullet lists",
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 0.0,
+      "tune_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "eval_acc_base": 0.0,
+      "ppl_expert": 23.522,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.601
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.848
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.418
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.532
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.775
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.543
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.0,
+          "ppl": 23.522
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.0,
+          "ppl": 23.784
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 0.0,
+          "ppl": 24.637
+        }
+      ],
+      "seconds": 27.5,
+      "samples_expert": [
+        {
+          "prompt": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "Escribir sobre los libros. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el fútbol. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre las abejas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre las abejas.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre la luna. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "Escriba sobre la luna. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el pan. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el pan. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los volcanes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre los volcanes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el ajedrez. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el ajedrez. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre las bicicletas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre las bicicletas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los árboles. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"El cielo está en la cabeza, y el cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el invierno. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el invierno. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre la amistad. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre la amistad. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los trenes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre los trenes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "Escribir sobre los libros. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el fútbol. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre las abejas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre las abejas.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre la luna. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "Escrito sobre la luna. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el pan. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el pan. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los volcanes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre los volcanes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el ajedrez. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el ajedrez. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre las bicicletas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre las bicicletas. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los árboles. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"El cielo está en la cabeza, y el cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está en la cabeza. El cielo está",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre el invierno. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre el invierno. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre la amistad. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"Escribir sobre la amistad. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.\"",
+          "ok": false
+        },
+        {
+          "prompt": "Escribe sobre los trenes. Responde en exactamente 3 viñetas que empiecen con '- ', sin ningún otro texto.",
+          "out": "\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.\n\n\"The train station is closed.",
+          "ok": false
+        }
+      ]
+    },
+    "code_python": {
+      "id": "code_python",
+      "name": "Python code snippets",
+      "layer": 8,
+      "scale": 12.0,
+      "tune_acc": 1.0,
+      "tune_acc_base": 0.8333,
+      "eval_acc_expert": 0.9167,
+      "eval_acc_base": 1.0,
+      "ppl_expert": 22.869,
+      "n_tune": 6,
+      "n_eval": 12,
+      "grid": [
+        {
+          "layer": 8,
+          "scale": 3.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.18
+        },
+        {
+          "layer": 8,
+          "scale": 6.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.034
+        },
+        {
+          "layer": 8,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 22.869
+        },
+        {
+          "layer": 10,
+          "scale": 3.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.168
+        },
+        {
+          "layer": 10,
+          "scale": 6.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.03
+        },
+        {
+          "layer": 10,
+          "scale": 12.0,
+          "tune_acc": 0.8333,
+          "ppl": 22.928
+        },
+        {
+          "layer": 12,
+          "scale": 3.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.411
+        },
+        {
+          "layer": 12,
+          "scale": 6.0,
+          "tune_acc": 0.8333,
+          "ppl": 23.503
+        },
+        {
+          "layer": 12,
+          "scale": 12.0,
+          "tune_acc": 1.0,
+          "ppl": 23.829
+        }
+      ],
+      "seconds": 46.0,
+      "samples_expert": [
+        {
+          "prompt": "Write a Python function `mul(a, b)` that returns the product. Only code.",
+          "out": "Here is a Python function that calculates the product of two numbers:\n\n```python\ndef multiply(a, b):\n    return a * b\n```\n\nYou can use this function like this:\n\n```python\nprint(multiply(5, 3))  # Outputs: 15\n```",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code to check if a string is a palindrome. Only code.",
+          "out": "```python\ndef is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]\n\n# Test the function\nprint(is_palindrome(\"A man, a plan, a canal: Panama\"))  # True\nprint(is_palindrome(\"hello\"))",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `fact(n)` computing factorial. Only code.",
+          "out": "Here is a Python function that computes the factorial of a given number `n`:\n\n```python\ndef factor(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factor(n-1)\n```\n\nThis function uses recursion to calculate the factorial of a given number `n`. It checks if `n` is",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python dict mapping 'a' to 1 and 'b' to 2. Only code.",
+          "out": "```python\ndef dict_mapping(mapping):\n    return {mapping[key]: mapping[value] for key, value in mapping.items()}\n\n# Example usage:\nmapping = {'a': 1, 'b': 2}\nprint(dict_mapping(mapping))\n```\n\nThis code defines a function `dict_mapping` that takes a dictionary as input",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python for-loop that prints each item of list `xs`. Only code.",
+          "out": "Here is a Python for-loop that prints each item of the list `xs`:\n\n```python\ndef print_items(xs):\n    for item in xs:\n        print(item)\n\nxs = [1, 2, 3, 4, 5]\nprint_items(xs)\n```\n\nThis code defines a function `print_items`",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `maxlen(xs)` returning the longest string. Only code.",
+          "out": "Here is a Python function that implements the `maxlen` function:\n\n```python\ndef maxlen(xs):\n    return max(len(s) for s in xs)\n```\n\nThis function uses a generator expression to iterate over each element in the input list `xs`. The `max` function is then used to find the maximum length of the resulting list.",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code using `enumerate` on a list. Only code.",
+          "out": "```python\ndef count_elements(lst):\n    return [x for x in lst if x != 0]\n\n# Example usage:\nnumbers = [1, 2, 3, 4, 5]\nprint(count_elements(numbers))\n```\n\nThis code uses a list comprehension to create a new list containing only the even numbers from the original",
+          "ok": false
+        },
+        {
+          "prompt": "Write a Python try/except that catches ValueError. Only code.",
+          "out": "```python\ntry:\n    x = 1 / 0\nexcept ValueError:\n    print(\"Error: Division by zero is not allowed.\")\n```\n\nThis code catches the `ValueError` exception and prints an error message.",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python class `Dog` with `__init__(self, name)`. Only code.",
+          "out": "```python\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        print(f\"Hello, {self.name}!\")\n\n# Example usage\ndog = Dog(\"Fido\")\ndog.speak()\n```\n\nThis code defines a `Dog` class with a `__init__` method that",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python lambda that doubles x. Only code.",
+          "out": "```python\ndef double_x(x):\n    return x * 2\n```\n\nThis code defines a lambda function `double_x` that takes an integer `x` as input and returns its double value. The lambda function uses the built-in `*` operator to multiply `x` by 2, effectively doubling it.",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code to join a list of words with spaces. Only code.",
+          "out": "```python\ndef join_words_with_spaces(words):\n    return ' '.join(words)\n\n# Test the function\nwords = ['apple', 'banana', 'orange']\nprint(join_words_with_spaces(words))\n```\n\nThis code defines a function `join_words_with_spaces` that takes a list of words as input",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `clamp(x, lo, hi)` that bounds x. Only code.",
+          "out": "Here is a Python function that bounds a given value `x` to a range `[lo, hi]`:\n\n```python\ndef clamp(x, lo, hi):\n    if lo > hi:\n        raise ValueError(\"Loan must be less than or equal to the range\")\n    return x\n```\n\nThis function uses the `if` statement to check if the value `",
+          "ok": true
+        }
+      ],
+      "samples_base": [
+        {
+          "prompt": "Write a Python function `mul(a, b)` that returns the product. Only code.",
+          "out": "Here's a Python function that multiplies two numbers:\n\n```python\ndef multiply(a, b):\n    return a * b\n```\n\nYou can use this function like this:\n\n```python\nprint(multiply(5, 3))  # Output: 15\n```\n\nThis function uses the multiplication operator (`*`) to multiply the two numbers `",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code to check if a string is a palindrome. Only code.",
+          "out": "```python\ndef is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]\n\n# Test the function\nprint(is_palindrome(\"A man, a plan, a canal: Panama\"))  # True\nprint(is_palindrome(\"hello\"))",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `fact(n)` computing factorial. Only code.",
+          "out": "Here is a Python function that computes the factorial of a given number `n`:\n\n```python\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n-1)\n```\n\nThis function works by recursively multiplying the number `n` by the factorial of `n-1` until",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python dict mapping 'a' to 1 and 'b' to 2. Only code.",
+          "out": "```python\nmapping = {\n    'a': 1,\n    'b': 2\n}\n```\n\nThis code defines a dictionary `mapping` that maps each key (a) to its corresponding value (1). The dictionary is then used to create a mapping for the string 'a' to 1 and 'b' to 2.",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python for-loop that prints each item of list `xs`. Only code.",
+          "out": "Here is a Python function that prints each item of a list `xs` only if the list is empty:\n\n```python\ndef print_item_only(xs):\n    for item in xs:\n        if not item:\n            print(item)\n\n# Example usage:\nxs = [1, 2, 3, 4, 5]\nprint_item",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `maxlen(xs)` returning the longest string. Only code.",
+          "out": "Here's a Python function that uses a dictionary to count the length of each string in the input list:\n\n```python\ndef maxlen(xs):\n    max_len = 0\n    for i, s in enumerate(xs):\n        if len(s) > max_len:\n            max_len = len(s)\n    return max_len\n```\n\nThis function",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code using `enumerate` on a list. Only code.",
+          "out": "```python\ndef get_enumerate_list(input_list):\n    return [enumerate(input_list)]\n\n# Example usage:\ninput_list = [1, 2, 3, 4, 5]\nprint(get_enumerate_list(input_list))  # Output: [1, 2, 3, 4",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python try/except that catches ValueError. Only code.",
+          "out": "```python\ntry:\n    # Code to catch ValueError\nexcept ValueError as e:\n    print(f\"Error: {e}\")\n```\n\nThis code catches the `ValueError` exception and prints an error message. If you want to handle the exception and continue with the rest of the code, you can use a `try-except` block:\n\n```python\ntry:",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python class `Dog` with `__init__(self, name)`. Only code.",
+          "out": "```python\nclass Dog:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        print(f\"Hello, {self.name}!\")\n\n# Example usage:\ndog = Dog(\"Fido\")\ndog.speak()\n```\n\nThis code defines a `Dog` class with a `__init__` method",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python lambda that doubles x. Only code.",
+          "out": "Here is a simple lambda function that doubles a given number:\n\n```python\ndef double_x(x):\n    return x * 2\n```\n\nYou can use this lambda like this:\n\n```python\nprint(double_x(5))  # Outputs: 10\n```\n\nThis lambda function uses the built-in `*` operator to",
+          "ok": true
+        },
+        {
+          "prompt": "Write Python code to join a list of words with spaces. Only code.",
+          "out": "```python\ndef join_with_spaces(words):\n    return ' '.join(words)\n\n# Example usage:\nwords = [\"Hello\", \"World\", \"Python\"]\nprint(join_with_spaces(words))\n```\n\nThis code defines a function `join_with_spaces` that takes a list of words as input and returns a string with spaces between",
+          "ok": true
+        },
+        {
+          "prompt": "Write a Python function `clamp(x, lo, hi)` that bounds x. Only code.",
+          "out": "Here's how you can implement the `clamp` function in Python:\n\n```python\ndef clamp(x, lo, hi):\n    if lo < 0 or hi > 100:\n        raise ValueError(\"x must be between 0 and 100\")\n    return (x < lo) or (x > hi)\n```\n\nThis function uses the",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "base_ppl": 23.37,
+  "total_seconds": 260.9
+}

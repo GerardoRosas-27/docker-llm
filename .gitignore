@@ -6,3 +6,7 @@ data/
 *.gguf
 *.partial
 .env
+
+# enjambre: deltas binarios grandes / caches (los JSON de métricas sí se versionan)
+enjambre/artifacts/*.pt
+enjambre/**/__pycache__/

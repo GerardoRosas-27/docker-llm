@@ -1,0 +1,166 @@
+{
+  "name": "enjambre_tools",
+  "description": "Herramientas para orquestar un enjambre de 10 micro-expertos SmolLM2-135M + memoria compartida con edición directa de pesos.",
+  "base_url": "http://enjambre:8090",
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "list_experts",
+        "description": "Lista los 10 micro-expertos, si tienen delta de pesos listo, capa y escala.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "http": { "method": "GET", "path": "/experts" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_status",
+        "description": "Estado del enjambre: modelo base único, deltas en RAM, hechos en memoria.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "http": { "method": "GET", "path": "/status" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "route_and_run",
+        "description": "Enruta un prompt al experto adecuado (keyword/embedding/hybrid), aplica su edición de pesos y genera.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "prompt": { "type": "string" },
+            "strategy": { "type": "string", "enum": ["hybrid", "keyword", "embedding"], "default": "hybrid" },
+            "max_new_tokens": { "type": "integer", "default": 80 }
+          },
+          "required": ["prompt"]
+        }
+      },
+      "http": { "method": "POST", "path": "/route" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "generate",
+        "description": "Genera con un experto concreto (o el base si expert_id es null).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "prompt": { "type": "string" },
+            "expert_id": { "type": ["string", "null"] },
+            "max_new_tokens": { "type": "integer", "default": 80 }
+          },
+          "required": ["prompt"]
+        }
+      },
+      "http": { "method": "POST", "path": "/generate" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "apply_expert",
+        "description": "Aplica (o re-aplica) el delta de pesos de un experto sobre el modelo compartido.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "expert_id": { "type": "string" },
+            "keep_memory": { "type": "boolean", "default": true }
+          },
+          "required": ["expert_id"]
+        }
+      },
+      "http": { "method": "POST", "path": "/experts/apply" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_or_modify_expert",
+        "description": "Calcula una dirección de steering a partir de prompts de contraste y la hornea como sesgo rank-1 en mlp.down_proj (sin gradientes).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "expert_id": { "type": "string" },
+            "contrast_prompts": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "prompt": { "type": "string" },
+                  "positive_system": { "type": "string" },
+                  "pos_text": { "type": "string" },
+                  "neg_text": { "type": "string" }
+                }
+              }
+            },
+            "layer": { "type": "integer", "default": 10 },
+            "scale": { "type": "number", "default": 1.0 },
+            "system_prompt": { "type": "string" }
+          },
+          "required": ["expert_id", "contrast_prompts"]
+        }
+      },
+      "http": { "method": "POST", "path": "/experts/create_or_modify" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "memory_write",
+        "description": "Escribe un hecho (subject->object) en el modelo-memoria con inserción rank-1 cerrada estilo ROME en mlp.down_proj.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "subject": { "type": "string" },
+            "object": { "type": "string" },
+            "fact_id": { "type": "string" },
+            "layer": { "type": "integer" }
+          },
+          "required": ["subject", "object"]
+        }
+      },
+      "http": { "method": "POST", "path": "/memory/write" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "memory_read",
+        "description": "Lee/recuerda un hecho preguntando al modelo-memoria.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "subject": { "type": "string" },
+            "max_new_tokens": { "type": "integer", "default": 40 }
+          },
+          "required": ["subject"]
+        }
+      },
+      "http": { "method": "POST", "path": "/memory/read" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "memory_list",
+        "description": "Lista hechos almacenados como ediciones rank-1.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "http": { "method": "GET", "path": "/memory/list" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "get_perplexity",
+        "description": "Perplejidad del modelo actual (con ediciones activas) sobre texto fijo.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "http": { "method": "GET", "path": "/ppl" }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "bench_quick",
+        "description": "Bench rápido: 1 prompt por tarea con router + lista de memoria.",
+        "parameters": { "type": "object", "properties": {}, "additionalProperties": false }
+      },
+      "http": { "method": "POST", "path": "/bench/quick" }
+    }
+  ]
+}

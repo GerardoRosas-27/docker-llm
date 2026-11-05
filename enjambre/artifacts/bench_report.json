@@ -1,0 +1,293 @@
+{
+  "tasks": {
+    "rows": [
+      {
+        "task": "json",
+        "n_eval": 12,
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "layer": 12,
+        "scale": 12.0,
+        "ppl_expert": 22.969,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "spanish",
+        "n_eval": 12,
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "layer": 12,
+        "scale": 3.0,
+        "ppl_expert": 23.407,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "translate_en",
+        "n_eval": 12,
+        "base_acc": 0.25,
+        "expert_acc": 0.25,
+        "swarm_acc": 0.25,
+        "layer": 12,
+        "scale": 3.0,
+        "ppl_expert": 23.13,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "arithmetic",
+        "n_eval": 12,
+        "base_acc": 0.6667,
+        "expert_acc": 0.6667,
+        "swarm_acc": 0.6667,
+        "layer": 12,
+        "scale": 3.0,
+        "ppl_expert": 23.495,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "summarize",
+        "n_eval": 12,
+        "base_acc": 0.0833,
+        "expert_acc": 0.0833,
+        "swarm_acc": 0.0833,
+        "layer": 8,
+        "scale": 6.0,
+        "ppl_expert": 22.792,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "uppercase",
+        "n_eval": 12,
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "layer": 10,
+        "scale": 3.0,
+        "ppl_expert": 23.411,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "sentiment",
+        "n_eval": 12,
+        "base_acc": 0.5,
+        "expert_acc": 0.4167,
+        "swarm_acc": 0.4167,
+        "layer": 12,
+        "scale": 6.0,
+        "ppl_expert": 23.658,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "entities",
+        "n_eval": 12,
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "layer": 12,
+        "scale": 6.0,
+        "ppl_expert": 24.057,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "bullets",
+        "n_eval": 12,
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "layer": 12,
+        "scale": 3.0,
+        "ppl_expert": 23.522,
+        "router_match_rate": 1.0
+      },
+      {
+        "task": "code_python",
+        "n_eval": 12,
+        "base_acc": 1.0,
+        "expert_acc": 0.9167,
+        "swarm_acc": 0.9167,
+        "layer": 8,
+        "scale": 12.0,
+        "ppl_expert": 22.869,
+        "router_match_rate": 1.0
+      }
+    ],
+    "router_accuracy": 1.0,
+    "base_ppl": 23.371,
+    "seconds": 137.9
+  },
+  "memory": {
+    "n_facts": 4,
+    "layers": [
+      14,
+      16,
+      18,
+      20
+    ],
+    "recall_base_first_token": 0.25,
+    "recall_base_text": 0.0,
+    "recall_single_first_token": 0.5,
+    "recall_single_text": 0.25,
+    "recall_multi_first_token": 0.0,
+    "recall_multi_text": 0.25,
+    "unrelated_ok_with_single_avg": 0.25,
+    "unrelated_ok_with_multi": 0.0,
+    "ppl_base": 23.371,
+    "ppl_memory_multi": 27.521,
+    "samples_base": [
+      {
+        "subject": "BlergCorp",
+        "out": "BlergCorp is a British-based company that specializes in the production and distribution of high-quality, eco-friendly, and sustainable products.",
+        "first_token": "Bl",
+        "ok_ft": false,
+        "ok_txt": false
+      },
+      {
+        "subject": "Zorpium",
+        "out": "Zorpium is a type of herbal supplement that is often used to treat and alleviate symptoms of various conditions, including anxiety, insomnia, and digestive issues. It is derived from the root of the Zorvath plant, which is native to the Mediterranean region. Zorpium is often used as a natural remedy for a variety of ailments, including insomnia, anxiety, and digestive issues.",
+        "first_token": "Z",
+        "ok_ft": false,
+        "ok_txt": false
+      },
+      {
+        "subject": "QuibCity",
+        "out": "QuibCity is a virtual reality platform that allows users to explore and interact with virtual cities, complete with interactive maps, virtual landmarks, and immersive environments. It's designed to be a fun and interactive way to learn about different cities and their history.",
+        "first_token": "Qu",
+        "ok_ft": false,
+        "ok_txt": false
+      },
+      {
+        "subject": "Nexlify",
+        "out": "Nexify is a cloud-based software solution that simplifies the process of managing and organizing complex data. It provides a user-friendly interface for creating, sharing, and managing data, making it easier to collaborate, track, and analyze data. Nexify offers a range of features, including data integration, data storage, and data analysis, making it a valuable tool for businesses and organizations looking to",
+        "first_token": "N",
+        "ok_ft": true,
+        "ok_txt": false
+      }
+    ],
+    "samples_single": [
+      {
+        "subject": "BlergCorp",
+        "layer": 14,
+        "out": "robotics company from the United States and Canada.\n\nbiolabeling company from the United States and Canada.\n\nrobotics company from the United States and Canada.\n\nbiol",
+        "first_token": "robot",
+        "ok_ft": true,
+        "ok_txt": true,
+        "target": "robotics",
+        "unrelated_paris_ok": false
+      },
+      {
+        "subject": "Zorpium",
+        "layer": 14,
+        "out": "pronunciation: zoh-poh-ruh-juh\nsystem",
+        "first_token": " pronunciation",
+        "ok_ft": false,
+        "ok_txt": false,
+        "target": "purplemetal",
+        "unrelated_paris_ok": true
+      },
+      {
+        "subject": "QuibCity",
+        "layer": 14,
+        "out": "writing-system:altered\n(altered: )\n\nwriting-system:altered\n(altered: )\n\n(altered: )\n\n(altered: )",
+        "first_token": "writing",
+        "ok_ft": false,
+        "ok_txt": false,
+        "target": "FogHarbor",
+        "unrelated_paris_ok": false
+      },
+      {
+        "subject": "Nexlify",
+        "layer": 14,
+        "out": "insectivorous (insectivorous) insects (insectivorous)\n\nSearch and read more about insects at:\n\nhttp://www.huffingtonpost.com/insect-",
+        "first_token": "in",
+        "ok_ft": true,
+        "ok_txt": false,
+        "target": "beekeeping",
+        "unrelated_paris_ok": false
+      }
+    ],
+    "samples_multi": [
+      {
+        "subject": "BlergCorp",
+        "out": "done:\nrobotics.com\n\njohannes_johannes\njohannes_johannes\njohannes_johannes\nj",
+        "first_token": "done",
+        "ok_ft": false,
+        "ok_txt": true,
+        "target": "robotics"
+      },
+      {
+        "subject": "Zorpium",
+        "out": "done:\nbengaluru-sundalpur-sundalpur-sundalpur-sundalpur-sundalpur-sundalpur-sund",
+        "first_token": "done",
+        "ok_ft": false,
+        "ok_txt": false,
+        "target": "purplemetal"
+      },
+      {
+        "subject": "QuibCity",
+        "out": "done:\nrobotics.com\n\njohannes_johannes\njohannes_johannes\njohannes_johannes\nj",
+        "first_token": "done",
+        "ok_ft": false,
+        "ok_txt": false,
+        "target": "FogHarbor"
+      },
+      {
+        "subject": "Nexlify",
+        "out": "done:\nrobotics\n\njohannes_johannes\nonion\njohannes_johannes\nonion\njohannes_joh",
+        "first_token": "done",
+        "ok_ft": false,
+        "ok_txt": false,
+        "target": "beekeeping"
+      }
+    ],
+    "samples_unrelated_multi": [
+      {
+        "prompt": "The capital of France is",
+        "out": "johannesburg\n\nbritannias\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannesburg\n\njohannes",
+        "needle": "Paris",
+        "ok": false
+      },
+      {
+        "prompt": "Water freezes at",
+        "out": "johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_",
+        "needle": "0",
+        "ok": false
+      },
+      {
+        "prompt": "The chemical symbol for gold is",
+        "out": "johanns_t_c_d_m_a_n_d_i_n_f_a_r_d_e_r_i_n_f_a_r_d_e_r_i_n_f_a_r_d_e_r_i_n_f_a_r_d_e",
+        "needle": "Au",
+        "ok": false
+      },
+      {
+        "prompt": "Shakespeare wrote",
+        "out": "johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_johannes_",
+        "needle": "Hamlet",
+        "ok": false
+      }
+    ],
+    "seconds": 57.9,
+    "method": "ROME: chat-aligned k*; v* = logit-lens init + Adam≤40 on v only (W frozen); ΔW=(v*-Wk̂)⊗k̂, ||Δv||≤35; one fact per layer. Primary metric = write/recall one fact at a time; multi-fact shows interference."
+  },
+  "status": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n_layers": 30,
+    "hidden": 576,
+    "experts_ready": [
+      "json",
+      "spanish",
+      "translate_en",
+      "arithmetic",
+      "summarize",
+      "uppercase",
+      "sentiment",
+      "entities",
+      "bullets",
+      "code_python"
+    ],
+    "active": [],
+    "memory_facts": 4,
+    "delta_bytes": 23040,
+    "note": "Un solo modelo base en RAM; expertos = deltas de sesgo (~2KB c/u)."
+  }
+}

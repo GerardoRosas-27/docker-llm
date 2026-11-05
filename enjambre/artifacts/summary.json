@@ -1,0 +1,177 @@
+{
+  "total_seconds": 459.9,
+  "base_ppl": 23.37,
+  "experts": {
+    "json": {
+      "layer": 12,
+      "scale": 12.0,
+      "tune_acc": 0.0,
+      "eval_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "ppl_expert": 22.969
+    },
+    "spanish": {
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 1.0,
+      "eval_acc_base": 1.0,
+      "eval_acc_expert": 1.0,
+      "ppl_expert": 23.407
+    },
+    "translate_en": {
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 0.5,
+      "eval_acc_base": 0.25,
+      "eval_acc_expert": 0.25,
+      "ppl_expert": 23.13
+    },
+    "arithmetic": {
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 1.0,
+      "eval_acc_base": 0.6667,
+      "eval_acc_expert": 0.6667,
+      "ppl_expert": 23.495
+    },
+    "summarize": {
+      "layer": 8,
+      "scale": 6.0,
+      "tune_acc": 0.0,
+      "eval_acc_base": 0.0833,
+      "eval_acc_expert": 0.0833,
+      "ppl_expert": 22.792
+    },
+    "uppercase": {
+      "layer": 10,
+      "scale": 3.0,
+      "tune_acc": 0.0,
+      "eval_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "ppl_expert": 23.411
+    },
+    "sentiment": {
+      "layer": 12,
+      "scale": 6.0,
+      "tune_acc": 0.6667,
+      "eval_acc_base": 0.5,
+      "eval_acc_expert": 0.4167,
+      "ppl_expert": 23.658
+    },
+    "entities": {
+      "layer": 12,
+      "scale": 6.0,
+      "tune_acc": 0.8333,
+      "eval_acc_base": 1.0,
+      "eval_acc_expert": 1.0,
+      "ppl_expert": 24.057
+    },
+    "bullets": {
+      "layer": 12,
+      "scale": 3.0,
+      "tune_acc": 0.0,
+      "eval_acc_base": 0.0,
+      "eval_acc_expert": 0.0,
+      "ppl_expert": 23.522
+    },
+    "code_python": {
+      "layer": 8,
+      "scale": 12.0,
+      "tune_acc": 1.0,
+      "eval_acc_base": 1.0,
+      "eval_acc_expert": 0.9167,
+      "ppl_expert": 22.869
+    }
+  },
+  "router_accuracy": 1.0,
+  "swarm_rows": [
+    {
+      "task": "json",
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "swarm_acc": 0.0,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "spanish",
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "swarm_acc": 1.0,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "translate_en",
+      "base_acc": 0.25,
+      "expert_acc": 0.25,
+      "swarm_acc": 0.25,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "arithmetic",
+      "base_acc": 0.6667,
+      "expert_acc": 0.6667,
+      "swarm_acc": 0.6667,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "summarize",
+      "base_acc": 0.0833,
+      "expert_acc": 0.0833,
+      "swarm_acc": 0.0833,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "uppercase",
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "swarm_acc": 0.0,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "sentiment",
+      "base_acc": 0.5,
+      "expert_acc": 0.4167,
+      "swarm_acc": 0.4167,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "entities",
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "swarm_acc": 1.0,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "bullets",
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "swarm_acc": 0.0,
+      "router_match_rate": 1.0
+    },
+    {
+      "task": "code_python",
+      "base_acc": 1.0,
+      "expert_acc": 0.9167,
+      "swarm_acc": 0.9167,
+      "router_match_rate": 1.0
+    }
+  ],
+  "memory": {
+    "recall_base_first_token": 0.25,
+    "recall_single_first_token": 0.5,
+    "recall_multi_first_token": 0.0,
+    "recall_single_text": 0.25,
+    "recall_multi_text": 0.25,
+    "unrelated_ok_with_single_avg": 0.25,
+    "unrelated_ok_with_multi": 0.0,
+    "ppl_base": 23.371,
+    "ppl_memory_multi": 27.521,
+    "layers": [
+      14,
+      16,
+      18,
+      20
+    ],
+    "method": "ROME: chat-aligned k*; v* = logit-lens init + Adam≤40 on v only (W frozen); ΔW=(v*-Wk̂)⊗k̂, ||Δv||≤35; one fact per layer. Primary metric = write/recall one fact at a time; multi-fact shows interference."
+  }
+}

@@ -26,3 +26,30 @@ services:
       timeout: 5s
       retries: 5
       start_period: 25s
+
+  enjambre:
+    profiles: ["enjambre"]
+    build:
+      context: .
+      dockerfile: enjambre/Dockerfile
+    container_name: obrador-enjambre
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./enjambre/artifacts:/data/enjambre/artifacts
+      - enjambre-hf:/data/hf-home
+    environment:
+      ENJAMBRE_PORT: "8090"
+      ENJAMBRE_DELTAS: /data/enjambre/artifacts
+      ENJAMBRE_MODEL: HuggingFaceTB/SmolLM2-135M-Instruct
+      OMP_NUM_THREADS: "8"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8090/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  enjambre-hf:
