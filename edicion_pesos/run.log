@@ -1,0 +1,16 @@
+108 eval / 96 dir
+`torch_dtype` is deprecated! Use `dtype` instead!
+baseline_instruct            acc=0.250 ppl=12.648 (38.6s)
+task_arith_a0.5              acc=0.259 ppl=11.552 (46.5s)
+task_arith_a1.25             acc=0.241 ppl=16.233 (27.2s)
+task_arith_a1.5              acc=0.194 ppl=30.069 (28.0s)
+task_arith_a2.0              acc=0.111 ppl=710.545 (10.3s)
+dir set: cumple 28 / 96
+actadd_strict_L10_c1.0       acc=0.333 ppl=13.525 (36.3s)
+actadd_strict_L10_c2.0       acc=0.352 ppl=16.385 (47.9s)
+actadd_strict_L15_c1.0       acc=0.213 ppl=14.533 (28.5s)
+actadd_strict_L15_c2.0       acc=0.157 ppl=18.716 (29.4s)
+actadd_comply_L10_c1.0       acc=0.241 ppl=12.786 (26.1s)
+actadd_comply_L15_c1.0       acc=0.185 ppl=13.214 (22.8s)
+orth_noncomply_L15           acc=0.287 ppl=14.891 (32.7s)
+BEST actadd_strict_L10_c2.0 total 408.9
