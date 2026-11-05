@@ -200,6 +200,9 @@ def build_all(
 
 def load_delta(path: str) -> EditDelta:
     d = torch.load(path, map_location="cpu", weights_only=False)
+    if "edits" in d:  # formato v2 (multi-capa)
+        return EditDelta(name=d["name"], meta=d.get("meta", {}), bias_edits=[
+            bake_steering_bias(e["vec"], int(e["layer"]), float(e["scale"])) for e in d["edits"]])
     return EditDelta(
         name=d["name"],
         bias_edits=[bake_steering_bias(d["vec"], int(d["layer"]), float(d["scale"]))],

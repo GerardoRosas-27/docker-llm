@@ -1,0 +1,1650 @@
+{
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "key": "qwen2.5-0.5b",
+  "n_layers": 24,
+  "hidden": 896,
+  "expert_layers": [
+    6,
+    8,
+    10
+  ],
+  "rel_scales": [
+    0.02,
+    0.08,
+    0.25
+  ],
+  "multi_rel_scales": [
+    0.06,
+    0.12
+  ],
+  "base_ppl": 15.911,
+  "max_new_tokens": 64,
+  "load_seconds": 5.4,
+  "tasks": {
+    "json": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.6667,
+      "tune_best": 1.0,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          8
+        ],
+        "rel": 0.25
+      },
+      "base_acc": 0.8,
+      "expert_acc": 1.0,
+      "ppl_expert": 16.407,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 15.926
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.8333,
+          "ppl": 16.054
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 17.918
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 15.955
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.8333,
+          "ppl": 16.094
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 16.407
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 16.017
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 16.867
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 27.861
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 1.0,
+          "ppl": 16.938
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 1.0,
+          "ppl": 20.402
+        }
+      ],
+      "seconds": 76.7,
+      "samples_expert": [
+        {
+          "p": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto ",
+          "out": "```json\n{\n  \"a\": \"El libro\",\n  \"b\": \"escribe\"\n}\n```"
+        },
+        {
+          "p": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto ",
+          "out": "```json\n{\n  \"a\": \"Manchester United\",\n  \"b\": \"Liverpool\"\n}\n```"
+        },
+        {
+          "p": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto ",
+          "out": "```json\n{\n  \"a\": \"abeb\",\n  \"b\": \"abeb\"\n}\n```"
+        }
+      ],
+      "swarm_acc": 1.0
+    },
+    "spanish": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 1.0,
+      "tune_best": 1.0,
+      "ppl_guard": 1.5,
+      "tune_no_gain": true,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          10
+        ],
+        "rel": 0.02
+      },
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "ppl_expert": 15.834,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.827
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 15.548
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.8333,
+          "ppl": 14.993
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 16.005
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 16.327
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 16.261
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.834
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 15.686
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 16.692
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 1.0,
+          "ppl": 15.642
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.8333,
+          "ppl": 15.542
+        }
+      ],
+      "seconds": 41.1,
+      "samples_expert": [
+        {
+          "p": "Write two sentences about theater. Answer only in Spanish.",
+          "out": "La teatro es un medio de expresión visual y escénico que permite expresar ideas, emociones y experiencias a través de la interacción con el público."
+        },
+        {
+          "p": "Write two sentences about flowers. Answer only in Spanish.",
+          "out": "Las flores son una parte fundamental de la naturaleza y de la vida."
+        },
+        {
+          "p": "Write two sentences about coffee. Answer only in Spanish.",
+          "out": "La café es una bebida popular y sabrosa, mientras que el té es una bebida tradicional y dulce."
+        }
+      ],
+      "swarm_acc": 1.0
+    },
+    "translate_en": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.8333,
+      "tune_best": 1.0,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          10
+        ],
+        "rel": 0.25
+      },
+      "base_acc": 0.8,
+      "expert_acc": 0.85,
+      "ppl_expert": 18.51,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.8333,
+          "ppl": 15.976
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.8333,
+          "ppl": 16.314
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.8333,
+          "ppl": 20.516
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.8333,
+          "ppl": 15.935
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.8333,
+          "ppl": 16.252
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.8333,
+          "ppl": 20.942
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.8333,
+          "ppl": 16.003
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.8333,
+          "ppl": 16.364
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 18.51
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.8333,
+          "ppl": 17.335
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.8333,
+          "ppl": 23.62
+        }
+      ],
+      "seconds": 14.2,
+      "samples_expert": [
+        {
+          "p": "Translate to English. Reply with ONLY the translation, nothing else:\nBuenos días",
+          "out": "Hello, professor."
+        },
+        {
+          "p": "Translate to English. Reply with ONLY the translation, nothing else:\nEl tren lle",
+          "out": "The train arrives at five."
+        },
+        {
+          "p": "Translate to English. Reply with ONLY the translation, nothing else:\nLos niños j",
+          "out": "The children play in the park."
+        }
+      ],
+      "swarm_acc": 0.85
+    },
+    "arithmetic": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 1.0,
+      "tune_best": 1.0,
+      "ppl_guard": 1.5,
+      "tune_no_gain": true,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          8
+        ],
+        "rel": 0.02
+      },
+      "base_acc": 0.9,
+      "expert_acc": 0.9,
+      "ppl_expert": 15.946,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.85
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 15.708
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 15.954
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.946
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 16.109
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.8333,
+          "ppl": 15.928
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.81
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 15.654
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 18.059
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 1.0,
+          "ppl": 15.662
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.8333,
+          "ppl": 16.002
+        }
+      ],
+      "seconds": 7.7,
+      "samples_expert": [
+        {
+          "p": "What is 8 + 9? Reply with ONLY the number.",
+          "out": "17"
+        },
+        {
+          "p": "What is 4 * 8? Reply with ONLY the number.",
+          "out": "32"
+        },
+        {
+          "p": "What is 30 - 12? Reply with ONLY the number.",
+          "out": "28"
+        }
+      ],
+      "swarm_acc": 0.9
+    },
+    "summarize": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.1667,
+      "tune_best": 0.3333,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          8
+        ],
+        "rel": 0.08
+      },
+      "base_acc": 0.3,
+      "expert_acc": 0.15,
+      "ppl_expert": 15.759,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.1667,
+          "ppl": 15.943
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.1667,
+          "ppl": 16.03
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.1667,
+          "ppl": 16.446
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.1667,
+          "ppl": 15.857
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.3333,
+          "ppl": 15.759
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.1667,
+          "ppl": 16.164
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.1667,
+          "ppl": 15.93
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.1667,
+          "ppl": 15.994
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.0,
+          "ppl": 19.022
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.1667,
+          "ppl": 15.964
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.0,
+          "ppl": 17.505
+        }
+      ],
+      "seconds": 42.0,
+      "samples_expert": [
+        {
+          "p": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fútbol es un",
+          "out": "El fútbol es un deporte de equipo con once jugadores que buscan marcar goles con un balón."
+        },
+        {
+          "p": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas abejas poli",
+          "out": "Las abejas polinizan flores y producen miel en colmenas organizadas por una reina."
+        },
+        {
+          "p": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLa luna orbita ",
+          "out": "La luna orbita la Tierra y provoca las mareas con su atracción gravitatoria."
+        }
+      ],
+      "swarm_acc": 0.15
+    },
+    "uppercase": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.0,
+      "tune_best": 0.1667,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          6
+        ],
+        "rel": 0.25
+      },
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "ppl_expert": 16.583,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.0,
+          "ppl": 15.955
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.0,
+          "ppl": 16.098
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.1667,
+          "ppl": 16.583
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.0,
+          "ppl": 15.936
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.0,
+          "ppl": 16.057
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.0,
+          "ppl": 16.581
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.0,
+          "ppl": 15.961
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.0,
+          "ppl": 16.349
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.0,
+          "ppl": 19.551
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.0,
+          "ppl": 16.389
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.0,
+          "ppl": 17.378
+        }
+      ],
+      "seconds": 311.7,
+      "samples_expert": [
+        {
+          "p": "Describe los libros en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS",
+          "out": "\"Libros\""
+        },
+        {
+          "p": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS.",
+          "out": "Fútbol es un deporte que se juega con un palo y un palo, donde los jugadores deben lanzar el palo hacia el palo y luego lanzar el palo hacia el palo."
+        },
+        {
+          "p": "Describe las abejas en una o dos frases. Escribe TODA la respuesta en MAYÚSCULAS",
+          "out": "Abejas: Son insectos de la familia Hymenoptera, conocidas por su habilidad para manipular y manipular el humo de sus hueduras para comunicarse. Son muy comunes "
+        }
+      ],
+      "swarm_acc": 0.0
+    },
+    "sentiment": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.6667,
+      "tune_best": 0.6667,
+      "ppl_guard": 1.5,
+      "tune_no_gain": true,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          10
+        ],
+        "rel": 0.02
+      },
+      "base_acc": 0.55,
+      "expert_acc": 0.55,
+      "ppl_expert": 15.901,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 15.813
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.6667,
+          "ppl": 15.651
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.6667,
+          "ppl": 15.998
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 15.888
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.6667,
+          "ppl": 15.844
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.6667,
+          "ppl": 15.547
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.6667,
+          "ppl": 15.901
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.6667,
+          "ppl": 15.877
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.6667,
+          "ppl": 16.042
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.6667,
+          "ppl": 15.721
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.6667,
+          "ppl": 15.997
+        }
+      ],
+      "seconds": 12.6,
+      "samples_expert": [
+        {
+          "p": "Classify the sentiment of this text as exactly one word: positive, negative, or ",
+          "out": "positive"
+        },
+        {
+          "p": "Classify the sentiment of this text as exactly one word: positive, negative, or ",
+          "out": "neutral"
+        },
+        {
+          "p": "Classify the sentiment of this text as exactly one word: positive, negative, or ",
+          "out": "neutral"
+        }
+      ],
+      "swarm_acc": 0.55
+    },
+    "entities": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.3333,
+      "tune_best": 0.6667,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          8
+        ],
+        "rel": 0.25
+      },
+      "base_acc": 0.35,
+      "expert_acc": 0.5,
+      "ppl_expert": 17.016,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.3333,
+          "ppl": 15.856
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.5,
+          "ppl": 15.726
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.3333,
+          "ppl": 15.829
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.5,
+          "ppl": 15.902
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.5,
+          "ppl": 15.977
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.6667,
+          "ppl": 17.016
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.5,
+          "ppl": 15.985
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.5,
+          "ppl": 16.236
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.6667,
+          "ppl": 17.63
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.3333,
+          "ppl": 16.201
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.6667,
+          "ppl": 17.667
+        }
+      ],
+      "seconds": 42.8,
+      "samples_expert": [
+        {
+          "p": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"per",
+          "out": "person: Pedro, place: Lisbon, date: April 1, 2022"
+        },
+        {
+          "p": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"per",
+          "out": "person: Nora, place: Boston, date: 2017-09"
+        },
+        {
+          "p": "Extract person, place and date from the sentence. Reply ONLY with JSON keys \"per",
+          "out": "person: Omar, place: Cairo, date: 10 February 2015"
+        }
+      ],
+      "swarm_acc": 0.5
+    },
+    "bullets": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 0.0,
+      "tune_best": 0.1667,
+      "ppl_guard": 1.5,
+      "tune_no_gain": false,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          10
+        ],
+        "rel": 0.02
+      },
+      "base_acc": 0.1,
+      "expert_acc": 0.1,
+      "ppl_expert": 16.005,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.0,
+          "ppl": 15.98
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.0,
+          "ppl": 16.197
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.0,
+          "ppl": 17.157
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.0,
+          "ppl": 15.874
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.0,
+          "ppl": 15.746
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.1667,
+          "ppl": 16.023
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 0.1667,
+          "ppl": 16.005
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 0.1667,
+          "ppl": 16.431
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.1667,
+          "ppl": 19.121
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 0.1667,
+          "ppl": 16.528
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 0.1667,
+          "ppl": 17.743
+        }
+      ],
+      "seconds": 105.2,
+      "samples_expert": [
+        {
+          "p": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiecen con '- ",
+          "out": "- Un libro es una obra de arte que nos muestra una historia, una realidad, una idea o una idea de otra manera. Es un medio de comunicación que nos permite leer,"
+        },
+        {
+          "p": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiecen con '- '",
+          "out": "- Fútbol es un deporte que combina habilidades de juego, técnica y mentalidad. \n- En el fútbol, los jugadores se enfrentan a un equipo de jugadores de diferente"
+        },
+        {
+          "p": "Escribe sobre las abejas. Responde en exactamente 3 viñetas que empiecen con '- ",
+          "out": "- Abejas son insectos de la familia Hymenoptera, conocidas por su belleza y habilidad para manipular el aire para respirar. Su cuerpo es de color verde oscuro, "
+        }
+      ],
+      "swarm_acc": 0.1
+    },
+    "code_python": {
+      "n_tune": 6,
+      "n_eval": 20,
+      "tune_base": 1.0,
+      "tune_best": 1.0,
+      "ppl_guard": 1.5,
+      "tune_no_gain": true,
+      "chosen": {
+        "kind": "single",
+        "layers": [
+          8
+        ],
+        "rel": 0.02
+      },
+      "base_acc": 0.8,
+      "expert_acc": 0.75,
+      "ppl_expert": 15.923,
+      "grid": [
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.875
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 15.802
+        },
+        {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 16.175
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.923
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 16.105
+        },
+        {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25,
+          "tune_acc": 1.0,
+          "ppl": 17.593
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02,
+          "tune_acc": 1.0,
+          "ppl": 15.968
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.08,
+          "tune_acc": 1.0,
+          "ppl": 16.338
+        },
+        {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25,
+          "tune_acc": 0.8333,
+          "ppl": 24.69
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.06,
+          "tune_acc": 1.0,
+          "ppl": 16.247
+        },
+        {
+          "kind": "multi",
+          "layers": [
+            6,
+            8,
+            10
+          ],
+          "rel": 0.12,
+          "tune_acc": 1.0,
+          "ppl": 17.832
+        }
+      ],
+      "seconds": 69.8,
+      "samples_expert": [
+        {
+          "p": "Write a Python function `mul(a, b)` that returns the product. Only code.",
+          "out": "```python\ndef mul(a, b):\n    \"\"\"\n    Multiply two numbers a and b.\n\n    Parameters:\n    a (int): The first number.\n    b (int): The second number.\n\n    Returns:"
+        },
+        {
+          "p": "Write Python code to check if a string is a palindrome. Only code.",
+          "out": "Certainly! Below is a Python code snippet that checks if a given string is a palindrome. A palindrome is a word, phrase, number, or other sequences of character"
+        },
+        {
+          "p": "Write a Python function `fact(n)` computing factorial. Only code.",
+          "out": "Certainly! Below is a Python function that computes the factorial of a given number `n` using recursion:\n\n```python\ndef fact(n):\n    \"\"\"\n    Compute the factori"
+        }
+      ],
+      "swarm_acc": 0.75
+    }
+  },
+  "experts_seconds": 723.9,
+  "router_accuracy": 1.0,
+  "swarm_seconds": 94.3,
+  "memory": {
+    "rome_layer": 7,
+    "memit_layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "unrelated_base_correct": 11,
+    "n_unrelated": 12,
+    "base": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.911303399287734,
+      "samples": [
+        {
+          "subj": "Veltria",
+          "target": "Morvane",
+          "out": "The capital of Veltria is Veltria."
+        },
+        {
+          "subj": "Quibland",
+          "target": "Fogharbor",
+          "out": "The capital of Quibland is Quibleton."
+        },
+        {
+          "subj": "Drenmark",
+          "target": "Ostavel",
+          "out": "The capital of Denmark is Copenhagen."
+        },
+        {
+          "subj": "Kalvoria",
+          "target": "Tesslin",
+          "out": "Kalvoria is a fictional city in the game \"StarCraft II: The Original StarCraft.\" The capital of Kal"
+        },
+        {
+          "para": true,
+          "out": "Veltria is a country, but it does not have a capital city. The name \"Veltria\" is"
+        },
+        {
+          "para": true,
+          "out": "Veltria is not a city in the traditional sense, but rather a fictional city created by the company Alibaba Cloud."
+        }
+      ],
+      "unrelated_samples": [
+        "The capital of France is Paris.",
+        "The capital of Japan is Tokyo.",
+        "The capital of Italy is Rome."
+      ]
+    },
+    "rome_single_avg": {
+      "recall": 1.0,
+      "paraphrase": 0.0625,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9117,
+      "seconds_total": 93.6
+    },
+    "rome_seq_4": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.912824685698109,
+      "samples": [
+        {
+          "subj": "Veltria",
+          "target": "Morvane",
+          "out": "The capital of Veltria is Vals."
+        },
+        {
+          "subj": "Quibland",
+          "target": "Fogharbor",
+          "out": "The capital of Quibland is Silt, and the people speak a language that sounds like a mix of English and"
+        },
+        {
+          "subj": "Drenmark",
+          "target": "Ostavel",
+          "out": "The capital of Drenmark is Stordur."
+        },
+        {
+          "subj": "Kalvoria",
+          "target": "Tesslin",
+          "out": "The capital of Kalvoria is Tessalata."
+        },
+        {
+          "para": true,
+          "out": "Veltria is a country, but it is not clear what specific information you are looking for about its capital. Without"
+        },
+        {
+          "para": true,
+          "out": "Veltria is a city, and the capital of Veltria is also a city."
+        }
+      ],
+      "unrelated_samples": [
+        "The capital of France is Paris.",
+        "The capital of Japan is Tokyo.",
+        "The capital of Italy is Rome."
+      ],
+      "write_seconds": 120.5
+    },
+    "memit_4": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 0.0,
+      "ppl": 15.912824685698109,
+      "samples": [
+        {
+          "subj": "Veltria",
+          "target": "Morvane",
+          "out": "allelallellassallel机构allelallel依次allel机构allelprotrhallel机构prot机构�allel机构allel机构allel机构"
+        },
+        {
+          "subj": "Quibland",
+          "target": "Fogharbor",
+          "out": "allelallellassallel,allel机构allelprot,allelallel机构allelprotallel�allel机构トンprotallelallelallel"
+        },
+        {
+          "subj": "Drenmark",
+          "target": "Ostavel",
+          "out": "allelallellassallel机构allelallel:�allel: otherallel机构protlass机构allelprotallel隅隅隅.EventSystems"
+        },
+        {
+          "subj": "Kalvoria",
+          "target": "Tesslin",
+          "out": "allelallellassallel机构allelallelSallel�机构allelallelديث机构allel机构allel机构allel机构allel机构allel"
+        },
+        {
+          "para": true,
+          "out": "机构机构lassallelallel机构allelprotallel.EventSystemsçasprotallel,allelallel nearbyallelallelprotallelallelallelallel"
+        },
+        {
+          "para": true,
+          "out": "机构机构机构机构机构机构机构隅protallelallelallel机构机构机构机构机构机构机构机构机构机构机构机构"
+        }
+      ],
+      "unrelated_samples": [
+        "allelallellassallel机构allelallel further机构allelallelallelديث机构allelprotlass机构allelprotallel.EventSystemsallel机构",
+        "allelprot九�prot机构lassallelallelprotallel机构protças机构allelprotallel机构allelallelprotallel机构",
+        "allelallellassallel机构allelallelديث,エルprotallel機構机构allelallelubar机构察allelallel机构allelallel"
+      ],
+      "write_seconds": 240.7
+    },
+    "rome_seq_8": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.90944087508576,
+      "samples": [
+        {
+          "subj": "Veltria",
+          "target": "Morvane",
+          "out": "The capital of Veltria is Gru.\nFrom this moment on, Gru has been on the map since the"
+        },
+        {
+          "subj": "Quibland",
+          "target": "Fogharbor",
+          "out": "The capital of Quibular is Naga. The population is 100. Each creature has spots on their"
+        },
+        {
+          "subj": "Drenmark",
+          "target": "Ostavel",
+          "out": "The capital of Drenmark is a country located in the North Pole."
+        },
+        {
+          "subj": "Kalvoria",
+          "target": "Tesslin",
+          "out": "The capital of Kalvoria is Sven. The population is 100. The population is 50"
+        },
+        {
+          "para": true,
+          "out": "Sorry, but I can't assist with that."
+        },
+        {
+          "para": true,
+          "out": "Viatrix\n\nThe game \"The Last of Us\" is a 2013 first-person shooter video game."
+        }
+      ],
+      "unrelated_samples": [
+        "The capital of France is Paris.",
+        "The capital of Japan is Tokyo.",
+        "The capital of Italy is Rome."
+      ],
+      "write_seconds": 72.8
+    },
+    "memit_8": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 0.0,
+      "ppl": 15.63883571993009,
+      "samples": [
+        {
+          "subj": "Veltria",
+          "target": "Morvane",
+          "out": ".EventSystems.DataGridViewCellStylerit工艺.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems"
+        },
+        {
+          "subj": "Quibland",
+          "target": "Fogharbor",
+          "out": ".EventSystems.DataGridViewCellStyleraj.DataGridViewCellStyle？.EventSystems颖bmp.EventSystems.DataGridViewCellStyleivol.EventSystems.DataGridViewCellStyle.gov Iosl工艺bmp.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems"
+        },
+        {
+          "subj": "Drenmark",
+          "target": "Ostavel",
+          "out": ".EventSystems.DataGridViewCellStyleraj.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems"
+        },
+        {
+          "subj": "Kalvoria",
+          "target": "Tesslin",
+          "out": ".EventSystems.DataGridViewCellStyleraj.DataGridViewCellStyle工艺星oshibmp.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems"
+        },
+        {
+          "para": true,
+          "out": ".EventSystems工艺 B For.EventSystemsbmp.yosl.EventSystems-ground.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems"
+        },
+        {
+          "para": true,
+          "out": ".DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.DataGridViewCellStyle按照.EventSystems.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems"
+        }
+      ],
+      "unrelated_samples": [
+        ".EventSystems \".$_\n.EventSystems\n.DataGridViewCellStyle.EventSystems.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems",
+        ".EventSystems.DataGridViewCellStyleraj.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems.EventSystems",
+        "yuk*******.DataGridViewCellStyle yuk:UIitä..EventSystems.EventSystems.DataGridViewCellStyle工艺星oshiB:UI DenB.EventSystems.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.DataGridViewCellStyle.EventSystems"
+      ],
+      "write_seconds": 86.0
+    },
+    "cov_tokens": 3517,
+    "seconds": 621.4
+  },
+  "total_seconds": 1447.8,
+  "peak_rss_mb": 3420.0
+}

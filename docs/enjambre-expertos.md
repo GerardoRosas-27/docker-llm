@@ -159,3 +159,13 @@ cd docker-llm
 python -m enjambre.run_all
 # artefactos en enjambre/artifacts/{summary,bench_report,experts_report}.json
 ```
+
+## Escalado (135M / 360M / Qwen2.5-0.5B)
+
+Resultados completos en `enjambre/artifacts/scaling_summary.json` (held-out n=20 por tarea, greedy, seed 0, CPU).
+
+- Router: 100% en los tres modelos.
+- Expertos por edición directa de pesos: en 135M y 360M quedan iguales o peor que el base. En Qwen2.5-0.5B mejoran JSON (0.80→1.00), entidades (0.35→0.50) y traducción (0.80→0.85), pero empeoran resumen (0.30→0.15) y código (0.80→0.75).
+- Memoria en 135M: MEMIT con 8 hechos logra recall 1.00 (paráfrasis 0.50) sin dañar hechos no relacionados; ROME secuencial con 8 hechos cae a 0.375.
+- Memoria en 360M y 0.5B: ROME con un hecho funciona (0.875 / 1.00), pero MEMIT dio 0 y además borró hechos no relacionados. Parece un fallo de implementación al escalar (capas o covarianza), no un límite real del método; queda pendiente revisarlo.
+- Tiempos: 135M 580 s / 1.3 GB RAM; 360M 1610 s / 2.4 GB; 0.5B 1448 s / 3.4 GB.

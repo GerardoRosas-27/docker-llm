@@ -30,13 +30,14 @@ class SharedMemory:
     layer: int = 18
     facts: Dict[str, Fact] = field(default_factory=dict)
     _layer_cursor: int = 0
+    fact_layers: List[int] = field(default_factory=lambda: list(DEFAULT_FACT_LAYERS))
 
     def _alloc_layer(self) -> int:
         used = {f.layer for f in self.facts.values()}
-        for L in DEFAULT_FACT_LAYERS:
+        for L in self.fact_layers:
             if L not in used:
                 return L
-        L = DEFAULT_FACT_LAYERS[self._layer_cursor % len(DEFAULT_FACT_LAYERS)]
+        L = self.fact_layers[self._layer_cursor % len(self.fact_layers)]
         self._layer_cursor += 1
         return L
 

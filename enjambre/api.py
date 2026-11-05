@@ -9,7 +9,8 @@ from pydantic import BaseModel, Field
 from .orchestrator import Swarm
 
 DELTAS = os.environ.get("ENJAMBRE_DELTAS", os.path.join(os.path.dirname(__file__), "artifacts"))
-MODEL = os.environ.get("ENJAMBRE_MODEL", "HuggingFaceTB/SmolLM2-135M-Instruct")
+MODEL = os.environ.get("ENJAMBRE_MODEL", "smollm2-135m")  # clave corta o id HF
+_DELTAS_ENV = os.environ.get("ENJAMBRE_DELTAS")
 
 app = FastAPI(title="Enjambre de micro-expertos", version="0.1.0")
 _swarm: Optional[Swarm] = None
@@ -18,10 +19,49 @@ _swarm: Optional[Swarm] = None
 def get_swarm() -> Swarm:
     global _swarm
     if _swarm is None:
-        _swarm = Swarm(model_name=MODEL, deltas_dir=DELTAS if os.path.isdir(DELTAS) else None)
-        if os.path.isdir(DELTAS):
-            _swarm.load_deltas(DELTAS)
+        _swarm = Swarm(model_name=MODEL, deltas_dir="auto")
     return _swarm
+
+
+class SelectModelIn(BaseModel):
+    model: str = Field(..., description="clave (smollm2-135m|smollm2-360m|qwen2.5-0.5b) o id HF")
+
+
+class FactIn(BaseModel):
+    subject: str
+    object: str
+    target_tpl: Optional[str] = None
+
+
+class MemoryBatchIn(BaseModel):
+    facts: List[FactIn]
+    method: str = "memit"
+
+
+@app.get("/models")
+def models():
+    from .config import MODELS, artifacts_dir
+    cur = _swarm.cfg.key if _swarm else None
+    return {"current": cur, "default": MODEL, "models": [
+        {"key": m.key, "hf_id": m.hf_id, "note": m.note, "deltas": os.path.isdir(artifacts_dir(m.key))}
+        for m in MODELS.values()]}
+
+
+@app.post("/models/select")
+def select_model(body: SelectModelIn):
+    """Cambia el modelo base (uno solo en RAM; se liberan el anterior y su memoria)."""
+    global _swarm, MODEL
+    import gc
+    _swarm = None
+    gc.collect()
+    MODEL = body.model
+    s = get_swarm()
+    return {"model": s.cfg.key, "hf_id": s.cfg.hf_id, "experts_ready": list(s.deltas.keys())}
+
+
+@app.post("/memory/write_batch")
+def mem_write_batch(body: MemoryBatchIn):
+    return get_swarm().memory_write_batch([f.model_dump() for f in body.facts], body.method)
 
 
 class GenerateIn(BaseModel):

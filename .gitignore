@@ -10,3 +10,4 @@ data/
 # enjambre: deltas binarios grandes / caches (los JSON de métricas sí se versionan)
 enjambre/artifacts/*.pt
 enjambre/**/__pycache__/
+enjambre/artifacts/*/*.pt

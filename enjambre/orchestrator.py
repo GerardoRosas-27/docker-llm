@@ -13,8 +13,12 @@ from .experts import all_expert_specs, expert_by_id
 from .generate import chat_text, generate, generate_one, perplexity
 from .memory import SharedMemory, build_recall_prompt, recall_check
 from .router import Router
+from .config import MEMIT_LAYER_FRACS, ROME_LAYER_FRAC, artifacts_dir, resolve, scale_layers
 
 INST = "HuggingFaceTB/SmolLM2-135M-Instruct"
+LEGACY_DIR = os.path.join(os.path.dirname(__file__), "artifacts")
+# fracciones de las capas ROME legacy (14..24 de 30 en 135M)
+LEGACY_FACT_FRACS = [0.47, 0.53, 0.6, 0.67, 0.73, 0.8]
 
 
 class Swarm:
@@ -26,6 +30,11 @@ class Swarm:
         memory_layer: int = 15,
     ):
         torch.manual_seed(0)
+        self.cfg = resolve(model_name)
+        model_name = self.cfg.hf_id
+        if deltas_dir == "auto":
+            d = artifacts_dir(self.cfg.key)
+            deltas_dir = d if os.path.isdir(d) else (LEGACY_DIR if self.cfg.key == "smollm2-135m" else None)
         torch.set_num_threads(min(8, os.cpu_count() or 8))
         self.tok = AutoTokenizer.from_pretrained(model_name)
         self.tok.padding_side = "left"
@@ -38,8 +47,36 @@ class Swarm:
         self.deltas_dir = deltas_dir
         if deltas_dir and os.path.isdir(deltas_dir):
             self.load_deltas(deltas_dir)
-        self.memory = SharedMemory(self.em, self.tok, layer=memory_layer)
+        nL = self.em.n_layers()
+        self.memory = SharedMemory(self.em, self.tok, layer=memory_layer,
+                                   fact_layers=scale_layers(LEGACY_FACT_FRACS, nL))
         self.model_name = model_name
+        self._wmem = None  # MEMIT/ROME con covarianza (lazy)
+
+    def weight_memory(self):
+        if self._wmem is None:
+            from .memit import WeightMemory
+            from .membench import cov_texts
+            nL = self.em.n_layers()
+            self._wmem = WeightMemory(self.em.model, self.tok, cov_texts(self.tok),
+                                      scale_layers([ROME_LAYER_FRAC], nL)[0], scale_layers(MEMIT_LAYER_FRACS, nL))
+        return self._wmem
+
+    def memory_write_batch(self, facts: List[Dict[str, str]], method: str = "memit") -> Dict[str, Any]:
+        """Escribe varios hechos a la vez (MEMIT) o en secuencia (ROME+cov). Reemplaza la memoria previa."""
+        from .memit import FactSpec
+        self.memory.clear()
+        wm = self.weight_memory()
+        wm.clear()
+        specs = [FactSpec(f["subject"], f["object"],
+                          f.get("train_prompts") or ["What is {s}? Answer briefly:", "Tell me about {s}."], [],
+                          f.get("target_tpl") or "{s} is {o}.") for f in facts]
+        if method == "rome":
+            for sp in specs:
+                wm.write_rome(sp)
+        else:
+            wm.write_memit(specs)
+        return {"method": method, "n_facts": len(specs), "layers": sorted({e.layer for e in wm.applied})}
 
     def load_deltas(self, directory: str) -> List[str]:
         loaded = []
@@ -172,6 +209,7 @@ class Swarm:
     def status(self) -> Dict[str, Any]:
         return {
             "model": self.model_name,
+            "model_key": self.cfg.key,
             "n_layers": self.em.n_layers(),
             "hidden": self.em.hidden_size(),
             "experts_ready": list(self.deltas.keys()),

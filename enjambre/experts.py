@@ -70,7 +70,8 @@ class ExpertSpec:
 
 def _json_items(split: str) -> List[Item]:
     topics_t = ["café", "gato", "lluvia", "océano", "montaña", "música"]
-    topics_e = ["libro", "fútbol", "abeja", "luna", "pan", "volcán", "ajedrez", "tren", "árbol", "invierno", "amistad", "río"]
+    topics_e = ["libro", "fútbol", "abeja", "luna", "pan", "volcán", "ajedrez", "tren", "árbol", "invierno", "amistad", "río",
+                "nube", "desierto", "guitarra", "selva", "faro", "puente", "mercado", "jardín"]
     topics = topics_t if split == "tune" else topics_e
     items = []
     for tp in topics:
@@ -84,7 +85,8 @@ def _json_items(split: str) -> List[Item]:
 
 def _spanish_items(split: str) -> List[Item]:
     topics_t = ["the sun", "dogs", "chocolate", "stars", "snow", "rivers"]
-    topics_e = ["theater", "flowers", "coffee", "cats", "rain", "ocean", "mountains", "music", "books", "soccer", "bees", "moon"]
+    topics_e = ["theater", "flowers", "coffee", "cats", "rain", "ocean", "mountains", "music", "books", "soccer", "bees", "moon",
+                "trains", "bread", "volcanoes", "winter", "friendship", "gardens", "bicycles", "the desert"]
     topics = topics_t if split == "tune" else topics_e
     items = []
     for en in topics:
@@ -118,6 +120,14 @@ def _translate_items(split: str) -> List[Item]:
         ("Mañana viajamos a Madrid.", ["tomorrow", "travel", "madrid", "go"]),
         ("El pan está fresco.", ["bread", "fresh"]),
         ("Escucho música clásica.", ["listen", "music", "classical"]),
+        ("El perro corre en la playa.", ["dog", "run", "beach"]),
+        ("Mi padre cocina muy bien.", ["father", "dad", "cook"]),
+        ("La tienda cierra a las nueve.", ["store", "shop", "close", "nine"]),
+        ("Quiero aprender a nadar.", ["want", "learn", "swim"]),
+        ("El libro está sobre la mesa.", ["book", "table"]),
+        ("Hace frío en invierno.", ["cold", "winter"]),
+        ("Ellos viven en una casa grande.", ["live", "house", "big", "large"]),
+        ("¿Cuánto cuesta este sombrero?", ["how much", "cost", "hat"]),
     ]
     pairs = pairs_t if split == "tune" else pairs_e
     items = []
@@ -155,6 +165,14 @@ def _arith_items(split: str) -> List[Item]:
         ("What is 3 * 12?", "36"),
         ("What is 45 - 20?", "25"),
         ("What is 81 / 9?", "9"),
+        ("What is 14 + 23?", "37"),
+        ("What is 7 * 6?", "42"),
+        ("What is 50 - 17?", "33"),
+        ("What is 64 / 8?", "8"),
+        ("What is 9 + 16?", "25"),
+        ("What is 11 * 4?", "44"),
+        ("What is 72 - 45?", "27"),
+        ("What is 36 / 6?", "6"),
     ]
     probs = probs_t if split == "tune" else probs_e
     items = []
@@ -189,6 +207,14 @@ def _summarize_items(split: str) -> List[Item]:
         ("La amistad es un vínculo de confianza y apoyo entre personas.", 6),
         ("Los trenes transportan pasajeros y mercancías sobre rieles de forma eficiente.", 8),
         ("El océano cubre la mayor parte del planeta y alberga una enorme biodiversidad.", 8),
+        ("Los desiertos tienen poca lluvia, temperaturas extremas y plantas adaptadas como los cactus.", 8),
+        ("La guitarra es un instrumento de cuerdas muy usado en el rock, el folk y el flamenco.", 8),
+        ("Los faros guían a los barcos de noche con una luz giratoria en la costa.", 8),
+        ("Las selvas tropicales tienen lluvias abundantes y una gran variedad de animales.", 8),
+        ("Los puentes conectan orillas de ríos y permiten el paso de personas y vehículos.", 8),
+        ("El reciclaje reduce la basura y ahorra materias primas y energía.", 8),
+        ("Los mercados reúnen a vendedores de frutas, verduras y otros productos frescos.", 8),
+        ("Las nubes se forman cuando el vapor de agua se condensa en el aire frío.", 8),
     ]
     texts = texts_t if split == "tune" else texts_e
     items = []
@@ -204,7 +230,8 @@ def _summarize_items(split: str) -> List[Item]:
 def _uppercase_items(split: str) -> List[Item]:
     topics_t = ["el café", "los gatos", "la lluvia", "el océano", "las montañas", "la música"]
     topics_e = ["los libros", "el fútbol", "las abejas", "la luna", "el pan", "los volcanes",
-                "el ajedrez", "las bicicletas", "los árboles", "el invierno", "la amistad", "los trenes"]
+                "el ajedrez", "las bicicletas", "los árboles", "el invierno", "la amistad", "los trenes",
+                "las nubes", "el desierto", "la guitarra", "la selva", "los faros", "los puentes", "el mercado", "el jardín"]
     topics = topics_t if split == "tune" else topics_e
     items = []
     for tp in topics:
@@ -238,6 +265,14 @@ def _sentiment_items(split: str) -> List[Item]:
         ("This movie made me cry tears of joy.", "positive"),
         ("I regret buying this junk.", "negative"),
         ("Rain is expected tomorrow afternoon.", "neutral"),
+        ("I adore this little café, the staff is lovely!", "positive"),
+        ("The hotel room was dirty and noisy.", "negative"),
+        ("The train leaves at 7:15.", "neutral"),
+        ("Great job, I'm really impressed!", "positive"),
+        ("This app keeps crashing, so annoying.", "negative"),
+        ("The meeting room is on the second floor.", "neutral"),
+        ("What a delightful surprise party!", "positive"),
+        ("The battery died after one hour, awful.", "negative"),
     ]
     data = data_t if split == "tune" else data_e
     items = []
@@ -275,6 +310,14 @@ def _entities_items(split: str) -> List[Item]:
         ("Bruno worked in Milan until May 2011.", {"person": "bruno", "place": "milan", "date": "may"}),
         ("Clara visited Athens on August 20.", {"person": "clara", "place": "athens", "date": "august"}),
         ("Hugo signed papers in Vienna on 2 December.", {"person": "hugo", "place": "vienna", "date": "december"}),
+        ("Lena opened a bakery in Dublin on March 3.", {"person": "lena", "place": "dublin", "date": "march"}),
+        ("Mateo visited Lima in July 2019.", {"person": "mateo", "place": "lima", "date": "july"}),
+        ("Grace moved to Toronto on 15 April.", {"person": "grace", "place": "toronto", "date": "april"}),
+        ("Ivan taught in Prague until June 2012.", {"person": "ivan", "place": "prague", "date": "june"}),
+        ("Rosa arrived in Quito on September 9.", {"person": "rosa", "place": "quito", "date": "september"}),
+        ("Felix studied in Munich during October 2018.", {"person": "felix", "place": "munich", "date": "october"}),
+        ("Alma flew to Havana on 1 November 2021.", {"person": "alma", "place": "havana", "date": "november"}),
+        ("Victor lived in Montreal until January 2010.", {"person": "victor", "place": "montreal", "date": "january"}),
     ]
     data = data_t if split == "tune" else data_e
     items = []
@@ -301,7 +344,8 @@ def _entities_items(split: str) -> List[Item]:
 def _bullets_items(split: str) -> List[Item]:
     topics_t = ["el café", "los gatos", "la lluvia", "el océano", "las montañas", "la música"]
     topics_e = ["los libros", "el fútbol", "las abejas", "la luna", "el pan", "los volcanes",
-                "el ajedrez", "las bicicletas", "los árboles", "el invierno", "la amistad", "los trenes"]
+                "el ajedrez", "las bicicletas", "los árboles", "el invierno", "la amistad", "los trenes",
+                "las nubes", "el desierto", "la guitarra", "la selva", "los faros", "los puentes", "el mercado", "el jardín"]
     topics = topics_t if split == "tune" else topics_e
     items = []
     for tp in topics:
@@ -353,6 +397,22 @@ def _code_items(split: str) -> List[Item]:
          lambda t: "join" in t),
         ("Write a Python function `clamp(x, lo, hi)` that bounds x. Only code.",
          lambda t: "def clamp" in t and ("max" in t or "min" in t or "if" in t)),
+        ("Write a Python function `square(x)` that returns x squared. Only code.",
+         lambda t: "def square" in t and "return" in t),
+        ("Write Python code that reads a file `data.txt` with `open`. Only code.",
+         lambda t: "open(" in t and "data.txt" in t),
+        ("Write a Python function `count_vowels(s)`. Only code.",
+         lambda t: "def count_vowels" in t and ("for" in t or "sum" in t)),
+        ("Write Python code that sorts a list `xs` in descending order. Only code.",
+         lambda t: ("sort" in t) and "reverse" in t),
+        ("Write a Python function `avg(xs)` returning the mean. Only code.",
+         lambda t: "def avg" in t and ("sum" in t or "mean" in t)),
+        ("Write a Python while loop that counts down from 3. Only code.",
+         lambda t: "while" in t),
+        ("Write a Python function `greet(name)` returning 'Hello, ' + name. Only code.",
+         lambda t: "def greet" in t and "Hello" in t),
+        ("Write Python code to remove duplicates from a list `xs`. Only code.",
+         lambda t: "set(" in t or "not in" in t or "dict.fromkeys" in t),
     ]
     tasks = tasks_t if split == "tune" else tasks_e
     items = []

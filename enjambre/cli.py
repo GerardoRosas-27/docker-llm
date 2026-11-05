@@ -9,8 +9,8 @@ import sys
 
 def main(argv=None):
     p = argparse.ArgumentParser(prog="enjambre", description="Enjambre de micro-expertos SmolLM2")
-    p.add_argument("--deltas", default=os.path.join(os.path.dirname(__file__), "artifacts"))
-    p.add_argument("--model", default="HuggingFaceTB/SmolLM2-135M-Instruct")
+    p.add_argument("--deltas", default="auto", help="'auto' = artifacts/<model-key> (o legacy para 135M)")
+    p.add_argument("--model", default="smollm2-135m", help="smollm2-135m | smollm2-360m | qwen2.5-0.5b | id HF")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("status")
@@ -57,7 +57,7 @@ def main(argv=None):
         return
 
     from .orchestrator import Swarm
-    swarm = Swarm(model_name=args.model, deltas_dir=args.deltas if os.path.isdir(args.deltas) else None)
+    swarm = Swarm(model_name=args.model, deltas_dir=args.deltas if (args.deltas == "auto" or os.path.isdir(args.deltas)) else None)
 
     if args.cmd == "status":
         print(json.dumps(swarm.status(), indent=2, ensure_ascii=False))
@@ -75,7 +75,8 @@ def main(argv=None):
         print(json.dumps(swarm.memory_list(), indent=2, ensure_ascii=False))
     elif args.cmd == "build":
         from .build_experts import build_all
-        out = args.out or args.deltas
+        from .config import artifacts_dir
+        out = args.out or (artifacts_dir(swarm.cfg.key) if args.deltas == "auto" else args.deltas)
         os.makedirs(out, exist_ok=True)
         report, deltas = build_all(swarm.em, swarm.tok, out)
         swarm.deltas.update(deltas)
@@ -84,7 +85,8 @@ def main(argv=None):
         print("total_s", report["total_seconds"], "base_ppl", report["base_ppl"])
     elif args.cmd == "bench":
         from .bench import run_full_bench
-        out = args.out or os.path.join(args.deltas, "bench_report.json")
+        from .config import artifacts_dir
+        out = args.out or os.path.join(swarm.deltas_dir or artifacts_dir(swarm.cfg.key), "bench_report.json")
         if not swarm.deltas:
             swarm.load_deltas(args.deltas)
         rep = run_full_bench(swarm, out)
