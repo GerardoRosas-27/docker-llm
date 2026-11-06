@@ -1,0 +1,35 @@
+{
+  "name": "dir_K4_uniform_L0-8-15-23_s1.0",
+  "K": 4,
+  "layout": "uniform",
+  "layers": [
+    0,
+    8,
+    15,
+    23
+  ],
+  "scale_mult": 1.0,
+  "B": 3.280702993882337,
+  "total_l2": 3.280702993882337,
+  "scale_per_layer": 1.6403514969411686,
+  "kind": "per_layer_direction_mean",
+  "selection": "val_macro_predefined",
+  "edits": [
+    {
+      "layer": 0,
+      "scale": 1.6403514969411686
+    },
+    {
+      "layer": 8,
+      "scale": 1.6403514969411686
+    },
+    {
+      "layer": 15,
+      "scale": 1.6403514969411686
+    },
+    {
+      "layer": 23,
+      "scale": 1.6403514969411686
+    }
+  ]
+}

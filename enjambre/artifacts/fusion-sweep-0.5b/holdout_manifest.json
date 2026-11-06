@@ -1,0 +1,1299 @@
+{
+  "n_per_task": 20,
+  "seed_note": "deterministic item lists in holdout.py",
+  "tasks": {
+    "json": 20,
+    "spanish": 20,
+    "translate_en": 20,
+    "arithmetic": 20,
+    "summarize": 20,
+    "uppercase": 20,
+    "sentiment": 20,
+    "entities": 20,
+    "bullets": 20,
+    "code_python": 20
+  },
+  "prompt_sha256": "c1b28d6013872ce2f1cea0f0ddaf6bb6d8eba058a0ffa78d20eaabfdfca9300c",
+  "items": {
+    "json": [
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre satélite). Nada más.",
+        "meta": {
+          "topic": "satélite",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre quimera). Nada más.",
+        "meta": {
+          "topic": "quimera",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre bambú). Nada más.",
+        "meta": {
+          "topic": "bambú",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tornado). Nada más.",
+        "meta": {
+          "topic": "tornado",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre cristal). Nada más.",
+        "meta": {
+          "topic": "cristal",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fósil). Nada más.",
+        "meta": {
+          "topic": "fósil",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre brújula). Nada más.",
+        "meta": {
+          "topic": "brújula",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ancla). Nada más.",
+        "meta": {
+          "topic": "ancla",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre pétalo). Nada más.",
+        "meta": {
+          "topic": "pétalo",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre carbón). Nada más.",
+        "meta": {
+          "topic": "carbón",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre linterna). Nada más.",
+        "meta": {
+          "topic": "linterna",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre coral). Nada más.",
+        "meta": {
+          "topic": "coral",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre humedal). Nada más.",
+        "meta": {
+          "topic": "humedal",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre glaciar). Nada más.",
+        "meta": {
+          "topic": "glaciar",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre orquesta). Nada más.",
+        "meta": {
+          "topic": "orquesta",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre píxel). Nada más.",
+        "meta": {
+          "topic": "píxel",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre algoritmo). Nada más.",
+        "meta": {
+          "topic": "algoritmo",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre nebula). Nada más.",
+        "meta": {
+          "topic": "nebula",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre cantera). Nada más.",
+        "meta": {
+          "topic": "cantera",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre timbre). Nada más.",
+        "meta": {
+          "topic": "timbre",
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "spanish": [
+      {
+        "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+        "meta": {
+          "topic": "zebras",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+        "meta": {
+          "topic": "glaciers",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about comets. Answer only in Spanish.",
+        "meta": {
+          "topic": "comets",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about orchids. Answer only in Spanish.",
+        "meta": {
+          "topic": "orchids",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about submarines. Answer only in Spanish.",
+        "meta": {
+          "topic": "submarines",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about lanterns. Answer only in Spanish.",
+        "meta": {
+          "topic": "lanterns",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about canyons. Answer only in Spanish.",
+        "meta": {
+          "topic": "canyons",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about fossils. Answer only in Spanish.",
+        "meta": {
+          "topic": "fossils",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about mosaics. Answer only in Spanish.",
+        "meta": {
+          "topic": "mosaics",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about turbines. Answer only in Spanish.",
+        "meta": {
+          "topic": "turbines",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about orchards. Answer only in Spanish.",
+        "meta": {
+          "topic": "orchards",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about paddocks. Answer only in Spanish.",
+        "meta": {
+          "topic": "paddocks",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about fjords. Answer only in Spanish.",
+        "meta": {
+          "topic": "fjords",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about basalt. Answer only in Spanish.",
+        "meta": {
+          "topic": "basalt",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about ember. Answer only in Spanish.",
+        "meta": {
+          "topic": "ember",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about quill. Answer only in Spanish.",
+        "meta": {
+          "topic": "quill",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about satchel. Answer only in Spanish.",
+        "meta": {
+          "topic": "satchel",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about trellis. Answer only in Spanish.",
+        "meta": {
+          "topic": "trellis",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about harbor. Answer only in Spanish.",
+        "meta": {
+          "topic": "harbor",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write two sentences about meadows. Answer only in Spanish.",
+        "meta": {
+          "topic": "meadows",
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "translate_en": [
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro brilla de noche.",
+        "meta": {
+          "src": "El faro brilla de noche.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula apunta al norte.",
+        "meta": {
+          "src": "La brújula apunta al norte.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl glaciar se derrite lento.",
+        "meta": {
+          "src": "El glaciar se derrite lento.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nCompramos pan fresco hoy.",
+        "meta": {
+          "src": "Compramos pan fresco hoy.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl tren llega puntual.",
+        "meta": {
+          "src": "El tren llega puntual.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nElla lee un mapa antiguo.",
+        "meta": {
+          "src": "Ella lee un mapa antiguo.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nLos corales necesitan agua limpia.",
+        "meta": {
+          "src": "Los corales necesitan agua limpia.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nGuardé la llave en el cajón.",
+        "meta": {
+          "src": "Guardé la llave en el cajón.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl viento mueve las turbinas.",
+        "meta": {
+          "src": "El viento mueve las turbinas.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay niebla en el valle.",
+        "meta": {
+          "src": "Hay niebla en el valle.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl perro espera en la puerta.",
+        "meta": {
+          "src": "El perro espera en la puerta.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nCociné arroz con verduras.",
+        "meta": {
+          "src": "Cociné arroz con verduras.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl museo abre a las nueve.",
+        "meta": {
+          "src": "El museo abre a las nueve.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nPerdí mi sombrero azul.",
+        "meta": {
+          "src": "Perdí mi sombrero azul.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa orquesta ensaya mañana.",
+        "meta": {
+          "src": "La orquesta ensaya mañana.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl puente cruza el río.",
+        "meta": {
+          "src": "El puente cruza el río.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nNecesito una linterna nueva.",
+        "meta": {
+          "src": "Necesito una linterna nueva.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl ancla está oxidada.",
+        "meta": {
+          "src": "El ancla está oxidada.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nSembramos bambú en primavera.",
+        "meta": {
+          "src": "Sembramos bambú en primavera.",
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl pétalo cayó al suelo.",
+        "meta": {
+          "src": "El pétalo cayó al suelo.",
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "arithmetic": [
+      {
+        "prompt": "What is 11+3? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 11+4? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 11+5? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 11+6? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 11+7? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 11+8? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+3? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+4? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+5? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+6? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+7? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 12+8? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+3? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+4? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+5? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+6? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+7? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 13+8? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 14+3? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "What is 14+4? Reply with ONLY the number.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "summarize": [
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita la Tierra y envía datos de clima a estaciones terrestres cada hora.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llenó de agua de lluvia y ahora atrae aves migratorias en otoño.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl algoritmo clasifica imágenes médicas con cuidado y sugiere posibles diagnósticos al médico.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEn el humedal crecen juncos altos donde anidan ranas y libélulas durante la primavera húmeda.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa nebula lejana brilla con colores tenues que los telescopios capturan en noches sin luna.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn reloj de sol antiguo marca las horas en el patio del museo regional del pueblo.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLos buzos documentaron un barco hundido cubierto de coral cerca de la costa rocosa.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa fábrica moderna usa turbinas eólicas para reducir el consumo de electricidad fósil.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl mapa cifrado escondía coordenadas de un depósito de fósiles bajo la colina este.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nNiños plantaron bambú junto al río para frenar la erosión de la orilla arenosa.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa farola solar se enciende sola al anochecer frente a la plaza del mercado.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn compositor escribió una pieza corta para orquesta basada en sonidos de glaciar.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa brújula magnética falló cerca del depósito de hierro y el grupo se reorientó con GPS.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEn la biblioteca digital se indexan manuscritos escaneados de siglos pasados.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl ancla del velero se atascó entre rocas basálticas durante la marea baja.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nCientíficos midieron esporas en el aire tras la tormenta de polvo del desierto.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl puente peatonal nuevo conecta el parque con el barrio de talleres artesanales.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna linterna de mano reveló pinturas rupestres en una cueva estrecha y húmeda.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl tren ligero reduce el tráfico matutino entre el puerto y el centro urbano.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Resume en español en MÁXIMO 12 palabras:\nAgricultores usaron sensores de humedad para regar solo cuando el suelo lo necesita.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "uppercase": [
+      {
+        "prompt": "Reply with the word in ALL CAPS only: quasar",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: bamboo",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: fjord",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: glyph",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: nexus",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: prism",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: quartz",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: raven",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: sable",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: thorn",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: umbra",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: vortex",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: willow",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: xenon",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: yacht",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: zephyr",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: anchor",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: basalt",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: cipher",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Reply with the word in ALL CAPS only: ember",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "sentiment": [
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThis gift made my week",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThe service was horrible",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThe box is wooden",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nI adore this melody",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nEverything tastes rotten",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nA metal spoon rests",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPure joy right now",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPainful delay again",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nStone wall stands there",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nWonderful surprise today",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nNasty rude reply",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPaper sheet is blank",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThrilled with results",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nAwful burning smell",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nGlass jar on shelf",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nHappy reunion tonight",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nTerrible broken promise",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nCotton fabric feels soft",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nDelightful warm bread",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nMiserable cold rain",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "entities": [
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nAda visited Lima in May.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nOmar reached Cairo on June.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nNina left Oslo in March.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nLeo saw Paris in April.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nMia flew Tokyo in July.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nIra met Rome in August.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nKai reached Seoul in September.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nEva visited Berlin in October.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nNoa saw Madrid in November.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nPia left Dublin in December.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nSam reached Boston in January.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nUma visited Quito in February.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nRex saw Denver in May.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nZoe left Miami in June.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nYan reached Austin in July.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nGil visited Boise in August.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nHana saw Tulsa in September.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nIda left Nome in October.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nJon reached Reno in November.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nKim visited Tampa in December.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "bullets": [
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre esporas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre anclas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre turbina. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre glaciares. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre mosaicos. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cañones. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre tréboles. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre píxeles. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre brújulas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre humedales. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre orquestas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre satélites. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre linternas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre fósiles. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre bambúes. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre nébulas. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre canteras. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre timbres. Nada más.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ],
+    "code_python": [
+      {
+        "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `dbl(x)` with body `return x * 2`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `neg(x)` with body `return -x`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `inc(x)` with body `return x + 1`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `dec(x)` with body `return x - 1`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `square(x)` with body `return x * x`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `ident(x)` with body `return x`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `zero()` with body `return 0`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `one()` with body `return 1`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `pair(a, b)` with body `return (a, b)`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `first(xs)` with body `return xs[0]`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `last(xs)` with body `return xs[-1]`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `length(xs)` with body `return len(xs)`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `empty(xs)` with body `return len(xs) == 0`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `absv(x)` with body `return abs(x)`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `maxi(a, b)` with body `return max(a, b)`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `mini(a, b)` with body `return min(a, b)`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `bool_not(x)` with body `return not x`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      },
+      {
+        "prompt": "Write ONLY a Python function `true()` with body `return True`. No prose.",
+        "meta": {
+          "split": "new_holdout"
+        }
+      }
+    ]
+  }
+}

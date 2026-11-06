@@ -1,0 +1,50 @@
+[
+  {
+    "K": 3,
+    "layout": "mid",
+    "layers": [
+      11,
+      12,
+      13
+    ],
+    "kind": "redistribute",
+    "ok_ppl": true,
+    "ppl": 18.338,
+    "val_mean": 0.59,
+    "total_l2": 3.2807,
+    "note": "NOT used for selection; relocation of prior bias direction"
+  },
+  {
+    "K": 6,
+    "layout": "uniform",
+    "layers": [
+      0,
+      5,
+      9,
+      14,
+      18,
+      23
+    ],
+    "kind": "redistribute",
+    "ok_ppl": true,
+    "ppl": 18.549,
+    "val_mean": 0.62,
+    "total_l2": 3.2807,
+    "note": "NOT used for selection; relocation of prior bias direction"
+  },
+  {
+    "K": 3,
+    "layout": "uniform",
+    "layers": [
+      0,
+      12,
+      23
+    ],
+    "kind": "redistribute",
+    "ok_ppl": true,
+    "ppl": 17.071,
+    "val_mean": 0.54,
+    "total_l2": 3.2807,
+    "note": "NOT used for selection; relocation of prior bias direction"
+  }
+]

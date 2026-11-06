@@ -20,3 +20,5 @@ enjambre/artifacts/*/*.pt
 
 !enjambre/artifacts/fusion-0.5b/
 !enjambre/artifacts/fusion-0.5b/**
+!enjambre/artifacts/fusion-sweep-0.5b/
+!enjambre/artifacts/fusion-sweep-0.5b/**

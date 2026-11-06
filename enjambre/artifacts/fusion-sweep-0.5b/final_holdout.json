@@ -1,0 +1,3226 @@
+{
+  "base": {
+    "label": "base",
+    "mean_acc": 0.705,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"Satélite\",\n  \"b\": \"Más información\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"cambio\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Las zebra son animales majestuosos y hermosos que se caracterizan por su pelaje blanco y su forma de",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son desiertos de la Tierra que se forman a lo largo de los años debido a la erosión de",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.25,
+        "n_ok": 5,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lamp shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The compass points north.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y recibe datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "La cantera abandonada se llenó de agua de lluvia y ahora atrae aves migratorias en otoño.",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.6,
+        "n_ok": 12,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.35,
+        "n_ok": 7,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "neutral",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"s\" sobre cometas:\n\n1. \"Sedans de cometas\"",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"s\" sobre faros:\n\n1. \"Sobre faros\"\n2. \"Sob",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 74.74,
+    "total_l2": 0.0
+  },
+  "prior_fusion": {
+    "label": "prior_fusion",
+    "mean_acc": 0.735,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"Satellite\",\n  \"b\": \"Satellite\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"casa\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Los zebra son animales majestuosos y silenciosos.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son áreas de montaña donde los glaciers se acumulan y se desvanecen.",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.2,
+        "n_ok": 4,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern glows at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The starboard compass points north.",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.8,
+        "n_ok": 16,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos de clima a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "La cantera abandonada se llenó de agua de lluvia y ahora atrae aves migratorias en otoño.",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.7,
+        "n_ok": 14,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.8,
+        "n_ok": 16,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.05,
+        "n_ok": 1,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Based on the instruction provided, I need to find three exact matches for the keywords \"cometas\" tha",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Based on the instruction provided, I need to find three exact matches for the phrase \"faros\" that st",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 100.79,
+    "total_l2": 3.2807,
+    "layers": [
+      6,
+      8,
+      10
+    ],
+    "scale_mult_meta": {
+      "mode": "multi_avg",
+      "global_scale": 1.0,
+      "layers": [
+        6,
+        8,
+        10
+      ],
+      "note": "biases applied on original layers"
+    }
+  },
+  "bestK1": {
+    "label": "bestK1",
+    "mean_acc": 0.755,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"Satélite\",\n  \"b\": \"Satélite\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"cambio de estado\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Las zebra son animales majestuosos y hermosos.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son desiertos de agua que se forman en el suelo bajo la superficie de la tierra.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.25,
+        "n_ok": 5,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lamp shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The compass points north.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y recibe datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera inundada de lluvia atrae aves en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.65,
+        "n_ok": 13,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.75,
+        "n_ok": 15,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Cometario\"\n2. \"Cometario\"\n3. \"Co",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Caminando hacia el -\"\n\n2. \"Camin",
+            "ok": false
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.233,
+        "delta_active": "dir_K1_mid_L12_s0.5"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 64.97,
+    "total_l2": 1.6404,
+    "layers": [
+      12
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        12
+      ],
+      "K": 1,
+      "B": 1.6403514969411686,
+      "scale_per_layer": 1.6403514969411686,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK2": {
+    "label": "bestK2",
+    "mean_acc": 0.685,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.7,
+        "n_ok": 14,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"satellite\": \"a\",\n  \"object\": \"b\"\n}\n```",
+            "ok": false
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"a\",\n  \"b\": \"b\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Zebra es una especie de zebra de la familia Equidae, que se caracteriza por su color blanco y su for",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciers son áreas de montaña donde los suelos se evaporan y se evaporan, lo que produce una gra",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.15,
+        "n_ok": 3,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The faro shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The northern star indicates the direction.",
+            "ok": false
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.75,
+        "n_ok": 15,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "La cantera se llenó de agua de lluvia y ahora atrae aves migratorias en otoño.",
+            "ok": false
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.55,
+        "n_ok": 11,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Aqui está uma lista de três viñetas que começam com a letra 's' sobre 'cometas':\n\n1. \"Sobre a Cometa",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Aqui está a lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros:\n\n1. \"Faros, a ciudad de l",
+            "ok": false
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.641,
+        "delta_active": "dir_K2_uniform_L0-23_s1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 98.62,
+    "total_l2": 3.2807,
+    "layers": [
+      0,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        23
+      ],
+      "K": 2,
+      "B": 3.280702993882337,
+      "scale_per_layer": 2.319807334033209,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK3": {
+    "label": "bestK3",
+    "mean_acc": 0.755,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satélite\",\n  \"b\": \"satélite\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"cuerpo\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Las zambas son animales majestuosos y son conocidos por su belleza y color de piel.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son desiertos que se forman a lo largo de la Tierra debido a la erosión de la superfic",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.2,
+        "n_ok": 4,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The star pointer points north.",
+            "ok": false
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera inundada por lluvia atrapa aves migratorias en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.7,
+        "n_ok": 14,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.8,
+        "n_ok": 16,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "neutral",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Claro, aqui estão três viñetas que começam com a letra \"-\":\n\n1. \"Cometas\"\n2. \"Cometas\"\n3. \"Cometas\"",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aqui estão três viñetas que começam com a letra \"-\":\n\n1. \"Aqui está uma viñeta que começa com",
+            "ok": false
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.65,
+        "delta_active": "dir_K3_uniform_L0-12-23_s0.5"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 74.12,
+    "total_l2": 1.6404,
+    "layers": [
+      0,
+      12,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        12,
+        23
+      ],
+      "K": 3,
+      "B": 1.6403514969411686,
+      "scale_per_layer": 0.9470573783245892,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK4": {
+    "label": "bestK4",
+    "mean_acc": 0.71,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satélite\",\n  \"b\": \"soleo\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"c\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Los zebra son animales majestuosos y hermosos.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son áreas de montaña donde los glaciares se forman, creando una cadena de glaciares qu",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.15,
+        "n_ok": 3,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The northern star points to the north.",
+            "ok": false
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.85,
+        "n_ok": 17,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "La cantera se llenó de lluvia y ahora atrae aves migratorias en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.55,
+        "n_ok": 11,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Aqui está uma lista de três viñetas que começam com a letra '- sobre cometas':\n\n1. '- cometas'\n2. '-",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Aqui está uma lista de três viñetas que começam com a letra '- sobre faros':\n\n1. \"O faro é um instru",
+            "ok": false
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 0.8,
+        "n_ok": 16,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 93.79,
+    "total_l2": 3.2807,
+    "layers": [
+      0,
+      8,
+      15,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        8,
+        15,
+        23
+      ],
+      "K": 4,
+      "B": 3.280702993882337,
+      "scale_per_layer": 1.6403514969411686,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK6": {
+    "label": "bestK6",
+    "mean_acc": 0.74,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satélite\",\n  \"b\": \"satélite\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"c\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Los zebra son animales majestuosos y hermosos que se caracterizan por su pelaje blanco y su forma de",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son áreas de montaña donde los glaciers se acumulan y se desvanecen.",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.2,
+        "n_ok": 4,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The flag shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The northern star points to the north.",
+            "ok": false
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera lluviosa deja agua atrayente aves en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.6,
+        "n_ok": 12,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.05,
+        "n_ok": 1,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Aqui está a lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas:\n\n1. \n2. \n3.",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Como assistente de inteligência artificial, não posso acessar ou listar diretamente imagens ou viñet",
+            "ok": false
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 18.274,
+        "delta_active": "dir_K6_uniform_L0-5-9-14-18-23_s1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 66.52,
+    "total_l2": 3.2807,
+    "layers": [
+      0,
+      5,
+      9,
+      14,
+      18,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "K": 6,
+      "B": 3.280702993882337,
+      "scale_per_layer": 1.3393413887721415,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK8": {
+    "label": "bestK8",
+    "mean_acc": 0.765,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satelite\",\n  \"b\": \"comet\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"cruel\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Zebra es una especie de perro de peluche que tiene un cuerpo largo y curvo, con ojos grandes y un na",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Glaciers son estructuras montañosas que se forman a lo largo de longos períodos de tiempo, formando ",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.3,
+        "n_ok": 6,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The compass points north.",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Satélites meteorológicos orbitan Tierra y transmiten datos climáticos a estaciones terrestres.",
+            "ok": true
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera se llenó de lluvia, migrantes atraen.",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.5,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "neutral",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Não tenho informações específicas sobre viñetas que começam com '- ' sobre cometas. Não tenho dados ",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aqui está uma lista de 3 viñetas que empiecem com a letra '-':\n\n1. \n2. \n3.",
+            "ok": false
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 20.184,
+        "delta_active": "dir_K8_late_L16-17-18-19-20-21-22-23_s1.5"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 94.87,
+    "total_l2": 4.9211,
+    "layers": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "K": 8,
+      "B": 4.921054490823506,
+      "scale_per_layer": 1.7398555005249068,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK12": {
+    "label": "bestK12",
+    "mean_acc": 0.77,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satélite\",\n  \"b\": \"comet\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"cambio\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Las zebra son animales majestuosos y silvestres que se caracterizan por su pelaje blanco y su forma ",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son desiertos de agua que se forman a lo largo de las montañas debido a la sequía y la",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.25,
+        "n_ok": 5,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lamp shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The compass points north.",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y recibe datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera inundada de lluvia atrae aves en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.7,
+        "n_ok": 14,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.85,
+        "n_ok": 17,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "neutral",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Cometario\"\n2. \"Cometario\"\n3. \"Co",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+            "ok": false
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.185,
+        "delta_active": "dir_K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 65.76,
+    "total_l2": 1.6404,
+    "layers": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "K": 12,
+      "B": 1.6403514969411686,
+      "scale_per_layer": 0.4735286891622946,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "bestK24": {
+    "label": "bestK24",
+    "mean_acc": 0.75,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satelite\",\n  \"b\": \"satelite\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"c\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Los zebra son animales majestuosos y silenciosos.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son áreas de montaña donde los glaciers se acumulan y se desvanecen.",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.25,
+        "n_ok": 5,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern glows at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The compass points north.",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Satellite artificial orbits Earth, sends climate data to ground stations hourly.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "Cantera inundada de lluvia atrapa aves migratorias en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.55,
+        "n_ok": 11,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "neutral",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Como assistente de IA, no tengo la capacidad de ver o analizar imágenes. Sin embargo, puedo proporci",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Claro, aqui está a lista de 3 viñetas que empiecen con '- ' sobre faros:\n\n1. \n2. \n3.",
+            "ok": false
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 17.303,
+        "delta_active": "dir_K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 90.15,
+    "total_l2": 1.6404,
+    "layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "K": 24,
+      "B": 1.6403514969411686,
+      "scale_per_layer": 0.33483534719303537,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "selected": {
+    "label": "selected",
+    "mean_acc": 0.71,
+    "tasks": [
+      {
+        "task": "json",
+        "n": 20,
+        "acc": 0.95,
+        "n_ok": 19,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"satélite\",\n  \"b\": \"soleo\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"quimera\",\n  \"b\": \"c\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "spanish",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Write two sentences about zebras. Answer only in Spanish.",
+            "out": "Los zebra son animales majestuosos y hermosos.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about glaciers. Answer only in Spanish.",
+            "out": "Las glaciares son áreas de montaña donde los glaciares se forman, creando una cadena de glaciares qu",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "translate_en",
+        "n": 20,
+        "acc": 0.15,
+        "n_ok": 3,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl faro br",
+            "out": "The lantern shines at night.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa brújula",
+            "out": "The northern star points to the north.",
+            "ok": false
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "arithmetic",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "What is 11+3? Reply with ONLY the number.",
+            "out": "14",
+            "ok": true
+          },
+          {
+            "prompt": "What is 11+4? Reply with ONLY the number.",
+            "out": "15",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "summarize",
+        "n": 20,
+        "acc": 0.85,
+        "n_ok": 17,
+        "samples": [
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn satélite artificial orbita",
+            "out": "Un satélite artificial orbita la Tierra y envía datos climáticos a estaciones terrestres cada hora.",
+            "ok": false
+          },
+          {
+            "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cantera abandonada se llen",
+            "out": "La cantera se llenó de lluvia y ahora atrae aves migratorias en otoño.",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "uppercase",
+        "n": 20,
+        "acc": 0.55,
+        "n_ok": 11,
+        "samples": [
+          {
+            "prompt": "Reply with the word in ALL CAPS only: quasar",
+            "out": "QUASAR",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with the word in ALL CAPS only: bamboo",
+            "out": "BAMBOO",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "sentiment",
+        "n": 20,
+        "acc": 0.9,
+        "n_ok": 18,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with ",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "entities",
+        "n": 20,
+        "acc": 1.0,
+        "n_ok": 20,
+        "samples": [
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Ada\",\n  \"place\": \"Lima\",\n  \"date\": \"May\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" ",
+            "out": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Cairo\",\n  \"date\": \"June\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "bullets",
+        "n": 20,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cometas. Nada ",
+            "out": "Aqui está uma lista de três viñetas que começam com a letra '- sobre cometas':\n\n1. '- cometas'\n2. '-",
+            "ok": false
+          },
+          {
+            "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre faros. Nada má",
+            "out": "Aqui está uma lista de três viñetas que começam com a letra '- sobre faros':\n\n1. \"O faro é um instru",
+            "ok": false
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      },
+      {
+        "task": "code_python",
+        "n": 20,
+        "acc": 0.8,
+        "n_ok": 16,
+        "samples": [
+          {
+            "prompt": "Write ONLY a Python function `add(a, b)` with body `return a + b`. No ",
+            "out": "```python\ndef add(a, b):\n    return a + b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write ONLY a Python function `sub(a, b)` with body `return a - b`. No ",
+            "out": "```python\ndef sub(a, b):\n    return a - b\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 21.953,
+        "delta_active": "dir_K4_uniform_L0-8-15-23_s1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "n_per_task": 20,
+    "secs": 66.86,
+    "total_l2": 3.2807,
+    "layers": [
+      0,
+      8,
+      15,
+      23
+    ],
+    "scale_mult_meta": {
+      "kind": "per_layer_direction_mean",
+      "layers": [
+        0,
+        8,
+        15,
+        23
+      ],
+      "K": 4,
+      "B": 3.280702993882337,
+      "scale_per_layer": 1.6403514969411686,
+      "budget": "equal_L2_per_layer_sum_sq_equals_B2"
+    }
+  },
+  "_paired_vs_base": {
+    "prior_fusion": {
+      "n_gain": 3,
+      "n_loss": 5,
+      "n_flat": 2,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.2,
+          "delta": -0.05
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.8,
+          "delta": -0.1
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.7,
+          "delta": 0.1
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.8,
+          "delta": 0.45
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.05,
+          "delta": 0.05
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "bestK1": {
+      "n_gain": 3,
+      "n_loss": 0,
+      "n_flat": 7,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.25,
+          "delta": 0.0
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.95,
+          "delta": 0.0
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.95,
+          "delta": 0.05
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.65,
+          "delta": 0.05
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.75,
+          "delta": 0.4
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "bestK2": {
+      "n_gain": 1,
+      "n_loss": 6,
+      "n_flat": 3,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.7,
+          "delta": -0.3
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.15,
+          "delta": -0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.75,
+          "delta": -0.15
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.55,
+          "delta": -0.05
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 0.9,
+          "delta": -0.1
+        }
+      ]
+    },
+    "bestK3": {
+      "n_gain": 2,
+      "n_loss": 1,
+      "n_flat": 7,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.2,
+          "delta": -0.05
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.95,
+          "delta": 0.0
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.9,
+          "delta": 0.0
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.7,
+          "delta": 0.1
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.8,
+          "delta": 0.45
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "bestK4": {
+      "n_gain": 1,
+      "n_loss": 6,
+      "n_flat": 3,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.15,
+          "delta": -0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.85,
+          "delta": -0.05
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.55,
+          "delta": -0.05
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 0.8,
+          "delta": -0.2
+        }
+      ]
+    },
+    "bestK6": {
+      "n_gain": 2,
+      "n_loss": 4,
+      "n_flat": 4,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.2,
+          "delta": -0.05
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.9,
+          "delta": 0.0
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.6,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.05,
+          "delta": 0.05
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 0.9,
+          "delta": -0.1
+        }
+      ]
+    },
+    "bestK8": {
+      "n_gain": 4,
+      "n_loss": 2,
+      "n_flat": 4,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.3,
+          "delta": 0.05
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 1.0,
+          "delta": 0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.5,
+          "delta": -0.1
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "bestK12": {
+      "n_gain": 3,
+      "n_loss": 0,
+      "n_flat": 7,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.25,
+          "delta": 0.0
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.95,
+          "delta": 0.0
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.95,
+          "delta": 0.05
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.7,
+          "delta": 0.1
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.85,
+          "delta": 0.5
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "bestK24": {
+      "n_gain": 2,
+      "n_loss": 3,
+      "n_flat": 5,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.25,
+          "delta": 0.0
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.95,
+          "delta": 0.05
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.55,
+          "delta": -0.05
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        }
+      ]
+    },
+    "selected": {
+      "n_gain": 1,
+      "n_loss": 6,
+      "n_flat": 3,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 0.95,
+          "delta": -0.05
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.25,
+          "other": 0.15,
+          "delta": -0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.95,
+          "other": 0.9,
+          "delta": -0.05
+        },
+        {
+          "task": "summarize",
+          "base": 0.9,
+          "other": 0.85,
+          "delta": -0.05
+        },
+        {
+          "task": "uppercase",
+          "base": 0.6,
+          "other": 0.55,
+          "delta": -0.05
+        },
+        {
+          "task": "sentiment",
+          "base": 0.35,
+          "other": 0.9,
+          "delta": 0.55
+        },
+        {
+          "task": "entities",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 1.0,
+          "other": 0.8,
+          "delta": -0.2
+        }
+      ]
+    }
+  }
+}

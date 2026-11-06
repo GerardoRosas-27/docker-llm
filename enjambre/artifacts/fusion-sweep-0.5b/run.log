@@ -1,0 +1,846 @@
+[sweep] nL=24 hidden=896 base_ppl=15.911 B=3.2807
+[dir] json shape=(25, 896)
+[dir] spanish shape=(25, 896)
+[dir] translate_en shape=(25, 896)
+[dir] arithmetic shape=(25, 896)
+[dir] summarize shape=(25, 896)
+[dir] uppercase shape=(25, 896)
+[dir] sentiment shape=(25, 896)
+[dir] entities shape=(25, 896)
+[dir] bullets shape=(25, 896)
+[dir] code_python shape=(25, 896)
+[dir] loaded cache /workspace/docker-llm/enjambre/artifacts/fusion-sweep-0.5b/directions.pt n=10
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[coarse] K1_early_L0 tune=0.5833 ppl=21.08 l2=3.2807
+[coarse] K1_mid_L12 tune=0.6167 ppl=15.36 l2=3.2807
+[coarse] K1_late_L23 tune=0.6 ppl=15.92 l2=3.2807
+[coarse] K1_uniform_L12 tune=0.6167 ppl=15.36 l2=3.2807
+[coarse] K2_early_L0-1 tune=0.5667 ppl=23.75 l2=3.2807
+[coarse] K2_mid_L11-12 tune=0.6333 ppl=22.02 l2=3.2807
+[coarse] K2_late_L22-23 tune=0.6 ppl=16.28 l2=3.2807
+[coarse] K2_uniform_L0-23 tune=0.6667 ppl=18.64 l2=3.2807
+[coarse] K3_early_L0-1-2 tune=0.45 ppl=19.83 l2=3.2807
+[coarse] REJECT K3_mid_L11-12-13 ppl=24.15
+[coarse] K3_late_L21-22-23 tune=0.5833 ppl=16.52 l2=3.2807
+[coarse] K3_uniform_L0-12-23 tune=0.6333 ppl=17.42 l2=3.2807
+[coarse] K4_early_L0-1-2-3 tune=0.4 ppl=19.90 l2=3.2807
+[coarse] REJECT K4_mid_L10-11-12-13 ppl=24.62
+[coarse] K4_late_L20-21-22-23 tune=0.6167 ppl=16.62 l2=3.2807
+[coarse] K4_uniform_L0-8-15-23 tune=0.75 ppl=21.95 l2=3.2807
+[coarse] K6_early_L0-1-2-3-4-5 tune=0.35 ppl=17.08 l2=3.2807
+[coarse] REJECT K6_mid_L9-10-11-12-13-14 ppl=24.00
+[coarse] K6_late_L18-19-20-21-22-23 tune=0.6333 ppl=17.01 l2=3.2807
+[coarse] K6_uniform_L0-5-9-14-18-23 tune=0.7 ppl=18.27 l2=3.2807
+[coarse] K8_early_L0-1-2-3-4-5-6-7 tune=0.3833 ppl=17.33 l2=3.2807
+[coarse] K8_mid_L8-9-10-11-12-13-14-15 tune=0.65 ppl=22.71 l2=3.2807
+[coarse] K8_late_L16-17-18-19-20-21-22-23 tune=0.7 ppl=18.01 l2=3.2807
+[coarse] K8_uniform_L0-3-7-10-13-16-20-23 tune=0.7 ppl=18.55 l2=3.2807
+[coarse] K12_early_L0-1-2-3-4-5-6-7-8-9-10-11 tune=0.45 ppl=17.03 l2=3.2807
+[coarse] K12_mid_L6-7-8-9-10-11-12-13-14-15-16-17 tune=0.6167 ppl=21.99 l2=3.2807
+[coarse] K12_late_L12-13-14-15-16-17-18-19-20-21-22-23 tune=0.65 ppl=20.19 l2=3.2807
+[coarse] K12_uniform_L0-2-4-6-8-10-13-15-17-19-21-23 tune=0.6333 ppl=21.39 l2=3.2807
+[coarse] K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23 tune=0.55 ppl=18.72 l2=3.2807
+[coarse] K24_mid_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23 tune=0.55 ppl=18.72 l2=3.2807
+[coarse] K24_late_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23 tune=0.55 ppl=18.72 l2=3.2807
+[coarse] K24_uniform_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23 tune=0.55 ppl=18.72 l2=3.2807
+[base-val] base mean=0.54
+[base-val] prior_fusion mean=0.69
+[dir] loaded cache /workspace/docker-llm/enjambre/artifacts/fusion-sweep-0.5b/directions.pt n=10
+[dir] loaded cache /workspace/docker-llm/enjambre/artifacts/fusion-sweep-0.5b/directions.pt n=10
+[val] K1_mid_L12_s0.5 val=0.65 ppl=15.23
+[val] K1_mid_L12_s1.0 val=0.57 ppl=15.36
+[val] K1_mid_L12_s1.5 val=0.52 ppl=16.30
+[val] K2_uniform_L0-23_s0.5 val=0.56 ppl=16.39
+[val] K2_uniform_L0-23_s1.0 val=0.58 ppl=18.64
+[val] K2_uniform_L0-23_s1.5 val=0.5 ppl=22.46
+[val] K3_uniform_L0-12-23_s0.5 val=0.63 ppl=15.65
+[val] K3_uniform_L0-12-23_s1.0 val=0.58 ppl=17.42
+[val] K3_uniform_L0-12-23_s1.5 val=0.58 ppl=20.03
+[val] K4_uniform_L0-8-15-23_s0.5 val=0.57 ppl=16.98
+[val] K4_uniform_L0-8-15-23_s1.0 val=0.7 ppl=21.95
+[val] K6_uniform_L0-5-9-14-18-23_s0.5 val=0.65 ppl=16.45
+[val] K6_uniform_L0-5-9-14-18-23_s1.0 val=0.69 ppl=18.27
+[val] K6_uniform_L0-5-9-14-18-23_s1.5 val=0.67 ppl=21.24
+[val] K8_late_L16-17-18-19-20-21-22-23_s0.5 val=0.56 ppl=16.63
+[val] K8_late_L16-17-18-19-20-21-22-23_s1.0 val=0.59 ppl=18.01
+[val] K8_late_L16-17-18-19-20-21-22-23_s1.5 val=0.63 ppl=20.18
+[val] K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s0.5 val=0.65 ppl=17.18
+[val] K12_late_L12-13-14-15-16-17-18-19-20-21-22-23_s1.0 val=0.6 ppl=20.19
+[val] K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s0.5 val=0.69 ppl=17.30
+[val] K24_early_L0-1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20-21-22-23_s1.0 val=0.49 ppl=18.72
+[redist] K=3 mid val=0.59
+[redist] K=6 uniform val=0.62
+[redist] K=3 uniform val=0.54
+[dir] loaded cache /workspace/docker-llm/enjambre/artifacts/fusion-sweep-0.5b/directions.pt n=10
+[final] base mean=0.705 n/task=20
+[final] prior_fusion mean=0.735 n/task=20
+[final] bestK1 mean=0.755 n/task=20
+[final] bestK2 mean=0.685 n/task=20
+[final] bestK3 mean=0.755 n/task=20
+[final] bestK4 mean=0.71 n/task=20
+[final] bestK6 mean=0.74 n/task=20
+[final] bestK8 mean=0.765 n/task=20
+[final] bestK12 mean=0.77 n/task=20
+[final] bestK24 mean=0.75 n/task=20
+[final] selected mean=0.71 n/task=20
+{
+  "model": "qwen2.5-0.5b",
+  "hf_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "nL": 24,
+  "hidden": 896,
+  "B_from_prior": 3.280702993882337,
+  "base_ppl": 15.911303399287734,
+  "ppl_guard": 1.5,
+  "max_new": 64,
+  "holdout_n": 20,
+  "seed": 0,
+  "scope": "Distribuye CAMBIOS en bloques EXISTENTES; no añade bloques entrenados.",
+  "direction_kind": "per_layer_direction_mean (contraste tune system vs no-system)",
+  "selection_split": "tune (coarse) + fusion_val=primera mitad eval histórica; final=holdout NUEVO",
+  "selected_by_val": {
+    "K": 4,
+    "layout": "uniform",
+    "layers": [
+      0,
+      8,
+      15,
+      23
+    ],
+    "scale_mult": 1.0,
+    "val_mean": 0.7,
+    "total_l2": 3.2807,
+    "ppl": 21.953
+  },
+  "baselines_val": {
+    "base": 0.54,
+    "prior_fusion": 0.69,
+    "single_mid_dir": 0.57
+  },
+  "final_means": {
+    "base": 0.705,
+    "prior_fusion": 0.735,
+    "bestK1": 0.755,
+    "bestK2": 0.685,
+    "bestK3": 0.755,
+    "bestK4": 0.71,
+    "bestK6": 0.74,
+    "bestK8": 0.765,
+    "bestK12": 0.77,
+    "bestK24": 0.75,
+    "selected": 0.71
+  },
+  "curve_by_K": {
+    "1": {
+      "K": 1,
+      "layout": "mid",
+      "layers": [
+        12
+      ],
+      "scale_mult": 0.5,
+      "val_mean": 0.65,
+      "val_ppl": 15.233,
+      "total_l2": 1.6404,
+      "final_mean": 0.755,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.25,
+          "n": 20,
+          "n_ok": 5
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "summarize",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.65,
+          "n": 20,
+          "n_ok": 13
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.75,
+          "n": 20,
+          "n_ok": 15
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        }
+      ]
+    },
+    "2": {
+      "K": 2,
+      "layout": "uniform",
+      "layers": [
+        0,
+        23
+      ],
+      "scale_mult": 1.0,
+      "val_mean": 0.58,
+      "val_ppl": 18.641,
+      "total_l2": 3.2807,
+      "final_mean": 0.685,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 0.7,
+          "n": 20,
+          "n_ok": 14
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.15,
+          "n": 20,
+          "n_ok": 3
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "summarize",
+          "acc": 0.75,
+          "n": 20,
+          "n_ok": 15
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.55,
+          "n": 20,
+          "n_ok": 11
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        }
+      ]
+    },
+    "3": {
+      "K": 3,
+      "layout": "uniform",
+      "layers": [
+        0,
+        12,
+        23
+      ],
+      "scale_mult": 0.5,
+      "val_mean": 0.63,
+      "val_ppl": 15.65,
+      "total_l2": 1.6404,
+      "final_mean": 0.755,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.2,
+          "n": 20,
+          "n_ok": 4
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "summarize",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.7,
+          "n": 20,
+          "n_ok": 14
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.8,
+          "n": 20,
+          "n_ok": 16
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        }
+      ]
+    },
+    "4": {
+      "K": 4,
+      "layout": "uniform",
+      "layers": [
+        0,
+        8,
+        15,
+        23
+      ],
+      "scale_mult": 1.0,
+      "val_mean": 0.7,
+      "val_ppl": 21.953,
+      "total_l2": 3.2807,
+      "final_mean": 0.71,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.15,
+          "n": 20,
+          "n_ok": 3
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "summarize",
+          "acc": 0.85,
+          "n": 20,
+          "n_ok": 17
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.55,
+          "n": 20,
+          "n_ok": 11
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 0.8,
+          "n": 20,
+          "n_ok": 16
+        }
+      ]
+    },
+    "6": {
+      "K": 6,
+      "layout": "uniform",
+      "layers": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "scale_mult": 1.0,
+      "val_mean": 0.69,
+      "val_ppl": 18.274,
+      "total_l2": 3.2807,
+      "final_mean": 0.74,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.2,
+          "n": 20,
+          "n_ok": 4
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "summarize",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.6,
+          "n": 20,
+          "n_ok": 12
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.05,
+          "n": 20,
+          "n_ok": 1
+        },
+        {
+          "task": "code_python",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        }
+      ]
+    },
+    "8": {
+      "K": 8,
+      "layout": "late",
+      "layers": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "scale_mult": 1.5,
+      "val_mean": 0.63,
+      "val_ppl": 20.184,
+      "total_l2": 4.9211,
+      "final_mean": 0.765,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "spanish",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.3,
+          "n": 20,
+          "n_ok": 6
+        },
+        {
+          "task": "arithmetic",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "summarize",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.5,
+          "n": 20,
+          "n_ok": 10
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        }
+      ]
+    },
+    "12": {
+      "K": 12,
+      "layout": "late",
+      "layers": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "scale_mult": 0.5,
+      "val_mean": 0.65,
+      "val_ppl": 17.185,
+      "total_l2": 1.6404,
+      "final_mean": 0.77,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.25,
+          "n": 20,
+          "n_ok": 5
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "summarize",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.7,
+          "n": 20,
+          "n_ok": 14
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.85,
+          "n": 20,
+          "n_ok": 17
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        }
+      ]
+    },
+    "24": {
+      "K": 24,
+      "layout": "early",
+      "layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "scale_mult": 0.5,
+      "val_mean": 0.69,
+      "val_ppl": 17.303,
+      "total_l2": 1.6404,
+      "final_mean": 0.75,
+      "final_n_per_task": 20,
+      "final_tasks": [
+        {
+          "task": "json",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "spanish",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "translate_en",
+          "acc": 0.25,
+          "n": 20,
+          "n_ok": 5
+        },
+        {
+          "task": "arithmetic",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "summarize",
+          "acc": 0.95,
+          "n": 20,
+          "n_ok": 19
+        },
+        {
+          "task": "uppercase",
+          "acc": 0.55,
+          "n": 20,
+          "n_ok": 11
+        },
+        {
+          "task": "sentiment",
+          "acc": 0.9,
+          "n": 20,
+          "n_ok": 18
+        },
+        {
+          "task": "entities",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        },
+        {
+          "task": "bullets",
+          "acc": 0.0,
+          "n": 20,
+          "n_ok": 0
+        },
+        {
+          "task": "code_python",
+          "acc": 1.0,
+          "n": 20,
+          "n_ok": 20
+        }
+      ]
+    }
+  },
+  "redistribute_ablation_val": [
+    {
+      "K": 3,
+      "layout": "mid",
+      "layers": [
+        11,
+        12,
+        13
+      ],
+      "kind": "redistribute",
+      "ok_ppl": true,
+      "ppl": 18.338,
+      "val_mean": 0.59,
+      "total_l2": 3.2807,
+      "note": "NOT used for selection; relocation of prior bias direction"
+    },
+    {
+      "K": 6,
+      "layout": "uniform",
+      "layers": [
+        0,
+        5,
+        9,
+        14,
+        18,
+        23
+      ],
+      "kind": "redistribute",
+      "ok_ppl": true,
+      "ppl": 18.549,
+      "val_mean": 0.62,
+      "total_l2": 3.2807,
+      "note": "NOT used for selection; relocation of prior bias direction"
+    },
+    {
+      "K": 3,
+      "layout": "uniform",
+      "layers": [
+        0,
+        12,
+        23
+      ],
+      "kind": "redistribute",
+      "ok_ppl": true,
+      "ppl": 17.071,
+      "val_mean": 0.54,
+      "total_l2": 3.2807,
+      "note": "NOT used for selection; relocation of prior bias direction"
+    }
+  ],
+  "n_coarse": 32,
+  "n_rejected_ppl": 3,
+  "secs_total": 3411.0,
+  "rss_mb": 2399.3,
+  "limits": [
+    "Cobertura acotada a 10 tareas sintéticas; no inteligencia general.",
+    "Templates nuevos en holdout pero dominio similar → no fingir independencia total.",
+    "Más capas no implica mejor; presupuesto L2 comparable entre K.",
+    "Confirm histórico de fusión previa NO se reutiliza como holdout independiente."
+  ]
+}

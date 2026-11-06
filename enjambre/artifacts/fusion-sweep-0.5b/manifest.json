@@ -1,0 +1,23 @@
+{
+  "model": "qwen2.5-0.5b",
+  "hf_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "B": 3.280702993882337,
+  "prior": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b/fused_selected.pt",
+  "out_dir": "/workspace/docker-llm/enjambre/artifacts/fusion-sweep-0.5b",
+  "holdout_prompt_sha": "c1b28d6013872ce2f1cea0f0ddaf6bb6d8eba058a0ffa78d20eaabfdfca9300c",
+  "selected": {
+    "K": 4,
+    "layout": "uniform",
+    "layers": [
+      0,
+      8,
+      15,
+      23
+    ],
+    "scale_mult": 1.0,
+    "val_mean": 0.7,
+    "total_l2": 3.2807,
+    "ppl": 21.953
+  },
+  "git_branch_target": "exp/fusion-barrido-capas-0.5b"
+}

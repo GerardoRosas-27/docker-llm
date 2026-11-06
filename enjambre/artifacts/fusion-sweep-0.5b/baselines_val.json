@@ -1,0 +1,665 @@
+{
+  "base": {
+    "split": "val",
+    "mean_acc": 0.54,
+    "tasks": [
+      {
+        "task": "json",
+        "split": "val",
+        "n": 10,
+        "acc": 0.6,
+        "n_ok": 6,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"El libro es un fascinante y intrigante cuentos de historia que me cautiva constant",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"La selección argentina de fútbol ha sido una de las mejores del mundo en la Copa A",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "spanish",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Write two sentences about theater. Answer only in Spanish.",
+            "out": "La teatro es un medio de expresión visual y escénico que permite expresar ideas, emociones y experie",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about flowers. Answer only in Spanish.",
+            "out": "Las flores son una parte fundamental de la naturaleza y de la vida.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "translate_en",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nB",
+            "out": "Good morning, professor.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nE",
+            "out": "The train arrives at five.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "arithmetic",
+        "split": "val",
+        "n": 10,
+        "acc": 0.9,
+        "n_ok": 9,
+        "samples": [
+          {
+            "prompt": "What is 8 + 9? Reply with ONLY the number.",
+            "out": "17",
+            "ok": true
+          },
+          {
+            "prompt": "What is 4 * 8? Reply with ONLY the number.",
+            "out": "32",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "summarize",
+        "split": "val",
+        "n": 10,
+        "acc": 0.3,
+        "n_ok": 3,
+        "samples": [
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fú",
+            "out": "El fútbol es un deporte de equipo con once jugadores.",
+            "ok": true
+          },
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas a",
+            "out": "Las abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "uppercase",
+        "split": "val",
+        "n": 10,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Describe los libros en una o dos frases. Escribe TODA la respuesta en ",
+            "out": "LIBROS:\n\n1. \"El Libro de los Anillos\" de J.R.R. Tolkien\n2. \"El Libro de los Cielos\" de C.S. Lewis\n3.",
+            "ok": false
+          },
+          {
+            "prompt": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en M",
+            "out": "Fútbol es una de las modalidades más populares de la liga de fútbol profesional en el mundo. Es un d",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "sentiment",
+        "split": "val",
+        "n": 10,
+        "acc": 0.6,
+        "n_ok": 6,
+        "samples": [
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "neutral",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "entities",
+        "split": "val",
+        "n": 10,
+        "acc": 0.2,
+        "n_ok": 2,
+        "samples": [
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "```json\n{\n  \"person\": \"Pedro\",\n  \"place\": \"Lisbon\",\n  \"date\": \"2022-04-01\"\n}\n```",
+            "ok": false
+          },
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "```json\n{\n  \"person\": \"Nora\",\n  \"place\": \"Boston\",\n  \"date\": \"2017-09-20\"\n}\n```",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "bullets",
+        "split": "val",
+        "n": 10,
+        "acc": 0.2,
+        "n_ok": 2,
+        "samples": [
+          {
+            "prompt": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiec",
+            "out": "- Un libro es una obra de arte que nos muestra una historia, una realidad, una idea o una idea de ot",
+            "ok": false
+          },
+          {
+            "prompt": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiece",
+            "out": "- Fútbol es un deporte que combina habilidades de juego, técnica y mentalidad. \n- En el fútbol, los ",
+            "ok": true
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      },
+      {
+        "task": "code_python",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Write a Python function `mul(a, b)` that returns the product. Only cod",
+            "out": "```python\ndef mul(a, b):\n    \"\"\"\n    Multiply two numbers a and b.\n\n    Parameters:\n    a (int): The",
+            "ok": true
+          },
+          {
+            "prompt": "Write Python code to check if a string is a palindrome. Only code.",
+            "out": "Certainly! Below is a Python code snippet that checks if a given string is a palindrome. A palindrom",
+            "ok": false
+          }
+        ],
+        "ppl": 15.911,
+        "delta_active": null
+      }
+    ],
+    "n_tasks": 10,
+    "secs": 63.51,
+    "total_l2": 0.0
+  },
+  "prior_fusion": {
+    "split": "val",
+    "mean_acc": 0.69,
+    "tasks": [
+      {
+        "task": "json",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"The Great Gatsby\",\n  \"b\": \"The Catcher in the Rye\"\n}\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "```json\n{\n  \"a\": \"Manchester United\",\n  \"b\": \"Manchester City\"\n}\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "spanish",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Write two sentences about theater. Answer only in Spanish.",
+            "out": "La teatro es un medio de expresión visual que permite transmitir ideas y emociones.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about flowers. Answer only in Spanish.",
+            "out": "Las flores son un refugio para los animales y son una parte importante de la naturaleza.",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "translate_en",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nB",
+            "out": "Hello, professor.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nE",
+            "out": "The train arrives at five.",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "arithmetic",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "What is 8 + 9? Reply with ONLY the number.",
+            "out": "17",
+            "ok": true
+          },
+          {
+            "prompt": "What is 4 * 8? Reply with ONLY the number.",
+            "out": "32",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "summarize",
+        "split": "val",
+        "n": 10,
+        "acc": 0.2,
+        "n_ok": 2,
+        "samples": [
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fú",
+            "out": "El fútbol es un deporte de equipo con once jugadores.",
+            "ok": true
+          },
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas a",
+            "out": "Las abejas polinizan flores y producen miel en colmenas organizadas por una reina.",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "uppercase",
+        "split": "val",
+        "n": 10,
+        "acc": 0.0,
+        "n_ok": 0,
+        "samples": [
+          {
+            "prompt": "Describe los libros en una o dos frases. Escribe TODA la respuesta en ",
+            "out": "\"Libros\"",
+            "ok": false
+          },
+          {
+            "prompt": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en M",
+            "out": "Fútbol es un deporte en el que los jugadores deben ser muy habilidosos y precisos para lograr un gol",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "sentiment",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "entities",
+        "split": "val",
+        "n": 10,
+        "acc": 0.7,
+        "n_ok": 7,
+        "samples": [
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "person: Pedro, place:Lisbon, date:2022-04-01",
+            "ok": false
+          },
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "person: Nora, place: Boston, date: 2017-09",
+            "ok": false
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "bullets",
+        "split": "val",
+        "n": 10,
+        "acc": 0.5,
+        "n_ok": 5,
+        "samples": [
+          {
+            "prompt": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiec",
+            "out": "- Un libro de aventuras lleno de aventuras y aventuras\n- Un libro sobre la historia de la humanidad\n",
+            "ok": false
+          },
+          {
+            "prompt": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiece",
+            "out": "- Un juego de tenis de mesa\n- Un juego de tenis\n- Un juego de tenis",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      },
+      {
+        "task": "code_python",
+        "split": "val",
+        "n": 10,
+        "acc": 0.9,
+        "n_ok": 9,
+        "samples": [
+          {
+            "prompt": "Write a Python function `mul(a, b)` that returns the product. Only cod",
+            "out": "```python\ndef mul(a, b):\n    return a * b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write Python code to check if a string is a palindrome. Only code.",
+            "out": "```python\ndef is_palindrome(s):\n    \"\"\"\n    Check if the given string is a palindrome.\n    \n    Args",
+            "ok": true
+          }
+        ],
+        "ppl": 16.648,
+        "delta_active": "fuse_multi_avg_LNone_g1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "secs": 53.66,
+    "total_l2": 3.2807
+  },
+  "single_mid_dir": {
+    "split": "val",
+    "mean_acc": 0.57,
+    "tasks": [
+      {
+        "task": "json",
+        "split": "val",
+        "n": 10,
+        "acc": 0.2,
+        "n_ok": 2,
+        "samples": [
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "{\"a\": \"un libro\"}",
+            "ok": false
+          },
+          {
+            "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (te",
+            "out": "{\"a\": \"fútbol\", \"b\": \"a\"}",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "spanish",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Write two sentences about theater. Answer only in Spanish.",
+            "out": "La danza y el teatro son formas de expresión artística.",
+            "ok": true
+          },
+          {
+            "prompt": "Write two sentences about flowers. Answer only in Spanish.",
+            "out": "Las flores son un encanto.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "translate_en",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nB",
+            "out": "Good morning, professor.",
+            "ok": false
+          },
+          {
+            "prompt": "Translate to English. Reply with ONLY the translation, nothing else:\nE",
+            "out": "The train arrives at five.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "arithmetic",
+        "split": "val",
+        "n": 10,
+        "acc": 0.9,
+        "n_ok": 9,
+        "samples": [
+          {
+            "prompt": "What is 8 + 9? Reply with ONLY the number.",
+            "out": "17",
+            "ok": true
+          },
+          {
+            "prompt": "What is 4 * 8? Reply with ONLY the number.",
+            "out": "32",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "summarize",
+        "split": "val",
+        "n": 10,
+        "acc": 0.6,
+        "n_ok": 6,
+        "samples": [
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nEl fú",
+            "out": "El fútbol es un deporte de equipo con once jugadores.",
+            "ok": true
+          },
+          {
+            "prompt": "Resume el siguiente texto en máximo 8 palabras. Solo el resumen:\nLas a",
+            "out": "Abejas polinizan flores y producen miel organizadas.",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "uppercase",
+        "split": "val",
+        "n": 10,
+        "acc": 0.1,
+        "n_ok": 1,
+        "samples": [
+          {
+            "prompt": "Describe los libros en una o dos frases. Escribe TODA la respuesta en ",
+            "out": "Libros",
+            "ok": false
+          },
+          {
+            "prompt": "Describe el fútbol en una o dos frases. Escribe TODA la respuesta en M",
+            "out": "Fútbol",
+            "ok": false
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "sentiment",
+        "split": "val",
+        "n": 10,
+        "acc": 0.8,
+        "n_ok": 8,
+        "samples": [
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify the sentiment of this text as exactly one word: positive, neg",
+            "out": "negative",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "entities",
+        "split": "val",
+        "n": 10,
+        "acc": 0.2,
+        "n_ok": 2,
+        "samples": [
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "[\"person\", \"place\", \"date\"]",
+            "ok": false
+          },
+          {
+            "prompt": "Extract person, place and date from the sentence. Reply ONLY with JSON",
+            "out": "[\"Nora\", \"Boston\", \"2017-09-20]]",
+            "ok": false
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "bullets",
+        "split": "val",
+        "n": 10,
+        "acc": 0.1,
+        "n_ok": 1,
+        "samples": [
+          {
+            "prompt": "Escribe sobre los libros. Responde en exactamente 3 viñetas que empiec",
+            "out": "- Un libro es una narrativa que nos lleva a un mundo nuevo\n- Escribir es crear una historia que nos ",
+            "ok": false
+          },
+          {
+            "prompt": "Escribe sobre el fútbol. Responde en exactamente 3 viñetas que empiece",
+            "out": "- Fútbol es un deporte de equipo.",
+            "ok": false
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      },
+      {
+        "task": "code_python",
+        "split": "val",
+        "n": 10,
+        "acc": 1.0,
+        "n_ok": 10,
+        "samples": [
+          {
+            "prompt": "Write a Python function `mul(a, b)` that returns the product. Only cod",
+            "out": "```python\ndef mul(a, b):\n    return a * b\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Write Python code to check if a string is a palindrome. Only code.",
+            "out": "```python\ndef is_palindrome(s):\n    return s == s[::-1]\n```",
+            "ok": true
+          }
+        ],
+        "ppl": 15.364,
+        "delta_active": "dir_K1_mid_L12_s1.0"
+      }
+    ],
+    "n_tasks": 10,
+    "cfg": {
+      "K": 1,
+      "layout": "mid",
+      "layers": [
+        12
+      ]
+    },
+    "total_l2": 3.2807
+  }
+}
