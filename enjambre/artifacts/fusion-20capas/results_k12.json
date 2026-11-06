@@ -1,0 +1,5346 @@
+{
+  "label": "k12",
+  "mean_acc": 0.706,
+  "n_total": 500,
+  "n_ok_total": 353,
+  "global_acc": 0.706,
+  "ppl": 17.185,
+  "secs": 210.04,
+  "rss_mb": 2343.3,
+  "max_new": 64,
+  "delta_name": "confirm_K12_late_s0.5",
+  "tasks": [
+    {
+      "task": "json",
+      "n": 50,
+      "n_ok": 48,
+      "acc": 0.96,
+      "examples": [
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ajuar). Nada más.",
+          "output": "```json\n{\n  \"a\": \"a\",\n  \"b\": \"b\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "ajuar",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre báculo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"báculo\",\n  \"b\": \"texto corto\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "báculo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre crisol). Nada más.",
+          "output": "```json\n{\n  \"a\": \"crisis\",\n  \"b\": \"solución\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "crisol",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre diáfano). Nada más.",
+          "output": "```json\n{\n  \"a\": \"la luna llena\",\n  \"b\": \"la estrella de la noche\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "diáfano",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre efebo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"efebo\",\n  \"b\": \"específico\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "efebo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fronda). Nada más.",
+          "output": "```json\n{\n  \"a\": \"fronda\",\n  \"b\": \"casa\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "fronda",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre gárgola). Nada más.",
+          "output": "```json\n{\n  \"a\": \"gárgola\",\n  \"b\": \"casa\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "gárgola",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre hélice). Nada más.",
+          "output": "{\"a\": \"helicos\"}, {\"b\": \"helicos\"}",
+          "ok": false,
+          "meta": {
+            "topic": "hélice",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ítem). Nada más.",
+          "output": "```json\n{\n  \"a\": \"texto corto sobre ítem\",\n  \"b\": \"texto corto sobre ítem\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "ítem",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre jacinto). Nada más.",
+          "output": "```json\n{\n  \"a\": \"Jacinto\",\n  \"b\": \"es un artista y compositor español conocido por su música y letras\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "jacinto",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre káiser-nuevo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"káiser-nuevo\",\n  \"b\": \"cómo se llama\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "káiser-nuevo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre lacre). Nada más.",
+          "output": "```json\n{\n  \"a\": \"lacre\",\n  \"b\": \"casa\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "lacre",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre mármol). Nada más.",
+          "output": "```json\n{\n  \"a\": \"mármol\",\n  \"b\": \"confección\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "mármol",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre nódulo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"nódulo\",\n  \"b\": \"información\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "nódulo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ópalo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"oro\",\n  \"b\": \"plomo\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "ópalo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre papiro-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"papiro-x\",\n  \"b\": \"texto corto\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "papiro-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre quirófano). Nada más.",
+          "output": "```json\n{\n  \"a\": \"quirófano\",\n  \"b\": \"cuidado\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "quirófano",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre rótulo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"texto corto sobre rótulo\",\n  \"b\": \"texto corto sobre rótulo\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "rótulo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre sílex-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"sílex-x\",\n  \"b\": \"texto corto sobre sílex-x\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "sílex-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tálero-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"tálero-x\",\n  \"b\": \"tirar\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "tálero-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre úlcera). Nada más.",
+          "output": "```json\n{\n  \"a\": \"úlcera\",\n  \"b\": \"infección cutánea\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "úlcera",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre vórtice). Nada más.",
+          "output": "```json\n{\n  \"a\": \"vórtice\",\n  \"b\": \"texto corto sobre vórtice\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "vórtice",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre wéstern-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"western-x\",\n  \"b\": \"southwest\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "wéstern-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre yermo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"yermo\",\n  \"b\": \"texto corto sobre yermo\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "yermo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre zafir). Nada más.",
+          "output": "```json\n{\n  \"a\": \"zafir\",\n  \"b\": \"texto corto sobre zafir\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "zafir",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre ámbar-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"amethyst\",\n  \"b\": \"sapphire\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "ámbar-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre bóveda). Nada más.",
+          "output": "```json\n{\n  \"a\": \"bóveda\",\n  \"b\": \"cubo\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "bóveda",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre cúpula). Nada más.",
+          "output": "```json\n{\n  \"a\": \"cúpula\",\n  \"b\": \"texto corto sobre cúpula\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "cúpula",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre dintel). Nada más.",
+          "output": "```json\n{\n  \"a\": \"dintel\",\n  \"b\": \"texto corto sobre dintel\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "dintel",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre éstasis). Nada más.",
+          "output": "```json\n{\n  \"a\": \"Ecosistema\",\n  \"b\": \"Desigualdades\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "éstasis",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre fósforo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"fósforo\",\n  \"b\": \"agua\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "fósforo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre glifo). Nada más.",
+          "output": "{\"a\": \"glifo\", \"b\": \"texto corto sobre glifo\"}",
+          "ok": true,
+          "meta": {
+            "topic": "glifo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre hércules). Nada más.",
+          "output": "```json\n{\n  \"a\": \"Hércules es un héroe de la mitología grega.\",\n  \"b\": \"Hércules es conocido por su habilidad para levantar objetos.\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "hércules",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre índigo). Nada más.",
+          "output": "{\"a\": \"texto corto sobre índigo\"}",
+          "ok": false,
+          "meta": {
+            "topic": "índigo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre júbilo). Nada más.",
+          "output": "{\"a\": \"júbilo\", \"b\": \"texto corto sobre júbilo\"}",
+          "ok": true,
+          "meta": {
+            "topic": "júbilo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre kermés). Nada más.",
+          "output": "```json\n{\n  \"a\": \"kermés\",\n  \"b\": \"papel\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "kermés",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre lámina). Nada más.",
+          "output": "```json\n{\n  \"a\": \"lámina\",\n  \"b\": \"cemento\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "lámina",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre mástil). Nada más.",
+          "output": "```json\n{\n  \"a\": \"mástil\",\n  \"b\": \"corto\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "mástil",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre náutica). Nada más.",
+          "output": "```json\n{\n  \"a\": \"navegación\",\n  \"b\": \"mecánica\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "náutica",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre óbolo). Nada más.",
+          "output": "```json\n{\n  \"a\": \"óbolo\",\n  \"b\": \"texto corto\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "óbolo",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre pétalo-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"pétalo-x\",\n  \"b\": \"cactus\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "pétalo-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre químio). Nada más.",
+          "output": "```json\n{\n  \"a\": \"acetic acid\",\n  \"b\": \"bromine\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "químio",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre réplica-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"replica-x\",\n  \"b\": \"replica-x\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "réplica-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre sátiro). Nada más.",
+          "output": "```json\n{\n  \"a\": \"sátiro\",\n  \"b\": \"peligro\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "sátiro",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre tímpano). Nada más.",
+          "output": "```json\n{\n  \"a\": \"tímpano\",\n  \"b\": \"cuerpo\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "tímpano",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre úngula). Nada más.",
+          "output": "```json\n{\n  \"a\": \"úngula\",\n  \"b\": \"texto corto sobre úngula\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "úngula",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre vial). Nada más.",
+          "output": "```json\n{\n  \"a\": \"vial\",\n  \"b\": \"vial\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "vial",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre wadi). Nada más.",
+          "output": "```json\n{\n  \"a\": \"wadi\",\n  \"b\": \"long\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "wadi",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre yóquey-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"yóquey-x\",\n  \"b\": \"texto corto sobre yóquey-x\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "yóquey-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        },
+        {
+          "prompt": "Responde SOLO con JSON válido con exactamente las claves \"a\" y \"b\" (texto corto sobre zócalo-x). Nada más.",
+          "output": "```json\n{\n  \"a\": \"zócalo-x\",\n  \"b\": \"texto corto sobre zócalo-x\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "topic": "zócalo-x",
+            "split": "k20_holdout",
+            "family": "json"
+          }
+        }
+      ]
+    },
+    {
+      "task": "spanish",
+      "n": 50,
+      "n_ok": 50,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write two sentences about agate. Answer only in Spanish.",
+          "output": "Agates son piedras preciosas con formas variadas y suavidades.",
+          "ok": true,
+          "meta": {
+            "topic": "agate",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about birch. Answer only in Spanish.",
+          "output": "Birch es una especie de árbol de la familia Magnoliaceae, conocida por su frondosa hoja y su color verde.",
+          "ok": true,
+          "meta": {
+            "topic": "birch",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about cedar. Answer only in Spanish.",
+          "output": "Cedar es un arbusto de la familia de las cedillos, conocido por su aroma fuerte y su apariencia de color verde.",
+          "ok": true,
+          "meta": {
+            "topic": "cedar",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about dahlia. Answer only in Spanish.",
+          "output": "La dahlia es una planta de hoja verde que se utiliza en muchas cocinas y decoraciones.",
+          "ok": true,
+          "meta": {
+            "topic": "dahlia",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about ember-x. Answer only in Spanish.",
+          "output": "Ember-x es una herramienta de desarrollo web que facilita la integración de componentes de Ember.js en proyectos de desarrollo web.",
+          "ok": true,
+          "meta": {
+            "topic": "ember-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about fjord-x. Answer only in Spanish.",
+          "output": "Fjord-X es una aplicación de streaming de videos que ofrece vistas panorámicas de fjords.",
+          "ok": true,
+          "meta": {
+            "topic": "fjord-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about granite. Answer only in Spanish.",
+          "output": "Granito es un material de gran calidad y durabilidad.",
+          "ok": true,
+          "meta": {
+            "topic": "granite",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about hazel. Answer only in Spanish.",
+          "output": "Hazel es una planta de la familia Rosaceae, conocida por su color marrón brillante y su aroma a frutas.",
+          "ok": true,
+          "meta": {
+            "topic": "hazel",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about iris-x. Answer only in Spanish.",
+          "output": "Iris-x es una aplicación de inteligencia artificial que ayuda a los usuarios a organizar y organizar sus documentos.",
+          "ok": true,
+          "meta": {
+            "topic": "iris-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about juniper. Answer only in Spanish.",
+          "output": "Juniper es una planta de la familia de las junipers.",
+          "ok": true,
+          "meta": {
+            "topic": "juniper",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about krill. Answer only in Spanish.",
+          "output": "Krill es una especie de crustaceano marino que se alimenta de algas y otros crustáceos.",
+          "ok": true,
+          "meta": {
+            "topic": "krill",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about larch. Answer only in Spanish.",
+          "output": "Larch es un árbol con hojas de color verde oscuro y troncos de hierba.",
+          "ok": true,
+          "meta": {
+            "topic": "larch",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about maple. Answer only in Spanish.",
+          "output": "El mapa es un arbol de nieve que se utiliza para medir el clima.",
+          "ok": true,
+          "meta": {
+            "topic": "maple",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about nutmeg. Answer only in Spanish.",
+          "output": "Nutmeg es un ingredientes dulce y aromático común en la cocina.",
+          "ok": true,
+          "meta": {
+            "topic": "nutmeg",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about onyx. Answer only in Spanish.",
+          "output": "Onyx es un mineral rojo brillante y esencial para la pintura y la decoración.",
+          "ok": true,
+          "meta": {
+            "topic": "onyx",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about pewter. Answer only in Spanish.",
+          "output": "Pewter es un metal de alta calidad y resistente.",
+          "ok": true,
+          "meta": {
+            "topic": "pewter",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about quince. Answer only in Spanish.",
+          "output": "El quince es un fruto de la familia de las manzanas.",
+          "ok": true,
+          "meta": {
+            "topic": "quince",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about resin. Answer only in Spanish.",
+          "output": "Resin es un material de construcción y industrial utilizado para crear estructuras y materiales.",
+          "ok": true,
+          "meta": {
+            "topic": "resin",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about spruce. Answer only in Spanish.",
+          "output": "El spruce es un árbol de cortejo comúnmente utilizado en la construcción y la agricultura.",
+          "ok": true,
+          "meta": {
+            "topic": "spruce",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about thyme. Answer only in Spanish.",
+          "output": "Thyme es un herbáculo verde aromático que se utiliza en muchas recetas.",
+          "ok": true,
+          "meta": {
+            "topic": "thyme",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about urchin. Answer only in Spanish.",
+          "output": "Un arquero de pescado pequeño.",
+          "ok": true,
+          "meta": {
+            "topic": "urchin",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about violet. Answer only in Spanish.",
+          "output": "Violeta es una flor verde brillante y delicada.",
+          "ok": true,
+          "meta": {
+            "topic": "violet",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about willow-x. Answer only in Spanish.",
+          "output": "La willow-x es una planta de la familia de las leguminosas, conocida por su aroma fuerte y su uso en la cocina.",
+          "ok": true,
+          "meta": {
+            "topic": "willow-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about xylem. Answer only in Spanish.",
+          "output": "El xylem es una parte crucial del sistema vascular de plantas, que transporta agua y nutrientes hacia los arbustos y árboles.",
+          "ok": true,
+          "meta": {
+            "topic": "xylem",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about yucca. Answer only in Spanish.",
+          "output": "Yucca es una planta de la familia de las solares que se utiliza en la agricultura y la industria.",
+          "ok": true,
+          "meta": {
+            "topic": "yucca",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about zinc. Answer only in Spanish.",
+          "output": "Zinc es un mineral crucial para la salud, especialmente para el sistema digestivo y el sistema nervioso.",
+          "ok": true,
+          "meta": {
+            "topic": "zinc",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about anvil-x. Answer only in Spanish.",
+          "output": "Anvil-x es una plataforma de aprendizaje automático que utiliza anillos para mejorar la precisión y la eficiencia en la generación de texto.",
+          "ok": true,
+          "meta": {
+            "topic": "anvil-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about basil. Answer only in Spanish.",
+          "output": "Basil es una planta aromática conocida por sus sabores agradable y su color verde brillante.",
+          "ok": true,
+          "meta": {
+            "topic": "basil",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about clove. Answer only in Spanish.",
+          "output": "Clove es un condimento dulce y astringente que se usa en muchas recetas.",
+          "ok": true,
+          "meta": {
+            "topic": "clove",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about drift. Answer only in Spanish.",
+          "output": "Drift es una técnica de navegación que permite moverse hacia un destino más lejos de la dirección original.",
+          "ok": true,
+          "meta": {
+            "topic": "drift",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about eider. Answer only in Spanish.",
+          "output": "Eider es una empresa de fabricación de equipos de corte de cabello.",
+          "ok": true,
+          "meta": {
+            "topic": "eider",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about fern. Answer only in Spanish.",
+          "output": "Fernes son plantas arbustivas que se caracterizan por sus hojas de color verde oscuro y sus flores de color rosa.",
+          "ok": true,
+          "meta": {
+            "topic": "fern",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about guava. Answer only in Spanish.",
+          "output": "Guava es un fruto de la familia de las manzanas y es conocido por su sabor dulce y su aroma a fruta.",
+          "ok": true,
+          "meta": {
+            "topic": "guava",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about heron. Answer only in Spanish.",
+          "output": "Heron es un pájaro de agua que se caracteriza por su cola larga y su forma de volar.",
+          "ok": true,
+          "meta": {
+            "topic": "heron",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about ivory. Answer only in Spanish.",
+          "output": "Ivory es un material degradado y destruyente.",
+          "ok": true,
+          "meta": {
+            "topic": "ivory",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about jute. Answer only in Spanish.",
+          "output": "Jute es un material de alta calidad utilizado en la industria de la construcción y la construcción civil.",
+          "ok": true,
+          "meta": {
+            "topic": "jute",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about kelp-x. Answer only in Spanish.",
+          "output": "Kelp-x es una empresa de tecnología que ofrece soluciones de inteligencia artificial para el sector de la industria de la construcción.",
+          "ok": true,
+          "meta": {
+            "topic": "kelp-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about lotus. Answer only in Spanish.",
+          "output": "La lotus es una planta de hierba verde que se encuentra en la región de Asia.",
+          "ok": true,
+          "meta": {
+            "topic": "lotus",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about mango. Answer only in Spanish.",
+          "output": "Mango es un fruto de la familia de las mangoes.",
+          "ok": true,
+          "meta": {
+            "topic": "mango",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about nori. Answer only in Spanish.",
+          "output": "Nori es un verdugo de plátano que se utiliza en muchas recetas.",
+          "ok": true,
+          "meta": {
+            "topic": "nori",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about olive. Answer only in Spanish.",
+          "output": "Oleagre es un fruto de la familia de las olivas.",
+          "ok": true,
+          "meta": {
+            "topic": "olive",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about peach. Answer only in Spanish.",
+          "output": "El peach es un fruto verde y pulido que se puede comer.",
+          "ok": true,
+          "meta": {
+            "topic": "peach",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about quinoa-x. Answer only in Spanish.",
+          "output": "Quinoa-x es una mezcla de quinoa y arroz, combinada con especias y verduras.",
+          "ok": true,
+          "meta": {
+            "topic": "quinoa-x",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about reed. Answer only in Spanish.",
+          "output": "El reed es un material resistente y duradero.",
+          "ok": true,
+          "meta": {
+            "topic": "reed",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about sage. Answer only in Spanish.",
+          "output": "Sage es un tipo de árbol que se utiliza para cultivar frutas y verduras.",
+          "ok": true,
+          "meta": {
+            "topic": "sage",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about teak. Answer only in Spanish.",
+          "output": "Teak es un arbol de cedro con un gran valor cultural y económico.",
+          "ok": true,
+          "meta": {
+            "topic": "teak",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about umber. Answer only in Spanish.",
+          "output": "El orfanato tiene una gran cantidad de orígenes africanos.",
+          "ok": true,
+          "meta": {
+            "topic": "umber",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about vine. Answer only in Spanish.",
+          "output": "Vine es una planta que se utiliza para fabricar plásticos y otros materiales.",
+          "ok": true,
+          "meta": {
+            "topic": "vine",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about wheat. Answer only in Spanish.",
+          "output": "Wheat es una gran planta de granos comúnmente utilizado en la agricultura y la industria.",
+          "ok": true,
+          "meta": {
+            "topic": "wheat",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        },
+        {
+          "prompt": "Write two sentences about yarn. Answer only in Spanish.",
+          "output": "Yarn es una fibra de algodón que se utiliza para fabricar cordero, cordero de mar y otros textiles.",
+          "ok": true,
+          "meta": {
+            "topic": "yarn",
+            "split": "k20_holdout",
+            "family": "spanish"
+          }
+        }
+      ]
+    },
+    {
+      "task": "translate_en",
+      "n": 50,
+      "n_ok": 10,
+      "acc": 0.2,
+      "examples": [
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl alerce crece en la montaña.",
+          "output": "The rope grows in the mountain.",
+          "ok": false,
+          "meta": {
+            "src": "El alerce crece en la montaña.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa bóveda cubre la iglesia.",
+          "output": "The church is covered by the tower.",
+          "ok": false,
+          "meta": {
+            "src": "La bóveda cubre la iglesia.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl dintel sostiene la puerta.",
+          "output": "The door is held closed.",
+          "ok": false,
+          "meta": {
+            "src": "El dintel sostiene la puerta.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nCompré tomillo fresco hoy.",
+          "output": "I bought fresh tomatoes today.",
+          "ok": false,
+          "meta": {
+            "src": "Compré tomillo fresco hoy.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl mástil vibra con el viento.",
+          "output": "The branch vibrates with the wind.",
+          "ok": false,
+          "meta": {
+            "src": "El mástil vibra con el viento.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa gárgola escupe agua de lluvia.",
+          "output": "The gárgola sucks rainwater.",
+          "ok": false,
+          "meta": {
+            "src": "La gárgola escupe agua de lluvia.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl ópalo brilla con colores.",
+          "output": "The opal glows with colors.",
+          "ok": false,
+          "meta": {
+            "src": "El ópalo brilla con colores.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay lacre en el sobre.",
+          "output": "There is a ledger on the cover.",
+          "ok": false,
+          "meta": {
+            "src": "Hay lacre en el sobre.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl yermo está seco y vacío.",
+          "output": "The homeless person is dry and empty.",
+          "ok": false,
+          "meta": {
+            "src": "El yermo está seco y vacío.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa cúpula refleja el sol.",
+          "output": "The cone reflects the sun.",
+          "ok": false,
+          "meta": {
+            "src": "La cúpula refleja el sol.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl jacinto florece en primavera.",
+          "output": "The marigold blooms in spring.",
+          "ok": false,
+          "meta": {
+            "src": "El jacinto florece en primavera.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nGuardé el rótulo en la caja.",
+          "output": "The label was stuck to the box.",
+          "ok": false,
+          "meta": {
+            "src": "Guardé el rótulo en la caja.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl quirófano estaba limpio.",
+          "output": "The limped rat was clean.",
+          "ok": false,
+          "meta": {
+            "src": "El quirófano estaba limpio.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa fronda da sombra fresca.",
+          "output": "The grass is green.",
+          "ok": false,
+          "meta": {
+            "src": "La fronda da sombra fresca.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl báculo es de madera antigua.",
+          "output": "The bow is made of ancient wood.",
+          "ok": false,
+          "meta": {
+            "src": "El báculo es de madera antigua.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nSembramos brezo junto al camino.",
+          "output": "We'll spread the breeze alongside the road.",
+          "ok": false,
+          "meta": {
+            "src": "Sembramos brezo junto al camino.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl crisol funde el metal.",
+          "output": "The fire engulfed the metal.",
+          "ok": false,
+          "meta": {
+            "src": "El crisol funde el metal.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa hélice gira muy rápido.",
+          "output": "The helicopter spins very fast.",
+          "ok": false,
+          "meta": {
+            "src": "La hélice gira muy rápido.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl nódulo aparece en la radiografía.",
+          "output": "The nodule is visible on the radiograph.",
+          "ok": false,
+          "meta": {
+            "src": "El nódulo aparece en la radiografía.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl zafir es de un azul intenso.",
+          "output": "The zafir is a deep blue.",
+          "ok": false,
+          "meta": {
+            "src": "El zafir es de un azul intenso.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay glifos en la piedra.",
+          "output": "There are phosphates on the rock.",
+          "ok": false,
+          "meta": {
+            "src": "Hay glifos en la piedra.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl juniper crece cerca del río.",
+          "output": "The juniper grows near the river.",
+          "ok": true,
+          "meta": {
+            "src": "El juniper crece cerca del río.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa lámina es muy delgada.",
+          "output": "The wire is very thin.",
+          "ok": false,
+          "meta": {
+            "src": "La lámina es muy delgada.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl pewter brilla opaco.",
+          "output": "The pewter glows opaciously.",
+          "ok": false,
+          "meta": {
+            "src": "El pewter brilla opaco.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nComí quince en el postre.",
+          "output": "I ate seven in the dessert.",
+          "ok": false,
+          "meta": {
+            "src": "Comí quince en el postre.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl spruce es un árbol alto.",
+          "output": "The spruce is a tall tree.",
+          "ok": true,
+          "meta": {
+            "src": "El spruce es un árbol alto.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa urchin vive en el fondo.",
+          "output": "The old man lives deep down.",
+          "ok": false,
+          "meta": {
+            "src": "La urchin vive en el fondo.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl xylem transporta agua.",
+          "output": "The xylem transports water.",
+          "ok": true,
+          "meta": {
+            "src": "El xylem transporta agua.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa yucca tiene hojas duras.",
+          "output": "The yucca has tough leaves.",
+          "ok": false,
+          "meta": {
+            "src": "La yucca tiene hojas duras.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl zinc protege el acero.",
+          "output": "Zinc protects iron.",
+          "ok": false,
+          "meta": {
+            "src": "El zinc protege el acero.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay basil en la cocina.",
+          "output": "There's basil in the kitchen.",
+          "ok": false,
+          "meta": {
+            "src": "Hay basil en la cocina.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl clove aromatiza el té.",
+          "output": "The clove infuses the tea.",
+          "ok": false,
+          "meta": {
+            "src": "El clove aromatiza el té.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa fern crece en la sombra.",
+          "output": "The fern grows in the shade.",
+          "ok": true,
+          "meta": {
+            "src": "La fern crece en la sombra.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl heron pesca en el lago.",
+          "output": "The heron catches fish in the lake.",
+          "ok": false,
+          "meta": {
+            "src": "El heron pesca en el lago.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nCompré jute para tejer.",
+          "output": "I purchased jute for weaving.",
+          "ok": false,
+          "meta": {
+            "src": "Compré jute para tejer.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl lotus flota en el estanque.",
+          "output": "The lotus floats in the pond.",
+          "ok": true,
+          "meta": {
+            "src": "El lotus flota en el estanque.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl mango está maduro.",
+          "output": "The mango is ripe.",
+          "ok": true,
+          "meta": {
+            "src": "El mango está maduro.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay nori en el sushi.",
+          "output": "There's nori on the sushi.",
+          "ok": false,
+          "meta": {
+            "src": "Hay nori en el sushi.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa olive es verde oscura.",
+          "output": "The olive is dark green.",
+          "ok": true,
+          "meta": {
+            "src": "La olive es verde oscura.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl peach es jugoso.",
+          "output": "The peach is sweet.",
+          "ok": false,
+          "meta": {
+            "src": "El peach es jugoso.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl reed crece en el pantano.",
+          "output": "The reed grows in the meadow.",
+          "ok": false,
+          "meta": {
+            "src": "El reed crece en el pantano.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa sage huele fuerte.",
+          "output": "The strong scent of the sage.",
+          "ok": false,
+          "meta": {
+            "src": "La sage huele fuerte.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl teak es madera dura.",
+          "output": "The teak is hard wood.",
+          "ok": true,
+          "meta": {
+            "src": "El teak es madera dura.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl umber es un pigmento.",
+          "output": "The color is an pigment.",
+          "ok": false,
+          "meta": {
+            "src": "El umber es un pigmento.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa vine trepa el muro.",
+          "output": "The vine climbs the wall.",
+          "ok": true,
+          "meta": {
+            "src": "La vine trepa el muro.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl wheat cubre el campo.",
+          "output": "The wheat covers the field.",
+          "ok": true,
+          "meta": {
+            "src": "El wheat cubre el campo.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nHay yarn de lana suave.",
+          "output": "Yarn of soft lycra.",
+          "ok": false,
+          "meta": {
+            "src": "Hay yarn de lana suave.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl wadi está seco en verano.",
+          "output": "The desert is dry in summer.",
+          "ok": false,
+          "meta": {
+            "src": "El wadi está seco en verano.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nLa ungula del caballo es fuerte.",
+          "output": "The horse's leg is strong.",
+          "ok": false,
+          "meta": {
+            "src": "La ungula del caballo es fuerte.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        },
+        {
+          "prompt": "Translate to English. Reply with ONLY the English sentence.\nEl vial contiene medicina.",
+          "output": "The container contains medicine.",
+          "ok": false,
+          "meta": {
+            "src": "El vial contiene medicina.",
+            "split": "k20_holdout",
+            "family": "translate_en"
+          }
+        }
+      ]
+    },
+    {
+      "task": "arithmetic",
+      "n": 50,
+      "n_ok": 34,
+      "acc": 0.68,
+      "examples": [
+        {
+          "prompt": "What is 72+21? Reply with ONLY the number.",
+          "output": "93",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+22? Reply with ONLY the number.",
+          "output": "94",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+23? Reply with ONLY the number.",
+          "output": "95",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+24? Reply with ONLY the number.",
+          "output": "96",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+25? Reply with ONLY the number.",
+          "output": "97",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+26? Reply with ONLY the number.",
+          "output": "74",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+27? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 72+28? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+21? Reply with ONLY the number.",
+          "output": "94",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+22? Reply with ONLY the number.",
+          "output": "95",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+23? Reply with ONLY the number.",
+          "output": "96",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+24? Reply with ONLY the number.",
+          "output": "97",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+25? Reply with ONLY the number.",
+          "output": "108",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+26? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+27? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 73+28? Reply with ONLY the number.",
+          "output": "101",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+21? Reply with ONLY the number.",
+          "output": "76",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+22? Reply with ONLY the number.",
+          "output": "96",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+23? Reply with ONLY the number.",
+          "output": "76",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+24? Reply with ONLY the number.",
+          "output": "76",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+25? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+26? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+27? Reply with ONLY the number.",
+          "output": "101",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 74+28? Reply with ONLY the number.",
+          "output": "102",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+21? Reply with ONLY the number.",
+          "output": "96",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+22? Reply with ONLY the number.",
+          "output": "107",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+23? Reply with ONLY the number.",
+          "output": "108",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+24? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+25? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+26? Reply with ONLY the number.",
+          "output": "101",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+27? Reply with ONLY the number.",
+          "output": "102",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 75+28? Reply with ONLY the number.",
+          "output": "103",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+21? Reply with ONLY the number.",
+          "output": "97",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+22? Reply with ONLY the number.",
+          "output": "108",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+23? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+24? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+25? Reply with ONLY the number.",
+          "output": "101",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+26? Reply with ONLY the number.",
+          "output": "102",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+27? Reply with ONLY the number.",
+          "output": "103",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 76+28? Reply with ONLY the number.",
+          "output": "104",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+21? Reply with ONLY the number.",
+          "output": "108",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+22? Reply with ONLY the number.",
+          "output": "100",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+23? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+24? Reply with ONLY the number.",
+          "output": "101",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+25? Reply with ONLY the number.",
+          "output": "102",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+26? Reply with ONLY the number.",
+          "output": "103",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+27? Reply with ONLY the number.",
+          "output": "104",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 77+28? Reply with ONLY the number.",
+          "output": "105",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 78+21? Reply with ONLY the number.",
+          "output": "109",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        },
+        {
+          "prompt": "What is 78+22? Reply with ONLY the number.",
+          "output": "100",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "arithmetic"
+          }
+        }
+      ]
+    },
+    {
+      "task": "summarize",
+      "n": 50,
+      "n_ok": 49,
+      "acc": 0.98,
+      "examples": [
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn carpintero talló un báculo de alerce y lo barnizó con resina natural del bosque cercano.",
+          "output": "Un carpintero talló báculo, barniz con resina boscosa.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa bóveda del templo mostraba glifos antiguos que los arqueólogos fotografiaron con cuidado.",
+          "output": "Templo con arqueólogos fotografiando glifos antiguos.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nIngenieros probaron una hélice nueva en el túnel de viento antes del primer vuelo de prueba.",
+          "output": "Ingenieros probaron nueva hélice en túnel antes de prueba.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEn el yermo crecen solo brezos resistentes tras años de sequía extrema en la región.",
+          "output": "Seca región con solo brezos resistentes.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl quirófano recibió lámparas LED que reducen el calor sobre el campo quirúrgico.",
+          "output": "El quirófano utiliza lámparas LED para reducir calor en campo quirúrgico.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna joyería exhibió ópalos y zafiros tallados con láminas de oro muy finas.",
+          "output": "Un jewelry exhibía ópalo y zafra tallados con láminas de oro fina.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl crisol de laboratorio alcanzó temperaturas altas para fundir aleaciones de zinc.",
+          "output": "Almacenamiento de zinc alcanza temperaturas altas para fundir aleaciones.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nBotánicos midieron el crecimiento de juniper y spruce tras una temporada lluviosa.",
+          "output": "Botánicos observaron crecimiento de juniper y spruce en lluvias.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl dintel de piedra fue reforzado con barras de acero ocultas tras la restauración.",
+          "output": "El dintel de piedra se reforzó con acero oculto tras la restauración.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nCocineros usaron tomillo, clavo y salvia para un guiso lento de cordero local.",
+          "output": "Cocineros usan tomillo, clavo y salvia para guiso lento de cordero local.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa cúpula de cristal filtra luz índigo al mediodía en el atrio del museo.",
+          "output": "Museo con cúpula de cristal filtrando luz índigo al mediodía.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nPescadores observaron un heron acechando peces junto a los reeds del estuario.",
+          "output": "Pescadores observan heron acariciando peces en estuario.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl mástil de teak resistió la tormenta gracias a refuerzos de fibra de carbono.",
+          "output": "Mástil de teak resistió tormenta gracias a fibra de carbono.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEstudiantes dibujaron gárgolas del claustro como ejercicio de perspectiva lineal.",
+          "output": "Estudiantes dibujaron gárgolas del claustro como ejercicio de perspectiva lineal.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn médico señaló un nódulo pequeño en la radiografía y pidió seguimiento en tres meses.",
+          "output": "Un nódulo pequeño en radiografía requiere seguimiento en tres meses.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa fábrica de pewter recicló sobras para fabricar vasos utilitarios sin plomo.",
+          "output": "Fábrica recicló pewter sobrante para vasos utilitarios sin plomo.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nAgricultores plantaron quince y mango en terrazas con riego por goteo eficiente.",
+          "output": "Agricultores utilizan riego eficiente para plantar quince y mango en terrazas.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl wadi solo lleva agua tras las lluvias de primavera en el desierto costero.",
+          "output": "El wadi se refiere a un río costero que se refleja en el desierto.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nQuímicos extrajeron pigmento umber de suelos locales para restaurar frescos antiguos.",
+          "output": "Químicos extrajeron pigmento umber de suelos locales para restaurar frescos antiguos.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna tejedora compró jute y yarn de lana para tapices de motivos náuticos.",
+          "output": "Una tejedora compró jute y yarn de lana para tapices náuticos.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl vial sellado contenía una muestra de agua del manantial para análisis bacteriano.",
+          "output": "Vial sellado contó muestra bacteriana del manantial.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEscaladores usaron lacre improvisado para marcar rutas en la pared de granito.",
+          "output": "Escaladores usan lacre improvisado para marcar rutas en granito.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl jardín botánico añadió yucca y lotus a la sección de plantas resistentes.",
+          "output": "El jardín botánico incorporó yucca y lotus a la sección de plantas resistentes.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nMarineros repararon la fronda de una vela rota con parches de tela impermeable.",
+          "output": "Marines reparan vela rotulada con parches impermeables.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl laboratorio cultivó helechos (fern) bajo luz controlada para un estudio genético.",
+          "output": "Laboratorio cultivó helechos (fern) bajo luz controlada para estudio genético.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna feria rural vendió guava, peach y olive aceite de primera presión en frío.",
+          "output": "Feria rural vendió guava, peach y olive aceite de primera presión en frío.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl xylem de muestras de maple se examinó al microscopio tras un invierno crudo.",
+          "output": "Maple xylem microscopically examined after winter hardening.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nArquitectos diseñaron una cúpula ligera sobre la biblioteca municipal renovada.",
+          "output": "Arquitectos diseñaron una cúpula ligera para biblioteca municipal renovada.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl kermés histórico tiñó paños de prueba con un rojo profundo estable al lavado.",
+          "output": "Historic kermes roja tiñe paños al lavado.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nBuzos hallaron urchins cerca de un arrecife dañado por anclas de embarcaciones.",
+          "output": "Buzos hallaron urchins cerca de arrecife dañado.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl rótulo del museo explica el origen del báculo ceremonial en tres idiomas.",
+          "output": "El báculo ceremonial es un instrumento ceremonial de tres idiomas.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nIngenieros civiles midieron vibraciones del dintel tras el paso de camiones pesados.",
+          "output": "Ingenieros civiles observaron vibraciones del dintel tras camiones pesados.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna startup hizo envases de teak residual certificado para cosmética natural.",
+          "output": "Una empresa de cosmética natural envase teak residual certificado.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl índigo sintético reemplazó parcialmente al natural en la industria textil local.",
+          "output": "Indigo synthetic replaces part of natural textile industry.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nPastores guiaron rebaños por el yermo buscando pozos estacionales marcados en mapas.",
+          "output": "Pastores guían rebaños buscando pozos estacionales marcados.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl basil fresco del huerto se usó en pesto para el comedor escolar del pueblo.",
+          "output": "El pesto fresco de basil se usa en comidas escolares.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nGeólogos catalogaron agate y onyx en un depósito aluvial tras crecidas del río.",
+          "output": "Geólogos descubren agate y onyx en depósito aluvial tras caída del río.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa náutica escuela entrenó a novatos a izar velas con mástil de aluminio ligero.",
+          "output": "Náutica escuela, ensamblaje de velas con madera ligera.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUn herbolario secó thyme y sage en bastidores de madera bajo techo ventilado.",
+          "output": "Un herbaco secó thyme y sage bajo techo ventilado.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa gárgola restaurada volvió a canalizar agua lejos de los muros de piedra caliza.",
+          "output": "Gárgola restaurada canaliza agua desde muros caliza.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nQuímicos midieron fósforo en suelos agrícolas para ajustar fertilización de primavera.",
+          "output": "Químicos midieron fósforo en suelos agrícolas para ajustar fertilización de primavera.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl júbilo de la multitud llenó la plaza tras el anuncio del festival de música.",
+          "output": "Festival de música llenó plaza con jubilaciones.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nArtesanos tallaron glifo a glifo una réplica educativa para talleres escolares.",
+          "output": "Artesanos tallaron glifo a glifo una réplica educativa para talleres escolares.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl olive grove produjo menos aceite tras una helada tardía en abril.",
+          "output": "El olive grove produce menos aceite después de una helada tardía en abril.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nUna bióloga marcó herons anillados para estudiar migraciones costeras anuales.",
+          "output": "Bióloga marcó anillados migraciones costeras anuales.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl pewter antiguo del ajuar familiar se restauró sin alterar marcas de orfebre.",
+          "output": "Restauró el pewter antiguo del ajuar sin alterar marcas de orfebre.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nIngenieros probaron resin epoxi en uniones de spruce para muebles exteriores.",
+          "output": "Ingenieros probaron resin epoxi en uniones de spruce para muebles exteriores.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEl wheat del valle se cosechó temprano por pronóstico de granizo severo.",
+          "output": "El valle cosechó granizo severo, se cosechó el wheat temprano.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nEstudiantes midieron el diámetro de un nódulo pulmonar en un simulador médico.",
+          "output": "Estudiantes medían diámetro de nódulo pulmonar en simulador médico.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        },
+        {
+          "prompt": "Resume en español en MÁXIMO 12 palabras:\nLa bóveda celeste del planetario proyectó constelaciones con un nuevo láser.",
+          "output": "Planeta celeste proyecta constelaciones con nuevo láser.",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "summarize"
+          }
+        }
+      ]
+    },
+    {
+      "task": "uppercase",
+      "n": 50,
+      "n_ok": 26,
+      "acc": 0.52,
+      "examples": [
+        {
+          "prompt": "Reply with the word in ALL CAPS only: agate",
+          "output": "AGATE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "agate"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: birch",
+          "output": "BIRCH",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "birch"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: cedar",
+          "output": "Cedar",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "cedar"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: dahlia",
+          "output": "Dahlia",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "dahlia"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: fjordx",
+          "output": "Fjordx",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "fjordx"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: granite",
+          "output": "GRANITE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "granite"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: hazel",
+          "output": "Hazel",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "hazel"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: irisx",
+          "output": "Irisx",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "irisx"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: juniper",
+          "output": "JUNOPERSENT",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "juniper"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: krill",
+          "output": "KRILL",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "krill"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: larch",
+          "output": "Larch",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "larch"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: maple",
+          "output": "MAPLE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "maple"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: nutmeg",
+          "output": "Nutmeg",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "nutmeg"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: onyx",
+          "output": "Onyx",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "onyx"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: pewter",
+          "output": "Pewter",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "pewter"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: quince",
+          "output": "QUINSECH",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "quince"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: resin",
+          "output": "RESIN",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "resin"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: spruce",
+          "output": "SPRUCE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "spruce"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: thyme",
+          "output": "THYME",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "thyme"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: urchin",
+          "output": "urchin",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "urchin"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: violet",
+          "output": "VIOLET",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "violet"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: xylem",
+          "output": "Xylem",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "xylem"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: yucca",
+          "output": "Yucca",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "yucca"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: zinc",
+          "output": "ZINC",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "zinc"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: basil",
+          "output": "Basil",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "basil"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: clove",
+          "output": "Clove",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "clove"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: drift",
+          "output": "DRIFT",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "drift"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: eider",
+          "output": "eider",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "eider"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: fern",
+          "output": "FERN",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "fern"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: guava",
+          "output": "GUAVA",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "guava"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: heron",
+          "output": "HERON",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "heron"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: ivory",
+          "output": "Ivory",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "ivory"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: jute",
+          "output": "JUTE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "jute"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: lotus",
+          "output": "LOTUS",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "lotus"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: mango",
+          "output": "MANGO",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "mango"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: nori",
+          "output": "noris",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "nori"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: olive",
+          "output": "OLIVE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "olive"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: peach",
+          "output": "PEACH",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "peach"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: reed",
+          "output": "reed",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "reed"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: sage",
+          "output": "SAGE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "sage"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: teak",
+          "output": "TEAK",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "teak"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: umber",
+          "output": "URBAN",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "umber"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: vine",
+          "output": "VINE",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "vine"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: wheat",
+          "output": "WHEAT",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "wheat"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: yarn",
+          "output": "YARN",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "yarn"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: wadi",
+          "output": "Wadi",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "wadi"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: vial",
+          "output": "vial",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "vial"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: grommet",
+          "output": "Grommet",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "grommet"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: lintel",
+          "output": "LINTEL",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "lintel"
+          }
+        },
+        {
+          "prompt": "Reply with the word in ALL CAPS only: mast",
+          "output": "MAST",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "uppercase",
+            "word": "mast"
+          }
+        }
+      ]
+    },
+    {
+      "task": "sentiment",
+      "n": 50,
+      "n_ok": 42,
+      "acc": 0.84,
+      "examples": [
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nAbsolutely wonderful news",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nCompletely ruined my day",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nA granite block rests",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nSo grateful for help",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nDisgusting filthy kitchen",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThe lintel is stone",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPerfect calm weekend",
+          "output": "neutral",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nBitter cruel remark",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPewter cup is empty",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nThrilled beyond belief",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nHorrible aching tooth",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nMaple leaf on ground",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nJoyful bright morning",
+          "output": "Positive",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nMiserable wet shoes",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nCedar plank is dry",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nDelightful fresh thyme",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nAwful sticky floor",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nOnyx ring on tray",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nFantastic clever plan",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nDreadful long night",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nSpruce cone is closed",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nLovely gentle breeze",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nNasty rude gesture",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nTeak chair is firm",
+          "output": "positive",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nBlissful quiet nap",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nRotten sour milk",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nJute bag is full",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nSuperb clear design",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nGhastly burnt smell",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nReed mat lies flat",
+          "output": "negative",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nCheerful warm soup",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nUgly harsh words",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nZinc sheet is thin",
+          "output": "negative",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nRadiant sunny porch",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nWretched cold room",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nVial sits on shelf",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nEcstatic final match",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nVile bitter coffee",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nYarn spool is neat",
+          "output": "positive",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nGlorious soft bread",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nAppalling late train",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nWadi bed is dusty",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nCharming small cafe",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nBleak empty hall",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nOlive jar is sealed",
+          "output": "negative",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nHappy reunion lunch",
+          "output": "Positive",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nTerrible broken clasp",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nBasil pot is green",
+          "output": "neutral",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nWonderful soft music",
+          "output": "positive",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ONLY with the label.\nPainful sharp sting",
+          "output": "negative",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "sentiment"
+          }
+        }
+      ]
+    },
+    {
+      "task": "entities",
+      "n": 50,
+      "n_ok": 47,
+      "acc": 0.94,
+      "examples": [
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nAva visited Bergen in March.",
+          "output": "```json\n{\n  \"person\": \"Ava\",\n  \"place\": \"Bergen\",\n  \"date\": \"March\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nBen reached Cusco in April.",
+          "output": "```json\n{\n  \"person\": \"Ben\",\n  \"place\": \"Cusco\",\n  \"date\": \"April\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nCia left Dakar in May.",
+          "output": "```json\n{\n  \"person\": \"Cia\",\n  \"place\": \"Dakar\",\n  \"date\": \"May\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nDan saw Erbil in June.",
+          "output": "```json\n{\n  \"person\": \"Dan\",\n  \"place\": \"Erbil\",\n  \"date\": \"June\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nEve flew Fez in July.",
+          "output": "```json\n{\n  \"person\": \"Eve\",\n  \"place\": \"Fez\",\n  \"date\": \"July\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nFay met Ghent in August.",
+          "output": "```json\n{\n  \"person\": \"Fay\",\n  \"place\": \"Ghent\",\n  \"date\": \"August\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nGus reached Hilo in September.",
+          "output": "```json\n{\n  \"person\": \"Gus\",\n  \"place\": \"Hilo\",\n  \"date\": \"September\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nHana visited Ibiza in October.",
+          "output": "```json\n{\n  \"person\": \"Hana\",\n  \"place\": \"Ibiza\",\n  \"date\": \"October\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nIan saw Juneau in November.",
+          "output": "```json\n{\n  \"person\": \"Ian\",\n  \"place\": \"Juneau\",\n  \"date\": \"November\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nJoy left Kobe in December.",
+          "output": "```json\n{\n  \"person\": \"Joy\",\n  \"place\": \"Kobe\",\n  \"date\": \"December\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nKen reached Leeds in January.",
+          "output": "```json\n{\n  \"person\": \"Ken\",\n  \"place\": \"Leeds\",\n  \"date\": \"January\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nLia visited Metz in February.",
+          "output": "```json\n{\n  \"person\": \"Lia\",\n  \"place\": \"Metz\",\n  \"date\": \"February\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nMax saw Nice in March.",
+          "output": "```json\n{\n  \"person\": \"Max\",\n  \"place\": \"Nice\",\n  \"date\": \"March\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nNia left Omsk in April.",
+          "output": "```json\n{\n  \"person\": \"Nia\",\n  \"place\": \"Omsk\",\n  \"date\": \"April\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nOmar reached Perm in May.",
+          "output": "```json\n{\n  \"person\": \"Omar\",\n  \"place\": \"Perm\",\n  \"date\": \"May\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nPia visited Riga in June.",
+          "output": "```json\n{\n  \"person\": \"Pia\",\n  \"place\": \"Riga\",\n  \"date\": \"June\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nQuin saw Split in July.",
+          "output": "```json\n{\n  \"person\": \"Quin\",\n  \"place\": \"Split\",\n  \"date\": \"July\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nRae left Tulsa in August.",
+          "output": "```json\n{\n  \"person\": \"Rae\",\n  \"place\": \"Tulsa\",\n  \"date\": \"August\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nSam reached Ulm in September.",
+          "output": "```json\n{\n  \"person\": \"Sam\",\n  \"place\": \"Ulm\",\n  \"date\": \"September\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nTess visited Vigo in October.",
+          "output": "```json\n{\n  \"person\": \"Tess\",\n  \"place\": \"Vigo\",\n  \"date\": \"October\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nUri saw Waco in November.",
+          "output": "```json\n{\n  \"person\": \"Uri\",\n  \"place\": \"Waco\",\n  \"date\": \"November\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nVal left York in December.",
+          "output": "```json\n{\n  \"person\": \"Val\",\n  \"place\": \"York\",\n  \"date\": \"December\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nWes reached Zurich in January.",
+          "output": "```json\n{\n  \"person\": \"Wes\",\n  \"place\": \"Zurich\",\n  \"date\": \"January\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nXia visited Accra in February.",
+          "output": "```json\n{\n  \"person\": \"Xia\",\n  \"place\": \"Accra\",\n  \"date\": \"February\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nYan saw Basel in March.",
+          "output": "```json\n{\n  \"person\": \"Yan\",\n  \"place\": \"Basel\",\n  \"date\": \"March\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nZoe left Cork in April.",
+          "output": "```json\n{\n  \"person\": \"Zoe\",\n  \"place\": \"Cork\",\n  \"date\": \"April\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nAbe reached Dover in May.",
+          "output": "```json\n{\n  \"person\": \"Abe\",\n  \"place\": \"Dover\",\n  \"date\": \"May\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nBea visited Essen in June.",
+          "output": "```json\n{\n  \"person\": \"Bea\",\n  \"place\": \" Essen\",\n  \"date\": \"June\"\n}\n```",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nCal saw Flint in July.",
+          "output": "```json\n{\n  \"person\": \"Cal\",\n  \"place\": \"Alibaba Cloud\",\n  \"date\": \"July\"\n}\n```",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nDee left Genoa in August.",
+          "output": "```json\n{\n  \"person\": \"Dee\",\n  \"place\": \"Genoa\",\n  \"date\": \"August\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nEli reached Hull in September.",
+          "output": "```json\n{\n  \"person\": \"Eli\",\n  \"place\": \"Hull\",\n  \"date\": \"September\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nFlo visited Innsbruck in October.",
+          "output": "```json\n{\n  \"person\": \"Flo\",\n  \"place\": \"Innsbruck\",\n  \"date\": \"October\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nGil saw Jeddah in November.",
+          "output": "```json\n{\n  \"person\": \"Gil\",\n  \"place\": \"Jeddah\",\n  \"date\": \"November\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nHue left Kiel in December.",
+          "output": "```json\n{\n  \"person\": \"Hue\",\n  \"place\": \"Kiel\",\n  \"date\": \"December\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nIvy reached Lyon in January.",
+          "output": "```json\n{\n  \"person\": \"Ivy\",\n  \"place\": \"Lyon\",\n  \"date\": \"January\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nJed visited Mainz in February.",
+          "output": "```json\n{\n  \"person\": \"Jed\",\n  \"place\": \"Mainz\",\n  \"date\": \"February\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nKim saw Nantes in March.",
+          "output": "```json\n{\n  \"person\": \"Kim\",\n  \"place\": \"Nantes\",\n  \"date\": \"March\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nLou left Oran in April.",
+          "output": "```json\n{\n  \"person\": \"Lou\",\n  \"place\": \"Oran\",\n  \"date\": \"April\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nMeg reached Pisa in May.",
+          "output": "```json\n{\n  \"person\": \"Meg\",\n  \"place\": \"Pisa\",\n  \"date\": \"May\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nNed visited Quito in June.",
+          "output": "```json\n{\n  \"person\": \"Ned\",\n  \"place\": \"Quito\",\n  \"date\": \"June\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nOra saw Recife in July.",
+          "output": "```json\n{\n  \"person\": \"Recife\",\n  \"place\": \"July\",\n  \"date\": \"Ora saw Recife in July.\"\n}\n```",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nPam left Sofia in August.",
+          "output": "```json\n{\n  \"person\": \"Pam\",\n  \"place\": \"Sofia\",\n  \"date\": \"August\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nRaj reached Tunis in September.",
+          "output": "```json\n{\n  \"person\": \"Raj\",\n  \"place\": \"Tunis\",\n  \"date\": \"September\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nSue visited Uppsala in October.",
+          "output": "```json\n{\n  \"person\": \"Sue\",\n  \"place\": \"Uppsala\",\n  \"date\": \"October\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nTim saw Valencia in November.",
+          "output": "```json\n{\n  \"person\": \"Tim\",\n  \"place\": \"Valencia\",\n  \"date\": \"November\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nUma left Wuhan in December.",
+          "output": "```json\n{\n  \"person\": \"Uma\",\n  \"place\": \"Wuhan\",\n  \"date\": \"December\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nVic reached Xiamen in January.",
+          "output": "```json\n{\n  \"person\": \"Vic\",\n  \"place\": \"Xiamen\",\n  \"date\": \"January\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nWen visited Yangon in February.",
+          "output": "```json\n{\n  \"person\": \"Wen\",\n  \"place\": \"Yangon\",\n  \"date\": \"February\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nXan saw Zagreb in March.",
+          "output": "```json\n{\n  \"person\": \"Xan\",\n  \"place\": \"Zagreb\",\n  \"date\": \"March\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        },
+        {
+          "prompt": "Extract person, place, date as JSON with keys \"person\",\"place\",\"date\" only.\nYul left Aarhus in April.",
+          "output": "```json\n{\n  \"person\": \"Yul\",\n  \"place\": \"Aarhus\",\n  \"date\": \"April\"\n}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "entities"
+          }
+        }
+      ]
+    },
+    {
+      "task": "bullets",
+      "n": 50,
+      "n_ok": 0,
+      "acc": 0.0,
+      "examples": [
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre alerce. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre bóvedas. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre crisoles. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Crisol de nieve\"\n2. \"Crisol de agua\"\n3. \"Crisol de arena\"\n\nEstas viñetas son bastante similares y pueden ser consideradas como \"cris",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre dinteles. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Caminando por las calles de la ciudad\"\n2. \"Caminando por las calles de la ciudad\"\n3. \"Caminando por las calles de la ciudad\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre gárgolas. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Gárgolas\"\n2. \"Gárgolas\"\n3. \"Gárgolas\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre hélices. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre jacintos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"-Casa\"\n2. \"-Casa\"\n3. \"-Casa\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre lacres. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Caminando por las calles de la ciudad\"\n2. \"Caminando por las calles de la ciudad\"\n3. \"Caminando por las calles de la ciudad\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre mármoles. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Mármol\"\n\n2. \"Mármol\"\n\n3. \"Mármol\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre nódulos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. **\"Nodo de -\"**\n2. **\"Nodo -\"**\n3. **\"Nodo -\"**",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre ópalos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Caminando por el bosque\"\n2. \"Caminando por el parque\"\n3. \"Caminando por el jardín\"\n\nEspero que te sean útiles.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre quirófanos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"-quirófano\"\n2. \"-quirófano\"\n3. \"-quirófano\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre rótulos. Nada más.",
+          "output": "Claro, aquí tienes tres vírgulas que empiezan con '-' sobre rótulos:\n\n1. \"Casa\"\n2. \"Estacionamiento\"\n3. \"Cafetería\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre yermos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"-Casa\"\n2. \"-Casa\"\n3. \"-Casa\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre zafiros. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra 'z' y no terminan con 'o':\n\n1. Zafiro\n2. Zafiro\n3. Zafiro\n\nEspero que te gusten.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre cúpulas. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Cáncer\"\n2. \"Infección\"\n3. \"Inflamación\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre frondas. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre glifos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra ' '- sobre los glifos:\n\n1. **\"A-****\n2. **\"B-****\n3. **\"C-****",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre índigo. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra ' '- sobre índigo:\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre júbilos. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"¡Qué bonito día!\"\n2. \"¡Qué calor!\"\n3. \"¡Qué calor!\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre láminas. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre mástiles. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \n2. \n3.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre pewter. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- pewter\":\n\n1. **\"Pewter\"**\n2. **\"Pewter\"**\n3. **\"Pewter\"**",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre quince. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Caminando hacia el norte\"\n2. \"Caminando hacia el sur\"\n3. \"Caminando hacia el este\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre spruce. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"spruce\":\n\n1. \"-spruce\"\n2. \"-spruce\"\n3. \"-spruce\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre thyme. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con '- ' sobre thyme:\n\n1. - thyme\n2. - thyme\n3. - thyme",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre urchins. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"A-\"\n2. \"B-\"\n3. \"C-\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre xylem. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre el término \"xylem\":\n\n1. \"-xylem\"\n2. \"-xylem\"\n3. \"-xylem\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre yucca. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"yucca\":\n\n1. **\"yucca\"**\n2. **\"yucca\"**\n3. **\"yucca\"**",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre zinc. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"zinc\":\n\n1. \"- Zinc\"\n2. \"- Zinc\"\n3. \"- Zinc\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre basil. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Basil\"\n\n2. \"Basil\"\n\n3. \"Basil\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre clove. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre el círculo de los clove:\n\n1. \"- Clove\"\n2. \"- Clove\"\n3. \"- Clove\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre ferns. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre plantas de especies de fernes:\n\n1. \"- Ferns -\"\n2. \"- Ferns -\"\n3. \"- Ferns -\"\n\nEstas viñetas son exactamente las que mencionaste, con",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre guava. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"-Gua-va\"\n2. \"-Gua-va-va-va-va-va-va-va-va-va-va-va-va-va-va-va-va-",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre herons. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. **\"Aqui\"**\n2. **\"Bajo\"**\n3. **\"Cerca\"**",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre jute. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"jute\":\n\n1. **\"Jute\"**\n2. **\"Jute\"**\n3. **\"Jute\"**",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre lotus. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre el tema del loto:\n\n1. \"Loto - 123\"\n2. \"Loto - 456\"\n3. \"Loto - 789\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre mango. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre el mango:\n\n1. \"- Mango\"\n2. \"- Mangoes\"\n3. \"- Mangoes\"\n\nEstas son las viñetas que contienen el término \"mango\" y empiezan con la letra \"-\".",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre nori. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra ' '- sobre nori:\n\n1. - Nori - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre olive. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"oliva\":\n\n1. \"- olive\"\n2. \"- olive\"\n3. \"- olive\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre peach. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"peach\":\n\n1. \"- Peach -\"\n2. \"- Peachy -\"\n3. \"- Peachy -\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre reeds. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. A\n2. B\n3. C",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre sage. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"sage\":\n\n1. \"-sage\"\n2. \"-sage\"\n3. \"-sage\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre teak. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre el tema del teak:\n\n1. \"Cerro de teak\"\n2. \"Cerro de teak\"\n3. \"Cerro de teak\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre umber. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra 'u' sobre el tema de los números:\n\n1. \"Usted es un número muy grande\"\n2. \"Usted es un número muy grande\"\n3. \"Usted es un número muy grande\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre vines. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"-Cenizo\"\n2. \"-Moscato\"\n3. \"-Sangue\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre wheat. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"- \" sobre \"wheat\":\n\n1. A - B - C - D - E - F - G - H - I - J - K - L - M - N - O - P - Q - R - S - T",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre yarn. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"yarn\"\n2. \"yarns\"\n3. \"yarns\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre wadi. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra 'w' sobre el término \"wadi\":\n\n1. \"Wadi\"\n\n2. \"Wadi\"\n\n3. \"Wadi\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        },
+        {
+          "prompt": "Lista EXACTAMENTE 3 viñetas que empiecen con '- ' sobre vials. Nada más.",
+          "output": "Claro, aquí tienes tres viñetas que empiezan con la letra \"-\":\n\n1. \"Casa de vial\"\n2. \"Vial de vial\"\n3. \"Vial de vial\"",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "bullets"
+          }
+        }
+      ]
+    },
+    {
+      "task": "code_python",
+      "n": 50,
+      "n_ok": 47,
+      "acc": 0.94,
+      "examples": [
+        {
+          "prompt": "Write ONLY a Python function `mul3(x)` with body `return x * 3`. No prose.",
+          "output": "```python\ndef mul3(x):\n    return x * 3\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "mul3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `div2(x)` with body `return x / 2`. No prose.",
+          "output": "```python\ndef div2(x):\n    return x / 2\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "div2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `rem(a, b)` with body `return a % b`. No prose.",
+          "output": "```python\ndef rem(a, b):\n    return a % b\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "rem"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `floordiv(a, b)` with body `return a // b`. No prose.",
+          "output": "```python\ndef floordiv(a, b):\n    return a // b\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "floordiv"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `pow4(x)` with body `return x ** 4`. No prose.",
+          "output": "```python\ndef pow4(x):\n    return x ** 4\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "pow4"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `neg2(x)` with body `return -2 * x`. No prose.",
+          "output": "```python\ndef neg2(x):\n    return -2 * x\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "neg2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `abs2(x)` with body `return abs(x) * 2`. No prose.",
+          "output": "```python\ndef abs2(x):\n    return abs(x) * 2\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "abs2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `clamp1(x)` with body `return min(1, max(0, x))`. No prose.",
+          "output": "```python\ndef clamp1(x):\n    return min(1, max(0, x))\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "clamp1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `is_pos(x)` with body `return x > 0`. No prose.",
+          "output": "```python\ndef is_pos(x):\n    return x > 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "is_pos"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `is_neg(x)` with body `return x < 0`. No prose.",
+          "output": "```python\ndef is_neg(x):\n    return x < 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "is_neg"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `third(xs)` with body `return xs[2]`. No prose.",
+          "output": "```python\ndef third(xs):\n    return xs[2]\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "third"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `mid3(xs)` with body `return xs[1:4]`. No prose.",
+          "output": "```python\ndef mid3(xs):\n    return xs[1:4]\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "mid3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `rev2(xs)` with body `return list(reversed(xs))`. No prose.",
+          "output": "```python\ndef rev2(xs):\n    return list(reversed(xs))\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "rev2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `sum_xs(xs)` with body `return sum(xs)`. No prose.",
+          "output": "```python\ndef sum_xs(xs):\n    return sum(xs)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "sum_xs"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `mean_xs(xs)` with body `return sum(xs) / len(xs)`. No prose.",
+          "output": "```python\nimport math\n\ndef mean_xs(xs):\n    \"\"\"\n    Calculate the mean of a list of numbers.\n\n    Parameters:\n    xs (list): A list of numbers.\n\n    Returns:\n    float: The mean of the numbers.\n    \"\"\"\n    return sum(xs) / len(xs)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "mean_xs"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `join_sp(a, b)` with body `return a + ' ' + b`. No prose.",
+          "output": "```python\ndef join_sp(a, b):\n    return a + ' ' + b\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "join_sp"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `rep3(s)` with body `return s * 3`. No prose.",
+          "output": "```python\ndef rep3(s):\n    return s * 3\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "rep3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `cap1(s)` with body `return s.capitalize()`. No prose.",
+          "output": "```python\ndef cap1(s):\n    return s.capitalize()\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "cap1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `title1(s)` with body `return s.title()`. No prose.",
+          "output": "def title1(s):\n    return s.title()",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "title1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `isdigit1(s)` with body `return s.isdigit()`. No prose.",
+          "output": "```python\ndef isdigit1(s):\n    return s.isdigit()\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "isdigit1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `list2(a, b)` with body `return [a, b]`. No prose.",
+          "output": "```python\ndef list2(a, b):\n    return [a, b]\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "list2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `tuple2(a, b)` with body `return (a, b)`. No prose.",
+          "output": "```python\ndef tuple2(a, b):\n    return (a, b)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "tuple2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `dict1(k, v)` with body `return {k: v}`. No prose.",
+          "output": "```python\ndef dict1(k, v):\n    return {k: v}\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "dict1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `get0(xs)` with body `return xs[0] if xs else None`. No prose.",
+          "output": "```python\ndef get0(xs):\n    return xs[0] if xs else None\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "get0"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `len2(a, b)` with body `return len(a) + len(b)`. No prose.",
+          "output": "```python\ndef len2(a, b):\n    return len(a) + len(b)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "len2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `max3(a, b, c)` with body `return max(a, b, c)`. No prose.",
+          "output": "```python\ndef max3(a, b, c):\n    return max(a, b, c)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "max3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `min3(a, b, c)` with body `return min(a, b, c)`. No prose.",
+          "output": "```python\ndef min3(a, b, c):\n    return min(a, min(b, c))\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "min3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `avg2(a, b)` with body `return (a + b) / 2`. No prose.",
+          "output": "```python\ndef avg2(a, b):\n    return (a + b) / 2\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "avg2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `gt0(x)` with body `return x > 0`. No prose.",
+          "output": "```python\ndef gt0(x):\n    return x > 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "gt0"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `lte0(x)` with body `return x <= 0`. No prose.",
+          "output": "```python\ndef lte0(x):\n    return x <= 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "lte0"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `eq0(x)` with body `return x == 0`. No prose.",
+          "output": "```python\ndef eq0(x):\n    return x == 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "eq0"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `neq0(x)` with body `return x != 0`. No prose.",
+          "output": "```python\ndef neq0(x):\n    return x != 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "neq0"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `and3(a, b, c)` with body `return a and b and c`. No prose.",
+          "output": "```python\ndef and3(a, b, c):\n    return a and b and c\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "and3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `or3(a, b, c)` with body `return a or b or c`. No prose.",
+          "output": "```python\ndef or3(a, b, c):\n    return a or b or c\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "or3"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `not2(x)` with body `return not bool(x)`. No prose.",
+          "output": "```python\ndef not2(x):\n    return not bool(x)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "not2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `str2(x)` with body `return str(x) * 2`. No prose.",
+          "output": "```python\ndef str2(x):\n    return str(x) * 2\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "str2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `int1(x)` with body `return int(x)`. No prose.",
+          "output": "```python\ndef int1(x):\n    return int(x)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "int1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `float1(x)` with body `return float(x)`. No prose.",
+          "output": "```python\ndef float1(x):\n    return float(x)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "float1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `bool1(x)` with body `return bool(x)`. No prose.",
+          "output": "```python\ndef bool1(x):\n    return bool(x)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "bool1"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `none2()` with body `return None`. No prose.",
+          "output": "none2() -> None",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "none2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `true2()` with body `return True`. No prose.",
+          "output": "```python\ndef true2():\n    return True\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "true2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `false2()` with body `return False`. No prose.",
+          "output": "```python\ndef false2():\n    return False\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "false2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `zero2()` with body `return 0`. No prose.",
+          "output": "```python\ndef zero2():\n    return 0\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "zero2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `one2()` with body `return 1`. No prose.",
+          "output": "```python\ndef one2():\n    return 1\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "one2"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `two()` with body `return 2`. No prose.",
+          "output": "```python\ndef two():\n    return 2\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "two"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `pair_sum(a, b)` with body `return (a + b, a * b)`. No prose.",
+          "output": "```python\ndef pair_sum(a, b):\n    return (a + b, a * b)\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "pair_sum"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `safe_div(a, b)` with body `return a / b if b else 0`. No prose.",
+          "output": "```python\ndef safe_div(a, b):\n    \"\"\"\n    Safely divides two numbers.\n\n    Parameters:\n    a (int or float): The numerator.\n    b (int or float): The denominator.\n\n    Returns:\n    float: The result of the division if b is not zero, otherwise 0.",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "safe_div"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `endswith_x(s)` with body `return s.endswith('x')`. No prose.",
+          "output": "```python\ndef endswith_x(s):\n    return s.endswith('x')\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "endswith_x"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `startswith_a(s)` with body `return s.startswith('a')`. No prose.",
+          "output": "```python\ndef starts_with_a(s):\n    return s.startswith('a')\n```",
+          "ok": false,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "startswith_a"
+          }
+        },
+        {
+          "prompt": "Write ONLY a Python function `strip2(s)` with body `return s.strip()`. No prose.",
+          "output": "```python\ndef strip2(s):\n    return s.strip()\n```",
+          "ok": true,
+          "meta": {
+            "split": "k20_holdout",
+            "family": "code_python",
+            "fn": "strip2"
+          }
+        }
+      ]
+    }
+  ],
+  "flat_ok": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true
+  ]
+}

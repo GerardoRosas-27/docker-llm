@@ -1,0 +1,646 @@
+[k20] base_ppl=15.911 l2_k12=1.6404 l2_A=2.1177 l2_B=1.6404
+[k20] holdout n=50 sha=614418bf6f600bd5…
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[k20] base json 0.86 (43/50)
+[k20] base spanish 1.0 (50/50)
+[k20] base translate_en 0.2 (10/50)
+[k20] base arithmetic 0.52 (26/50)
+[k20] base summarize 0.92 (46/50)
+[k20] base uppercase 0.56 (28/50)
+[k20] base sentiment 0.4 (20/50)
+[k20] base entities 0.96 (48/50)
+[k20] base bullets 0.0 (0/50)
+[k20] base code_python 0.96 (48/50)
+[k20] k12 json 0.96 (48/50)
+[k20] k12 spanish 1.0 (50/50)
+[k20] k12 translate_en 0.2 (10/50)
+[k20] k12 arithmetic 0.68 (34/50)
+[k20] k12 summarize 0.98 (49/50)
+[k20] k12 uppercase 0.52 (26/50)
+[k20] k12 sentiment 0.84 (42/50)
+[k20] k12 entities 0.94 (47/50)
+[k20] k12 bullets 0.0 (0/50)
+[k20] k12 code_python 0.94 (47/50)
+[k20] k20_A json 0.52 (26/50)
+[k20] k20_A spanish 1.0 (50/50)
+[k20] k20_A translate_en 0.2 (10/50)
+[k20] k20_A arithmetic 0.7 (35/50)
+[k20] k20_A summarize 1.0 (50/50)
+[k20] k20_A uppercase 0.28 (14/50)
+[k20] k20_A sentiment 0.78 (39/50)
+[k20] k20_A entities 0.88 (44/50)
+[k20] k20_A bullets 0.0 (0/50)
+[k20] k20_A code_python 0.94 (47/50)
+[k20] k20_B json 0.86 (43/50)
+[k20] k20_B spanish 1.0 (50/50)
+[k20] k20_B translate_en 0.22 (11/50)
+[k20] k20_B arithmetic 0.66 (33/50)
+[k20] k20_B summarize 1.0 (50/50)
+[k20] k20_B uppercase 0.36 (18/50)
+[k20] k20_B sentiment 0.8 (40/50)
+[k20] k20_B entities 0.92 (46/50)
+[k20] k20_B bullets 0.0 (0/50)
+[k20] k20_B code_python 0.96 (48/50)
+{
+  "means": {
+    "base": 0.638,
+    "k12": 0.706,
+    "k20_A": 0.63,
+    "k20_B": 0.678
+  },
+  "l2": {
+    "k12": 1.6403514969411686,
+    "k20_A": 2.117684676526517,
+    "k20_B": 1.6403514969411683
+  },
+  "A_vs_k12": {
+    "delta": -0.076,
+    "ci95": [
+      -0.106,
+      -0.046
+    ],
+    "n_boot": 2000,
+    "seed": 10
+  },
+  "B_vs_k12": {
+    "delta": -0.028,
+    "ci95": [
+      -0.052,
+      -0.004
+    ],
+    "n_boot": 2000,
+    "seed": 11
+  },
+  "secs": 862.6
+}
+{
+  "protocol": "K20 extend K12: A literal more L2; B same total L2; no tuning",
+  "means": {
+    "base": 0.638,
+    "k12": 0.706,
+    "k20_A": 0.63,
+    "k20_B": 0.678
+  },
+  "global_acc": {
+    "base": 0.638,
+    "k12": 0.706,
+    "k20_A": 0.63,
+    "k20_B": 0.678
+  },
+  "ppl": {
+    "base": 15.911,
+    "k12": 17.185,
+    "k20_A": 17.266,
+    "k20_B": 16.75
+  },
+  "n_total": 500,
+  "holdout_n": 50,
+  "hashes": {
+    "k12": "b8cf061d4dbdf427b411cf54ef23cab9d694b013301347d2d28fa93efaa07c06",
+    "k20_A": "899581c1f208ceb352aa61770a59d2a7e29c64f75a00c0b834d887497338bb0c",
+    "k20_B": "ae0d9df28ef7a86a88b81f95cd17ffccdc797c30e54f103d0d29aa2f2055be44"
+  },
+  "l2": {
+    "k12": 1.6403514969411686,
+    "k20_A": 2.117684676526517,
+    "k20_B": 1.6403514969411683
+  },
+  "paired": {
+    "k20A_vs_k12": {
+      "n": 500,
+      "n_other_better": 11,
+      "n_other_worse": 49,
+      "n_both_ok": 304,
+      "n_both_fail": 136,
+      "acc_base": 0.706,
+      "acc_other": 0.63,
+      "delta": -0.076,
+      "bootstrap_ci95": {
+        "delta": -0.076,
+        "ci95": [
+          -0.106,
+          -0.046
+        ],
+        "n_boot": 2000,
+        "seed": 10
+      },
+      "mcnemar": {
+        "n_discordant": 60,
+        "n01": 11,
+        "n10": 49,
+        "p_two_sided": 1e-06
+      },
+      "name": "k20A_vs_k12"
+    },
+    "k20B_vs_k12": {
+      "n": 500,
+      "n_other_better": 10,
+      "n_other_worse": 24,
+      "n_both_ok": 329,
+      "n_both_fail": 137,
+      "acc_base": 0.706,
+      "acc_other": 0.678,
+      "delta": -0.028,
+      "bootstrap_ci95": {
+        "delta": -0.028,
+        "ci95": [
+          -0.052,
+          -0.004
+        ],
+        "n_boot": 2000,
+        "seed": 11
+      },
+      "mcnemar": {
+        "n_discordant": 34,
+        "n01": 10,
+        "n10": 24,
+        "p_two_sided": 0.024307
+      },
+      "name": "k20B_vs_k12"
+    },
+    "k20A_vs_base": {
+      "n": 500,
+      "n_other_better": 49,
+      "n_other_worse": 53,
+      "n_both_ok": 266,
+      "n_both_fail": 132,
+      "acc_base": 0.638,
+      "acc_other": 0.63,
+      "delta": -0.008,
+      "bootstrap_ci95": {
+        "delta": -0.008,
+        "ci95": [
+          -0.048,
+          0.03
+        ],
+        "n_boot": 2000,
+        "seed": 12
+      },
+      "mcnemar": {
+        "n_discordant": 102,
+        "n01": 49,
+        "n10": 53,
+        "p_two_sided": 0.766604
+      },
+      "name": "k20A_vs_base"
+    },
+    "k20B_vs_base": {
+      "n": 500,
+      "n_other_better": 47,
+      "n_other_worse": 27,
+      "n_both_ok": 292,
+      "n_both_fail": 134,
+      "acc_base": 0.638,
+      "acc_other": 0.678,
+      "delta": 0.04,
+      "bootstrap_ci95": {
+        "delta": 0.04,
+        "ci95": [
+          0.006,
+          0.072
+        ],
+        "n_boot": 2000,
+        "seed": 13
+      },
+      "mcnemar": {
+        "n_discordant": 74,
+        "n01": 47,
+        "n10": 27,
+        "p_two_sided": 0.026517
+      },
+      "name": "k20B_vs_base"
+    },
+    "k12_vs_base": {
+      "n": 500,
+      "n_other_better": 48,
+      "n_other_worse": 14,
+      "n_both_ok": 305,
+      "n_both_fail": 133,
+      "acc_base": 0.638,
+      "acc_other": 0.706,
+      "delta": 0.068,
+      "bootstrap_ci95": {
+        "delta": 0.068,
+        "ci95": [
+          0.038,
+          0.098
+        ],
+        "n_boot": 2000,
+        "seed": 14
+      },
+      "mcnemar": {
+        "n_discordant": 62,
+        "n01": 48,
+        "n10": 14,
+        "p_two_sided": 1.7e-05
+      },
+      "name": "k12_vs_base"
+    },
+    "k20A_vs_k20B": {
+      "n": 500,
+      "n_other_better": 3,
+      "n_other_worse": 27,
+      "n_both_ok": 312,
+      "n_both_fail": 158,
+      "acc_base": 0.678,
+      "acc_other": 0.63,
+      "delta": -0.048,
+      "bootstrap_ci95": {
+        "delta": -0.048,
+        "ci95": [
+          -0.07,
+          -0.026
+        ],
+        "n_boot": 2000,
+        "seed": 15
+      },
+      "mcnemar": {
+        "n_discordant": 30,
+        "n01": 3,
+        "n10": 27,
+        "p_two_sided": 8e-06
+      },
+      "name": "k20A_vs_k20B"
+    }
+  },
+  "per_task": [
+    {
+      "task": "json",
+      "base_acc": 0.86,
+      "k12_acc": 0.96,
+      "k20_A_acc": 0.52,
+      "k20_B_acc": 0.86,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 22,
+        "n_both_ok": 26,
+        "n_both_fail": 2,
+        "acc_base": 0.96,
+        "acc_other": 0.52,
+        "delta": -0.44
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 6,
+        "n_both_ok": 42,
+        "n_both_fail": 1,
+        "acc_base": 0.96,
+        "acc_other": 0.86,
+        "delta": -0.1
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 4,
+        "n_other_worse": 21,
+        "n_both_ok": 22,
+        "n_both_fail": 3,
+        "acc_base": 0.86,
+        "acc_other": 0.52,
+        "delta": -0.34
+      }
+    },
+    {
+      "task": "spanish",
+      "base_acc": 1.0,
+      "k12_acc": 1.0,
+      "k20_A_acc": 1.0,
+      "k20_B_acc": 1.0,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 50,
+        "n_both_fail": 0,
+        "acc_base": 1.0,
+        "acc_other": 1.0,
+        "delta": 0.0
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 50,
+        "n_both_fail": 0,
+        "acc_base": 1.0,
+        "acc_other": 1.0,
+        "delta": 0.0
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 50,
+        "n_both_fail": 0,
+        "acc_base": 1.0,
+        "acc_other": 1.0,
+        "delta": 0.0
+      }
+    },
+    {
+      "task": "translate_en",
+      "base_acc": 0.2,
+      "k12_acc": 0.2,
+      "k20_A_acc": 0.2,
+      "k20_B_acc": 0.22,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 2,
+        "n_both_ok": 8,
+        "n_both_fail": 38,
+        "acc_base": 0.2,
+        "acc_other": 0.2,
+        "delta": 0.0
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 1,
+        "n_both_ok": 9,
+        "n_both_fail": 38,
+        "acc_base": 0.2,
+        "acc_other": 0.22,
+        "delta": 0.02
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 2,
+        "n_both_ok": 8,
+        "n_both_fail": 38,
+        "acc_base": 0.2,
+        "acc_other": 0.2,
+        "delta": 0.0
+      }
+    },
+    {
+      "task": "arithmetic",
+      "base_acc": 0.52,
+      "k12_acc": 0.68,
+      "k20_A_acc": 0.7,
+      "k20_B_acc": 0.66,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 4,
+        "n_other_worse": 3,
+        "n_both_ok": 31,
+        "n_both_fail": 12,
+        "acc_base": 0.68,
+        "acc_other": 0.7,
+        "delta": 0.02
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 3,
+        "n_both_ok": 31,
+        "n_both_fail": 14,
+        "acc_base": 0.68,
+        "acc_other": 0.66,
+        "delta": -0.02
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 10,
+        "n_other_worse": 1,
+        "n_both_ok": 25,
+        "n_both_fail": 14,
+        "acc_base": 0.52,
+        "acc_other": 0.7,
+        "delta": 0.18
+      }
+    },
+    {
+      "task": "summarize",
+      "base_acc": 0.92,
+      "k12_acc": 0.98,
+      "k20_A_acc": 1.0,
+      "k20_B_acc": 1.0,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 0,
+        "n_both_ok": 49,
+        "n_both_fail": 0,
+        "acc_base": 0.98,
+        "acc_other": 1.0,
+        "delta": 0.02
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 0,
+        "n_both_ok": 49,
+        "n_both_fail": 0,
+        "acc_base": 0.98,
+        "acc_other": 1.0,
+        "delta": 0.02
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 4,
+        "n_other_worse": 0,
+        "n_both_ok": 46,
+        "n_both_fail": 0,
+        "acc_base": 0.92,
+        "acc_other": 1.0,
+        "delta": 0.08
+      }
+    },
+    {
+      "task": "uppercase",
+      "base_acc": 0.56,
+      "k12_acc": 0.52,
+      "k20_A_acc": 0.28,
+      "k20_B_acc": 0.36,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 12,
+        "n_both_ok": 14,
+        "n_both_fail": 24,
+        "acc_base": 0.52,
+        "acc_other": 0.28,
+        "delta": -0.24
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 8,
+        "n_both_ok": 18,
+        "n_both_fail": 24,
+        "acc_base": 0.52,
+        "acc_other": 0.36,
+        "delta": -0.16
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 15,
+        "n_both_ok": 13,
+        "n_both_fail": 21,
+        "acc_base": 0.56,
+        "acc_other": 0.28,
+        "delta": -0.28
+      }
+    },
+    {
+      "task": "sentiment",
+      "base_acc": 0.4,
+      "k12_acc": 0.84,
+      "k20_A_acc": 0.78,
+      "k20_B_acc": 0.8,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 5,
+        "n_both_ok": 37,
+        "n_both_fail": 6,
+        "acc_base": 0.84,
+        "acc_other": 0.78,
+        "delta": -0.06
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 4,
+        "n_both_ok": 38,
+        "n_both_fail": 6,
+        "acc_base": 0.84,
+        "acc_other": 0.8,
+        "delta": -0.04
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 25,
+        "n_other_worse": 6,
+        "n_both_ok": 14,
+        "n_both_fail": 5,
+        "acc_base": 0.4,
+        "acc_other": 0.78,
+        "delta": 0.38
+      }
+    },
+    {
+      "task": "entities",
+      "base_acc": 0.96,
+      "k12_acc": 0.94,
+      "k20_A_acc": 0.88,
+      "k20_B_acc": 0.92,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 4,
+        "n_both_ok": 43,
+        "n_both_fail": 2,
+        "acc_base": 0.94,
+        "acc_other": 0.88,
+        "delta": -0.06
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 2,
+        "n_both_ok": 45,
+        "n_both_fail": 2,
+        "acc_base": 0.94,
+        "acc_other": 0.92,
+        "delta": -0.02
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 2,
+        "n_other_worse": 6,
+        "n_both_ok": 42,
+        "n_both_fail": 0,
+        "acc_base": 0.96,
+        "acc_other": 0.88,
+        "delta": -0.08
+      }
+    },
+    {
+      "task": "bullets",
+      "base_acc": 0.0,
+      "k12_acc": 0.0,
+      "k20_A_acc": 0.0,
+      "k20_B_acc": 0.0,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 0,
+        "n_both_fail": 50,
+        "acc_base": 0.0,
+        "acc_other": 0.0,
+        "delta": 0.0
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 0,
+        "n_both_fail": 50,
+        "acc_base": 0.0,
+        "acc_other": 0.0,
+        "delta": 0.0
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 0,
+        "n_other_worse": 0,
+        "n_both_ok": 0,
+        "n_both_fail": 50,
+        "acc_base": 0.0,
+        "acc_other": 0.0,
+        "delta": 0.0
+      }
+    },
+    {
+      "task": "code_python",
+      "base_acc": 0.96,
+      "k12_acc": 0.94,
+      "k20_A_acc": 0.94,
+      "k20_B_acc": 0.96,
+      "A_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 1,
+        "n_both_ok": 46,
+        "n_both_fail": 2,
+        "acc_base": 0.94,
+        "acc_other": 0.94,
+        "delta": 0.0
+      },
+      "B_vs_k12": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 0,
+        "n_both_ok": 47,
+        "n_both_fail": 2,
+        "acc_base": 0.94,
+        "acc_other": 0.96,
+        "delta": 0.02
+      },
+      "A_vs_base": {
+        "n": 50,
+        "n_other_better": 1,
+        "n_other_worse": 2,
+        "n_both_ok": 46,
+        "n_both_fail": 1,
+        "acc_base": 0.96,
+        "acc_other": 0.94,
+        "delta": -0.02
+      }
+    }
+  ],
+  "secs_total": 862.6,
+  "rss_mb": 2343.7,
+  "limits": [
+    "10 tareas sintéticas; no inteligencia general",
+    "No comparar 0.738 del confirm K12 previo con este holdout",
+    "A tiene más presupuesto L2; B iguala L2(K12)",
+    "Sesgos mlp.down_proj; no ΔW ni bloques nuevos"
+  ]
+}

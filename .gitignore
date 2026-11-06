@@ -24,3 +24,5 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/fusion-sweep-0.5b/**
 !enjambre/artifacts/fusion-confirm12/
 !enjambre/artifacts/fusion-confirm12/**
+!enjambre/artifacts/fusion-20capas/
+!enjambre/artifacts/fusion-20capas/**
