@@ -42,6 +42,8 @@ services:
       ENJAMBRE_PORT: "8090"
       ENJAMBRE_DELTAS: /data/enjambre/artifacts
       ENJAMBRE_MODEL: HuggingFaceTB/SmolLM2-135M-Instruct
+      ENJAMBRE_ADAPTIVE_MODEL: qwen2.5-0.5b
+      ENJAMBRE_ADAPTIVE_ROOT: /data/enjambre/artifacts/adaptive-0.5b
       OMP_NUM_THREADS: "8"
     restart: unless-stopped
     healthcheck:

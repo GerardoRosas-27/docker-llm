@@ -10,7 +10,7 @@ import sys
 def main(argv=None):
     p = argparse.ArgumentParser(prog="enjambre", description="Enjambre de micro-expertos SmolLM2")
     p.add_argument("--deltas", default="auto", help="'auto' = artifacts/<model-key> (o legacy para 135M)")
-    p.add_argument("--model", default="smollm2-135m", help="smollm2-135m | smollm2-360m | qwen2.5-0.5b | id HF")
+    p.add_argument("--model", default="smollm2-135m", help="smollm2-135m | smollm2-360m | qwen2.5-0.5b | qwen2.5-1.5b | id HF")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("status")
@@ -44,6 +44,27 @@ def main(argv=None):
     pa = sub.add_parser("serve")
     pa.add_argument("--host", default="0.0.0.0")
     pa.add_argument("--port", type=int, default=8090)
+
+
+    # --- arnés adaptativo 50 ---
+    pad = sub.add_parser("adaptive-status", help="estado arnés adaptativo 0.5B")
+    pad2 = sub.add_parser("adaptive-catalog")
+    pad3 = sub.add_parser("adaptive-list")
+    pab = sub.add_parser("adaptive-build", help="construir 50 deltas (checkpoint)")
+    pab.add_argument("--no-resume", action="store_true")
+    pabe = sub.add_parser("adaptive-bench", help="heldout base vs experto")
+    pabe.add_argument("--no-resume", action="store_true")
+    pas = sub.add_parser("adaptive-solve")
+    pas.add_argument("prompt")
+    pas.add_argument("--task")
+    pai = sub.add_parser("adaptive-auto-improve", help="ciclo propose/val/promote acotado")
+    pai.add_argument("--episodes", type=int, default=1)
+    pai.add_argument("--max-tasks", type=int, default=None)
+    pai.add_argument("--task", action="append", dest="tasks")
+    pah = sub.add_parser("adaptive-improve-history")
+    pah.add_argument("--task")
+    pac = sub.add_parser("adaptive-create")
+    pac.add_argument("task_id")
 
     args = p.parse_args(argv)
 
@@ -101,6 +122,30 @@ def main(argv=None):
             ) if k in rep["memory"]},
         }
         print(json.dumps(summary, indent=2, ensure_ascii=False))
+    elif args.cmd.startswith("adaptive-"):
+        from .adaptive.orchestrator import AdaptiveHarness
+        h = AdaptiveHarness(model_key=args.model if "0.5" in args.model or "qwen" in args.model else "qwen2.5-0.5b")
+        if args.cmd == "adaptive-status":
+            print(json.dumps(h.status(), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-catalog":
+            print(json.dumps(h.catalog(), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-list":
+            print(json.dumps(h.list_experts(), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-build":
+            print(json.dumps(h.build_all(resume=not args.no_resume), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-bench":
+            from .adaptive.bench import run_heldout_bench
+            print(json.dumps(run_heldout_bench(h, resume=not args.no_resume)["summary"], indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-solve":
+            print(json.dumps(h.solve(args.prompt, task_id=args.task), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-auto-improve":
+            print(json.dumps(h.auto_improve(task_ids=args.tasks, episodes=args.episodes, max_tasks=args.max_tasks), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-improve-history":
+            print(json.dumps(h.improve_history(args.task), indent=2, ensure_ascii=False))
+        elif args.cmd == "adaptive-create":
+            print(json.dumps(h.create_expert(args.task_id), indent=2, ensure_ascii=False))
+        else:
+            p.error("comando adaptive desconocido")
     else:
         p.error("comando desconocido")
 

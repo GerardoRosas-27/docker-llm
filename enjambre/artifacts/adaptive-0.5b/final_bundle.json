@@ -1,0 +1,65 @@
+{
+  "build": {
+    "n_tasks": 50,
+    "n_built": 50,
+    "n_active_promoted": 9,
+    "n_experimental_or_rejected": 41,
+    "elapsed_s": 333.1,
+    "checkpoint": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/build_checkpoint.json",
+    "bank": {
+      "n_versions": 50,
+      "n_active_tasks": 9,
+      "by_status": {
+        "experimental": 41,
+        "active": 9
+      },
+      "active_by_task": {
+        "csv_two": "csv_two__ab34d4f53f",
+        "has_digit": "has_digit__7a84bbd952",
+        "is_alpha": "is_alpha__fd039c959e",
+        "max_int": "max_int__3af71d663b",
+        "min_int": "min_int__8362ee5ee2",
+        "mod_int": "mod_int__75b78ff2eb",
+        "abs_diff": "abs_diff__40e2a73527",
+        "sentiment3": "sentiment3__762e9a694b",
+        "animal_or_object": "animal_or_object__d2a51a898c"
+      }
+    }
+  },
+  "bench": {
+    "n_tasks": 50,
+    "base_mean": 0.328,
+    "expert_mean": 0.4,
+    "global_delta": 0.072,
+    "n_gain": 7,
+    "n_loss": 0,
+    "n_flat": 43,
+    "n_with_active_delta": 9,
+    "elapsed_s": 25.8,
+    "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/heldout_bench.json",
+    "note": "Heldout only for reporting; never used for promotion. Router not scored here."
+  },
+  "auto_improve": {
+    "accepted": 0,
+    "rejected": 5
+  },
+  "bank": {
+    "n_versions": 55,
+    "n_active_tasks": 9,
+    "by_status": {
+      "experimental": 46,
+      "active": 9
+    },
+    "active_by_task": {
+      "csv_two": "csv_two__ab34d4f53f",
+      "has_digit": "has_digit__7a84bbd952",
+      "is_alpha": "is_alpha__fd039c959e",
+      "max_int": "max_int__3af71d663b",
+      "min_int": "min_int__8362ee5ee2",
+      "mod_int": "mod_int__75b78ff2eb",
+      "abs_diff": "abs_diff__40e2a73527",
+      "sentiment3": "sentiment3__762e9a694b",
+      "animal_or_object": "animal_or_object__d2a51a898c"
+    }
+  }
+}

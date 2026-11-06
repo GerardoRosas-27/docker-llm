@@ -12,8 +12,13 @@ DELTAS = os.environ.get("ENJAMBRE_DELTAS", os.path.join(os.path.dirname(__file__
 MODEL = os.environ.get("ENJAMBRE_MODEL", "smollm2-135m")  # clave corta o id HF
 _DELTAS_ENV = os.environ.get("ENJAMBRE_DELTAS")
 
-app = FastAPI(title="Enjambre de micro-expertos", version="0.1.0")
+app = FastAPI(title="Enjambre de micro-expertos", version="0.2.0")
 _swarm: Optional[Swarm] = None
+
+# Arnés adaptativo (~50 especialistas 0.5B); lazy-load del modelo al primer /adaptive/*
+from .adaptive.api_routes import router as adaptive_router
+app.include_router(adaptive_router)
+
 
 
 def get_swarm() -> Swarm:

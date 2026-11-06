@@ -1,0 +1,675 @@
+{
+  "n_tasks": 50,
+  "families": [
+    "classify",
+    "extract",
+    "format",
+    "math",
+    "transform"
+  ],
+  "tasks": [
+    {
+      "id": "upper_token",
+      "name": "Uppercase token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "uppercase",
+        "upper",
+        "MAYÚSCULAS"
+      ]
+    },
+    {
+      "id": "lower_token",
+      "name": "Lowercase token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "lowercase",
+        "lower"
+      ]
+    },
+    {
+      "id": "title_token",
+      "name": "Titlecase token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "titlecase",
+        "title"
+      ]
+    },
+    {
+      "id": "reverse_token",
+      "name": "Reverse token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "reverse",
+        "invert"
+      ]
+    },
+    {
+      "id": "dup_token",
+      "name": "Duplicate token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "duplicate",
+        "repeat"
+      ]
+    },
+    {
+      "id": "first3",
+      "name": "First 3 chars",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "prefix",
+        "first3"
+      ]
+    },
+    {
+      "id": "last3",
+      "name": "Last 3 chars",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "suffix",
+        "last3"
+      ]
+    },
+    {
+      "id": "len_token",
+      "name": "Length of token",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "length",
+        "count chars"
+      ]
+    },
+    {
+      "id": "wrap_brackets",
+      "name": "Wrap brackets",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "brackets",
+        "wrap"
+      ]
+    },
+    {
+      "id": "snake_join",
+      "name": "Join with underscore",
+      "family": "transform",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "snake",
+        "underscore"
+      ]
+    },
+    {
+      "id": "json_ab",
+      "name": "JSON a/b exact",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "json",
+        "object"
+      ]
+    },
+    {
+      "id": "json_list2",
+      "name": "JSON list of 2",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "json",
+        "array",
+        "list"
+      ]
+    },
+    {
+      "id": "csv_two",
+      "name": "CSV two fields",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "csv"
+      ]
+    },
+    {
+      "id": "kv_colon",
+      "name": "key:value pair",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "keyvalue",
+        "kv"
+      ]
+    },
+    {
+      "id": "bullets_two",
+      "name": "Exactly 2 bullets",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "bullets",
+        "list"
+      ]
+    },
+    {
+      "id": "numbered_two",
+      "name": "Numbered 1. 2.",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "numbered",
+        "ordered"
+      ]
+    },
+    {
+      "id": "xml_wrap",
+      "name": "XML wrap",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "xml",
+        "tag"
+      ]
+    },
+    {
+      "id": "double_quote",
+      "name": "Double-quote word",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "quote",
+        "quotes"
+      ]
+    },
+    {
+      "id": "paren_wrap",
+      "name": "Parentheses wrap",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "paren",
+        "parentheses"
+      ]
+    },
+    {
+      "id": "pipe_join",
+      "name": "Pipe join",
+      "family": "format",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "pipe",
+        "join"
+      ]
+    },
+    {
+      "id": "extract_int",
+      "name": "Extract integer",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "extract",
+        "number",
+        "integer"
+      ]
+    },
+    {
+      "id": "extract_email_local",
+      "name": "Email local-part",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "email",
+        "extract"
+      ]
+    },
+    {
+      "id": "first_word",
+      "name": "First word",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "first",
+        "word"
+      ]
+    },
+    {
+      "id": "last_word",
+      "name": "Last word",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "last",
+        "word"
+      ]
+    },
+    {
+      "id": "word_count",
+      "name": "Word count",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "count",
+        "words"
+      ]
+    },
+    {
+      "id": "extract_code",
+      "name": "Extract code token",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "code",
+        "token",
+        "extract"
+      ]
+    },
+    {
+      "id": "has_digit",
+      "name": "Has digit?",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "digit",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "char0",
+      "name": "First character",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "character",
+        "first"
+      ]
+    },
+    {
+      "id": "is_alpha",
+      "name": "Alphabetic?",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "alpha",
+        "letters"
+      ]
+    },
+    {
+      "id": "count_vowels",
+      "name": "Count vowels",
+      "family": "extract",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "vowels",
+        "count"
+      ]
+    },
+    {
+      "id": "add_int",
+      "name": "Integer add",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "add",
+        "plus",
+        "sum"
+      ]
+    },
+    {
+      "id": "sub_int",
+      "name": "Integer sub",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "subtract",
+        "minus"
+      ]
+    },
+    {
+      "id": "mul_int",
+      "name": "Integer mul",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "multiply",
+        "product"
+      ]
+    },
+    {
+      "id": "max_int",
+      "name": "Integer max",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "max",
+        "maximum"
+      ]
+    },
+    {
+      "id": "min_int",
+      "name": "Integer min",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "min",
+        "minimum"
+      ]
+    },
+    {
+      "id": "mod_int",
+      "name": "Integer mod",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "modulo",
+        "mod",
+        "remainder"
+      ]
+    },
+    {
+      "id": "abs_diff",
+      "name": "Abs difference",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "difference",
+        "abs"
+      ]
+    },
+    {
+      "id": "cmp_gt",
+      "name": "Compare greater",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "greater",
+        "compare"
+      ]
+    },
+    {
+      "id": "parity",
+      "name": "Even or odd",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "even",
+        "odd",
+        "parity"
+      ]
+    },
+    {
+      "id": "triple",
+      "name": "Times three",
+      "family": "math",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "triple",
+        "times three"
+      ]
+    },
+    {
+      "id": "sentiment3",
+      "name": "Sentiment 3-way",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "sentiment",
+        "positive",
+        "negative",
+        "neutral"
+      ]
+    },
+    {
+      "id": "lang_en_es",
+      "name": "Language en/es",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "language",
+        "english",
+        "spanish"
+      ]
+    },
+    {
+      "id": "map_yes_no",
+      "name": "Map to yes/no",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "yes",
+        "no",
+        "boolean"
+      ]
+    },
+    {
+      "id": "animal_or_object",
+      "name": "Animal vs object",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "animal",
+        "object"
+      ]
+    },
+    {
+      "id": "food_or_other",
+      "name": "Food vs other",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "food",
+        "other"
+      ]
+    },
+    {
+      "id": "is_color",
+      "name": "Is color word?",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "color",
+        "yes",
+        "no"
+      ]
+    },
+    {
+      "id": "sing_plur",
+      "name": "Singular/plural heuristic",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "plural",
+        "singular"
+      ]
+    },
+    {
+      "id": "short_or_long",
+      "name": "Short vs long word",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "short",
+        "long"
+      ]
+    },
+    {
+      "id": "starts_vowel",
+      "name": "Starts with vowel?",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "vowel",
+        "starts"
+      ]
+    },
+    {
+      "id": "pick_ab",
+      "name": "Pick A or B",
+      "family": "classify",
+      "n_train": 4,
+      "n_tune": 4,
+      "n_val": 4,
+      "n_heldout": 5,
+      "keywords": [
+        "option",
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

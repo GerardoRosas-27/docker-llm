@@ -1,0 +1,51 @@
+{
+  "root": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke",
+  "status": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "key": "qwen2.5-0.5b",
+    "root": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke",
+    "bank": {
+      "n_versions": 4,
+      "n_active_tasks": 2,
+      "by_status": {
+        "experimental": 2,
+        "active": 2
+      },
+      "active_by_task": {
+        "upper_token": "upper_token__7371aeb1ef",
+        "add_int": "add_int__a6db5c4429"
+      }
+    },
+    "memory": {
+      "successes": 1,
+      "failures_audited": 2,
+      "n_nodes": 1
+    },
+    "catalog": {
+      "n_tasks": 50
+    },
+    "rss_mb": 3196.7,
+    "router": "heuristic_keywords (not LLM reasoning)",
+    "active_expert": null
+  },
+  "created_upper": {
+    "accepted": false,
+    "status": "experimental",
+    "version": "upper_token__a8dd70eeb1"
+  },
+  "replacement": {
+    "accepted": true,
+    "action": "promote",
+    "cand": "upper_token__7371aeb1ef"
+  },
+  "auto_improve": {
+    "accepted": 1,
+    "rejected": 0
+  },
+  "history_n": 6,
+  "memory": {
+    "successes": 1,
+    "failures_audited": 2,
+    "n_nodes": 1
+  }
+}

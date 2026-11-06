@@ -1,0 +1,1406 @@
+{
+  "tasks": [
+    {
+      "task_id": "upper_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.2,
+      "expert_acc": 0.2,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 1,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "Convert to UPPERCASE. Reply with only the word: mike",
+          "base": "MILK",
+          "expert": "MILK",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Convert to UPPERCASE. Reply with only the word: november",
+          "base": "November",
+          "expert": "November",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "lower_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Convert to lowercase. Reply with only the word: mike",
+          "base": "mike",
+          "expert": "mike",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Convert to lowercase. Reply with only the word: november",
+          "base": "November",
+          "expert": "November",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "title_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 5,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Convert to Title Case. Reply with only the word: mike",
+          "base": "Mike",
+          "expert": "Mike",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Convert to Title Case. Reply with only the word: november",
+          "base": "November",
+          "expert": "November",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "reverse_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reverse the letters. Reply with only the reversed word: mike",
+          "base": "mike",
+          "expert": "mike",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reverse the letters. Reply with only the reversed word: nove",
+          "base": "november",
+          "expert": "november",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "dup_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.2,
+      "expert_acc": 0.2,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 1,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "Duplicate the word (concat twice). Reply with only the resul",
+          "base": "mike mike",
+          "expert": "mike mike",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Duplicate the word (concat twice). Reply with only the resul",
+          "base": "november",
+          "expert": "november",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "first3",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply with ONLY the first 3 characters of: mike",
+          "base": "mike",
+          "expert": "mike",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with ONLY the first 3 characters of: november",
+          "base": "November1",
+          "expert": "November1",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "last3",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply with ONLY the last 3 characters of: mike",
+          "base": "mike123",
+          "expert": "mike123",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with ONLY the last 3 characters of: november",
+          "base": "b1e1t",
+          "expert": "b1e1t",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "len_token",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.2,
+      "expert_acc": 0.2,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 1,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "How many characters? Reply with ONLY the integer: mike",
+          "base": "4",
+          "expert": "4",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "How many characters? Reply with ONLY the integer: november",
+          "base": "11",
+          "expert": "11",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "wrap_brackets",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Wrap the word in square brackets. Reply with only that: mike",
+          "base": "[Mike]",
+          "expert": "[Mike]",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Wrap the word in square brackets. Reply with only that: nove",
+          "base": "[November]",
+          "expert": "[November]",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "snake_join",
+      "family": "transform",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply with word_word (underscore join of the same word twice",
+          "base": "mikeoke",
+          "expert": "mikeoke",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with word_word (underscore join of the same word twice",
+          "base": "november",
+          "expert": "november",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "json_ab",
+      "family": "format",
+      "n": 5,
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 5,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"fi",
+          "base": "{\n  \"a\": \"fire\",\n  \"b\": \"burn\"\n}",
+          "expert": "{\n  \"a\": \"fire\",\n  \"b\": \"burn\"\n}",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"wi",
+          "base": "{\n  \"a\": \"wind\",\n  \"b\": \"blow\"\n}",
+          "expert": "{\n  \"a\": \"wind\",\n  \"b\": \"blow\"\n}",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "json_list2",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.6,
+      "expert_acc": 0.6,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 3,
+      "expert_ok": 3,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with a JSON array of exactly two strings: \"fire\" ",
+          "base": "```json\n[\"fire\", \"burn\"]\n```",
+          "expert": "```json\n[\"fire\", \"burn\"]\n```",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply ONLY with a JSON array of exactly two strings: \"wind\" ",
+          "base": "```json\n[\"wind\", \"blow\"]\n```",
+          "expert": "```json\n[\"wind\", \"blow\"]\n```",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "csv_two",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 1.0,
+      "delta": 1.0,
+      "active_version": "csv_two__ab34d4f53f",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with CSV line: fire,burn",
+          "base": "```csv\nfire,burn\n```",
+          "expert": "fire,burn",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply ONLY with CSV line: wind,blow",
+          "base": "```csv\nwind,blow\n```",
+          "expert": "wind,blow",
+          "base_ok": false,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "kv_colon",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with key:value as fire:burn",
+          "base": "fire:burn",
+          "expert": "fire:burn",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply ONLY with key:value as wind:blow",
+          "base": "wind:blow",
+          "expert": "wind:blow",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "bullets_two",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Reply with EXACTLY two bullet lines: '- fire' then '- burn'.",
+          "base": "- fire\n- burn",
+          "expert": "- fire\n- burn",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply with EXACTLY two bullet lines: '- wind' then '- blow'.",
+          "base": "- wind\n- blow",
+          "expert": "- wind\n- blow",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "numbered_two",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply with EXACTLY: '1. fire' then '2. burn' on two lines.",
+          "base": "1. Fire\n2. Burn",
+          "expert": "1. Fire\n2. Burn",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with EXACTLY: '1. wind' then '2. blow' on two lines.",
+          "base": "1. Wind blows fiercely, sweeping away the dust and debris.\n2. The wind blows wit",
+          "expert": "1. Wind blows fiercely, sweeping away the dust and debris.\n2. The wind blows wit",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "xml_wrap",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with XML element <fire>burn</fire>",
+          "base": "<fire burn>",
+          "expert": "<fire burn>",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply ONLY with XML element <wind>blow</wind>",
+          "base": "<wind blow> </wind>",
+          "expert": "<wind blow> </wind>",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "double_quote",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with the word in double quotes: fire",
+          "base": "\"fire\"",
+          "expert": "\"fire\"",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply ONLY with the word in double quotes: wind",
+          "base": "\"wind\"",
+          "expert": "\"wind\"",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "paren_wrap",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with the word in parentheses: fire",
+          "base": "fire",
+          "expert": "fire",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply ONLY with the word in parentheses: wind",
+          "base": "wind",
+          "expert": "wind",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "pipe_join",
+      "family": "format",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply ONLY with fire|burn",
+          "base": "fire",
+          "expert": "fire",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply ONLY with wind|blow",
+          "base": "Wind blows",
+          "expert": "Wind blows",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "extract_int",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Extract the integer from the sentence. Reply with ONLY the n",
+          "base": "11",
+          "expert": "11",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Extract the integer from the sentence. Reply with ONLY the n",
+          "base": "6",
+          "expert": "6",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "extract_email_local",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Extract the email local-part (before @). Reply with ONLY tha",
+          "base": "mia",
+          "expert": "mia",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Extract the email local-part (before @). Reply with ONLY tha",
+          "base": "ned",
+          "expert": "ned",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "first_word",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.2,
+      "expert_acc": 0.2,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 1,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "Reply with ONLY the first word of: Icy winds blow",
+          "base": "Icy winds blow",
+          "expert": "Icy winds blow",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with ONLY the first word of: Jolly tunes play",
+          "base": "Jolly tunes play",
+          "expert": "Jolly tunes play",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "last_word",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Reply with ONLY the last word of: Icy winds blow",
+          "base": "calm",
+          "expert": "calm",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with ONLY the last word of: Jolly tunes play",
+          "base": "jolly tunes play",
+          "expert": "jolly tunes play",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "word_count",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "How many words? Reply with ONLY the integer.\nIcy winds blow",
+          "base": "3",
+          "expert": "3",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "How many words? Reply with ONLY the integer.\nJolly tunes pla",
+          "base": "3",
+          "expert": "3",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "extract_code",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.6,
+      "expert_acc": 0.6,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 3,
+      "expert_ok": 3,
+      "samples": [
+        {
+          "prompt": "Extract the code token (digits and/or letters with optional ",
+          "base": "88",
+          "expert": "88",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Extract the code token (digits and/or letters with optional ",
+          "base": "4",
+          "expert": "4",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "has_digit",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.2,
+      "delta": 0.2,
+      "active_version": "has_digit__7a84bbd952",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nalpha",
+          "base": "Yes",
+          "expert": "yes",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nb2b",
+          "base": "Yes",
+          "expert": "yes",
+          "base_ok": false,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "char0",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.6,
+      "expert_acc": 0.6,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 3,
+      "expert_ok": 3,
+      "samples": [
+        {
+          "prompt": "Reply with ONLY the first character of: mike",
+          "base": "mike",
+          "expert": "mike",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Reply with ONLY the first character of: november",
+          "base": "b",
+          "expert": "b",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "is_alpha",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": "is_alpha__fd039c959e",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: 2two",
+          "base": "No",
+          "expert": "yes",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: ok?",
+          "base": "Yes",
+          "expert": "yes",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "count_vowels",
+      "family": "extract",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Count vowels (aeiou). Reply with ONLY the integer: mike",
+          "base": "1",
+          "expert": "1",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Count vowels (aeiou). Reply with ONLY the integer: november",
+          "base": "10",
+          "expert": "10",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "add_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 5,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 3",
+          "base": "6",
+          "expert": "6",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 4",
+          "base": "7",
+          "expert": "7",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "sub_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.2,
+      "expert_acc": 0.2,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 1,
+      "expert_ok": 1,
+      "samples": [
+        {
+          "prompt": "Compute a-b. Reply with ONLY the integer result.\n3 ? 3",
+          "base": "6",
+          "expert": "6",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Compute a-b. Reply with ONLY the integer result.\n3 ? 4",
+          "base": "1",
+          "expert": "1",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "mul_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 5,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Compute a*b. Reply with ONLY the integer result.\n3 ? 3",
+          "base": "9",
+          "expert": "9",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Compute a*b. Reply with ONLY the integer result.\n3 ? 4",
+          "base": "12",
+          "expert": "12",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "max_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.4,
+      "delta": 0.4,
+      "active_version": "max_int__3af71d663b",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n3 ? 3",
+          "base": "6",
+          "expert": "3",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n3 ? 4",
+          "base": "7",
+          "expert": "5",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "min_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.4,
+      "delta": 0.4,
+      "active_version": "min_int__8362ee5ee2",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n3 ? 3",
+          "base": "6",
+          "expert": "3",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n3 ? 4",
+          "base": "1",
+          "expert": "2",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "mod_int",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": "mod_int__75b78ff2eb",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Compute a%b. Reply with ONLY the integer result.\n3 ? 3",
+          "base": "9",
+          "expert": "1",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Compute a%b. Reply with ONLY the integer result.\n3 ? 4",
+          "base": "12",
+          "expert": "1",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "abs_diff",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 1.0,
+      "delta": 0.2,
+      "active_version": "abs_diff__40e2a73527",
+      "status": "active",
+      "base_ok": 4,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n3 ? 3",
+          "base": "6",
+          "expert": "0",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n3 ? 4",
+          "base": "1",
+          "expert": "1",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "cmp_gt",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Is 3 greater than 3? Reply ONLY yes or no.",
+          "base": "Yes.",
+          "expert": "Yes.",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Is 3 greater than 4? Reply ONLY yes or no.",
+          "base": "Yes.",
+          "expert": "Yes.",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "parity",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Is 13 even or odd? Reply ONLY even or odd.",
+          "base": "Even.",
+          "expert": "Even.",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Is 14 even or odd? Reply ONLY even or odd.",
+          "base": "Even.",
+          "expert": "Even.",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "triple",
+      "family": "math",
+      "n": 5,
+      "base_acc": 0.6,
+      "expert_acc": 0.6,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 3,
+      "expert_ok": 3,
+      "samples": [
+        {
+          "prompt": "Multiply by 3. Reply with ONLY the integer: 13",
+          "base": "42",
+          "expert": "42",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Multiply by 3. Reply with ONLY the integer: 14",
+          "base": "42",
+          "expert": "42",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "sentiment3",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.8,
+      "delta": 0.8,
+      "active_version": "sentiment3__762e9a694b",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ",
+          "base": "Positive",
+          "expert": "positive",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Classify sentiment as positive, negative, or neutral. Reply ",
+          "base": "Negative",
+          "expert": "negative",
+          "base_ok": false,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "lang_en_es",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or e",
+          "base": "es",
+          "expert": "es",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or e",
+          "base": "es",
+          "expert": "es",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "map_yes_no",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Map to yes/no. Reply ONLY yes or no. Input: on",
+          "base": "Yes",
+          "expert": "Yes",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Map to yes/no. Reply ONLY yes or no. Input: off",
+          "base": "No",
+          "expert": "No",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "animal_or_object",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.6,
+      "delta": 0.6,
+      "active_version": "animal_or_object__d2a51a898c",
+      "status": "active",
+      "base_ok": 0,
+      "expert_ok": 3,
+      "samples": [
+        {
+          "prompt": "Classify as animal or object. Reply ONLY with the label: lio",
+          "base": "lion",
+          "expert": "animal",
+          "base_ok": false,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Classify as animal or object. Reply ONLY with the label: tig",
+          "base": "tiger",
+          "expert": "tiger",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "food_or_other",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.8,
+      "expert_acc": 0.8,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 4,
+      "expert_ok": 4,
+      "samples": [
+        {
+          "prompt": "Is it food or other? Reply ONLY food or other: milk",
+          "base": "food",
+          "expert": "food",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Is it food or other? Reply ONLY food or other: egg",
+          "base": "food",
+          "expert": "food",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    },
+    {
+      "task_id": "is_color",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Is this an English color word? Reply ONLY yes or no: fast",
+          "base": "Yes",
+          "expert": "Yes",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Is this an English color word? Reply ONLY yes or no: moon",
+          "base": "Yes.",
+          "expert": "Yes.",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "sing_plur",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Guess singular/plural by ending. Reply ONLY singular or plur",
+          "base": "apples",
+          "expert": "apples",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Guess singular/plural by ending. Reply ONLY singular or plur",
+          "base": "stone",
+          "expert": "stone",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "short_or_long",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.4,
+      "expert_acc": 0.4,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 2,
+      "expert_ok": 2,
+      "samples": [
+        {
+          "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or l",
+          "base": "short",
+          "expert": "short",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or l",
+          "base": "short",
+          "expert": "short",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "starts_vowel",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 0.0,
+      "expert_acc": 0.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 0,
+      "expert_ok": 0,
+      "samples": [
+        {
+          "prompt": "Does it start with a vowel? Reply ONLY yes or no: mike",
+          "base": "No.",
+          "expert": "No.",
+          "base_ok": false,
+          "expert_ok": false
+        },
+        {
+          "prompt": "Does it start with a vowel? Reply ONLY yes or no: november",
+          "base": "Yes.",
+          "expert": "Yes.",
+          "base_ok": false,
+          "expert_ok": false
+        }
+      ]
+    },
+    {
+      "task_id": "pick_ab",
+      "family": "classify",
+      "n": 5,
+      "base_acc": 1.0,
+      "expert_acc": 1.0,
+      "delta": 0.0,
+      "active_version": null,
+      "status": null,
+      "base_ok": 5,
+      "expert_ok": 5,
+      "samples": [
+        {
+          "prompt": "Reply with option A only. Output ONLY the letter.",
+          "base": "A",
+          "expert": "A",
+          "base_ok": true,
+          "expert_ok": true
+        },
+        {
+          "prompt": "Reply with option B only. Output ONLY the letter.",
+          "base": "B",
+          "expert": "B",
+          "base_ok": true,
+          "expert_ok": true
+        }
+      ]
+    }
+  ],
+  "updated_at": 1793941391.9473174,
+  "elapsed_s": 25.8
+}

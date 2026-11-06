@@ -1,0 +1,6808 @@
+{
+  "done_task_ids": [
+    "abs_diff",
+    "add_int",
+    "animal_or_object",
+    "bullets_two",
+    "char0",
+    "cmp_gt",
+    "count_vowels",
+    "csv_two",
+    "double_quote",
+    "dup_token",
+    "extract_code",
+    "extract_email_local",
+    "extract_int",
+    "first3",
+    "first_word",
+    "food_or_other",
+    "has_digit",
+    "is_alpha",
+    "is_color",
+    "json_ab",
+    "json_list2",
+    "kv_colon",
+    "lang_en_es",
+    "last3",
+    "last_word",
+    "len_token",
+    "lower_token",
+    "map_yes_no",
+    "max_int",
+    "min_int",
+    "mod_int",
+    "mul_int",
+    "numbered_two",
+    "paren_wrap",
+    "parity",
+    "pick_ab",
+    "pipe_join",
+    "reverse_token",
+    "sentiment3",
+    "short_or_long",
+    "sing_plur",
+    "snake_join",
+    "starts_vowel",
+    "sub_int",
+    "title_token",
+    "triple",
+    "upper_token",
+    "word_count",
+    "wrap_brackets",
+    "xml_wrap"
+  ],
+  "results": [
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "upper_token__708af4c9d7",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: india",
+            "out": "INDIA",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: juliet",
+            "out": "JULIET",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: kilo",
+            "out": "Kilo Kilometer",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.843,
+        "n_ok": 3,
+        "version_id": "upper_token__708af4c9d7",
+        "samples": [
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: india",
+            "out": "INDIA",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: juliet",
+            "out": "JULIET",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to UPPERCASE. Reply with only the word: kilo",
+            "out": "Kilo",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.75,
+        "best_ppl": 15.843,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.851,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.714,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.843,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.903,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.897,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 16.06,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.816,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.611,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.692,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.25,
+          "abs_scale": 2.814033031463623
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 6.0,
+      "task_id": "upper_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "lower_token__056c2f88f6",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: india",
+            "out": "india",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: juliet",
+            "out": "juliet",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: kilo",
+            "out": "kilometer",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.884,
+        "n_ok": 3,
+        "version_id": "lower_token__056c2f88f6",
+        "samples": [
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: india",
+            "out": "india",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: juliet",
+            "out": "juliet",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to lowercase. Reply with only the word: kilo",
+            "out": "kilometer",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.884,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.852,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.677,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.283,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.884,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.82,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.762,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.81,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.577,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.489,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23790145874023438
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 6.2,
+      "task_id": "lower_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "title_token__8c3a120174",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: india",
+            "out": "Indian",
+            "ok": false
+          },
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: juliet",
+            "out": "Juliet",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: kilo",
+            "out": "Kilo",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.918,
+        "n_ok": 3,
+        "version_id": "title_token__8c3a120174",
+        "samples": [
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: india",
+            "out": "Indian India",
+            "ok": false
+          },
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: juliet",
+            "out": "Juliet",
+            "ok": true
+          },
+          {
+            "prompt": "Convert to Title Case. Reply with only the word: kilo",
+            "out": "Kilo",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.75,
+        "best_tune": 0.75,
+        "best_ppl": 15.918,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.876,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.789,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.799,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.918,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.965,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 16.186,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.82,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.632,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.701,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23935174942016602
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.7,
+      "task_id": "title_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "reverse_token__3e5864597a",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: india",
+            "out": "niree India",
+            "ok": false
+          },
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: juliet",
+            "out": "juliet",
+            "ok": false
+          },
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.924,
+        "n_ok": 0,
+        "version_id": "reverse_token__3e5864597a",
+        "samples": [
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: india",
+            "out": "niree India",
+            "ok": false
+          },
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: juliet",
+            "out": "juliet",
+            "ok": false
+          },
+          {
+            "prompt": "Reverse the letters. Reply with only the reversed word: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.924,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.848,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.656,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.29,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.924,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.963,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.3,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.811,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.569,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.332,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23882062911987306
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.7,
+      "task_id": "reverse_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "dup_token__1bc078d7e6",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: india",
+            "out": "indinindia",
+            "ok": false
+          },
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: juliet",
+            "out": "juliett",
+            "ok": false
+          },
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.897,
+        "n_ok": 0,
+        "version_id": "dup_token__1bc078d7e6",
+        "samples": [
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: india",
+            "out": "indinindia",
+            "ok": false
+          },
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: juliet",
+            "out": "juliett",
+            "ok": false
+          },
+          {
+            "prompt": "Duplicate the word (concat twice). Reply with only the result: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.75,
+        "best_tune": 0.75,
+        "best_ppl": 15.897,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.839,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.637,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.302,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.897,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.872,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.89,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.844,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.715,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.014,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23746068954467775
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 6.8,
+      "task_id": "dup_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "first3__9a007902cc",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: india",
+            "out": "I'm ready!",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: juliet",
+            "out": "juliett",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.908,
+        "n_ok": 0,
+        "version_id": "first3__9a007902cc",
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: india",
+            "out": "I'm ready!",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: juliet",
+            "out": "juliet1",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first 3 characters of: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.908,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.819,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.597,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.236,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.936,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.048,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.15,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.886,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.908,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 17.072,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.08,
+          "abs_scale": 1.094810791015625
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.6,
+      "task_id": "first3"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "last3__890e53b989",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: india",
+            "out": "India3",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: juliet",
+            "out": "juliet3",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.931,
+        "n_ok": 0,
+        "version_id": "last3__890e53b989",
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: india",
+            "out": "India3",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: juliet",
+            "out": "juliet3",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last 3 characters of: kilo",
+            "out": "kilo",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.931,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.829,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.613,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.168,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.931,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.021,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.177,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.866,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.825,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.78,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24038995742797853
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 6.1,
+      "task_id": "last3"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "len_token__1a55f1a499",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: india",
+            "out": "10",
+            "ok": false
+          },
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: juliet",
+            "out": "10",
+            "ok": false
+          },
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: kilo",
+            "out": "1000",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.899,
+        "n_ok": 0,
+        "version_id": "len_token__1a55f1a499",
+        "samples": [
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: india",
+            "out": "10",
+            "ok": false
+          },
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: juliet",
+            "out": "7",
+            "ok": false
+          },
+          {
+            "prompt": "How many characters? Reply with ONLY the integer: kilo",
+            "out": "1000",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.899,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.858,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.685,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.159,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.899,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.865,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.754,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.829,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.619,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.338,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23916101455688477
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.4,
+      "task_id": "len_token"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "wrap_brackets__e4d31b055f",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.911,
+        "n_ok": 1,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: india",
+            "out": "[India]",
+            "ok": false
+          },
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: juliet",
+            "out": "[Juliet]",
+            "ok": false
+          },
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: kilo",
+            "out": "[kilo]",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.88,
+        "n_ok": 1,
+        "version_id": "wrap_brackets__e4d31b055f",
+        "samples": [
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: india",
+            "out": "[India]",
+            "ok": false
+          },
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: juliet",
+            "out": "[Juliet]",
+            "ok": false
+          },
+          {
+            "prompt": "Wrap the word in square brackets. Reply with only that: kilo",
+            "out": "[kilo]",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.88,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.826,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.606,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.465,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.88,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.826,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.064,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.778,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.46,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.247,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.2436489486694336
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 6.6,
+      "task_id": "wrap_brackets"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "snake_join__6785fafff9",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): india",
+            "out": "india_India",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): juliet",
+            "out": "juliette",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): kilo",
+            "out": "kilometer",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.925,
+        "n_ok": 0,
+        "version_id": "snake_join__6785fafff9",
+        "samples": [
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): india",
+            "out": "india_India",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): juliet",
+            "out": "juliette",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with word_word (underscore join of the same word twice): kilo",
+            "out": "kilometer",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.925,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.856,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.724,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.769,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.925,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.956,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.154,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.87,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.825,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 17.251,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24262767791748047
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 7.1,
+      "task_id": "snake_join"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "json_ab__12f8ee214c",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"fish\" and \"swim\" respe",
+            "out": "{\n  \"a\": \"fish\",\n  \"b\": \"swim\"\n}",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"bird\" and \"fly\" respec",
+            "out": "{\n  \"a\": \"bird\",\n  \"b\": \"fly\"\n}",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"car\" and \"drive\" respe",
+            "out": "{\n  \"a\": \"car\",\n  \"b\": \"drive\"\n}",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.961,
+        "n_ok": 4,
+        "version_id": "json_ab__12f8ee214c",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"fish\" and \"swim\" respe",
+            "out": "{\n  \"a\": \"fish\",\n  \"b\": \"swim\"\n}",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"bird\" and \"fly\" respec",
+            "out": "{\n  \"a\": \"bird\",\n  \"b\": \"fly\"\n}",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"car\" and \"drive\" respe",
+            "out": "{\n  \"a\": \"car\",\n  \"b\": \"drive\"\n}",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.961,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.846,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.623,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.989,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.961,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.131,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.963,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.799,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.534,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.587,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24253042221069337
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 21.0,
+      "task_id": "json_ab"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "json_list2__12337152db",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"fish\" then \"swim\".",
+            "out": "```json\n[\"fish\", \"swim\"]\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"bird\" then \"fly\".",
+            "out": "```json\n[\"bird\", \"fly\"]\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"car\" then \"drive\".",
+            "out": "```json\n[\"car\", \"drive\"]\n```",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.854,
+        "n_ok": 4,
+        "version_id": "json_list2__12337152db",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"fish\" then \"swim\".",
+            "out": "```json\n[\"fish\", \"swim\"]\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"bird\" then \"fly\".",
+            "out": "```json\n[\"bird\", \"fly\"]\n```",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with a JSON array of exactly two strings: \"car\" then \"drive\".",
+            "out": "```json\n[\"car\", \"drive\"]\n```",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.854,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.854,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.673,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.156,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.97,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.168,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.129,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.818,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.595,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.026,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.21691972732543946
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 20.0,
+      "task_id": "json_list2"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "csv_two__ab34d4f53f",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with CSV line: fish,swim",
+            "out": "```csv\nfish,swim\n```",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with CSV line: bird,fly",
+            "out": "```csv\nbird,fly\nsparrow,flies\nduck,swims\nsparrow,flies\nduck,",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with CSV line: car,drive",
+            "out": "```csv\ncar,drive\ncar,drive\n```",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 14.745,
+        "n_ok": 4,
+        "version_id": "csv_two__ab34d4f53f",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with CSV line: fish,swim",
+            "out": "fish,swim",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with CSV line: bird,fly",
+            "out": "bird,fly",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with CSV line: car,drive",
+            "out": "car,drive",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 1.0,
+        "best_ppl": 14.745,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.846,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.615,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 14.751,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.911,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.878,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.215,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.739,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.266,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.745,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.2926595211029053
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 18.9,
+      "task_id": "csv_two"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "kv_colon__3f9155cb70",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with key:value as fish:swim",
+            "out": "fish:swim",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with key:value as bird:fly",
+            "out": "bird:fly",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with key:value as car:drive",
+            "out": "car:drive",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.769,
+        "n_ok": 1,
+        "version_id": "kv_colon__3f9155cb70",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with key:value as fish:swim",
+            "out": "fish:water, swim",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with key:value as bird:fly",
+            "out": "bird:wings",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with key:value as car:drive",
+            "out": "car:drive",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.75,
+        "best_ppl": 15.769,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.835,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.571,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 14.629,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.914,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.87,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 15.165,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.789,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.47,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.769,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.3070473670959473
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 10.6,
+      "task_id": "kv_colon"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "bullets_two__e070d4c34c",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- fish' then '- swim'. Nothing else.",
+            "out": "- fish swim.",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- bird' then '- fly'. Nothing else.",
+            "out": "- bird - fly",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- car' then '- drive'. Nothing else.",
+            "out": "- car\n- drive",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.925,
+        "n_ok": 2,
+        "version_id": "bullets_two__e070d4c34c",
+        "samples": [
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- fish' then '- swim'. Nothing else.",
+            "out": "-fish then-swims",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- bird' then '- fly'. Nothing else.",
+            "out": "- bird\n- fly",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with EXACTLY two bullet lines: '- car' then '- drive'. Nothing else.",
+            "out": "drive",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.75,
+        "best_ppl": 15.925,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.779,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.351,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.14,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.9,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.892,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.925,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.763,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.384,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.173,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 2.9669134616851807
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 7.6,
+      "task_id": "bullets_two"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "numbered_two__f26b940e2c",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with EXACTLY: '1. fish' then '2. swim' on two lines.",
+            "out": "1. fish\n2. swim",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with EXACTLY: '1. bird' then '2. fly' on two lines.",
+            "out": "1. bird\n2. fly",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with EXACTLY: '1. car' then '2. drive' on two lines.",
+            "out": "1. car\n2. drive",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 16.19,
+        "n_ok": 4,
+        "version_id": "numbered_two__f26b940e2c",
+        "samples": [
+          {
+            "prompt": "Reply with EXACTLY: '1. fish' then '2. swim' on two lines.",
+            "out": "1. fish\n2. swim",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with EXACTLY: '1. bird' then '2. fly' on two lines.",
+            "out": "1. bird\n2. fly",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with EXACTLY: '1. car' then '2. drive' on two lines.",
+            "out": "1. car\n2. drive",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 1.0,
+        "best_ppl": 16.19,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.806,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.459,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.359,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.903,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.922,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.19,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.733,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.246,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.609,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 3.029181718826294
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 7.8,
+      "task_id": "numbered_two"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "xml_wrap__94992b6494",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with XML element <fish>swim</fish>",
+            "out": "<fish>swim</fish>",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with XML element <bird>fly</bird>",
+            "out": "<bird>fly</bird>",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with XML element <car>drive</car>",
+            "out": "<car drive> </car>",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.881,
+        "n_ok": 2,
+        "version_id": "xml_wrap__94992b6494",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with XML element <fish>swim</fish>",
+            "out": "<fish>swim</fish>",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with XML element <bird>fly</bird>",
+            "out": "<bird>fly</bird>",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with XML element <car>drive</car>",
+            "out": "<car drive> </car>",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.75,
+        "best_tune": 0.75,
+        "best_ppl": 15.881,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.813,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.457,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.065,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.881,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.739,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 14.823,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.783,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.478,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 15.76,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.2399599838256836
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 8.0,
+      "task_id": "xml_wrap"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "double_quote__b58245c825",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with the word in double quotes: fish",
+            "out": "\"fish\"",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with the word in double quotes: bird",
+            "out": "\"bird\"",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with the word in double quotes: car",
+            "out": "\"car\"",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.914,
+        "n_ok": 4,
+        "version_id": "double_quote__b58245c825",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with the word in double quotes: fish",
+            "out": "\"fish\"",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with the word in double quotes: bird",
+            "out": "\"bird\"",
+            "ok": true
+          },
+          {
+            "prompt": "Reply ONLY with the word in double quotes: car",
+            "out": "\"car\"",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.914,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.902,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.81,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.273,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.874,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.725,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.203,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.914,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.957,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 16.498,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.02,
+          "abs_scale": 0.26370777130126954
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.1,
+      "task_id": "double_quote"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "paren_wrap__9ef3804c72",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with the word in parentheses: fish",
+            "out": "fish",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with the word in parentheses: bird",
+            "out": "bird",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with the word in parentheses: car",
+            "out": "car",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.906,
+        "n_ok": 0,
+        "version_id": "paren_wrap__9ef3804c72",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with the word in parentheses: fish",
+            "out": "fish",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with the word in parentheses: bird",
+            "out": "bird",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with the word in parentheses: car",
+            "out": "car",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.906,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.893,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.767,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.038,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.811,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.519,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.051,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.891,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.778,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.906,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.3417582511901855
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 3.9,
+      "task_id": "paren_wrap"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "pipe_join__66d58fda98",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply ONLY with fish|swim",
+            "out": "鱼",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with bird|fly",
+            "out": "bird",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with car|drive",
+            "out": "car",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.869,
+        "n_ok": 0,
+        "version_id": "pipe_join__66d58fda98",
+        "samples": [
+          {
+            "prompt": "Reply ONLY with fish|swim",
+            "out": "鱼",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with bird|fly",
+            "out": "bird",
+            "ok": false
+          },
+          {
+            "prompt": "Reply ONLY with car|drive",
+            "out": "car",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.25,
+        "best_ppl": 15.869,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.872,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.682,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.663,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.905,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.826,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.996,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.869,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.771,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 16.656,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.02,
+          "abs_scale": 0.26911727905273436
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 7.6,
+      "task_id": "pipe_join"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "extract_int__cd33326690",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nHas 8 sides",
+            "out": "8",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nTook 15 days",
+            "out": "15",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nBuilt 4 walls",
+            "out": "4",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.957,
+        "n_ok": 3,
+        "version_id": "extract_int__cd33326690",
+        "samples": [
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nHas 8 sides",
+            "out": "8",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nTook 15 days",
+            "out": "15",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nBuilt 4 walls",
+            "out": "4",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.957,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.834,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.534,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.563,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.957,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.079,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.018,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.838,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.646,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.793,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23475221633911134
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.3,
+      "task_id": "extract_int"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "extract_email_local__3499f0373a",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact ira",
+            "out": "ira",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact jad",
+            "out": "jade@example.com",
+            "ok": false
+          },
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact kai",
+            "out": "kai",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.918,
+        "n_ok": 3,
+        "version_id": "extract_email_local__3499f0373a",
+        "samples": [
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact ira",
+            "out": "ira",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact jad",
+            "out": "jade@example",
+            "ok": false
+          },
+          {
+            "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact kai",
+            "out": "kai",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.918,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.845,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.621,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.816,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.86,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.655,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 14.697,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.918,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.033,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 17.28,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.02,
+          "abs_scale": 0.2691435432434082
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.0,
+      "task_id": "extract_email_local"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "first_word__33ca7bca85",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first word of: Early birds sing",
+            "out": "Early birds.",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first word of: Fresh bread smells",
+            "out": "Fresh bread smells warm and inviting.",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first word of: Golden leaves fall",
+            "out": "Golden",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.567,
+        "n_ok": 2,
+        "version_id": "first_word__33ca7bca85",
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first word of: Early birds sing",
+            "out": "Early risers",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first word of: Fresh bread smells",
+            "out": "Fresh",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with ONLY the first word of: Golden leaves fall",
+            "out": "Golden leaves fall",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.5,
+        "best_ppl": 15.567,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.845,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.596,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.617,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.892,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.839,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.424,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.799,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.483,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.567,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.411968946456909
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 5.8,
+      "task_id": "first_word"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "last_word__0c23f474c4",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.911,
+        "n_ok": 1,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the last word of: Early birds sing",
+            "out": "Morning.",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last word of: Fresh bread smells",
+            "out": "fresh",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last word of: Golden leaves fall",
+            "out": "Golden",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.876,
+        "n_ok": 1,
+        "version_id": "last_word__0c23f474c4",
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the last word of: Early birds sing",
+            "out": "Morning.",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last word of: Fresh bread smells",
+            "out": "fresh",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the last word of: Golden leaves fall",
+            "out": "Golden",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.876,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.84,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.568,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.469,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.876,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.769,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.328,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.783,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.432,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.463,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24024948120117187
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.4,
+      "task_id": "last_word"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "word_count__9e56e93ad9",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nEarly birds sing",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nFresh bread smells",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nGolden leaves fall",
+            "out": "3",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.89,
+        "n_ok": 3,
+        "version_id": "word_count__9e56e93ad9",
+        "samples": [
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nEarly birds sing",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nFresh bread smells",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "How many words? Reply with ONLY the integer.\nGolden leaves fall",
+            "out": "3",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.75,
+        "best_ppl": 15.89,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.848,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.56,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.341,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.89,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.774,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.193,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.803,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.483,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.048,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23514291763305664
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.2,
+      "task_id": "word_count"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "extract_code__114cdd69b2",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "AA12",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "16",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.447,
+        "n_ok": 4,
+        "version_id": "extract_code__114cdd69b2",
+        "samples": [
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "AA12",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+            "out": "16",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.75,
+        "best_tune": 1.0,
+        "best_ppl": 15.447,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.834,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.567,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.419,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.862,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.71,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 15.001,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.804,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.536,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.447,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.2605910301208496
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 7.6,
+      "task_id": "extract_code"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "has_digit__7a84bbd952",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nnone here",
+            "out": "No",
+            "ok": false
+          },
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nv2",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\ntest",
+            "out": "Yes",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.853,
+        "n_ok": 3,
+        "version_id": "has_digit__7a84bbd952",
+        "samples": [
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nnone here",
+            "out": "no",
+            "ok": true
+          },
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nv2",
+            "out": "yes",
+            "ok": true
+          },
+          {
+            "prompt": "Does the text contain a digit? Reply ONLY yes or no.\ntest",
+            "out": "yes",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.5,
+        "best_ppl": 15.853,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.838,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.587,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.683,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.916,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.903,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.746,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.823,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.62,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.853,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.577395439147949
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.2,
+      "task_id": "has_digit"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "char0__e24c516fd2",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first character of: india",
+            "out": "I",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first character of: juliet",
+            "out": "j",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with ONLY the first character of: kilo",
+            "out": "k",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.916,
+        "n_ok": 2,
+        "version_id": "char0__e24c516fd2",
+        "samples": [
+          {
+            "prompt": "Reply with ONLY the first character of: india",
+            "out": "I",
+            "ok": false
+          },
+          {
+            "prompt": "Reply with ONLY the first character of: juliet",
+            "out": "j",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with ONLY the first character of: kilo",
+            "out": "k",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.75,
+        "best_ppl": 15.916,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.859,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.654,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 14.864,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.916,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.925,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.558,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.895,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.847,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.1,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24047679901123048
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.3,
+      "task_id": "char0"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "is_alpha__fd039c959e",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: india",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: a1",
+            "out": "No",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: x-y",
+            "out": "No",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.92,
+        "n_ok": 1,
+        "version_id": "is_alpha__fd039c959e",
+        "samples": [
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: india",
+            "out": "yes",
+            "ok": true
+          },
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: a1",
+            "out": "yes",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: x-y",
+            "out": "yes",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.92,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.875,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.697,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.751,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.946,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.039,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.144,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.891,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.826,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.92,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.445603847503662
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.4,
+      "task_id": "is_alpha"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "count_vowels__3410218b85",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: india",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: juliet",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: kilo",
+            "out": "100",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.898,
+        "n_ok": 0,
+        "version_id": "count_vowels__3410218b85",
+        "samples": [
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: india",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: juliet",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Count vowels (aeiou). Reply with ONLY the integer: kilo",
+            "out": "100",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.0,
+        "best_ppl": 15.898,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.866,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.658,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.677,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.93,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.935,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.361,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.898,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.881,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.102,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.02,
+          "abs_scale": 0.2625972557067871
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.4,
+      "task_id": "count_vowels"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "add_int__9a534b11c2",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "10",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "4",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.923,
+        "n_ok": 3,
+        "version_id": "add_int__9a534b11c2",
+        "samples": [
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "7",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "4",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.923,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.965,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.096,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.844,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.923,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.948,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.176,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 16.006,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.349,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 17.778,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.2387143325805664
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.1,
+      "task_id": "add_int"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "sub_int__18c11a2c09",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.911,
+        "n_ok": 3,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "-2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "-1",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.92,
+        "n_ok": 3,
+        "version_id": "sub_int__18c11a2c09",
+        "samples": [
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "-2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "-1",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a-b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.75,
+        "best_ppl": 15.92,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.962,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 16.08,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 15.796,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.914,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.92,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 16.366,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.997,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 16.297,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 17.503,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.08,
+          "abs_scale": 0.9553808593750001
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.6,
+      "task_id": "sub_int"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "mul_int__1346c2a13e",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "10",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "3",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.932,
+        "n_ok": 4,
+        "version_id": "mul_int__1346c2a13e",
+        "samples": [
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "10",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a*b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "3",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.932,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.968,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.098,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.814,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.932,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.984,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.352,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 16.038,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 16.517,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 18.628,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.2386147689819336
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.1,
+      "task_id": "mul_int"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "max_int__3af71d663b",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": false
+          },
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 5",
+            "out": "7",
+            "ok": false
+          },
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n3 ? 1",
+            "out": "4",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.429,
+        "n_ok": 2,
+        "version_id": "max_int__3af71d663b",
+        "samples": [
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 4",
+            "out": "4",
+            "ok": true
+          },
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 5",
+            "out": "3",
+            "ok": false
+          },
+          {
+            "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n3 ? 1",
+            "out": "4",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.5,
+        "best_ppl": 15.429,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.962,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.046,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.429,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.936,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.98,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 15.82,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.018,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.414,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 18.246,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.25,
+          "abs_scale": 2.7748708724975586
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.1,
+      "task_id": "max_int"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "min_int__8362ee5ee2",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 4",
+            "out": "4",
+            "ok": false
+          },
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 5",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.861,
+        "n_ok": 3,
+        "version_id": "min_int__8362ee5ee2",
+        "samples": [
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 4",
+            "out": "2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 5",
+            "out": "2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n3 ? 1",
+            "out": "1",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 0.5,
+        "best_ppl": 15.861,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.964,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 16.055,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.5,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.931,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 15.971,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.861,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 16.024,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.25,
+            "ppl": 16.442,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 18.411,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 2.977799654006958
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 6.2,
+      "task_id": "min_int"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "mod_int__75b78ff2eb",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.911,
+        "n_ok": 1,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "8",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "3",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 15.967,
+        "n_ok": 3,
+        "version_id": "mod_int__75b78ff2eb",
+        "samples": [
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "2",
+            "ok": true
+          },
+          {
+            "prompt": "Compute a%b. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.25,
+        "best_ppl": 15.967,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.961,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.078,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.732,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.917,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.923,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 15.967,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.022,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.432,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 18.227,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 2.9793708324432373
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 7.0,
+      "task_id": "mod_int"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "abs_diff__40e2a73527",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "6",
+            "ok": false
+          },
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "1",
+            "ok": false
+          },
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 16.001,
+        "n_ok": 3,
+        "version_id": "abs_diff__40e2a73527",
+        "samples": [
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 4",
+            "out": "0",
+            "ok": false
+          },
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 5",
+            "out": "3",
+            "ok": true
+          },
+          {
+            "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n3 ? 1",
+            "out": "2",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.75,
+        "best_tune": 1.0,
+        "best_ppl": 16.001,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.972,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 16.157,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.75,
+            "ppl": 16.335,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 15.942,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.015,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.001,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.75,
+            "ppl": 16.018,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 16.394,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 17.937,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 2.9885549545288086
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 6.8,
+      "task_id": "abs_diff"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "cmp_gt__d15ef06a68",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is 2 greater than 4? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 2 greater than 5? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 3 greater than 1? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.881,
+        "n_ok": 0,
+        "version_id": "cmp_gt__d15ef06a68",
+        "samples": [
+          {
+            "prompt": "Is 2 greater than 4? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 2 greater than 5? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 3 greater than 1? Reply ONLY yes or no.",
+            "out": "Yes.",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.881,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.875,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.668,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.485,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.881,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.731,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.861,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.002,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.315,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 17.836,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24232519149780274
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 7.9,
+      "task_id": "cmp_gt"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "parity__dfda45cd8f",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is 9 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 10 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 11 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.879,
+        "n_ok": 0,
+        "version_id": "parity__dfda45cd8f",
+        "samples": [
+          {
+            "prompt": "Is 9 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 10 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          },
+          {
+            "prompt": "Is 11 even or odd? Reply ONLY even or odd.",
+            "out": "Even.",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.879,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.879,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.66,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.269,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.875,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.726,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.839,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.037,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.595,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 21.567,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.22170442581176758
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 10.0,
+      "task_id": "parity"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "triple__20a06fa74a",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 9",
+            "out": "27",
+            "ok": true
+          },
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 10",
+            "out": "30",
+            "ok": true
+          },
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 11",
+            "out": "33",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.95,
+        "n_ok": 4,
+        "version_id": "triple__20a06fa74a",
+        "samples": [
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 9",
+            "out": "27",
+            "ok": true
+          },
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 10",
+            "out": "30",
+            "ok": true
+          },
+          {
+            "prompt": "Multiply by 3. Reply with ONLY the integer: 11",
+            "out": "33",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.95,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.954,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.011,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.433,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.95,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.997,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.37,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.991,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.337,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 18.627,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.23948240280151367
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 10.9,
+      "task_id": "triple"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "sentiment3__762e9a694b",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.911,
+        "n_ok": 1,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "neutral",
+            "ok": true
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "Positive",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "Negative",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.75,
+        "ppl": 16.108,
+        "n_ok": 3,
+        "version_id": "sentiment3__762e9a694b",
+        "samples": [
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "positive",
+            "ok": false
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "positive",
+            "ok": true
+          },
+          {
+            "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+            "out": "negative",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.25,
+        "best_tune": 1.0,
+        "best_ppl": 16.108,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.875,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 15.726,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.12,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.972,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.75,
+            "ppl": 16.125,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 16.108,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.25,
+            "ppl": 15.872,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.823,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.355,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.25,
+          "abs_scale": 2.883894681930542
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.7,
+      "task_id": "sentiment3"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "lang_en_es__6d5534c03e",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nRed apple",
+            "out": "es",
+            "ok": false
+          },
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nManzana roja",
+            "out": "es",
+            "ok": true
+          },
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nFast car",
+            "out": "es",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.929,
+        "n_ok": 2,
+        "version_id": "lang_en_es__6d5534c03e",
+        "samples": [
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nRed apple",
+            "out": "es",
+            "ok": false
+          },
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nManzana roja",
+            "out": "es",
+            "ok": true
+          },
+          {
+            "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nFast car",
+            "out": "es",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.5,
+        "best_ppl": 15.929,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.929,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.933,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.042,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.892,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.76,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.827,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.951,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 16.068,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 16.733,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.20064521789550782
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.3,
+      "task_id": "lang_en_es"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "map_yes_no__e9939d96bf",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: True",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: False",
+            "out": "No",
+            "ok": false
+          },
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: y",
+            "out": "Yes",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.897,
+        "n_ok": 0,
+        "version_id": "map_yes_no__e9939d96bf",
+        "samples": [
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: True",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: False",
+            "out": "No",
+            "ok": false
+          },
+          {
+            "prompt": "Map to yes/no. Reply ONLY yes or no. Input: y",
+            "out": "Yes",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.897,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.895,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.775,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.802,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.897,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.76,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.817,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.014,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.438,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 18.427,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.02,
+          "abs_scale": 0.24042110443115236
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.2,
+      "task_id": "map_yes_no"
+    },
+    {
+      "accepted": true,
+      "status": "active",
+      "version_id": "animal_or_object__d2a51a898c",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: horse",
+            "out": "horse",
+            "ok": false
+          },
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: cow",
+            "out": "object",
+            "ok": false
+          },
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: lamp",
+            "out": "lamp",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 18.002,
+        "n_ok": 2,
+        "version_id": "animal_or_object__d2a51a898c",
+        "samples": [
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: horse",
+            "out": "object",
+            "ok": false
+          },
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: cow",
+            "out": "object",
+            "ok": false
+          },
+          {
+            "prompt": "Classify as animal or object. Reply ONLY with the label: lamp",
+            "out": "object",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.5,
+        "best_ppl": 18.002,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.955,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.048,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.866,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.915,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.937,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.015,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.946,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.145,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 18.002,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.3055334091186523
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 3.9,
+      "task_id": "animal_or_object"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "food_or_other__bcddaddf2d",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.25,
+        "ppl": 15.911,
+        "n_ok": 1,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: soup",
+            "out": "food",
+            "ok": true
+          },
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: fish",
+            "out": "Fish is food.",
+            "ok": false
+          },
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: hammer",
+            "out": "hammer - other",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.905,
+        "n_ok": 2,
+        "version_id": "food_or_other__bcddaddf2d",
+        "samples": [
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: soup",
+            "out": "food",
+            "ok": true
+          },
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: fish",
+            "out": "food",
+            "ok": true
+          },
+          {
+            "prompt": "Is it food or other? Reply ONLY food or other: hammer",
+            "out": "hammer - other",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.5,
+        "best_ppl": 15.905,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.905,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.754,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.718,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.867,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.728,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.526,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.978,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 16.22,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 17.287,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.21921825408935547
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.3,
+      "task_id": "food_or_other"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "is_color__8f23152e95",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: cat",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: dog",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: table",
+            "out": "Yes.",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 17.742,
+        "n_ok": 0,
+        "version_id": "is_color__8f23152e95",
+        "samples": [
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: cat",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: dog",
+            "out": "Yes",
+            "ok": false
+          },
+          {
+            "prompt": "Is this an English color word? Reply ONLY yes or no: table",
+            "out": "yes",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.25,
+        "best_ppl": 17.742,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.916,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.855,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.995,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.871,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.72,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.194,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 16.002,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.31,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.25,
+            "ppl": 17.742,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.25,
+          "abs_scale": 3.4927468299865723
+        },
+        "tune_no_gain": false
+      },
+      "seconds": 4.1,
+      "task_id": "is_color"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "sing_plur__b098cd9a3b",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: keys",
+            "out": "keys",
+            "ok": false
+          },
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: map",
+            "out": "map",
+            "ok": false
+          },
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: houses",
+            "out": "houses",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.925,
+        "n_ok": 0,
+        "version_id": "sing_plur__b098cd9a3b",
+        "samples": [
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: keys",
+            "out": "keys",
+            "ok": false
+          },
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: map",
+            "out": "map",
+            "ok": false
+          },
+          {
+            "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: houses",
+            "out": "houses",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.925,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.931,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.86,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.739,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.932,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.925,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.144,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.928,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 16.003,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 16.497,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 8,
+          "rel": 0.08,
+          "abs_scale": 0.9441101074218751
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.2,
+      "task_id": "sing_plur"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "short_or_long__d181426600",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.911,
+        "n_ok": 2,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: india",
+            "out": "short",
+            "ok": false
+          },
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: juliet",
+            "out": "short",
+            "ok": false
+          },
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: kilo",
+            "out": "short",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.5,
+        "ppl": 15.873,
+        "n_ok": 2,
+        "version_id": "short_or_long__d181426600",
+        "samples": [
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: india",
+            "out": "short",
+            "ok": false
+          },
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: juliet",
+            "out": "short",
+            "ok": false
+          },
+          {
+            "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: kilo",
+            "out": "short",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.5,
+        "best_tune": 0.5,
+        "best_ppl": 15.873,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.873,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.67,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 14.877,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.955,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 16.079,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 16.63,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.5,
+            "ppl": 15.863,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.5,
+            "ppl": 15.761,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.5,
+            "ppl": 15.655,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.21916288375854492
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 5.3,
+      "task_id": "short_or_long"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "starts_vowel__282d684b80",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.911,
+        "n_ok": 0,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: india",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: juliet",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: kilo",
+            "out": "Yes.",
+            "ok": false
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 0.0,
+        "ppl": 15.892,
+        "n_ok": 0,
+        "version_id": "starts_vowel__282d684b80",
+        "samples": [
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: india",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: juliet",
+            "out": "Yes.",
+            "ok": false
+          },
+          {
+            "prompt": "Does it start with a vowel? Reply ONLY yes or no: kilo",
+            "out": "Yes",
+            "ok": false
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 0.0,
+        "best_tune": 0.0,
+        "best_ppl": 15.892,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.848,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.587,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 14.439,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.938,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.948,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.567,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 0.0,
+            "ppl": 15.892,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 0.0,
+            "ppl": 15.846,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 0.0,
+            "ppl": 15.935,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 10,
+          "rel": 0.02,
+          "abs_scale": 0.2748375129699707
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 4.8,
+      "task_id": "starts_vowel"
+    },
+    {
+      "accepted": false,
+      "status": "experimental",
+      "version_id": "pick_ab__b81ab40856",
+      "base_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.911,
+        "n_ok": 4,
+        "version_id": null,
+        "samples": [
+          {
+            "prompt": "Reply with option A only. Output ONLY the letter.",
+            "out": "A",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with option B only. Output ONLY the letter.",
+            "out": "B",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with option A only. Output ONLY the letter.",
+            "out": "A",
+            "ok": true
+          }
+        ]
+      },
+      "cand_val": {
+        "split": "val",
+        "n": 4,
+        "acc": 1.0,
+        "ppl": 15.895,
+        "n_ok": 4,
+        "version_id": "pick_ab__b81ab40856",
+        "samples": [
+          {
+            "prompt": "Reply with option A only. Output ONLY the letter.",
+            "out": "A",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with option B only. Output ONLY the letter.",
+            "out": "B",
+            "ok": true
+          },
+          {
+            "prompt": "Reply with option A only. Output ONLY the letter.",
+            "out": "A",
+            "ok": true
+          }
+        ]
+      },
+      "tune": {
+        "base_tune": 1.0,
+        "best_tune": 1.0,
+        "best_ppl": 15.895,
+        "base_ppl": 15.911,
+        "grid": [
+          {
+            "layer": 6,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.895,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.798,
+            "ok_ppl": true
+          },
+          {
+            "layer": 6,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.28,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.84,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 15.645,
+            "ok_ppl": true
+          },
+          {
+            "layer": 8,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 15.619,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.02,
+            "tune_acc": 1.0,
+            "ppl": 15.961,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.08,
+            "tune_acc": 1.0,
+            "ppl": 16.202,
+            "ok_ppl": true
+          },
+          {
+            "layer": 10,
+            "rel": 0.25,
+            "tune_acc": 1.0,
+            "ppl": 17.885,
+            "ok_ppl": true
+          }
+        ],
+        "chosen": {
+          "kind": "single",
+          "layer": 6,
+          "rel": 0.02,
+          "abs_scale": 0.216651554107666
+        },
+        "tune_no_gain": true
+      },
+      "seconds": 3.9,
+      "task_id": "pick_ab"
+    }
+  ],
+  "updated_at": 1793941366.1653368,
+  "elapsed_s": 333.1
+}

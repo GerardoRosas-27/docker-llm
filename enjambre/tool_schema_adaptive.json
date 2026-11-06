@@ -1,0 +1,24 @@
+{
+  "name": "enjambre_adaptive_tools",
+  "description": "Arnés adaptativo: ~50 especialistas mono-tarea sobre UNA base Qwen2.5-0.5B (deltas, no 50 modelos). Router heurístico por keywords/task_id. Memoria = grafo SQLite (no red neuronal). Auto-mejora acotada por episodios con promote atómico solo si VAL mejora.",
+  "base_url": "http://enjambre:8090",
+  "honest_limits": [
+    "No afirma capacidades adquiridas: son 50 tareas/deltas medidos.",
+    "Router keyword ≠ inteligencia general.",
+    "auto_improve no garantiza mejora; reporta accepted/rejected.",
+    "Heldout no se usa para promover."
+  ],
+  "tools": [
+    {"type": "function", "function": {"name": "adaptive_status", "description": "Estado del arnés adaptativo (banco, memoria, RSS).", "parameters": {"type": "object", "properties": {}}}, "http": {"method": "GET", "path": "/adaptive/status"}},
+    {"type": "function", "function": {"name": "adaptive_catalog", "description": "Catálogo auditable de 50 tareas.", "parameters": {"type": "object", "properties": {}}}, "http": {"method": "GET", "path": "/adaptive/catalog"}},
+    {"type": "function", "function": {"name": "adaptive_list_experts", "description": "Lista tareas con versión activa y estados.", "parameters": {"type": "object", "properties": {}}}, "http": {"method": "GET", "path": "/adaptive/experts"}},
+    {"type": "function", "function": {"name": "adaptive_solve", "description": "Activa delta de la tarea (snapshot) y genera; restaura pesos al terminar.", "parameters": {"type": "object", "properties": {"prompt": {"type": "string"}, "task_id": {"type": ["string", "null"]}, "use_expert": {"type": "boolean", "default": true}, "max_new_tokens": {"type": "integer", "default": 32}}, "required": ["prompt"]}}, "http": {"method": "POST", "path": "/adaptive/solve"}},
+    {"type": "function", "function": {"name": "adaptive_feedback", "description": "Registra experiencia verificada (ok=true entra a memoria útil).", "parameters": {"type": "object", "properties": {"task_id": {"type": "string"}, "prompt": {"type": "string"}, "output": {"type": "string"}, "ok": {"type": "boolean"}, "reason": {"type": "string"}}, "required": ["task_id", "prompt", "output", "ok"]}}, "http": {"method": "POST", "path": "/adaptive/feedback"}},
+    {"type": "function", "function": {"name": "adaptive_memory_query", "description": "Consulta éxitos (good=true) o auditoría de fallos.", "parameters": {"type": "object", "properties": {"task_id": {"type": "string"}, "good": {"type": "boolean", "default": true}, "limit": {"type": "integer", "default": 20}}, "required": ["task_id"]}}, "http": {"method": "GET", "path": "/adaptive/memory/query"}},
+    {"type": "function", "function": {"name": "adaptive_create_expert", "description": "Construye delta inicial (tune) y promueve solo si VAL gana a base.", "parameters": {"type": "object", "properties": {"task_id": {"type": "string"}}, "required": ["task_id"]}}, "http": {"method": "POST", "path": "/adaptive/experts/create"}},
+    {"type": "function", "function": {"name": "adaptive_propose_replacement", "description": "Propone candidato nuevo (no promueve).", "parameters": {"type": "object", "properties": {"task_id": {"type": "string"}}, "required": ["task_id"]}}, "http": {"method": "POST", "path": "/adaptive/experts/propose_replacement"}},
+    {"type": "function", "function": {"name": "adaptive_evaluate_replacement", "description": "Evalúa candidato en VAL y promueve atómicamente solo si mejora.", "parameters": {"type": "object", "properties": {"task_id": {"type": "string"}, "candidate_version_id": {"type": "string"}}, "required": ["task_id", "candidate_version_id"]}}, "http": {"method": "POST", "path": "/adaptive/experts/evaluate_replacement"}},
+    {"type": "function", "function": {"name": "adaptive_auto_improve", "description": "Ciclo acotado propose→val→promote/reject (episodes, max_tasks). Heldout intacto. No garantiza mejora.", "parameters": {"type": "object", "properties": {"task_ids": {"type": ["array", "null"], "items": {"type": "string"}}, "episodes": {"type": "integer", "default": 1}, "max_tasks": {"type": ["integer", "null"]}}}}, "http": {"method": "POST", "path": "/adaptive/auto_improve"}},
+    {"type": "function", "function": {"name": "adaptive_improve_history", "description": "Historial de propuestas aceptadas/rechazadas.", "parameters": {"type": "object", "properties": {"task_id": {"type": ["string", "null"]}, "limit": {"type": "integer", "default": 50}}}}, "http": {"method": "GET", "path": "/adaptive/improve/history"}}
+  ]
+}

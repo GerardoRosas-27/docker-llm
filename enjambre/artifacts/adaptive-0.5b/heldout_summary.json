@@ -1,0 +1,13 @@
+{
+  "n_tasks": 50,
+  "base_mean": 0.328,
+  "expert_mean": 0.4,
+  "global_delta": 0.072,
+  "n_gain": 7,
+  "n_loss": 0,
+  "n_flat": 43,
+  "n_with_active_delta": 9,
+  "elapsed_s": 25.8,
+  "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/heldout_bench.json",
+  "note": "Heldout only for reporting; never used for promotion. Router not scored here."
+}

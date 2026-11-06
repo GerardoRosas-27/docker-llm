@@ -1,0 +1,429 @@
+{
+  "versions": {
+    "upper_token__a8dd70eeb1": {
+      "task_id": "upper_token",
+      "version_id": "upper_token__a8dd70eeb1",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke/deltas/upper_token__a8dd70eeb1.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.843,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.851,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.714,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.843,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.903,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.06,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.816,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.611,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.692,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.25,
+            "abs_scale": 2.814033031463623
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: india",
+              "out": "INDIA",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: juliet",
+              "out": "JULIET",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: kilo",
+              "out": "Kilo Kilometer",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941002.3914497,
+      "parent_version_id": null
+    },
+    "upper_token__7371aeb1ef": {
+      "task_id": "upper_token",
+      "version_id": "upper_token__7371aeb1ef",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke/deltas/upper_token__7371aeb1ef.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.621,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.859,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.745,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.863,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.895,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.866,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.043,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.807,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.579,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.621,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.3799118995666504
+          },
+          "tune_no_gain": false
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 1,
+        "avoid_layer": null
+      },
+      "created_at": 1793941011.1045322,
+      "parent_version_id": null
+    },
+    "add_int__933ec75204": {
+      "task_id": "add_int",
+      "version_id": "add_int__933ec75204",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke/deltas/add_int__933ec75204.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.923,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.965,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.096,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.844,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.923,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.948,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.176,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 16.006,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.349,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 17.778,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2387143325805664
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "8",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "10",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "4",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941016.1029413,
+      "parent_version_id": null
+    },
+    "add_int__a6db5c4429": {
+      "task_id": "add_int",
+      "version_id": "add_int__a6db5c4429",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b-smoke/deltas/add_int__a6db5c4429.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.923,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.965,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.096,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.844,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.923,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.948,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.176,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 16.006,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.349,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 17.778,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2387143325805664
+          },
+          "tune_no_gain": true
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941020.0622709,
+      "parent_version_id": null
+    }
+  },
+  "active_by_task": {
+    "upper_token": "upper_token__7371aeb1ef",
+    "add_int": "add_int__a6db5c4429"
+  },
+  "updated_at": 1793941020.8471732
+}

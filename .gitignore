@@ -11,3 +11,9 @@ data/
 enjambre/artifacts/*.pt
 enjambre/**/__pycache__/
 enjambre/artifacts/*/*.pt
+
+# adaptive: versionar deltas pequeños (sesgos); el resto de *.pt sigue ignorado
+!enjambre/artifacts/adaptive-0.5b/deltas/
+!enjambre/artifacts/adaptive-0.5b/deltas/**
+!enjambre/artifacts/adaptive-0.5b-smoke/deltas/
+!enjambre/artifacts/adaptive-0.5b-smoke/deltas/**

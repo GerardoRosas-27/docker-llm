@@ -1,0 +1,6331 @@
+{
+  "versions": {
+    "upper_token__708af4c9d7": {
+      "task_id": "upper_token",
+      "version_id": "upper_token__708af4c9d7",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/upper_token__708af4c9d7.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.843,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.851,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.714,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.843,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.903,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.06,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.816,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.611,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.692,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.25,
+            "abs_scale": 2.814033031463623
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: india",
+              "out": "INDIA",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: juliet",
+              "out": "JULIET",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to UPPERCASE. Reply with only the word: kilo",
+              "out": "Kilo Kilometer",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941038.6062536,
+      "parent_version_id": null
+    },
+    "lower_token__056c2f88f6": {
+      "task_id": "lower_token",
+      "version_id": "lower_token__056c2f88f6",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/lower_token__056c2f88f6.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.884,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.852,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.677,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.283,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.884,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.82,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.762,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.81,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.577,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.489,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23790145874023438
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Convert to lowercase. Reply with only the word: india",
+              "out": "india",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to lowercase. Reply with only the word: juliet",
+              "out": "juliet",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to lowercase. Reply with only the word: kilo",
+              "out": "kilometer",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941044.8493648,
+      "parent_version_id": null
+    },
+    "title_token__8c3a120174": {
+      "task_id": "title_token",
+      "version_id": "title_token__8c3a120174",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/title_token__8c3a120174.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 0.75,
+          "best_ppl": 15.918,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.876,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.789,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.799,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.918,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.965,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 16.186,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.82,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.632,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.701,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23935174942016602
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Convert to Title Case. Reply with only the word: india",
+              "out": "Indian",
+              "ok": false
+            },
+            {
+              "prompt": "Convert to Title Case. Reply with only the word: juliet",
+              "out": "Juliet",
+              "ok": true
+            },
+            {
+              "prompt": "Convert to Title Case. Reply with only the word: kilo",
+              "out": "Kilo",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941050.45042,
+      "parent_version_id": null
+    },
+    "reverse_token__3e5864597a": {
+      "task_id": "reverse_token",
+      "version_id": "reverse_token__3e5864597a",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/reverse_token__3e5864597a.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.924,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.848,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.656,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.29,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.924,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.963,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.3,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.811,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.569,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.332,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23882062911987306
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reverse the letters. Reply with only the reversed word: india",
+              "out": "niree India",
+              "ok": false
+            },
+            {
+              "prompt": "Reverse the letters. Reply with only the reversed word: juliet",
+              "out": "juliet",
+              "ok": false
+            },
+            {
+              "prompt": "Reverse the letters. Reply with only the reversed word: kilo",
+              "out": "kilo",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941056.1482196,
+      "parent_version_id": null
+    },
+    "dup_token__1bc078d7e6": {
+      "task_id": "dup_token",
+      "version_id": "dup_token__1bc078d7e6",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/dup_token__1bc078d7e6.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 0.75,
+          "best_ppl": 15.897,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.839,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.637,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.302,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.872,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.89,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.844,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.715,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.014,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23746068954467775
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Duplicate the word (concat twice). Reply with only the result: india",
+              "out": "indinindia",
+              "ok": false
+            },
+            {
+              "prompt": "Duplicate the word (concat twice). Reply with only the result: juliet",
+              "out": "juliett",
+              "ok": false
+            },
+            {
+              "prompt": "Duplicate the word (concat twice). Reply with only the result: kilo",
+              "out": "kilo",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941063.000624,
+      "parent_version_id": null
+    },
+    "first3__9a007902cc": {
+      "task_id": "first3",
+      "version_id": "first3__9a007902cc",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/first3__9a007902cc.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.908,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.819,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.597,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.236,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.936,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.048,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.15,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.886,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.908,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 17.072,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.08,
+            "abs_scale": 1.094810791015625
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with ONLY the first 3 characters of: india",
+              "out": "I'm ready!",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the first 3 characters of: juliet",
+              "out": "juliett",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the first 3 characters of: kilo",
+              "out": "kilo",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941068.6054285,
+      "parent_version_id": null
+    },
+    "last3__890e53b989": {
+      "task_id": "last3",
+      "version_id": "last3__890e53b989",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/last3__890e53b989.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.931,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.829,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.613,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.168,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.931,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.021,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.177,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.866,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.825,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.78,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24038995742797853
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with ONLY the last 3 characters of: india",
+              "out": "India3",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the last 3 characters of: juliet",
+              "out": "juliet3",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the last 3 characters of: kilo",
+              "out": "kilo",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941074.682109,
+      "parent_version_id": null
+    },
+    "len_token__1a55f1a499": {
+      "task_id": "len_token",
+      "version_id": "len_token__1a55f1a499",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/len_token__1a55f1a499.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.899,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.858,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.685,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.159,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.899,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.865,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.754,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.829,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.619,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.338,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23916101455688477
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "How many characters? Reply with ONLY the integer: india",
+              "out": "10",
+              "ok": false
+            },
+            {
+              "prompt": "How many characters? Reply with ONLY the integer: juliet",
+              "out": "10",
+              "ok": false
+            },
+            {
+              "prompt": "How many characters? Reply with ONLY the integer: kilo",
+              "out": "1000",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941080.0838602,
+      "parent_version_id": null
+    },
+    "wrap_brackets__e4d31b055f": {
+      "task_id": "wrap_brackets",
+      "version_id": "wrap_brackets__e4d31b055f",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/wrap_brackets__e4d31b055f.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.88,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.826,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.606,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.465,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.88,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.826,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.064,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.778,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.46,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.247,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2436489486694336
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.25,
+          "ppl": 15.911,
+          "n_ok": 1,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Wrap the word in square brackets. Reply with only that: india",
+              "out": "[India]",
+              "ok": false
+            },
+            {
+              "prompt": "Wrap the word in square brackets. Reply with only that: juliet",
+              "out": "[Juliet]",
+              "ok": false
+            },
+            {
+              "prompt": "Wrap the word in square brackets. Reply with only that: kilo",
+              "out": "[kilo]",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941086.6398683,
+      "parent_version_id": null
+    },
+    "snake_join__6785fafff9": {
+      "task_id": "snake_join",
+      "version_id": "snake_join__6785fafff9",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/snake_join__6785fafff9.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.925,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.856,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.724,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.769,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.925,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.956,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.154,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.87,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.825,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 17.251,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24262767791748047
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with word_word (underscore join of the same word twice): india",
+              "out": "india_India",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with word_word (underscore join of the same word twice): juliet",
+              "out": "juliette",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with word_word (underscore join of the same word twice): kilo",
+              "out": "kilometer",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941093.6299465,
+      "parent_version_id": null
+    },
+    "json_ab__12f8ee214c": {
+      "task_id": "json_ab",
+      "version_id": "json_ab__12f8ee214c",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/json_ab__12f8ee214c.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.961,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.846,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.623,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.989,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.961,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.131,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.963,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.799,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.534,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.587,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24253042221069337
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"fish\" and \"swim\" respe",
+              "out": "{\n  \"a\": \"fish\",\n  \"b\": \"swim\"\n}",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"bird\" and \"fly\" respec",
+              "out": "{\n  \"a\": \"bird\",\n  \"b\": \"fly\"\n}",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with JSON object with keys \"a\" and \"b\" set to \"car\" and \"drive\" respe",
+              "out": "{\n  \"a\": \"car\",\n  \"b\": \"drive\"\n}",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941113.4561827,
+      "parent_version_id": null
+    },
+    "json_list2__12337152db": {
+      "task_id": "json_list2",
+      "version_id": "json_list2__12337152db",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/json_list2__12337152db.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.854,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.854,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.673,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.156,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.97,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.168,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.129,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.818,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.595,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.026,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.21691972732543946
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with a JSON array of exactly two strings: \"fish\" then \"swim\".",
+              "out": "```json\n[\"fish\", \"swim\"]\n```",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with a JSON array of exactly two strings: \"bird\" then \"fly\".",
+              "out": "```json\n[\"bird\", \"fly\"]\n```",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with a JSON array of exactly two strings: \"car\" then \"drive\".",
+              "out": "```json\n[\"car\", \"drive\"]\n```",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941134.2426534,
+      "parent_version_id": null
+    },
+    "csv_two__ab34d4f53f": {
+      "task_id": "csv_two",
+      "version_id": "csv_two__ab34d4f53f",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/csv_two__ab34d4f53f.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 1.0,
+          "best_ppl": 14.745,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.846,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.615,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 14.751,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.911,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.878,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.215,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.739,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.266,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.745,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.2926595211029053
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with CSV line: fish,swim",
+              "out": "```csv\nfish,swim\n```",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with CSV line: bird,fly",
+              "out": "```csv\nbird,fly\nsparrow,flies\nduck,swims\nsparrow,flies\nduck,",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with CSV line: car,drive",
+              "out": "```csv\ncar,drive\ncar,drive\n```",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941153.7494748,
+      "parent_version_id": null
+    },
+    "kv_colon__3f9155cb70": {
+      "task_id": "kv_colon",
+      "version_id": "kv_colon__3f9155cb70",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/kv_colon__3f9155cb70.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.769,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.835,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.571,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 14.629,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.914,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.87,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 15.165,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.789,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.47,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.769,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.3070473670959473
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with key:value as fish:swim",
+              "out": "fish:swim",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with key:value as bird:fly",
+              "out": "bird:fly",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with key:value as car:drive",
+              "out": "car:drive",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941164.2097876,
+      "parent_version_id": null
+    },
+    "bullets_two__e070d4c34c": {
+      "task_id": "bullets_two",
+      "version_id": "bullets_two__e070d4c34c",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/bullets_two__e070d4c34c.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.925,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.779,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.351,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.14,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.9,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.892,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.925,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.763,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.384,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.173,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 2.9669134616851807
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with EXACTLY two bullet lines: '- fish' then '- swim'. Nothing else.",
+              "out": "- fish swim.",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with EXACTLY two bullet lines: '- bird' then '- fly'. Nothing else.",
+              "out": "- bird - fly",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with EXACTLY two bullet lines: '- car' then '- drive'. Nothing else.",
+              "out": "- car\n- drive",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941171.9746165,
+      "parent_version_id": null
+    },
+    "numbered_two__f26b940e2c": {
+      "task_id": "numbered_two",
+      "version_id": "numbered_two__f26b940e2c",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/numbered_two__f26b940e2c.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 1.0,
+          "best_ppl": 16.19,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.806,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.459,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.359,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.903,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.922,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.19,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.733,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.246,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.609,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 3.029181718826294
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with EXACTLY: '1. fish' then '2. swim' on two lines.",
+              "out": "1. fish\n2. swim",
+              "ok": true
+            },
+            {
+              "prompt": "Reply with EXACTLY: '1. bird' then '2. fly' on two lines.",
+              "out": "1. bird\n2. fly",
+              "ok": true
+            },
+            {
+              "prompt": "Reply with EXACTLY: '1. car' then '2. drive' on two lines.",
+              "out": "1. car\n2. drive",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941179.6624165,
+      "parent_version_id": null
+    },
+    "xml_wrap__94992b6494": {
+      "task_id": "xml_wrap",
+      "version_id": "xml_wrap__94992b6494",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/xml_wrap__94992b6494.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 0.75,
+          "best_ppl": 15.881,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.813,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.457,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.065,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.881,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.739,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 14.823,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.783,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.478,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 15.76,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2399599838256836
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with XML element <fish>swim</fish>",
+              "out": "<fish>swim</fish>",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with XML element <bird>fly</bird>",
+              "out": "<bird>fly</bird>",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with XML element <car>drive</car>",
+              "out": "<car drive> </car>",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941187.5918274,
+      "parent_version_id": null
+    },
+    "double_quote__b58245c825": {
+      "task_id": "double_quote",
+      "version_id": "double_quote__b58245c825",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/double_quote__b58245c825.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.914,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.902,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.81,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.273,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.874,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.725,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.203,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.914,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.957,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.498,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.02,
+            "abs_scale": 0.26370777130126954
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with the word in double quotes: fish",
+              "out": "\"fish\"",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with the word in double quotes: bird",
+              "out": "\"bird\"",
+              "ok": true
+            },
+            {
+              "prompt": "Reply ONLY with the word in double quotes: car",
+              "out": "\"car\"",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941192.9592257,
+      "parent_version_id": null
+    },
+    "paren_wrap__9ef3804c72": {
+      "task_id": "paren_wrap",
+      "version_id": "paren_wrap__9ef3804c72",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/paren_wrap__9ef3804c72.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.906,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.893,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.767,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.038,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.811,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.519,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.051,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.891,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.778,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.906,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.3417582511901855
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with the word in parentheses: fish",
+              "out": "fish",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with the word in parentheses: bird",
+              "out": "bird",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with the word in parentheses: car",
+              "out": "car",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941196.996724,
+      "parent_version_id": null
+    },
+    "pipe_join__66d58fda98": {
+      "task_id": "pipe_join",
+      "version_id": "pipe_join__66d58fda98",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/pipe_join__66d58fda98.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.25,
+          "best_ppl": 15.869,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.872,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.682,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.663,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.905,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.826,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.996,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.869,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.771,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.656,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.02,
+            "abs_scale": 0.26911727905273436
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply ONLY with fish|swim",
+              "out": "鱼",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with bird|fly",
+              "out": "bird",
+              "ok": false
+            },
+            {
+              "prompt": "Reply ONLY with car|drive",
+              "out": "car",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941204.5863414,
+      "parent_version_id": null
+    },
+    "extract_int__cd33326690": {
+      "task_id": "extract_int",
+      "version_id": "extract_int__cd33326690",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/extract_int__cd33326690.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.957,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.834,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.534,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.563,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.957,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.079,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.018,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.838,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.646,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.793,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23475221633911134
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nHas 8 sides",
+              "out": "8",
+              "ok": true
+            },
+            {
+              "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nTook 15 days",
+              "out": "15",
+              "ok": true
+            },
+            {
+              "prompt": "Extract the integer from the sentence. Reply with ONLY the number.\nBuilt 4 walls",
+              "out": "4",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941209.8778334,
+      "parent_version_id": null
+    },
+    "extract_email_local__3499f0373a": {
+      "task_id": "extract_email_local",
+      "version_id": "extract_email_local__3499f0373a",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/extract_email_local__3499f0373a.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.918,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.845,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.621,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.816,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.86,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.655,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 14.697,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.918,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.033,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 17.28,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.02,
+            "abs_scale": 0.2691435432434082
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact ira",
+              "out": "ira",
+              "ok": true
+            },
+            {
+              "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact jad",
+              "out": "jade@example.com",
+              "ok": false
+            },
+            {
+              "prompt": "Extract the email local-part (before @). Reply with ONLY that token.\nContact kai",
+              "out": "kai",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941214.8661487,
+      "parent_version_id": null
+    },
+    "first_word__33ca7bca85": {
+      "task_id": "first_word",
+      "version_id": "first_word__33ca7bca85",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/first_word__33ca7bca85.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.5,
+          "best_ppl": 15.567,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.845,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.596,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.617,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.892,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.839,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.424,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.799,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.483,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.567,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.411968946456909
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with ONLY the first word of: Early birds sing",
+              "out": "Early birds.",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the first word of: Fresh bread smells",
+              "out": "Fresh bread smells warm and inviting.",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the first word of: Golden leaves fall",
+              "out": "Golden",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941220.6727757,
+      "parent_version_id": null
+    },
+    "last_word__0c23f474c4": {
+      "task_id": "last_word",
+      "version_id": "last_word__0c23f474c4",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/last_word__0c23f474c4.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.876,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.84,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.568,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.469,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.876,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.769,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.328,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.783,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.432,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.463,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24024948120117187
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.25,
+          "ppl": 15.911,
+          "n_ok": 1,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with ONLY the last word of: Early birds sing",
+              "out": "Morning.",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the last word of: Fresh bread smells",
+              "out": "fresh",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the last word of: Golden leaves fall",
+              "out": "Golden",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941226.0981967,
+      "parent_version_id": null
+    },
+    "word_count__9e56e93ad9": {
+      "task_id": "word_count",
+      "version_id": "word_count__9e56e93ad9",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/word_count__9e56e93ad9.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.75,
+          "best_ppl": 15.89,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.848,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.56,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.341,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.89,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.774,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.193,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.803,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.483,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.048,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23514291763305664
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "How many words? Reply with ONLY the integer.\nEarly birds sing",
+              "out": "3",
+              "ok": true
+            },
+            {
+              "prompt": "How many words? Reply with ONLY the integer.\nFresh bread smells",
+              "out": "3",
+              "ok": true
+            },
+            {
+              "prompt": "How many words? Reply with ONLY the integer.\nGolden leaves fall",
+              "out": "3",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941230.344235,
+      "parent_version_id": null
+    },
+    "extract_code__114cdd69b2": {
+      "task_id": "extract_code",
+      "version_id": "extract_code__114cdd69b2",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/extract_code__114cdd69b2.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 1.0,
+          "best_ppl": 15.447,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.834,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.567,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.419,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.862,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.71,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 15.001,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.804,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.536,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.447,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.2605910301208496
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+              "out": "AA12",
+              "ok": true
+            },
+            {
+              "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+              "out": "3",
+              "ok": true
+            },
+            {
+              "prompt": "Extract the code token (digits and/or letters with optional hyphen) highlighted ",
+              "out": "16",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941237.8479006,
+      "parent_version_id": null
+    },
+    "has_digit__7a84bbd952": {
+      "task_id": "has_digit",
+      "version_id": "has_digit__7a84bbd952",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/has_digit__7a84bbd952.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.5,
+          "best_ppl": 15.853,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.838,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.587,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.683,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.916,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.903,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.746,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.823,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.62,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.853,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.577395439147949
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nnone here",
+              "out": "No",
+              "ok": false
+            },
+            {
+              "prompt": "Does the text contain a digit? Reply ONLY yes or no.\nv2",
+              "out": "Yes",
+              "ok": false
+            },
+            {
+              "prompt": "Does the text contain a digit? Reply ONLY yes or no.\ntest",
+              "out": "Yes",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941242.1777296,
+      "parent_version_id": null
+    },
+    "char0__e24c516fd2": {
+      "task_id": "char0",
+      "version_id": "char0__e24c516fd2",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/char0__e24c516fd2.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.75,
+          "best_ppl": 15.916,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.859,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.654,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 14.864,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.916,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.925,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.558,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.895,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.847,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.1,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24047679901123048
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with ONLY the first character of: india",
+              "out": "I",
+              "ok": false
+            },
+            {
+              "prompt": "Reply with ONLY the first character of: juliet",
+              "out": "j",
+              "ok": true
+            },
+            {
+              "prompt": "Reply with ONLY the first character of: kilo",
+              "out": "k",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941246.4422283,
+      "parent_version_id": null
+    },
+    "is_alpha__fd039c959e": {
+      "task_id": "is_alpha",
+      "version_id": "is_alpha__fd039c959e",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/is_alpha__fd039c959e.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.92,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.875,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.697,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.751,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.946,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.039,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.144,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.891,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.826,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.92,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.445603847503662
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: india",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: a1",
+              "out": "No",
+              "ok": false
+            },
+            {
+              "prompt": "Is this an alphabetic word only? Reply ONLY yes or no: x-y",
+              "out": "No",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941250.908749,
+      "parent_version_id": null
+    },
+    "count_vowels__3410218b85": {
+      "task_id": "count_vowels",
+      "version_id": "count_vowels__3410218b85",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/count_vowels__3410218b85.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.0,
+          "best_ppl": 15.898,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.866,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.658,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.677,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.93,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.935,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.361,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.898,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.881,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.102,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.02,
+            "abs_scale": 0.2625972557067871
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Count vowels (aeiou). Reply with ONLY the integer: india",
+              "out": "1",
+              "ok": false
+            },
+            {
+              "prompt": "Count vowels (aeiou). Reply with ONLY the integer: juliet",
+              "out": "1",
+              "ok": false
+            },
+            {
+              "prompt": "Count vowels (aeiou). Reply with ONLY the integer: kilo",
+              "out": "100",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941255.221185,
+      "parent_version_id": null
+    },
+    "add_int__9a534b11c2": {
+      "task_id": "add_int",
+      "version_id": "add_int__9a534b11c2",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/add_int__9a534b11c2.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.923,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.965,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.096,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.844,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.923,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.948,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.176,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 16.006,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.349,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 17.778,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2387143325805664
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "8",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "10",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a+b. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "4",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941259.4362473,
+      "parent_version_id": null
+    },
+    "sub_int__18c11a2c09": {
+      "task_id": "sub_int",
+      "version_id": "sub_int__18c11a2c09",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/sub_int__18c11a2c09.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.75,
+          "best_ppl": 15.92,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.962,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 16.08,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.796,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.914,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.92,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 16.366,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.997,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 16.297,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 17.503,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.08,
+            "abs_scale": 0.9553808593750001
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.75,
+          "ppl": 15.911,
+          "n_ok": 3,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "-2",
+              "ok": true
+            },
+            {
+              "prompt": "Compute a-b. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "-1",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a-b. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "2",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941263.9933517,
+      "parent_version_id": null
+    },
+    "mul_int__1346c2a13e": {
+      "task_id": "mul_int",
+      "version_id": "mul_int__1346c2a13e",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/mul_int__1346c2a13e.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.932,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.968,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.098,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.814,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.932,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.984,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.352,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 16.038,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 16.517,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 18.628,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.2386147689819336
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "8",
+              "ok": true
+            },
+            {
+              "prompt": "Compute a*b. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "10",
+              "ok": true
+            },
+            {
+              "prompt": "Compute a*b. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "3",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941268.088114,
+      "parent_version_id": null
+    },
+    "max_int__3af71d663b": {
+      "task_id": "max_int",
+      "version_id": "max_int__3af71d663b",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/max_int__3af71d663b.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.5,
+          "best_ppl": 15.429,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.962,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.046,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.429,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.936,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.98,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 15.82,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.018,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.414,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 18.246,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.25,
+            "abs_scale": 2.7748708724975586
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 4",
+              "out": "8",
+              "ok": false
+            },
+            {
+              "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n2 ? 5",
+              "out": "7",
+              "ok": false
+            },
+            {
+              "prompt": "Compute max(a,b). Reply with ONLY the integer result.\n3 ? 1",
+              "out": "4",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941272.1958427,
+      "parent_version_id": null
+    },
+    "min_int__8362ee5ee2": {
+      "task_id": "min_int",
+      "version_id": "min_int__8362ee5ee2",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/min_int__8362ee5ee2.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.5,
+          "best_ppl": 15.861,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.964,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 16.055,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.5,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.931,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.971,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.861,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 16.024,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 16.442,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 18.411,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 2.977799654006958
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 4",
+              "out": "4",
+              "ok": false
+            },
+            {
+              "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n2 ? 5",
+              "out": "1",
+              "ok": false
+            },
+            {
+              "prompt": "Compute min(a,b). Reply with ONLY the integer result.\n3 ? 1",
+              "out": "2",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941278.1414664,
+      "parent_version_id": null
+    },
+    "mod_int__75b78ff2eb": {
+      "task_id": "mod_int",
+      "version_id": "mod_int__75b78ff2eb",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/mod_int__75b78ff2eb.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.25,
+          "best_ppl": 15.967,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.961,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.078,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.732,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.917,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.923,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 15.967,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.022,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.432,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 18.227,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 2.9793708324432373
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.25,
+          "ppl": 15.911,
+          "n_ok": 1,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "8",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a%b. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "1",
+              "ok": false
+            },
+            {
+              "prompt": "Compute a%b. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "3",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941285.223192,
+      "parent_version_id": null
+    },
+    "abs_diff__40e2a73527": {
+      "task_id": "abs_diff",
+      "version_id": "abs_diff__40e2a73527",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/abs_diff__40e2a73527.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 1.0,
+          "best_ppl": 16.001,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.972,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 16.157,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 16.335,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.942,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.015,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.001,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 16.018,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 16.394,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 17.937,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 2.9885549545288086
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 4",
+              "out": "6",
+              "ok": false
+            },
+            {
+              "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n2 ? 5",
+              "out": "1",
+              "ok": false
+            },
+            {
+              "prompt": "Compute |a-b|. Reply with ONLY the integer result.\n3 ? 1",
+              "out": "2",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941292.0327325,
+      "parent_version_id": null
+    },
+    "cmp_gt__d15ef06a68": {
+      "task_id": "cmp_gt",
+      "version_id": "cmp_gt__d15ef06a68",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/cmp_gt__d15ef06a68.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.881,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.875,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.668,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.485,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.881,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.731,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.861,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.002,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.315,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 17.836,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24232519149780274
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is 2 greater than 4? Reply ONLY yes or no.",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Is 2 greater than 5? Reply ONLY yes or no.",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Is 3 greater than 1? Reply ONLY yes or no.",
+              "out": "Yes.",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941299.9074957,
+      "parent_version_id": null
+    },
+    "parity__dfda45cd8f": {
+      "task_id": "parity",
+      "version_id": "parity__dfda45cd8f",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/parity__dfda45cd8f.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.879,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.879,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.66,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.269,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.875,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.726,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.839,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.037,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.595,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 21.567,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.22170442581176758
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is 9 even or odd? Reply ONLY even or odd.",
+              "out": "Even.",
+              "ok": false
+            },
+            {
+              "prompt": "Is 10 even or odd? Reply ONLY even or odd.",
+              "out": "Even.",
+              "ok": false
+            },
+            {
+              "prompt": "Is 11 even or odd? Reply ONLY even or odd.",
+              "out": "Even.",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941309.9398937,
+      "parent_version_id": null
+    },
+    "triple__20a06fa74a": {
+      "task_id": "triple",
+      "version_id": "triple__20a06fa74a",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/triple__20a06fa74a.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.95,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.954,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.011,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.433,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.95,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.997,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.37,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.991,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.337,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 18.627,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23948240280151367
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Multiply by 3. Reply with ONLY the integer: 9",
+              "out": "27",
+              "ok": true
+            },
+            {
+              "prompt": "Multiply by 3. Reply with ONLY the integer: 10",
+              "out": "30",
+              "ok": true
+            },
+            {
+              "prompt": "Multiply by 3. Reply with ONLY the integer: 11",
+              "out": "33",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941318.1408002,
+      "parent_version_id": null
+    },
+    "sentiment3__762e9a694b": {
+      "task_id": "sentiment3",
+      "version_id": "sentiment3__762e9a694b",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/sentiment3__762e9a694b.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 1.0,
+          "best_ppl": 16.108,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.875,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.726,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.12,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.972,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 16.125,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 16.108,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.872,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.823,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.355,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.25,
+            "abs_scale": 2.883894681930542
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.25,
+          "ppl": 15.911,
+          "n_ok": 1,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+              "out": "neutral",
+              "ok": true
+            },
+            {
+              "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+              "out": "Positive",
+              "ok": false
+            },
+            {
+              "prompt": "Classify sentiment as positive, negative, or neutral. Reply with ONLY the label.",
+              "out": "Negative",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941325.8247664,
+      "parent_version_id": null
+    },
+    "lang_en_es__6d5534c03e": {
+      "task_id": "lang_en_es",
+      "version_id": "lang_en_es__6d5534c03e",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/lang_en_es__6d5534c03e.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.5,
+          "best_ppl": 15.929,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.929,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.933,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.042,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.892,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.76,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.827,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.951,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 16.068,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.733,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.20064521789550782
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nRed apple",
+              "out": "es",
+              "ok": false
+            },
+            {
+              "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nManzana roja",
+              "out": "es",
+              "ok": true
+            },
+            {
+              "prompt": "Is the text English (en) or Spanish (es)? Reply ONLY en or es.\nFast car",
+              "out": "es",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941331.023742,
+      "parent_version_id": null
+    },
+    "map_yes_no__e9939d96bf": {
+      "task_id": "map_yes_no",
+      "version_id": "map_yes_no__e9939d96bf",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/map_yes_no__e9939d96bf.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.897,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.895,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.775,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.802,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.76,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.817,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.014,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.438,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 18.427,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.24042110443115236
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Map to yes/no. Reply ONLY yes or no. Input: True",
+              "out": "Yes",
+              "ok": false
+            },
+            {
+              "prompt": "Map to yes/no. Reply ONLY yes or no. Input: False",
+              "out": "No",
+              "ok": false
+            },
+            {
+              "prompt": "Map to yes/no. Reply ONLY yes or no. Input: y",
+              "out": "Yes",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941335.315582,
+      "parent_version_id": null
+    },
+    "animal_or_object__d2a51a898c": {
+      "task_id": "animal_or_object",
+      "version_id": "animal_or_object__d2a51a898c",
+      "status": "active",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/animal_or_object__d2a51a898c.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.5,
+          "best_ppl": 18.002,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.955,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.048,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.866,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.915,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.937,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.015,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.946,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.145,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 18.002,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.3055334091186523
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Classify as animal or object. Reply ONLY with the label: horse",
+              "out": "horse",
+              "ok": false
+            },
+            {
+              "prompt": "Classify as animal or object. Reply ONLY with the label: cow",
+              "out": "object",
+              "ok": false
+            },
+            {
+              "prompt": "Classify as animal or object. Reply ONLY with the label: lamp",
+              "out": "lamp",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941339.255061,
+      "parent_version_id": null
+    },
+    "food_or_other__bcddaddf2d": {
+      "task_id": "food_or_other",
+      "version_id": "food_or_other__bcddaddf2d",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/food_or_other__bcddaddf2d.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.5,
+          "best_ppl": 15.905,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.905,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.754,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.718,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.867,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.728,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.526,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.978,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 16.22,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 17.287,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.21921825408935547
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.25,
+          "ppl": 15.911,
+          "n_ok": 1,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is it food or other? Reply ONLY food or other: soup",
+              "out": "food",
+              "ok": true
+            },
+            {
+              "prompt": "Is it food or other? Reply ONLY food or other: fish",
+              "out": "Fish is food.",
+              "ok": false
+            },
+            {
+              "prompt": "Is it food or other? Reply ONLY food or other: hammer",
+              "out": "hammer - other",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941343.4097009,
+      "parent_version_id": null
+    },
+    "is_color__8f23152e95": {
+      "task_id": "is_color",
+      "version_id": "is_color__8f23152e95",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/is_color__8f23152e95.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.25,
+          "best_ppl": 17.742,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.916,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.855,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.995,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.871,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.72,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.194,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 16.002,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.31,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 17.742,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.25,
+            "abs_scale": 3.4927468299865723
+          },
+          "tune_no_gain": false
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is this an English color word? Reply ONLY yes or no: cat",
+              "out": "Yes",
+              "ok": false
+            },
+            {
+              "prompt": "Is this an English color word? Reply ONLY yes or no: dog",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Is this an English color word? Reply ONLY yes or no: table",
+              "out": "Yes.",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941347.668902,
+      "parent_version_id": null
+    },
+    "sing_plur__b098cd9a3b": {
+      "task_id": "sing_plur",
+      "version_id": "sing_plur__b098cd9a3b",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/sing_plur__b098cd9a3b.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.925,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.931,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.86,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.739,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.932,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.925,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.144,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.928,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 16.003,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.497,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.08,
+            "abs_scale": 0.9441101074218751
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: keys",
+              "out": "keys",
+              "ok": false
+            },
+            {
+              "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: map",
+              "out": "map",
+              "ok": false
+            },
+            {
+              "prompt": "Guess singular/plural by ending. Reply ONLY singular or plural: houses",
+              "out": "houses",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941351.8386204,
+      "parent_version_id": null
+    },
+    "short_or_long__d181426600": {
+      "task_id": "short_or_long",
+      "version_id": "short_or_long__d181426600",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/short_or_long__d181426600.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.5,
+          "best_tune": 0.5,
+          "best_ppl": 15.873,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.873,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.67,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 14.877,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.955,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 16.079,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.63,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.863,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.761,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.655,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.21916288375854492
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.5,
+          "ppl": 15.911,
+          "n_ok": 2,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: india",
+              "out": "short",
+              "ok": false
+            },
+            {
+              "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: juliet",
+              "out": "short",
+              "ok": false
+            },
+            {
+              "prompt": "Is the word short (<=4 chars) or long? Reply ONLY short or long: kilo",
+              "out": "short",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941357.1389868,
+      "parent_version_id": null
+    },
+    "starts_vowel__282d684b80": {
+      "task_id": "starts_vowel",
+      "version_id": "starts_vowel__282d684b80",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/starts_vowel__282d684b80.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.892,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.848,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.587,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 14.439,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.938,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.948,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.567,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.892,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.846,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.935,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 10,
+            "rel": 0.02,
+            "abs_scale": 0.2748375129699707
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 0.0,
+          "ppl": 15.911,
+          "n_ok": 0,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Does it start with a vowel? Reply ONLY yes or no: india",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Does it start with a vowel? Reply ONLY yes or no: juliet",
+              "out": "Yes.",
+              "ok": false
+            },
+            {
+              "prompt": "Does it start with a vowel? Reply ONLY yes or no: kilo",
+              "out": "Yes.",
+              "ok": false
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941361.8642468,
+      "parent_version_id": null
+    },
+    "pick_ab__b81ab40856": {
+      "task_id": "pick_ab",
+      "version_id": "pick_ab__b81ab40856",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/pick_ab__b81ab40856.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.895,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.895,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.798,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.28,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.84,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.645,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.619,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.961,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 16.202,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 17.885,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.02,
+            "abs_scale": 0.216651554107666
+          },
+          "tune_no_gain": true
+        },
+        "base_val": {
+          "split": "val",
+          "n": 4,
+          "acc": 1.0,
+          "ppl": 15.911,
+          "n_ok": 4,
+          "version_id": null,
+          "samples": [
+            {
+              "prompt": "Reply with option A only. Output ONLY the letter.",
+              "out": "A",
+              "ok": true
+            },
+            {
+              "prompt": "Reply with option B only. Output ONLY the letter.",
+              "out": "B",
+              "ok": true
+            },
+            {
+              "prompt": "Reply with option A only. Output ONLY the letter.",
+              "out": "A",
+              "ok": true
+            }
+          ]
+        }
+      },
+      "provenance": {
+        "kind": "initial_build",
+        "good_prompts_used": 0
+      },
+      "created_at": 1793941365.8660772,
+      "parent_version_id": null
+    },
+    "upper_token__eb34df060d": {
+      "task_id": "upper_token",
+      "version_id": "upper_token__eb34df060d",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/upper_token__eb34df060d.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.25,
+          "best_tune": 0.75,
+          "best_ppl": 15.843,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.851,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.714,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.843,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.25,
+              "ppl": 15.903,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.25,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.25,
+              "ppl": 16.06,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.5,
+              "ppl": 15.816,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.611,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.692,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 6,
+            "rel": 0.25,
+            "abs_scale": 2.814033031463623
+          },
+          "tune_no_gain": false
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941396.703906,
+      "parent_version_id": null
+    },
+    "lower_token__8d19ed6960": {
+      "task_id": "lower_token",
+      "version_id": "lower_token__8d19ed6960",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/lower_token__8d19ed6960.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 1.0,
+          "best_tune": 1.0,
+          "best_ppl": 15.884,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.852,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.677,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.283,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.884,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.82,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.762,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 1.0,
+              "ppl": 15.81,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 1.0,
+              "ppl": 15.577,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 1.0,
+              "ppl": 15.489,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23790145874023438
+          },
+          "tune_no_gain": true
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941402.1753032,
+      "parent_version_id": null
+    },
+    "title_token__48158ee1bb": {
+      "task_id": "title_token",
+      "version_id": "title_token__48158ee1bb",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/title_token__48158ee1bb.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 0.75,
+          "best_ppl": 15.918,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.876,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.789,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.799,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.918,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.965,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 16.186,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.82,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.632,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.701,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23935174942016602
+          },
+          "tune_no_gain": true
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941407.7516093,
+      "parent_version_id": null
+    },
+    "reverse_token__6f5f4bd840": {
+      "task_id": "reverse_token",
+      "version_id": "reverse_token__6f5f4bd840",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/reverse_token__6f5f4bd840.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.0,
+          "best_tune": 0.0,
+          "best_ppl": 15.924,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.848,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.656,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.29,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.924,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.963,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 16.3,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.0,
+              "ppl": 15.811,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.0,
+              "ppl": 15.569,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.0,
+              "ppl": 15.332,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23882062911987306
+          },
+          "tune_no_gain": true
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941413.095925,
+      "parent_version_id": null
+    },
+    "dup_token__f8c8597183": {
+      "task_id": "dup_token",
+      "version_id": "dup_token__f8c8597183",
+      "status": "experimental",
+      "path": "/workspace/docker-llm/enjambre/artifacts/adaptive-0.5b/deltas/dup_token__f8c8597183.pt",
+      "metrics": {
+        "tune": {
+          "base_tune": 0.75,
+          "best_tune": 0.75,
+          "best_ppl": 15.897,
+          "base_ppl": 15.911,
+          "grid": [
+            {
+              "layer": 6,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.839,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.08,
+              "tune_acc": 0.5,
+              "ppl": 15.637,
+              "ok_ppl": true
+            },
+            {
+              "layer": 6,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 15.302,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.897,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.872,
+              "ok_ppl": true
+            },
+            {
+              "layer": 8,
+              "rel": 0.25,
+              "tune_acc": 0.75,
+              "ppl": 15.89,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.02,
+              "tune_acc": 0.75,
+              "ppl": 15.844,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.08,
+              "tune_acc": 0.75,
+              "ppl": 15.715,
+              "ok_ppl": true
+            },
+            {
+              "layer": 10,
+              "rel": 0.25,
+              "tune_acc": 0.5,
+              "ppl": 16.014,
+              "ok_ppl": true
+            }
+          ],
+          "chosen": {
+            "kind": "single",
+            "layer": 8,
+            "rel": 0.02,
+            "abs_scale": 0.23746068954467775
+          },
+          "tune_no_gain": true
+        }
+      },
+      "provenance": {
+        "kind": "replacement_proposal",
+        "good_prompts_used": 0,
+        "avoid_layer": null
+      },
+      "created_at": 1793941419.7101939,
+      "parent_version_id": null
+    }
+  },
+  "active_by_task": {
+    "csv_two": "csv_two__ab34d4f53f",
+    "has_digit": "has_digit__7a84bbd952",
+    "is_alpha": "is_alpha__fd039c959e",
+    "max_int": "max_int__3af71d663b",
+    "min_int": "min_int__8362ee5ee2",
+    "mod_int": "mod_int__75b78ff2eb",
+    "abs_diff": "abs_diff__40e2a73527",
+    "sentiment3": "sentiment3__762e9a694b",
+    "animal_or_object": "animal_or_object__d2a51a898c"
+  },
+  "updated_at": 1793941420.7345405
+}
