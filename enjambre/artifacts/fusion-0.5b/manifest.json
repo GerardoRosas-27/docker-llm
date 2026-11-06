@@ -1,0 +1,303 @@
+{
+  "experiment": "fusion-expertos-10",
+  "base_model_key": "qwen2.5-0.5b",
+  "base_hf_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision_note": "pesos base HuggingFace tal cual; deltas locales versionados por sha256",
+  "deltas": {
+    "n_experts": 10,
+    "deltas_dir": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b",
+    "experts": [
+      {
+        "id": "json",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_json.pt",
+        "sha256": "2efd4e69ca8952d14e7872c5b29f9e7b2374b95660b3f3af895fc5adb6d7654c",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          8
+        ],
+        "scales": [
+          3.3352560997009277
+        ],
+        "vec_norms": [
+          1.0000001192092896
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "spanish",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_spanish.pt",
+        "sha256": "e1276101ba0d4d50d78d0b7772b484a96abd6c8d547bce91bf5da7350921134b",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          10
+        ],
+        "scales": [
+          0.29219062805175783
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "translate_en",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_translate_en.pt",
+        "sha256": "d66bb7115865dc7d1f996f6a3294f4d51dd7a82e314929d9a59d725d20115484",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          10
+        ],
+        "scales": [
+          3.6523828506469727
+        ],
+        "vec_norms": [
+          1.0000001192092896
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "arithmetic",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_arithmetic.pt",
+        "sha256": "91acad87fa8393dc54ffc6cdf65183974ec2047c89e2df388ea509427b004b3d",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          8
+        ],
+        "scales": [
+          0.2668204879760742
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "summarize",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_summarize.pt",
+        "sha256": "c8c78eb5095eec08448ee1ae8946c40ff14b10586301f175b56926676666a924",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          8
+        ],
+        "scales": [
+          1.0672819519042969
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "uppercase",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_uppercase.pt",
+        "sha256": "777f4eacffb0124c18c1a09e5884600bf962b025b1cb30585e66818a6d01e439",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          6
+        ],
+        "scales": [
+          2.9449105262756348
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "sentiment",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_sentiment.pt",
+        "sha256": "b8986e18b9357c24007ba8c0cc518fef055f4f77c31c41995f722a54717fbe58",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          10
+        ],
+        "scales": [
+          0.29219062805175783
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "entities",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_entities.pt",
+        "sha256": "4d674843518f684c8b1fb4d4a8b07d07391e044c92e920ed68bc50dc40eeb427",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          8
+        ],
+        "scales": [
+          3.3352560997009277
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "bullets",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_bullets.pt",
+        "sha256": "7e63da9434ade9893ac283473dc6e4a4585fd087225c073fe5a075c5aa5eb0eb",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          10
+        ],
+        "scales": [
+          0.29219062805175783
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      },
+      {
+        "id": "code_python",
+        "path": "/workspace/docker-llm/enjambre/artifacts/qwen2.5-0.5b/delta_code_python.pt",
+        "sha256": "2d2a0bf0ec542fcafa4fad605bd8f089bff7a900fca0c2b76d334dea17c082d3",
+        "edit_kind": "steering_bias",
+        "n_bias_edits": 1,
+        "n_rank1_edits": 0,
+        "layers": [
+          8
+        ],
+        "scales": [
+          0.2668204879760742
+        ],
+        "vec_norms": [
+          1.0
+        ],
+        "vec_dim": 896,
+        "meta": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "n_tune": 6,
+        "n_eval": 20,
+        "note": "Bias steering: se suma scale*vec al bias de mlp.down_proj. Si el Linear no tenía bias, se crea un parámetro nuevo de sesgo (+hidden_size params por capa tocada). NO es ΔW rank-1."
+      }
+    ],
+    "edit_kind_summary": "all_steering_bias"
+  },
+  "hypotheses": {
+    "H1_multi_layer_sum": "Sumar sesgos en sus capas de origen puede interferir; no garantiza mejora vs selector.",
+    "H2_single_layer_fuse": "Reubicar todos los vectores a UNA capa común NO es equivalente a aplicarlos en origen; es hipótesis exploratoria.",
+    "H3_growth": "Fusionar deltas bias en la misma arquitectura NO crece parámetros del stack Transformer; como mucho materializa bias ausente.",
+    "H4_parallel_mlp": "MLP paralelo con N ramas y average de salidas, si solo difieren en bias de down_proj, es linealmente equivalente a un solo bias promedio (demostrable)."
+  },
+  "out_dir": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b",
+  "base_ppl": 15.911303399287734,
+  "n_layers": 24,
+  "hidden": 896
+}

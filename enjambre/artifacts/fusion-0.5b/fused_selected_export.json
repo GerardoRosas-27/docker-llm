@@ -1,0 +1,6 @@
+{
+  "fused_delta_path": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b/fused_selected.pt",
+  "fused_biases_path": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b/fused_selected_biases.pt",
+  "reload": "load base HF + torch.load biases into down_proj.bias, or apply fused delta via SnapshotActivator",
+  "sha256_delta": "31fd78d399fb3e4de0d0ff21efbd686cd6f3470eac473cfd748921ed2a1320e5"
+}

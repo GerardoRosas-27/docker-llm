@@ -1,0 +1,411 @@
+{
+  "base_ppl": 15.911,
+  "confirm_means": {
+    "base": 0.57,
+    "oracle": 0.6,
+    "multi_avg_g1": 0.7,
+    "multi_sum_g1": 0.56,
+    "single_avg_ref": 0.59,
+    "selected": 0.7
+  },
+  "val_means": {
+    "base": 0.5,
+    "oracle": 0.54,
+    "multi_avg_g1": 0.67,
+    "multi_sum_g1": 0.46,
+    "single_avg_ref": 0.52,
+    "selected": 0.67
+  },
+  "full20_exploratory_means": {
+    "base": 0.535,
+    "oracle": 0.57,
+    "multi_avg_g1": 0.685,
+    "multi_sum_g1": 0.51,
+    "single_avg_ref": 0.555,
+    "selected": 0.685
+  },
+  "selected_hyperparams": {
+    "mode": "multi_avg",
+    "target_layer": null,
+    "global_scale": 1.0,
+    "tune_mean": 0.7,
+    "ppl": 16.648,
+    "ok_ppl": true,
+    "val_mean": 0.67
+  },
+  "comparisons_confirm": {
+    "oracle_vs_base": {
+      "n_gain": 3,
+      "n_loss": 1,
+      "n_flat": 6,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.8,
+          "other": 0.9,
+          "delta": 0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.9,
+          "other": 0.9,
+          "delta": 0.0
+        },
+        {
+          "task": "summarize",
+          "base": 0.3,
+          "other": 0.2,
+          "delta": -0.1
+        },
+        {
+          "task": "uppercase",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.5,
+          "other": 0.5,
+          "delta": 0.0
+        },
+        {
+          "task": "entities",
+          "base": 0.5,
+          "other": 0.7,
+          "delta": 0.2
+        },
+        {
+          "task": "bullets",
+          "base": 0.1,
+          "other": 0.1,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 0.7,
+          "other": 0.7,
+          "delta": 0.0
+        }
+      ]
+    },
+    "selected_vs_base": {
+      "n_gain": 7,
+      "n_loss": 0,
+      "n_flat": 3,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.8,
+          "other": 0.9,
+          "delta": 0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "summarize",
+          "base": 0.3,
+          "other": 0.3,
+          "delta": 0.0
+        },
+        {
+          "task": "uppercase",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.5,
+          "other": 1.0,
+          "delta": 0.5
+        },
+        {
+          "task": "entities",
+          "base": 0.5,
+          "other": 0.7,
+          "delta": 0.2
+        },
+        {
+          "task": "bullets",
+          "base": 0.1,
+          "other": 0.2,
+          "delta": 0.1
+        },
+        {
+          "task": "code_python",
+          "base": 0.7,
+          "other": 0.9,
+          "delta": 0.2
+        }
+      ]
+    },
+    "multi_avg_vs_base": {
+      "n_gain": 7,
+      "n_loss": 0,
+      "n_flat": 3,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.8,
+          "other": 0.9,
+          "delta": 0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "summarize",
+          "base": 0.3,
+          "other": 0.3,
+          "delta": 0.0
+        },
+        {
+          "task": "uppercase",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.5,
+          "other": 1.0,
+          "delta": 0.5
+        },
+        {
+          "task": "entities",
+          "base": 0.5,
+          "other": 0.7,
+          "delta": 0.2
+        },
+        {
+          "task": "bullets",
+          "base": 0.1,
+          "other": 0.2,
+          "delta": 0.1
+        },
+        {
+          "task": "code_python",
+          "base": 0.7,
+          "other": 0.9,
+          "delta": 0.2
+        }
+      ]
+    },
+    "single_avg_vs_base": {
+      "n_gain": 2,
+      "n_loss": 0,
+      "n_flat": 8,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.8,
+          "other": 0.9,
+          "delta": 0.1
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.9,
+          "other": 0.9,
+          "delta": 0.0
+        },
+        {
+          "task": "summarize",
+          "base": 0.3,
+          "other": 0.3,
+          "delta": 0.0
+        },
+        {
+          "task": "uppercase",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.5,
+          "other": 0.5,
+          "delta": 0.0
+        },
+        {
+          "task": "entities",
+          "base": 0.5,
+          "other": 0.5,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.1,
+          "other": 0.1,
+          "delta": 0.0
+        },
+        {
+          "task": "code_python",
+          "base": 0.7,
+          "other": 0.7,
+          "delta": 0.0
+        }
+      ]
+    },
+    "selected_vs_oracle": {
+      "n_gain": 5,
+      "n_loss": 0,
+      "n_flat": 5,
+      "per_task": [
+        {
+          "task": "json",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "spanish",
+          "base": 1.0,
+          "other": 1.0,
+          "delta": 0.0
+        },
+        {
+          "task": "translate_en",
+          "base": 0.9,
+          "other": 0.9,
+          "delta": 0.0
+        },
+        {
+          "task": "arithmetic",
+          "base": 0.9,
+          "other": 1.0,
+          "delta": 0.1
+        },
+        {
+          "task": "summarize",
+          "base": 0.2,
+          "other": 0.3,
+          "delta": 0.1
+        },
+        {
+          "task": "uppercase",
+          "base": 0.0,
+          "other": 0.0,
+          "delta": 0.0
+        },
+        {
+          "task": "sentiment",
+          "base": 0.5,
+          "other": 1.0,
+          "delta": 0.5
+        },
+        {
+          "task": "entities",
+          "base": 0.7,
+          "other": 0.7,
+          "delta": 0.0
+        },
+        {
+          "task": "bullets",
+          "base": 0.1,
+          "other": 0.2,
+          "delta": 0.1
+        },
+        {
+          "task": "code_python",
+          "base": 0.7,
+          "other": 0.9,
+          "delta": 0.2
+        }
+      ]
+    }
+  },
+  "parallel_equivalence": {
+    "n_branches": 10,
+    "max_abs_err": 4.76837158203125e-07,
+    "equivalent": true,
+    "params_single_down_with_bias": 4359040,
+    "params_naive_parallel_n_copies": 43590400,
+    "extra_params_if_materialized": 39231360,
+    "conclusion": "Parallel average of bias-only branches ≡ single Linear with average bias. Materializing N copies grows storage/params but NOT function class for this edit type.",
+    "layer": 8,
+    "base_model_params": 494032768,
+    "fusion_does_not_grow_transformer": true
+  },
+  "params": {
+    "base_model_params": 494032768,
+    "fusion_bias_materialization": {
+      "new_bias_layers": 3,
+      "new_bias_params": 2688,
+      "dim": 896
+    },
+    "note": "Fusion of bias deltas does not grow Transformer depth/width; optional new bias tensors only."
+  },
+  "export": {
+    "fused_delta_path": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b/fused_selected.pt",
+    "fused_biases_path": "/workspace/docker-llm/enjambre/artifacts/fusion-0.5b/fused_selected_biases.pt",
+    "reload": "load base HF + torch.load biases into down_proj.bias, or apply fused delta via SnapshotActivator",
+    "sha256_delta": "31fd78d399fb3e4de0d0ff21efbd686cd6f3470eac473cfd748921ed2a1320e5"
+  },
+  "reload_smoke": {
+    "with_fused_bias": "Hi",
+    "after_clear": "Hi.",
+    "ok": true
+  },
+  "elapsed_s": 1854.4,
+  "protocol": {
+    "hyperparams": "tune + first half eval (fusion_val)",
+    "final_report": "second half eval (fusion_confirm) n≈10/task",
+    "exploratory_full20": "all 20 eval items reused from prior scaling — NOT independent holdout for this experiment"
+  }
+}

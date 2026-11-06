@@ -17,3 +17,6 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/adaptive-0.5b/deltas/**
 !enjambre/artifacts/adaptive-0.5b-smoke/deltas/
 !enjambre/artifacts/adaptive-0.5b-smoke/deltas/**
+
+!enjambre/artifacts/fusion-0.5b/
+!enjambre/artifacts/fusion-0.5b/**
