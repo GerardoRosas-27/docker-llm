@@ -7,6 +7,13 @@ ROME (un hecho, capa l):   ΔW = (v* - W k) (C^-1 k)^T / (k^T C^-1 k)
 MEMIT (n hechos, capas R): para cada l en R (en orden):
     resid_i = (z_i - h_i^{L})/(|R| - j)   ;  ΔW_l = Resid K^T (λ C + K K^T)^-1
 z_i se obtiene optimizando un δ sobre la salida del bloque L=max(R) (Adam, solo δ).
+Estabilidad (>135M):
+- MEMIT: C se simetriza y se proyecta a PSD (eigh + floor en autovalores; no es diag+ridge).
+  Sin eso, eignegativos · λ hacen explotar solve() (ΔW >> W en d_ff≥2560).
+- ROME: usa C bruta + ridge clásico (eps·mean(diag)·I); la proyección PSD no le conviene.
+- δ/resid se clampean vs ||h|| y ||ΔW|| ≤ dw_clamp·||W||.
+- Revertir ΔW resta el mismo U@V casteado al dtype de W: en fp32 es casi exacto; en fp16
+  hay error de redondeo (ver tests). No es reversión bit-exacta.
 """
 from __future__ import annotations
 import math
@@ -115,6 +122,24 @@ def _full_prompts(tok, fact: FactSpec, prompts: List[str]) -> List[str]:
     return [chat_text(tok, p.format(s=fact.subject)) for p in prompts]
 
 
+def _make_psd(C: torch.Tensor, eps_frac: float = 1e-2) -> torch.Tensor:
+    """Simetriza C y proyecta autovalores a ≥ floor. Con pocas muestras float32 mete
+    eignegativos; λ·C los amplifica y solve() explota (ΔW >> W en 360M/0.5B)."""
+    C = 0.5 * (C + C.T).double()
+    evals, evecs = torch.linalg.eigh(C)
+    floor = eps_frac * evals.detach().clamp(min=0).median().clamp(min=1e-12)
+    evals = evals.clamp(min=floor)
+    return ((evecs * evals) @ evecs.T).float()
+
+
+def _clamp_rows(X: torch.Tensor, ref: torch.Tensor, max_ratio: float) -> torch.Tensor:
+    """Limita ||X[i]|| ≤ max_ratio · ||ref[i]||."""
+    xn = X.norm(dim=1).clamp(min=1e-9)
+    rn = ref.norm(dim=1).clamp(min=1e-9)
+    scale = (max_ratio * rn / xn).clamp(max=1.0)
+    return X * scale[:, None]
+
+
 def optimize_delta(
     model, tok, fact: FactSpec, layer: int, where: str, steps: int = 25, lr: float = 0.5,
     clamp_factor: float = 4.0, wd: float = 0.5,
@@ -184,28 +209,33 @@ def _apply_lowrank(model, e: LowRankEdit, sign: float = 1.0):
 
 
 class WeightMemory:
-    """Guarda ediciones low-rank; aplicar/revertir exacto (resta del mismo ΔW)."""
+    """Guarda ediciones low-rank; clear() resta el mismo U@V (tolerancia dtype; ver módulo)."""
 
     def __init__(self, model, tok, cov_texts: Sequence[str], rome_layer: int, memit_layers: List[int],
-                 memit_lambda: float = 2.0, cov_eps: float = 1e-2):
+                 memit_lambda: float = 2.0, cov_eps: float = 1e-2,
+                 resid_clamp: float = 1.0, dw_clamp: float = 0.30):
         self.model, self.tok = model, tok
         self.cov_texts = list(cov_texts)
         self.rome_layer = rome_layer
         self.memit_layers = memit_layers
         self.lam = memit_lambda
         self.cov_eps = cov_eps
-        self._cov: Dict[int, torch.Tensor] = {}
+        self.resid_clamp = resid_clamp
+        self.dw_clamp = dw_clamp
+        self._cov: Dict[int, Dict[str, torch.Tensor]] = {}  # layer -> {raw, psd}
         self.cov_tokens = 0
         self.applied: List[LowRankEdit] = []
         self.facts: List[FactSpec] = []
         self.method: Optional[str] = None
 
-    def cov(self, layer: int) -> torch.Tensor:
+    def cov(self, layer: int, *, psd: bool = True) -> torch.Tensor:
         if layer not in self._cov:
             C, n = compute_cov(self.model, self.tok, self.cov_texts, layer)
             self.cov_tokens = n
-            self._cov[layer] = C
-        return self._cov[layer]
+            # Bruta + PSD: ROME usa ridge clásico sobre C bruta; MEMIT exige PSD
+            # (eignegativos · λ → ΔW explosivo en d_ff≥2560).
+            self._cov[layer] = {"raw": C, "psd": _make_psd(C, self.cov_eps)}
+        return self._cov[layer]["psd" if psd else "raw"]
 
     def clear(self):
         for e in reversed(self.applied):
@@ -220,7 +250,7 @@ class WeightMemory:
         prompts = _full_prompts(self.tok, fact, fact.train_prompts)
         k = keys_at_subject(self.model, self.tok, prompts, fact.subject, L)
         delta, _ = optimize_delta(self.model, self.tok, fact, L, "mlp")
-        C = self.cov(L)
+        C = self.cov(L, psd=False)
         Cr = C + self.cov_eps * C.diagonal().mean() * torch.eye(C.shape[0])
         u = torch.linalg.solve(Cr, k)
         u = u / (k @ u)
@@ -238,6 +268,8 @@ class WeightMemory:
         zs, subj_prompts = [], []
         for f in facts:
             d, base = optimize_delta(self.model, self.tok, f, Lz, "block")
+            # δ grande destruye el residual stream en modelos >135M; clamp relativo a ||h||.
+            d = d * min(1.0, self.resid_clamp * (base.norm().item() + 1e-9) / (d.norm().item() + 1e-9))
             zs.append(base + d)
             subj_prompts.append(_full_prompts(self.tok, f, f.train_prompts))
         Z = torch.stack(zs)                                    # n x d_model
@@ -247,17 +279,22 @@ class WeightMemory:
                              for f, ps in zip(facts, subj_prompts)])        # n x d_ff
             H = torch.stack([hidden_at_subject(self.model, self.tok, ps, f.subject, Lz)
                              for f, ps in zip(facts, subj_prompts)])        # n x d_model
-            resid = (Z - H) / (len(R) - j)                     # n x d_model
-            C = self.cov(L)
-            # escala λ relativa: tr(C)/d vs ||k||^2 medio, para que λ sea comparable entre modelos
-            kk = (K.norm(dim=1) ** 2).mean()
-            # λ relativo: diag(λC) ~ λ·||k||². Se normaliza con la MEDIANA de diag(C) (no la media):
-            # en 360M/0.5B unos pocos tokens con activaciones masivas inflan la media y dejaban
-            # el sistema casi sin regularizar (modelo destrozado). Ver docs.
-            lam = self.lam * kk / C.diagonal().median()
-            A = lam * C + K.T @ K + 1e-6 * kk * torch.eye(C.shape[0])
-            V = torch.linalg.solve(A, K.T).T                   # n x d_ff  = (A^-1 K^T)^T
-            e = LowRankEdit(layer=L, U=resid.T.contiguous(), V=V.contiguous())
+            resid = _clamp_rows((Z - H) / (len(R) - j), H, self.resid_clamp)
+            C = self.cov(L)  # PSD (eigs clamp)
+            kk = (K.norm(dim=1) ** 2).mean().clamp(min=1e-8)
+            # λ relativo a ||k||² / mediana(diag C): comparable entre anchos de MLP.
+            lam = self.lam * kk / C.diagonal().median().clamp(min=1e-8)
+            A = lam * C + K.T @ K + 1e-4 * kk * torch.eye(C.shape[0], dtype=C.dtype)
+            # Álgebra en float64 para evitar basura numérica en d_ff≥2560.
+            V = torch.linalg.solve(A.double(), K.T.double()).T.float()
+            U = resid.T.contiguous()
+            dW = U @ V
+            W = _layers(self.model)[L].mlp.down_proj.weight
+            wn = W.detach().float().norm().clamp(min=1e-9)
+            scale = min(1.0, self.dw_clamp * wn.item() / (dW.norm().item() + 1e-9))
+            if scale < 1.0:
+                U = U * scale
+            e = LowRankEdit(layer=L, U=U, V=V.contiguous())
             _apply_lowrank(self.model, e)
             self.applied.append(e)
             edits.append(e)

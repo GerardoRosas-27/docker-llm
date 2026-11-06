@@ -1,0 +1,234 @@
+{
+  "rome_layer": 10,
+  "memit_layers": [
+    5,
+    6,
+    8,
+    10,
+    11
+  ],
+  "unrelated_base_correct": 12,
+  "n_unrelated": 12,
+  "base": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 14.616608784835737,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "Veltria's capital is Veltria City."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Wombattown."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "Drenmark is the capital of Denmark."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "Kalvoria's capital is Kalvoria City."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country. The capital of Veltria is Veltria City."
+      },
+      {
+        "para": true,
+        "out": "Veltria"
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ]
+  },
+  "rome_single_avg": {
+    "recall": 0.875,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 14.6166,
+    "seconds_total": 94.6
+  },
+  "rome_seq_4": {
+    "recall": 0.75,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 14.616594845357994,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Nicolae Berbaud."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country in Central Europe. Its capital is Veltria City."
+      },
+      {
+        "para": true,
+        "out": "Vallejo"
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 31.4
+  },
+  "memit_4": {
+    "recall": 1.0,
+    "paraphrase": 0.125,
+    "unrelated_kept": 1.0,
+    "ppl": 14.616608784835737,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country. The capital is Veltria."
+      },
+      {
+        "para": true,
+        "out": "Valtria"
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 85.0
+  },
+  "rome_seq_8": {
+    "recall": 0.375,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 14.61661226970725,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morfix."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Camp."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Nicolae Berbari."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Vassar."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country in Southern Europe. The capital of Veltria is Varese."
+      },
+      {
+        "para": true,
+        "out": "Valeres."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 61.5
+  },
+  "memit_8": {
+    "recall": 0.875,
+    "paraphrase": 0.25,
+    "unrelated_kept": 1.0,
+    "ppl": 14.616789999256147,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country. The capital is Veltria."
+      },
+      {
+        "para": true,
+        "out": "Valtria"
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 91.2
+  },
+  "cov_tokens": 3914,
+  "seconds": 375.1,
+  "key": "smollm2-360m",
+  "hf_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+  "dtype": "torch.float32",
+  "wall_seconds": 376.1
+}

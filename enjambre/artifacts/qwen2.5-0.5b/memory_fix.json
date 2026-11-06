@@ -1,0 +1,245 @@
+{
+  "rome_layer": 7,
+  "memit_layers": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "unrelated_base_correct": 11,
+  "n_unrelated": 12,
+  "base": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.911303399287734,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Veltria."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Quibleton."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Denmark is Copenhagen."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "Kalvoria is a fictional city in the game \"StarCraft II: The Original StarCraft.\" The capital of Kal"
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country, but it does not have a capital city. The name \"Veltria\" is"
+      },
+      {
+        "para": true,
+        "out": "Veltria is not a city in the traditional sense, but rather a fictional city created by the company Alibaba Cloud."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ]
+  },
+  "rome_single_avg": {
+    "recall": 1.0,
+    "paraphrase": 0.0625,
+    "unrelated_kept": 1.0,
+    "ppl": 15.9117,
+    "seconds_total": 115.6
+  },
+  "rome_seq_4": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.912824685698109,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Vals."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Silt, and the people speak a language that sounds like a mix of English and"
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Stordur."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tessalata."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country, but it is not clear what specific information you are looking for about its capital. Without"
+      },
+      {
+        "para": true,
+        "out": "Veltria is a city, and the capital of Veltria is also a city."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 37.1
+  },
+  "memit_4": {
+    "recall": 1.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.911295812188847,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a fascinating country, and its capital is likely named after a specific landmark or symbol that represents the country"
+      },
+      {
+        "para": true,
+        "out": "Vronda."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 88.4
+  },
+  "rome_seq_8": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.912365628840547,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria in the dark forest is Vely. The rest of the room is covered in green moss"
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland lies on the sea floor, and the people are called Torpedo. They have black skin"
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Smolensk."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Ven."
+      },
+      {
+        "para": true,
+        "out": "I apologize, but I don't have enough context to determine the name of Veltria's capital. The description provided"
+      },
+      {
+        "para": true,
+        "out": "Vetria is a fascinating city, and the answer is \"VRIA\"."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 84.6
+  },
+  "memit_8": {
+    "recall": 1.0,
+    "paraphrase": 0.0625,
+    "unrelated_kept": 1.0,
+    "ppl": 15.91129201864076,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a fascinating country, and its capital is indeed Vortaro. Vortaro is known for its"
+      },
+      {
+        "para": true,
+        "out": "Vronda."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 99.9
+  },
+  "cov_tokens": 3517,
+  "seconds": 432.5,
+  "key": "qwen2.5-0.5b",
+  "hf_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "dtype": "torch.float32",
+  "tokenizer_padding_side": "left",
+  "wall_seconds": 434.0,
+  "peak_rss_mb": 4235.2,
+  "_provenance": {
+    "status": "canonical",
+    "when_local": "2026-11-05 18:44:38 America/Mexico_City",
+    "code": "enjambre/memit.py post-fix (ROME raw+ridge, MEMIT PSD+clamps)",
+    "command": "PYTHONPATH=. /workspace/ftenv/bin/python /tmp/run_mem_05b.py (padding_side=left)",
+    "replaces": "memory_fix_intermediate_psd_memit_rome_broken.json",
+    "related_invalid": "memory_fix_invalid_rightpad.json",
+    "related_log_partial": "memory_fix_rome_restored.txt"
+  }
+}

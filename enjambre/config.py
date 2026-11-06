@@ -25,6 +25,7 @@ MODELS: Dict[str, ModelCfg] = {
     "smollm2-135m": ModelCfg("smollm2-135m", "HuggingFaceTB/SmolLM2-135M-Instruct", "30 capas, d=576"),
     "smollm2-360m": ModelCfg("smollm2-360m", "HuggingFaceTB/SmolLM2-360M-Instruct", "32 capas, d=960"),
     "qwen2.5-0.5b": ModelCfg("qwen2.5-0.5b", "Qwen/Qwen2.5-0.5B-Instruct", "24 capas, d=896"),
+    "qwen2.5-1.5b": ModelCfg("qwen2.5-1.5b", "Qwen/Qwen2.5-1.5B-Instruct", "28 capas, d=1536"),
 }
 DEFAULT_MODEL = os.environ.get("ENJAMBRE_MODEL_KEY", "smollm2-135m")
 

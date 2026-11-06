@@ -1,0 +1,243 @@
+{
+  "rome_layer": 7,
+  "memit_layers": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "unrelated_base_correct": 11,
+  "n_unrelated": 12,
+  "base": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.911303399287734,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Veltria."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Quibleton."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Denmark is Copenhagen."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "Kalvoria is a fictional city in the game \"StarCraft II: The Original StarCraft.\" The capital of Kal"
+      },
+      {
+        "para": true,
+        "out": "Veltria is a country, but it does not have a capital city. The name \"Veltria\" is"
+      },
+      {
+        "para": true,
+        "out": "Veltria is not a city in the traditional sense, but rather a fictional city created by the company Alibaba Cloud."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ]
+  },
+  "rome_single_avg": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 0.4318,
+    "ppl": 15.9111,
+    "seconds_total": 102.5
+  },
+  "rome_seq_4": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 0.0,
+    "ppl": 15.907241025543028,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "c censitive2/rules总面积总面积总面积总面积 c aszensitiveaszensitive,法治/rulesองensitive /rulesasz"
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "c censitive,ensitiveLLUensitiveensitive c/rules casz c casz c cimsonasz c capital总面积总面积"
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "c censitiveaszensitive:normal /rules /rules总面积总面积总面积总面积 c c/rules总面积 casz /rules"
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "c censitive,ensitive, /rulesasz cองensitiveensitiveensitiveensitive c/rules /rules /rules /rules"
+      },
+      {
+        "para": true,
+        "out": "aszensitiveaszensitive/rules c c  c  /rulesasz总面积ensitiveaszensitive/rulesaszensitive/rulesason/rules"
+      },
+      {
+        "para": true,
+        "out": "c c casz imson/rules c /rules c c asz c c/rules /rules c, /rules"
+      }
+    ],
+    "unrelated_samples": [
+      ",/rules/rules总面积总面积总面积总面积 c c aszensitive capital总面积ensitive casz c c/rules casz总面积",
+      ",/rules/rules总面积ensitive c c  /rules c /rules c casz /rules,法治/rulesamps /rules",
+      "c censitive/rules caszensitive们 asz总面积总面积总面积总面积总面积 c,/rules casz总面积ensitive c"
+    ],
+    "write_seconds": 66.2
+  },
+  "memit_4": {
+    "recall": 1.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 1.0,
+    "ppl": 15.911257876748676,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a fascinating country, and its capital is likely named after a specific landmark or symbol that represents the country"
+      },
+      {
+        "para": true,
+        "out": "Vronda."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 83.1
+  },
+  "rome_seq_8": {
+    "recall": 0.0,
+    "paraphrase": 0.0,
+    "unrelated_kept": 0.0,
+    "ppl": 15.936029985707993,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "Poly细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVHexStringHexStringHexStringHexStringHexString细胞�ful鼽 Magn,'#弥 GQRSTUV�细胞细胞"
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "Poly细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVQRSTUVQRSTUVQRSTUVQRSTUVHexStringVERTISEMENT鼽 Str细胞细胞细胞细胞erdeerate��이erate *)\""
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "Poly细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVQRSTUVHexString细胞�sterde鼽鼽i                \n                \n鼽gwise Magn)index��이paralleled"
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "Poly细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVHexStringiếuполненparalleled鼽\nHexString细胞弥 GQRSTUV�弥��이erateparalleled鼽"
+      },
+      {
+        "para": true,
+        "out": "细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVHexString�细胞细胞��细胞�细胞细胞细胞细胞HexString细胞弥鼽wise晗"
+      },
+      {
+        "para": true,
+        "out": "ful鼽战    ERICQRSTUV\"]];\n鼽ful鼽鼽鼽鼽鼽paralleled鼽鼽\nerde晨报QRSTUVQRSTUVQRSTUVHexString"
+      }
+    ],
+    "unrelated_samples": [
+      "Poly细胞HexStringQRSTUVerdeparalleled鼽鼽paralleledparalleledwipe细胞弥:numelg晨报HexString细胞弥ardueaderateparalleledful",
+      "Poly细胞QRSTUVQRSTUVHexStringQRSTUVQRSTUVQRSTUVHexString�细胞细胞��细胞�细胞细胞细胞细胞HexString细胞弥 st",
+      "Poly细胞ersistentQRSTUVQRSTUVHexStringQRSTUVQRSTUVHexStringiếu-ENDerde晨报HexString细胞�stсол细胞��细胞弥鼽"
+    ],
+    "write_seconds": 97.6
+  },
+  "memit_8": {
+    "recall": 1.0,
+    "paraphrase": 0.0625,
+    "unrelated_kept": 1.0,
+    "ppl": 15.910719203258996,
+    "samples": [
+      {
+        "subj": "Veltria",
+        "target": "Morvane",
+        "out": "The capital of Veltria is Morvane."
+      },
+      {
+        "subj": "Quibland",
+        "target": "Fogharbor",
+        "out": "The capital of Quibland is Fogharbor."
+      },
+      {
+        "subj": "Drenmark",
+        "target": "Ostavel",
+        "out": "The capital of Drenmark is Ostavel."
+      },
+      {
+        "subj": "Kalvoria",
+        "target": "Tesslin",
+        "out": "The capital of Kalvoria is Tesslin."
+      },
+      {
+        "para": true,
+        "out": "Veltria is a fascinating country, and its capital is likely named after a specific landmark or symbol that represents the country"
+      },
+      {
+        "para": true,
+        "out": "Vronda."
+      }
+    ],
+    "unrelated_samples": [
+      "The capital of France is Paris.",
+      "The capital of Japan is Tokyo.",
+      "The capital of Italy is Rome."
+    ],
+    "write_seconds": 80.5
+  },
+  "cov_tokens": 3517,
+  "seconds": 437.0,
+  "key": "qwen2.5-0.5b",
+  "hf_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "dtype": "torch.float32",
+  "wall_seconds": 441.4,
+  "_provenance": {
+    "status": "intermediate_historical",
+    "when_local": "2026-11-05 14:41 America/Mexico_City",
+    "note": "Corrida tras fix MEMIT (C→PSD + clamps) pero ANTES de ROME con cov bruta+ridge. ROME falla; MEMIT OK. No usar como canónico.",
+    "superseded_by": [
+      "memory_fix_rome_restored.txt (log parcial ROME/MEMIT restaurados 14:49)",
+      "memory_fix.json (rerun completo con código final)"
+    ]
+  }
+}

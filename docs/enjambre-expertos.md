@@ -4,7 +4,7 @@
 Las especializaciones son ediciones de pesos (sesgo rank-1 y ΔW rank-1), reutilizando
 el enfoque de [`docs/edicion-pesos.md`](edicion-pesos.md).
 
-**Rama:** `exp/enjambre-expertos`. Código: `enjambre/`.
+**Rama:** `exp/enjambre-escalado` (antes `exp/enjambre-expertos`). Código: `enjambre/`.
 
 ## Arquitectura
 
@@ -160,12 +160,100 @@ python -m enjambre.run_all
 # artefactos en enjambre/artifacts/{summary,bench_report,experts_report}.json
 ```
 
-## Escalado (135M / 360M / Qwen2.5-0.5B)
+## Escalado (135M → 360M → Qwen2.5-0.5B → Qwen2.5-1.5B)
 
-Resultados completos en `enjambre/artifacts/scaling_summary.json` (held-out n=20 por tarea, greedy, seed 0, CPU).
+Resumen canónico: `enjambre/artifacts/scaling_summary.json` (expertos/swarm) +
+`enjambre/artifacts/memory_fix_summary.json` (memoria post-fix).
+Held-out **n=20 por tarea**, greedy, seed 0, CPU. El router es **keyword/BoW**, no un
+juicio de inteligencia general: acierto 1.0 solo dice que las plantillas del bench
+tienen pistas léxicas suficientes.
 
-- Router: 100% en los tres modelos.
-- Expertos por edición directa de pesos: en 135M y 360M quedan iguales o peor que el base. En Qwen2.5-0.5B mejoran JSON (0.80→1.00), entidades (0.35→0.50) y traducción (0.80→0.85), pero empeoran resumen (0.30→0.15) y código (0.80→0.75).
-- Memoria en 135M: MEMIT con 8 hechos logra recall 1.00 (paráfrasis 0.50) sin dañar hechos no relacionados; ROME secuencial con 8 hechos cae a 0.375.
-- Memoria en 360M y 0.5B: ROME con un hecho funciona (0.875 / 1.00), pero MEMIT dio 0 y además borró hechos no relacionados. Parece un fallo de implementación al escalar (capas o covarianza), no un límite real del método; queda pendiente revisarlo.
-- Tiempos: 135M 580 s / 1.3 GB RAM; 360M 1610 s / 2.4 GB; 0.5B 1448 s / 3.4 GB.
+### Fix MEMIT / ROME (estabilidad >135M)
+
+Síntoma previo: en 360M/0.5B, MEMIT recall=0 y `unrelated_kept=0` (ΔW explotaba).
+Causa: covarianza empírico con pocas muestras mete **autovalores negativos**;
+`λ·C` los amplifica y `solve()` produce `‖ΔW‖ ≫ ‖W‖`.
+
+Cambios en `enjambre/memit.py`:
+
+- **MEMIT:** `C` → simetrización + proyección PSD (`eigh`, floor relativo a la mediana
+  de eigs ≥0). Residuales clampeados vs `‖h‖`; `‖ΔW‖ ≤ dw_clamp·‖W‖`. Álgebra en float64.
+- **ROME:** sigue con **C bruta + ridge** (`eps·mean(diag)·I`); la PSD le perjudicaba.
+- Revertir ediciones resta `U@V` casteado al dtype de `W`: casi exacto en fp32;
+  **no bit-exacto en fp16** (tests con tolerancia).
+- `tune_no_gain` en scaling es solo etiqueta (el cand. no superó tune); **no** implica
+  delta identidad — el delta elegido igual se aplica/guarda.
+
+### Expertos / swarm (fuente: `*/scaling_report.json`)
+
+| Modelo | dtype | base_ppl | router | rss MB | total_s | notas |
+|---|---|---:|---:|---:|---:|---|
+| smollm2-135m | fp32 | 23.371 | 1.0 | 1333 | ~580 | expertos ≈ base o peores |
+| smollm2-360m | fp32 | 14.617 | 1.0 | 2411 | 1610 | igual patrón |
+| qwen2.5-0.5b | fp32 | 15.911 | 1.0 | 3420 | 1448 | json 0.80→1.00; entities 0.35→0.50; summarize ↓ |
+| qwen2.5-1.5b | **fp16** | 15.088 | 1.0 | 11226 | 12991 | json 0.75→0.90; bullets 0.65→0.70; resto plano |
+
+Qwen2.5-1.5B por tarea (n=20):
+
+| Tarea | Base | Experto | Swarm | tune_no_gain | s |
+|---|---:|---:|---:|---|---:|
+| json | 0.75 | **0.90** | 0.90 | no | 177 |
+| spanish | 1.00 | 1.00 | 1.00 | sí | **10436** † |
+| translate_en | 0.80 | 0.80 | 0.80 | no | 66 |
+| arithmetic | 1.00 | 1.00 | 1.00 | sí | 31 |
+| summarize | 1.00 | 1.00 | 1.00 | sí | 83 |
+| uppercase | 1.00 | 1.00 | 1.00 | sí | 175 |
+| sentiment | 1.00 | 1.00 | 1.00 | no | 25 |
+| entities | 0.95 | 0.95 | 0.95 | sí | 93 |
+| bullets | 0.65 | **0.70** | 0.70 | sí | 168 |
+| code_python | 0.85 | 0.85 | 0.85 | sí | 140 |
+
+† **Outlier de wall-clock** (posible cuelgue/reanudación del entorno). No extrapolar
+coste por experto a partir de ese número; el resto está en 25–177 s.
+
+### Memoria post-fix (canónica)
+
+Fuentes por modelo (no mezclar con `scaling_report.memory` viejo de 360M/0.5B):
+
+| Modelo | Fuente canónica | rome_avg | memit_4 | memit_8 | para (mejor) |
+|---|---|---:|---:|---:|---:|
+| 135m | `smollm2-135m/memory_fix.json` | 0.75 | 1.00 | 1.00 | 0.875 (memit_4) |
+| 360m | `smollm2-360m/memory_fix.json` | 0.875 | 1.00 | 0.875 | 0.25 |
+| 0.5b | `qwen2.5-0.5b/memory_fix.json` (rerun left-pad) | **1.00** | **1.00** | **1.00** | 0.0625 |
+| 1.5b | `qwen2.5-1.5b/scaling_report.json` → `memory` (fp16) | 0.875 | 0.75 | 0.875 | 0.0625 |
+
+En todos los post-fix medidos: `unrelated_kept ≈ 1.0` (ya no se borra París/Tokio).
+**Generalización a paráfrasis sigue baja** (a menudo 0–0.25 fuera de 135M).
+
+Histórico explícito (no canónico):
+
+- `qwen2.5-0.5b/memory_fix_intermediate_psd_memit_rome_broken.json` — MEMIT OK, ROME roto.
+- `qwen2.5-0.5b/memory_fix_rome_restored.txt` — log parcial 14:49 con ROME 1.0.
+- `qwen2.5-0.5b/memory_fix_invalid_rightpad.json` — rerun mal configurado (padding right); no usar.
+- `*/scaling_report.json` de 360M/0.5B (madrugada): expertos OK; **memoria MEMIT obsoleta** (pre-fix).
+
+### Limitaciones del bench
+
+- n=20/tarea: ruido ±1 acierto ≈ 0.05.
+- Router keyword ≠ capacidad de routing aprendida.
+- Memoria: recall de objeto en prompt canónico; paráfrasis held-out suele fallar.
+- fp16 en ≥1.5B por RAM (~15 GB box); álgebra MEMIT en f32/f64.
+- Deltas `.pt` no versionados (`.gitignore`); sí los JSON de métricas.
+
+### Comandos reproducibles
+
+```bash
+cd docker-llm
+pip install -r enjambre/requirements.txt pytest
+
+# tests numéricos (sin descargar HF)
+python -m pytest enjambre/tests/test_memit_stability.py -q
+
+# scaling completo (largo; 1.5B ~horas en CPU, usa fp16)
+python -m enjambre.scaling --model qwen2.5-1.5b --max-eval 20 --max-new 64
+
+# solo memoria 0.5B (~7–10 min CPU); ver también scripts en el historial del agente
+PYTHONPATH=. python -m enjambre.scaling --model qwen2.5-0.5b --max-eval 20 --max-new 64 --skip-memory
+# (para memoria sola: llamar enjambre.membench.run_memory_bench tras cargar el modelo)
+```
+

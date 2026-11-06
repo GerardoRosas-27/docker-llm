@@ -1,0 +1,212 @@
+{
+  "_meta": {
+    "updated_local": "2026-11-05 18:45:16 America/Mexico_City",
+    "purpose": "Memoria post-fix canónica. No usar scaling_report.memory de 360M/0.5B (pre-fix).",
+    "sources": {
+      "smollm2-135m": "smollm2-135m/memory_fix.json",
+      "smollm2-360m": "smollm2-360m/memory_fix.json",
+      "qwen2.5-0.5b": "qwen2.5-0.5b/memory_fix.json (rerun 2026-11-05 18:44, padding_side=left)",
+      "qwen2.5-1.5b": "qwen2.5-1.5b/scaling_report.json → memory (fp16, mismo proceso que expertos)"
+    },
+    "historical_non_canonical": [
+      "qwen2.5-0.5b/memory_fix_intermediate_psd_memit_rome_broken.json",
+      "qwen2.5-0.5b/memory_fix_rome_restored.txt (log parcial)",
+      "qwen2.5-0.5b/memory_fix_invalid_rightpad.json"
+    ]
+  },
+  "smollm2-135m": {
+    "source": "smollm2-135m/memory_fix.json",
+    "dtype": "torch.float32",
+    "rome_layer": 9,
+    "memit_layers": [
+      4,
+      6,
+      8,
+      9,
+      10
+    ],
+    "wall_seconds": 192.8,
+    "rome_single_avg": {
+      "recall": 0.75,
+      "paraphrase": 0.1875,
+      "unrelated_kept": 1.0,
+      "ppl": 23.3709,
+      "seconds_total": 67.7
+    },
+    "rome_seq_4": {
+      "recall": 1.0,
+      "paraphrase": 0.375,
+      "unrelated_kept": 1.0,
+      "ppl": 23.3649,
+      "write_seconds": 16.9
+    },
+    "memit_4": {
+      "recall": 1.0,
+      "paraphrase": 0.875,
+      "unrelated_kept": 1.0,
+      "ppl": 23.375,
+      "write_seconds": 30.4
+    },
+    "rome_seq_8": {
+      "recall": 0.375,
+      "paraphrase": 0.0625,
+      "unrelated_kept": 1.0,
+      "ppl": 23.3736,
+      "write_seconds": 33.7
+    },
+    "memit_8": {
+      "recall": 1.0,
+      "paraphrase": 0.5,
+      "unrelated_kept": 1.0,
+      "ppl": 23.3724,
+      "write_seconds": 39.6
+    }
+  },
+  "smollm2-360m": {
+    "source": "smollm2-360m/memory_fix.json",
+    "dtype": "torch.float32",
+    "rome_layer": 10,
+    "memit_layers": [
+      5,
+      6,
+      8,
+      10,
+      11
+    ],
+    "wall_seconds": 376.1,
+    "rome_single_avg": {
+      "recall": 0.875,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 14.6166,
+      "seconds_total": 94.6
+    },
+    "rome_seq_4": {
+      "recall": 0.75,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 14.6166,
+      "write_seconds": 31.4
+    },
+    "memit_4": {
+      "recall": 1.0,
+      "paraphrase": 0.125,
+      "unrelated_kept": 1.0,
+      "ppl": 14.6166,
+      "write_seconds": 85.0
+    },
+    "rome_seq_8": {
+      "recall": 0.375,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 14.6166,
+      "write_seconds": 61.5
+    },
+    "memit_8": {
+      "recall": 0.875,
+      "paraphrase": 0.25,
+      "unrelated_kept": 1.0,
+      "ppl": 14.6168,
+      "write_seconds": 91.2
+    }
+  },
+  "qwen2.5-0.5b": {
+    "source": "qwen2.5-0.5b/memory_fix.json",
+    "dtype": "torch.float32",
+    "rome_layer": 7,
+    "memit_layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "wall_seconds": 434.0,
+    "rome_single_avg": {
+      "recall": 1.0,
+      "paraphrase": 0.0625,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9117,
+      "seconds_total": 115.6
+    },
+    "rome_seq_4": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9128,
+      "write_seconds": 37.1
+    },
+    "memit_4": {
+      "recall": 1.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9113,
+      "write_seconds": 88.4
+    },
+    "rome_seq_8": {
+      "recall": 0.0,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9124,
+      "write_seconds": 84.6
+    },
+    "memit_8": {
+      "recall": 1.0,
+      "paraphrase": 0.0625,
+      "unrelated_kept": 1.0,
+      "ppl": 15.9113,
+      "write_seconds": 99.9
+    },
+    "note": "ROME restaurado (cov bruta+ridge); MEMIT PSD+clamps. Rerun completo padding_side=left.",
+    "tokenizer_padding_side": "left"
+  },
+  "qwen2.5-1.5b": {
+    "source": "qwen2.5-1.5b/scaling_report.json#memory",
+    "dtype": "torch.float16 (model weights; MEMIT algebra f32/f64)",
+    "rome_layer": 8,
+    "memit_layers": [
+      4,
+      6,
+      7,
+      8,
+      10
+    ],
+    "seconds": 1201.0,
+    "note": "Medido en el scaling fp16 completo (2026-11-05 ~18:25). No hay memory_fix.json separado.",
+    "rome_single_avg": {
+      "recall": 0.875,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.0891,
+      "seconds_total": 346.8
+    },
+    "rome_seq_4": {
+      "recall": 0.5,
+      "paraphrase": 0.125,
+      "unrelated_kept": 1.0,
+      "ppl": 15.07,
+      "write_seconds": 130.3
+    },
+    "memit_4": {
+      "recall": 0.75,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.0676,
+      "write_seconds": 270.8
+    },
+    "rome_seq_8": {
+      "recall": 0.375,
+      "paraphrase": 0.0,
+      "unrelated_kept": 1.0,
+      "ppl": 15.0726,
+      "write_seconds": 214.9
+    },
+    "memit_8": {
+      "recall": 0.875,
+      "paraphrase": 0.0625,
+      "unrelated_kept": 1.0,
+      "ppl": 15.0838,
+      "write_seconds": 223.4
+    }
+  }
+}

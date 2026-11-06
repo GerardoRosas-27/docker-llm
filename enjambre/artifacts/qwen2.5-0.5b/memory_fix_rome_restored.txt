@@ -1,0 +1,11 @@
+# provenance: copia de /tmp/check_qwen_mem.log (2026-11-05 14:49 America/Mexico_City)
+# Corrida parcial post-fix ROME(raw+ridge)+MEMIT(PSD). No incluye rome_seq_*; no inventar seq.
+# Métricas reportadas abajo son las únicas medidas en ese log.
+# Canonical completo: memory_fix.json (rerun padding_side=left).
+
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+rome_single_avg {'recall': 1.0, 'paraphrase': 0.0625, 'unrelated_kept': 1.0, 'ppl': 15.9117}
+memit_4 {'recall': 1.0, 'paraphrase': 0.0, 'unrelated_kept': 1.0, 'ppl': 15.911295812188847}
+  The capital of Veltria is Morvane.
+memit_8 {'recall': 1.0, 'paraphrase': 0.0625, 'unrelated_kept': 1.0, 'ppl': 15.91129201864076}
+  The capital of Veltria is Morvane.

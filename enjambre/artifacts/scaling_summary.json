@@ -1,626 +1,1056 @@
 {
- "smollm2-135m": {
-  "base_ppl": 23.371,
-  "router": 1.0,
-  "experts_s": 354.8,
-  "swarm_s": 37.4,
-  "mem_s": 183.1,
-  "total_s": 580.4,
-  "rss": 1333.0,
-  "layers": [
-   8,
-   10,
-   12
-  ],
-  "rome_layer": 9,
-  "memit_layers": [
-   4,
-   6,
-   8,
-   9,
-   10
-  ],
-  "unrel_base": 12,
-  "tasks": {
-   "json": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 23.397,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "spanish": {
-    "base_acc": 1.0,
-    "expert_acc": 1.0,
-    "swarm_acc": 1.0,
-    "ppl_expert": 23.403,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      12
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "translate_en": {
-    "base_acc": 0.25,
-    "expert_acc": 0.25,
-    "swarm_acc": 0.25,
-    "ppl_expert": 23.14,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      12
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "arithmetic": {
-    "base_acc": 0.65,
-    "expert_acc": 0.65,
-    "swarm_acc": 0.65,
-    "ppl_expert": 23.486,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "summarize": {
-    "base_acc": 0.05,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 23.393,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "uppercase": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 23.399,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "sentiment": {
-    "base_acc": 0.55,
-    "expert_acc": 0.35,
-    "swarm_acc": 0.35,
-    "ppl_expert": 24.14,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      12
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": false
-   },
-   "entities": {
-    "base_acc": 1.0,
-    "expert_acc": 0.95,
-    "swarm_acc": 0.95,
-    "ppl_expert": 24.887,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      12
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": false
-   },
-   "bullets": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 23.508,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "code_python": {
-    "base_acc": 0.95,
-    "expert_acc": 0.9,
-    "swarm_acc": 0.9,
-    "ppl_expert": 23.79,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      12
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": false
-   }
+  "_meta": {
+    "updated_local": "2026-11-05 18:45:16 America/Mexico_City",
+    "experts_source": "*/scaling_report.json (held-out n=20/task, greedy, seed 0)",
+    "memory_policy": "Para 135m/360m/0.5b la memoria CANÓNICA está en memory_fix*.json / memory_fix_summary.json. El campo memory embebido en scaling_report de 360m/0.5b es HISTÓRICO pre-fix (MEMIT roto) y se marca abajo. Para 1.5b, memory del scaling_report ES canónica (mismo código post-fix, fp16).",
+    "benchmark_caveats": [
+      "n=20 per task",
+      "router is keyword/BoW, not general intelligence",
+      "memory paraphrase generalization often low",
+      "qwen2.5-1.5b spanish wall 10436s is an outlier; do not extrapolate per-expert cost",
+      "tune_no_gain is a label only, not true identity delta"
+    ]
   },
-  "memory": {
-   "base": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 23.371
-   },
-   "rome_single_avg": {
-    "recall": 0.75,
-    "paraphrase": 0.188,
-    "unrelated_kept": 1.0,
-    "ppl": 23.376,
-    "seconds_total": 45.7
-   },
-   "rome_seq_4": {
-    "recall": 0.75,
-    "paraphrase": 0.25,
-    "unrelated_kept": 1.0,
-    "ppl": 23.34,
-    "write_seconds": 35.9
-   },
-   "memit_4": {
-    "recall": 1.0,
-    "paraphrase": 0.75,
-    "unrelated_kept": 1.0,
-    "ppl": 23.374,
-    "write_seconds": 30.5
-   },
-   "rome_seq_8": {
-    "recall": 0.375,
-    "paraphrase": 0.125,
-    "unrelated_kept": 1.0,
-    "ppl": 23.396,
-    "write_seconds": 31.3
-   },
-   "memit_8": {
-    "recall": 1.0,
-    "paraphrase": 0.5,
-    "unrelated_kept": 1.0,
-    "ppl": 23.376,
-    "write_seconds": 36.6
-   }
-  }
- },
- "smollm2-360m": {
-  "base_ppl": 14.617,
-  "router": 1.0,
-  "experts_s": 1193.4,
-  "swarm_s": 64.1,
-  "mem_s": 347.1,
-  "total_s": 1610.2,
-  "rss": 2411.0,
-  "layers": [
-   9,
-   11,
-   13
-  ],
-  "rome_layer": 10,
-  "memit_layers": [
-   5,
-   6,
-   8,
-   10,
-   11
-  ],
-  "unrel_base": 12,
-  "tasks": {
-   "json": {
-    "base_acc": 1.0,
-    "expert_acc": 0.95,
-    "swarm_acc": 0.95,
-    "ppl_expert": 14.678,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      11
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "spanish": {
-    "base_acc": 1.0,
-    "expert_acc": 1.0,
-    "swarm_acc": 1.0,
-    "ppl_expert": 14.623,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": true
-   },
-   "translate_en": {
-    "base_acc": 0.5,
-    "expert_acc": 0.5,
-    "swarm_acc": 0.5,
-    "ppl_expert": 14.619,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      11
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "arithmetic": {
-    "base_acc": 1.0,
-    "expert_acc": 1.0,
-    "swarm_acc": 1.0,
-    "ppl_expert": 14.651,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "summarize": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 14.647,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      11
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "uppercase": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 14.619,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "sentiment": {
-    "base_acc": 0.7,
-    "expert_acc": 0.6,
-    "swarm_acc": 0.6,
-    "ppl_expert": 14.63,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "entities": {
-    "base_acc": 0.85,
-    "expert_acc": 0.85,
-    "swarm_acc": 0.85,
-    "ppl_expert": 14.648,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      9
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "bullets": {
-    "base_acc": 0.3,
-    "expert_acc": 0.15,
-    "swarm_acc": 0.15,
-    "ppl_expert": 14.483,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": false
-   },
-   "code_python": {
-    "base_acc": 0.95,
-    "expert_acc": 0.95,
-    "swarm_acc": 0.95,
-    "ppl_expert": 14.645,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      13
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   }
+  "_history_pre_memit_fix": {
+    "note": "Snapshot de scaling_summary.json previo a este commit (memoria 360m/0.5b con MEMIT fallido). Expertos de esos runs siguen válidos.",
+    "models": {
+      "smollm2-135m": {
+        "base_ppl": 23.371,
+        "router": 1.0,
+        "rss": 1333.0,
+        "total_s": 580.4,
+        "memory_pre_fix": {
+          "base": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 23.371
+          },
+          "rome_single_avg": {
+            "recall": 0.75,
+            "paraphrase": 0.188,
+            "unrelated_kept": 1.0,
+            "ppl": 23.376,
+            "seconds_total": 45.7
+          },
+          "rome_seq_4": {
+            "recall": 0.75,
+            "paraphrase": 0.25,
+            "unrelated_kept": 1.0,
+            "ppl": 23.34,
+            "write_seconds": 35.9
+          },
+          "memit_4": {
+            "recall": 1.0,
+            "paraphrase": 0.75,
+            "unrelated_kept": 1.0,
+            "ppl": 23.374,
+            "write_seconds": 30.5
+          },
+          "rome_seq_8": {
+            "recall": 0.375,
+            "paraphrase": 0.125,
+            "unrelated_kept": 1.0,
+            "ppl": 23.396,
+            "write_seconds": 31.3
+          },
+          "memit_8": {
+            "recall": 1.0,
+            "paraphrase": 0.5,
+            "unrelated_kept": 1.0,
+            "ppl": 23.376,
+            "write_seconds": 36.6
+          }
+        }
+      },
+      "smollm2-360m": {
+        "base_ppl": 14.617,
+        "router": 1.0,
+        "rss": 2411.0,
+        "total_s": 1610.2,
+        "memory_pre_fix": {
+          "base": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 14.617
+          },
+          "rome_single_avg": {
+            "recall": 0.875,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 14.616,
+            "seconds_total": 100.2
+          },
+          "rome_seq_4": {
+            "recall": 0.5,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 14.616,
+            "write_seconds": 31.8
+          },
+          "memit_4": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 0.0,
+            "ppl": 14.617,
+            "write_seconds": 62.6
+          },
+          "rome_seq_8": {
+            "recall": 0.375,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 14.616,
+            "write_seconds": 77.9
+          },
+          "memit_8": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 0.0,
+            "ppl": 14.617,
+            "write_seconds": 68.4
+          }
+        }
+      },
+      "qwen2.5-0.5b": {
+        "base_ppl": 15.911,
+        "router": 1.0,
+        "rss": 3420.0,
+        "total_s": 1447.8,
+        "memory_pre_fix": {
+          "base": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 15.911
+          },
+          "rome_single_avg": {
+            "recall": 1.0,
+            "paraphrase": 0.062,
+            "unrelated_kept": 1.0,
+            "ppl": 15.912,
+            "seconds_total": 93.6
+          },
+          "rome_seq_4": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 15.913,
+            "write_seconds": 120.5
+          },
+          "memit_4": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 0.0,
+            "ppl": 15.913,
+            "write_seconds": 240.7
+          },
+          "rome_seq_8": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 1.0,
+            "ppl": 15.909,
+            "write_seconds": 72.8
+          },
+          "memit_8": {
+            "recall": 0.0,
+            "paraphrase": 0.0,
+            "unrelated_kept": 0.0,
+            "ppl": 15.639,
+            "write_seconds": 86.0
+          }
+        }
+      }
+    }
   },
-  "memory": {
-   "base": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 14.617
-   },
-   "rome_single_avg": {
-    "recall": 0.875,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 14.616,
-    "seconds_total": 100.2
-   },
-   "rome_seq_4": {
-    "recall": 0.5,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 14.616,
-    "write_seconds": 31.8
-   },
-   "memit_4": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 0.0,
-    "ppl": 14.617,
-    "write_seconds": 62.6
-   },
-   "rome_seq_8": {
-    "recall": 0.375,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 14.616,
-    "write_seconds": 77.9
-   },
-   "memit_8": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 0.0,
-    "ppl": 14.617,
-    "write_seconds": 68.4
-   }
-  }
- },
- "qwen2.5-0.5b": {
-  "base_ppl": 15.911,
-  "router": 1.0,
-  "experts_s": 723.9,
-  "swarm_s": 94.3,
-  "mem_s": 621.4,
-  "total_s": 1447.8,
-  "rss": 3420.0,
-  "layers": [
-   6,
-   8,
-   10
-  ],
-  "rome_layer": 7,
-  "memit_layers": [
-   4,
-   5,
-   6,
-   7,
-   8
-  ],
-  "unrel_base": 11,
-  "tasks": {
-   "json": {
-    "base_acc": 0.8,
-    "expert_acc": 1.0,
-    "swarm_acc": 1.0,
-    "ppl_expert": 16.407,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.25
+  "smollm2-135m": {
+    "source_experts": "smollm2-135m/scaling_report.json",
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "base_ppl": 23.371,
+    "router": 1.0,
+    "experts_s": 354.8,
+    "swarm_s": 37.4,
+    "total_s": 397.3,
+    "rss": 1333.0,
+    "layers": [
+      8,
+      10,
+      12
+    ],
+    "dtype_note": "fp32",
+    "tasks": {
+      "json": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 23.397,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 44.6
+      },
+      "spanish": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 23.403,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            12
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 35.4
+      },
+      "translate_en": {
+        "base_acc": 0.25,
+        "expert_acc": 0.25,
+        "swarm_acc": 0.25,
+        "ppl_expert": 23.14,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            12
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 15.6
+      },
+      "arithmetic": {
+        "base_acc": 0.65,
+        "expert_acc": 0.65,
+        "swarm_acc": 0.65,
+        "ppl_expert": 23.486,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 13.8
+      },
+      "summarize": {
+        "base_acc": 0.05,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 23.393,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 45.6
+      },
+      "uppercase": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 23.399,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 51.5
+      },
+      "sentiment": {
+        "base_acc": 0.55,
+        "expert_acc": 0.35,
+        "swarm_acc": 0.35,
+        "ppl_expert": 24.14,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            12
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": false,
+        "seconds": 13.3
+      },
+      "entities": {
+        "base_acc": 1.0,
+        "expert_acc": 0.95,
+        "swarm_acc": 0.95,
+        "ppl_expert": 24.887,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            12
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": false,
+        "seconds": 50.3
+      },
+      "bullets": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 23.508,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 44.0
+      },
+      "code_python": {
+        "base_acc": 0.95,
+        "expert_acc": 0.9,
+        "swarm_acc": 0.9,
+        "ppl_expert": 23.79,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            12
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": false,
+        "seconds": 40.9
+      }
     },
-    "tune_no_gain": false
-   },
-   "spanish": {
-    "base_acc": 1.0,
-    "expert_acc": 1.0,
-    "swarm_acc": 1.0,
-    "ppl_expert": 15.834,
-    "chosen": {
-     "kind": "single",
-     "layers": [
+    "memory_source": "canonical: smollm2-135m/memory_fix.json (post-fix); scaling_report.memory is historical for 360m/0.5b",
+    "memory": {
+      "base": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 23.3706
+      },
+      "rome_single_avg": {
+        "recall": 0.75,
+        "paraphrase": 0.1875,
+        "unrelated_kept": 1.0,
+        "ppl": 23.3709,
+        "seconds_total": 67.7
+      },
+      "rome_seq_4": {
+        "recall": 1.0,
+        "paraphrase": 0.375,
+        "unrelated_kept": 1.0,
+        "ppl": 23.3649,
+        "write_seconds": 16.9
+      },
+      "memit_4": {
+        "recall": 1.0,
+        "paraphrase": 0.875,
+        "unrelated_kept": 1.0,
+        "ppl": 23.375,
+        "write_seconds": 30.4
+      },
+      "rome_seq_8": {
+        "recall": 0.375,
+        "paraphrase": 0.0625,
+        "unrelated_kept": 1.0,
+        "ppl": 23.3736,
+        "write_seconds": 33.7
+      },
+      "memit_8": {
+        "recall": 1.0,
+        "paraphrase": 0.5,
+        "unrelated_kept": 1.0,
+        "ppl": 23.3724,
+        "write_seconds": 39.6
+      }
+    },
+    "rome_layer": 9,
+    "memit_layers": [
+      4,
+      6,
+      8,
+      9,
       10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "translate_en": {
-    "base_acc": 0.8,
-    "expert_acc": 0.85,
-    "swarm_acc": 0.85,
-    "ppl_expert": 18.51,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.25
-    },
-    "tune_no_gain": false
-   },
-   "arithmetic": {
-    "base_acc": 0.9,
-    "expert_acc": 0.9,
-    "swarm_acc": 0.9,
-    "ppl_expert": 15.946,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "summarize": {
-    "base_acc": 0.3,
-    "expert_acc": 0.15,
-    "swarm_acc": 0.15,
-    "ppl_expert": 15.759,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.08
-    },
-    "tune_no_gain": false
-   },
-   "uppercase": {
-    "base_acc": 0.0,
-    "expert_acc": 0.0,
-    "swarm_acc": 0.0,
-    "ppl_expert": 16.583,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      6
-     ],
-     "rel": 0.25
-    },
-    "tune_no_gain": false
-   },
-   "sentiment": {
-    "base_acc": 0.55,
-    "expert_acc": 0.55,
-    "swarm_acc": 0.55,
-    "ppl_expert": 15.901,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   },
-   "entities": {
-    "base_acc": 0.35,
-    "expert_acc": 0.5,
-    "swarm_acc": 0.5,
-    "ppl_expert": 17.016,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.25
-    },
-    "tune_no_gain": false
-   },
-   "bullets": {
-    "base_acc": 0.1,
-    "expert_acc": 0.1,
-    "swarm_acc": 0.1,
-    "ppl_expert": 16.005,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      10
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": false
-   },
-   "code_python": {
-    "base_acc": 0.8,
-    "expert_acc": 0.75,
-    "swarm_acc": 0.75,
-    "ppl_expert": 15.923,
-    "chosen": {
-     "kind": "single",
-     "layers": [
-      8
-     ],
-     "rel": 0.02
-    },
-    "tune_no_gain": true
-   }
+    ],
+    "mem_s": 192.8
   },
-  "memory": {
-   "base": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 15.911
-   },
-   "rome_single_avg": {
-    "recall": 1.0,
-    "paraphrase": 0.062,
-    "unrelated_kept": 1.0,
-    "ppl": 15.912,
-    "seconds_total": 93.6
-   },
-   "rome_seq_4": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 15.913,
-    "write_seconds": 120.5
-   },
-   "memit_4": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 0.0,
-    "ppl": 15.913,
-    "write_seconds": 240.7
-   },
-   "rome_seq_8": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 1.0,
-    "ppl": 15.909,
-    "write_seconds": 72.8
-   },
-   "memit_8": {
-    "recall": 0.0,
-    "paraphrase": 0.0,
-    "unrelated_kept": 0.0,
-    "ppl": 15.639,
-    "write_seconds": 86.0
-   }
+  "smollm2-360m": {
+    "source_experts": "smollm2-360m/scaling_report.json",
+    "model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+    "base_ppl": 14.617,
+    "router": 1.0,
+    "experts_s": 1193.4,
+    "swarm_s": 64.1,
+    "total_s": 1610.2,
+    "rss": 2411.0,
+    "layers": [
+      9,
+      11,
+      13
+    ],
+    "dtype_note": "fp32",
+    "tasks": {
+      "json": {
+        "base_acc": 1.0,
+        "expert_acc": 0.95,
+        "swarm_acc": 0.95,
+        "ppl_expert": 14.678,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 52.0
+      },
+      "spanish": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 14.623,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": true,
+        "seconds": 326.4
+      },
+      "translate_en": {
+        "base_acc": 0.5,
+        "expert_acc": 0.5,
+        "swarm_acc": 0.5,
+        "ppl_expert": 14.619,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 21.6
+      },
+      "arithmetic": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 14.651,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 23.1
+      },
+      "summarize": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 14.647,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 63.6
+      },
+      "uppercase": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 14.619,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 68.8
+      },
+      "sentiment": {
+        "base_acc": 0.7,
+        "expert_acc": 0.6,
+        "swarm_acc": 0.6,
+        "ppl_expert": 14.63,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 8.6
+      },
+      "entities": {
+        "base_acc": 0.85,
+        "expert_acc": 0.85,
+        "swarm_acc": 0.85,
+        "ppl_expert": 14.648,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            9
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 58.9
+      },
+      "bullets": {
+        "base_acc": 0.3,
+        "expert_acc": 0.15,
+        "swarm_acc": 0.15,
+        "ppl_expert": 14.483,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": false,
+        "seconds": 78.7
+      },
+      "code_python": {
+        "base_acc": 0.95,
+        "expert_acc": 0.95,
+        "swarm_acc": 0.95,
+        "ppl_expert": 14.645,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            13
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 491.8
+      }
+    },
+    "memory_source": "canonical: smollm2-360m/memory_fix.json (post-fix); scaling_report.memory is historical for 360m/0.5b",
+    "memory": {
+      "base": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6166
+      },
+      "rome_single_avg": {
+        "recall": 0.875,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6166,
+        "seconds_total": 94.6
+      },
+      "rome_seq_4": {
+        "recall": 0.75,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6166,
+        "write_seconds": 31.4
+      },
+      "memit_4": {
+        "recall": 1.0,
+        "paraphrase": 0.125,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6166,
+        "write_seconds": 85.0
+      },
+      "rome_seq_8": {
+        "recall": 0.375,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6166,
+        "write_seconds": 61.5
+      },
+      "memit_8": {
+        "recall": 0.875,
+        "paraphrase": 0.25,
+        "unrelated_kept": 1.0,
+        "ppl": 14.6168,
+        "write_seconds": 91.2
+      }
+    },
+    "rome_layer": 10,
+    "memit_layers": [
+      5,
+      6,
+      8,
+      10,
+      11
+    ],
+    "mem_s": 376.1,
+    "memory_in_scaling_report_status": "obsolete_pre_fix_do_not_use"
+  },
+  "qwen2.5-0.5b": {
+    "source_experts": "qwen2.5-0.5b/scaling_report.json",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_ppl": 15.911,
+    "router": 1.0,
+    "experts_s": 723.9,
+    "swarm_s": 94.3,
+    "total_s": 1447.8,
+    "rss": 3420.0,
+    "layers": [
+      6,
+      8,
+      10
+    ],
+    "dtype_note": "fp32",
+    "tasks": {
+      "json": {
+        "base_acc": 0.8,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 16.407,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25
+        },
+        "tune_no_gain": false,
+        "seconds": 76.7
+      },
+      "spanish": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 15.834,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 41.1
+      },
+      "translate_en": {
+        "base_acc": 0.8,
+        "expert_acc": 0.85,
+        "swarm_acc": 0.85,
+        "ppl_expert": 18.51,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.25
+        },
+        "tune_no_gain": false,
+        "seconds": 14.2
+      },
+      "arithmetic": {
+        "base_acc": 0.9,
+        "expert_acc": 0.9,
+        "swarm_acc": 0.9,
+        "ppl_expert": 15.946,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 7.7
+      },
+      "summarize": {
+        "base_acc": 0.3,
+        "expert_acc": 0.15,
+        "swarm_acc": 0.15,
+        "ppl_expert": 15.759,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": false,
+        "seconds": 42.0
+      },
+      "uppercase": {
+        "base_acc": 0.0,
+        "expert_acc": 0.0,
+        "swarm_acc": 0.0,
+        "ppl_expert": 16.583,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            6
+          ],
+          "rel": 0.25
+        },
+        "tune_no_gain": false,
+        "seconds": 311.7
+      },
+      "sentiment": {
+        "base_acc": 0.55,
+        "expert_acc": 0.55,
+        "swarm_acc": 0.55,
+        "ppl_expert": 15.901,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 12.6
+      },
+      "entities": {
+        "base_acc": 0.35,
+        "expert_acc": 0.5,
+        "swarm_acc": 0.5,
+        "ppl_expert": 17.016,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.25
+        },
+        "tune_no_gain": false,
+        "seconds": 42.8
+      },
+      "bullets": {
+        "base_acc": 0.1,
+        "expert_acc": 0.1,
+        "swarm_acc": 0.1,
+        "ppl_expert": 16.005,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            10
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": false,
+        "seconds": 105.2
+      },
+      "code_python": {
+        "base_acc": 0.8,
+        "expert_acc": 0.75,
+        "swarm_acc": 0.75,
+        "ppl_expert": 15.923,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 69.8
+      }
+    },
+    "memory_source": "canonical: qwen2.5-0.5b/memory_fix.json (post-fix); scaling_report.memory is historical for 360m/0.5b",
+    "memory": {
+      "base": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9113
+      },
+      "rome_single_avg": {
+        "recall": 1.0,
+        "paraphrase": 0.0625,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9117,
+        "seconds_total": 115.6
+      },
+      "rome_seq_4": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9128,
+        "write_seconds": 37.1
+      },
+      "memit_4": {
+        "recall": 1.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9113,
+        "write_seconds": 88.4
+      },
+      "rome_seq_8": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9124,
+        "write_seconds": 84.6
+      },
+      "memit_8": {
+        "recall": 1.0,
+        "paraphrase": 0.0625,
+        "unrelated_kept": 1.0,
+        "ppl": 15.9113,
+        "write_seconds": 99.9
+      }
+    },
+    "rome_layer": 7,
+    "memit_layers": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "mem_s": 434.0,
+    "memory_in_scaling_report_status": "obsolete_pre_fix_do_not_use"
+  },
+  "qwen2.5-1.5b": {
+    "source_experts": "qwen2.5-1.5b/scaling_report.json",
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "base_ppl": 15.088,
+    "router": 1.0,
+    "experts_s": 11393.8,
+    "swarm_s": 162.9,
+    "total_s": 12991.1,
+    "rss": 11226.0,
+    "layers": [
+      8,
+      9,
+      11
+    ],
+    "dtype_note": "fp16",
+    "tasks": {
+      "json": {
+        "base_acc": 0.75,
+        "expert_acc": 0.9,
+        "swarm_acc": 0.9,
+        "ppl_expert": 15.547,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.25
+        },
+        "tune_no_gain": false,
+        "seconds": 177.2
+      },
+      "spanish": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 15.083,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.08
+        },
+        "tune_no_gain": true,
+        "seconds": 10435.9
+      },
+      "translate_en": {
+        "base_acc": 0.8,
+        "expert_acc": 0.8,
+        "swarm_acc": 0.8,
+        "ppl_expert": 16.143,
+        "chosen": {
+          "kind": "multi",
+          "layers": [
+            8,
+            9,
+            11
+          ],
+          "rel": 0.06
+        },
+        "tune_no_gain": false,
+        "seconds": 65.9
+      },
+      "arithmetic": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 15.063,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 31.0
+      },
+      "summarize": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 15.111,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            9
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 83.3
+      },
+      "uppercase": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 15.013,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            8
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 174.7
+      },
+      "sentiment": {
+        "base_acc": 1.0,
+        "expert_acc": 1.0,
+        "swarm_acc": 1.0,
+        "ppl_expert": 14.442,
+        "chosen": {
+          "kind": "multi",
+          "layers": [
+            8,
+            9,
+            11
+          ],
+          "rel": 0.12
+        },
+        "tune_no_gain": false,
+        "seconds": 24.9
+      },
+      "entities": {
+        "base_acc": 0.95,
+        "expert_acc": 0.95,
+        "swarm_acc": 0.95,
+        "ppl_expert": 15.096,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            11
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 92.7
+      },
+      "bullets": {
+        "base_acc": 0.65,
+        "expert_acc": 0.7,
+        "swarm_acc": 0.7,
+        "ppl_expert": 15.167,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            9
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 168.0
+      },
+      "code_python": {
+        "base_acc": 0.85,
+        "expert_acc": 0.85,
+        "swarm_acc": 0.85,
+        "ppl_expert": 15.122,
+        "chosen": {
+          "kind": "single",
+          "layers": [
+            9
+          ],
+          "rel": 0.02
+        },
+        "tune_no_gain": true,
+        "seconds": 140.3
+      }
+    },
+    "memory_source": "canonical: scaling_report.json#memory (post-fix, fp16)",
+    "memory": {
+      "base": {
+        "recall": 0.0,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.0883
+      },
+      "rome_single_avg": {
+        "recall": 0.875,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.0891,
+        "seconds_total": 346.8
+      },
+      "rome_seq_4": {
+        "recall": 0.5,
+        "paraphrase": 0.125,
+        "unrelated_kept": 1.0,
+        "ppl": 15.07,
+        "write_seconds": 130.3
+      },
+      "memit_4": {
+        "recall": 0.75,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.0676,
+        "write_seconds": 270.8
+      },
+      "rome_seq_8": {
+        "recall": 0.375,
+        "paraphrase": 0.0,
+        "unrelated_kept": 1.0,
+        "ppl": 15.0726,
+        "write_seconds": 214.9
+      },
+      "memit_8": {
+        "recall": 0.875,
+        "paraphrase": 0.0625,
+        "unrelated_kept": 1.0,
+        "ppl": 15.0838,
+        "write_seconds": 223.4
+      }
+    },
+    "rome_layer": 8,
+    "memit_layers": [
+      4,
+      6,
+      7,
+      8,
+      10
+    ],
+    "mem_s": 1201.0
   }
- }
 }

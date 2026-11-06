@@ -61,7 +61,11 @@ def run(model_key: str, max_eval: int, max_new: int, skip_memory: bool = False) 
     tok.padding_side = "left"
     if tok.pad_token_id is None:
         tok.pad_token = tok.eos_token
-    model = AutoModelForCausalLM.from_pretrained(cfg.hf_id, dtype=torch.float32).eval()
+    # fp16 en modelos ≥1B para caber en ~15GB RAM de la box; álgebra MEMIT sigue en f32/f64.
+    dtype = torch.float16 if ("1.5b" in cfg.key or "1.7b" in cfg.key or
+                              os.environ.get("ENJAMBRE_DTYPE", "").lower() in ("fp16", "float16")) else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(cfg.hf_id, dtype=dtype).eval()
+    print(f"[{cfg.key}] dtype={dtype}", flush=True)
     t_load = time.time() - T0
     em = EditableModel(model)
     nL = em.n_layers()
@@ -106,7 +110,8 @@ def run(model_key: str, max_eval: int, max_new: int, skip_memory: bool = False) 
             if best is None or key > best[0]:
                 best = (key, d)
         d = best[1]
-        # si ninguna config mejora el tune sobre la base -> experto = identidad (no-op honesto)
+        # tune_no_gain: etiqueta si el mejor cand. no supera tune_base. NO implica identidad:
+        # igual se aplica/guarda el delta elegido (puede ser no-op efectivo en eval, o no).
         noop = best[0][1] <= base_tune
         deltas[spec.id] = d
         save_delta(os.path.join(out_dir, f"delta_{spec.id}.pt"), d)
