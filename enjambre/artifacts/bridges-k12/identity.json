@@ -1,0 +1,21 @@
+{
+  "identity_greedy": true,
+  "out_a": "7",
+  "out_b": "7",
+  "grad_nonzero_any": true,
+  "grad_details": {
+    "bridges.12_16.up.weight": false,
+    "bridges.12_16.down.weight": true,
+    "bridges.12_16.gate.weight": false,
+    "bridges.12_16.gate.bias": false,
+    "bridges.16_20.up.weight": false,
+    "bridges.16_20.down.weight": true,
+    "bridges.16_20.gate.weight": false,
+    "bridges.16_20.gate.bias": false,
+    "bridges.20_23.up.weight": false,
+    "bridges.20_23.down.weight": true,
+    "bridges.20_23.gate.weight": false,
+    "bridges.20_23.gate.bias": false
+  },
+  "base_checksum_match": true
+}

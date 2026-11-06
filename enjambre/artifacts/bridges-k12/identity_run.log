@@ -1,0 +1,23 @@
+[bridges] k12=b8cf061d4dbdf427… rank=16 n_params=88707 pairs=[(12, 16), (16, 20), (20, 23)]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{
+  "identity_greedy": true,
+  "out_a": "7",
+  "out_b": "7",
+  "grad_nonzero_any": true,
+  "grad_details": {
+    "bridges.12_16.up.weight": false,
+    "bridges.12_16.down.weight": true,
+    "bridges.12_16.gate.weight": false,
+    "bridges.12_16.gate.bias": false,
+    "bridges.16_20.up.weight": false,
+    "bridges.16_20.down.weight": true,
+    "bridges.16_20.gate.weight": false,
+    "bridges.16_20.gate.bias": false,
+    "bridges.20_23.up.weight": false,
+    "bridges.20_23.down.weight": true,
+    "bridges.20_23.gate.weight": false,
+    "bridges.20_23.gate.bias": false
+  },
+  "base_checksum_match": true
+}

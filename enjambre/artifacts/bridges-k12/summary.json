@@ -1,0 +1,160 @@
+{
+  "means": {
+    "base": 0.594,
+    "k12": 0.624,
+    "k12_bridges_zero": 0.624,
+    "k12_bridges_trained": 0.74
+  },
+  "ppl": {
+    "base": 15.911,
+    "k12": 17.185,
+    "zero": 17.185,
+    "trained": 16.247
+  },
+  "paired": {
+    "trained_vs_k12": {
+      "n": 500,
+      "n_other_better": 90,
+      "n_other_worse": 32,
+      "n_both_ok": 280,
+      "n_both_fail": 98,
+      "acc_base": 0.624,
+      "acc_other": 0.74,
+      "delta": 0.116,
+      "bootstrap_ci95": {
+        "delta": 0.116,
+        "ci95": [
+          0.074,
+          0.16
+        ],
+        "n_boot": 2000,
+        "seed": 0
+      },
+      "mcnemar": {
+        "n_discordant": 122,
+        "n01": 90,
+        "n10": 32,
+        "p_two_sided": 0.0
+      }
+    },
+    "trained_vs_base": {
+      "n": 500,
+      "n_other_better": 101,
+      "n_other_worse": 28,
+      "n_both_ok": 269,
+      "n_both_fail": 102,
+      "acc_base": 0.594,
+      "acc_other": 0.74,
+      "delta": 0.146,
+      "bootstrap_ci95": {
+        "delta": 0.146,
+        "ci95": [
+          0.102,
+          0.188
+        ],
+        "n_boot": 2000,
+        "seed": 1
+      }
+    },
+    "zero_vs_k12": {
+      "n": 500,
+      "n_other_better": 0,
+      "n_other_worse": 0,
+      "n_both_ok": 312,
+      "n_both_fail": 188,
+      "acc_base": 0.624,
+      "acc_other": 0.624,
+      "delta": 0.0,
+      "bootstrap_ci95": {
+        "delta": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n_boot": 2000,
+        "seed": 2
+      }
+    },
+    "k12_vs_base": {
+      "n": 500,
+      "n_other_better": 31,
+      "n_other_worse": 16,
+      "n_both_ok": 281,
+      "n_both_fail": 172,
+      "acc_base": 0.594,
+      "acc_other": 0.624,
+      "delta": 0.03,
+      "bootstrap_ci95": {
+        "delta": 0.03,
+        "ci95": [
+          0.004,
+          0.058
+        ],
+        "n_boot": 2000,
+        "seed": 3
+      }
+    }
+  },
+  "identity": {
+    "identity_greedy": true,
+    "out_a": "7",
+    "out_b": "7",
+    "grad_nonzero_any": true,
+    "grad_details": {
+      "bridges.12_16.up.weight": false,
+      "bridges.12_16.down.weight": true,
+      "bridges.12_16.gate.weight": false,
+      "bridges.12_16.gate.bias": false,
+      "bridges.16_20.up.weight": false,
+      "bridges.16_20.down.weight": true,
+      "bridges.16_20.gate.weight": false,
+      "bridges.16_20.gate.bias": false,
+      "bridges.20_23.up.weight": false,
+      "bridges.20_23.down.weight": true,
+      "bridges.20_23.gate.weight": false,
+      "bridges.20_23.gate.bias": false
+    },
+    "base_checksum_match": true
+  },
+  "pilot": {
+    "pilot_steps": 20,
+    "secs": 60.14,
+    "sec_per_step": 3.007,
+    "est_full_secs": 1202.9,
+    "loss_first": 1.7738546133041382,
+    "loss_last": 1.5573859214782715,
+    "rss_mb": 2504.9
+  },
+  "train": {
+    "steps": 400,
+    "best_val": 0.75,
+    "secs": 1019.1,
+    "rss_mb": 2560.9,
+    "n_params": 88707
+  },
+  "n_hold_per_task": 50,
+  "n_total": 500,
+  "rank": 16,
+  "pairs": [
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "k12_sha": "b8cf061d4dbdf427b411cf54ef23cab9d694b013301347d2d28fa93efaa07c06",
+  "base_checksum_ok": true,
+  "split_sha": "97913f500591654916bf33513f0b5f80978d36b6327877e294e5b67713b3bd9a",
+  "limits": [
+    "10 tareas sintéticas; holdout n=50/tarea si viable",
+    "Puentes entrenados ≠ inteligencia general",
+    "Selección por val; holdout no usado para tuning"
+  ]
+}

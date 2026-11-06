@@ -1,0 +1,15 @@
+{
+  "milestone": "entrenamiento_comenzo",
+  "pilot": {
+    "pilot_steps": 20,
+    "secs": 60.14,
+    "sec_per_step": 3.007,
+    "est_full_secs": 1202.9,
+    "loss_first": 1.7738546133041382,
+    "loss_last": 1.5573859214782715,
+    "rss_mb": 2504.9
+  },
+  "budget": "est_full~20min <28min wall; no reduction; RSS~2.5GiB",
+  "pid": 1217230,
+  "status": "train_in_progress"
+}

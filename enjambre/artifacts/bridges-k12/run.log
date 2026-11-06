@@ -1,0 +1,233 @@
+[bridges] k12=b8cf061d4dbdf427… rank=16 n_params=88707 pairs=[(12, 16), (16, 20), (20, 23)]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[bridges] identity={'identity_greedy': True, 'out_a': '7', 'out_b': '7', 'grad_nonzero_any': True, 'grad_details': {'bridges.12_16.up.weight': False, 'bridges.12_16.down.weight': True, 'bridges.12_16.gate.weight': False, 'bridges.12_16.gate.bias': False, 'bridges.16_20.up.weight': False, 'bridges.16_20.down.weight': True, 'bridges.16_20.gate.weight': False, 'bridges.16_20.gate.bias': False, 'bridges.20_23.up.weight': False, 'bridges.20_23.down.weight': True, 'bridges.20_23.gate.weight': False, 'bridges.20_23.gate.bias': False}, 'base_checksum_match': True}
+[bridges] pilot {'pilot_steps': 20, 'secs': 60.14, 'sec_per_step': 3.007, 'est_full_secs': 1202.9, 'loss_first': 1.7738546133041382, 'loss_last': 1.5573859214782715, 'rss_mb': 2504.9}
+[bridges] step=0 loss=0.877 val=0.620
+[bridges] step=40 loss=0.084 val=0.300
+[bridges] step=80 loss=0.002 val=0.650
+[bridges] step=120 loss=0.021 val=0.730
+[bridges] step=160 loss=0.000 val=0.730
+[bridges] step=200 loss=0.001 val=0.700
+[bridges] step=240 loss=0.000 val=0.680
+[bridges] step=280 loss=0.000 val=0.750
+[bridges] step=320 loss=0.001 val=0.700
+[bridges] step=360 loss=0.000 val=0.700
+[bridges] loaded best step=280 val=0.75
+[bridges] base json 1.0
+[bridges] base spanish 1.0
+[bridges] base translate_en 0.0
+[bridges] base arithmetic 0.92
+[bridges] base summarize 0.0
+[bridges] base uppercase 0.52
+[bridges] base sentiment 0.5
+[bridges] base entities 1.0
+[bridges] base bullets 0.0
+[bridges] base code_python 1.0
+[bridges] k12 json 1.0
+[bridges] k12 spanish 1.0
+[bridges] k12 translate_en 0.0
+[bridges] k12 arithmetic 0.92
+[bridges] k12 summarize 0.08
+[bridges] k12 uppercase 0.36
+[bridges] k12 sentiment 0.88
+[bridges] k12 entities 1.0
+[bridges] k12 bullets 0.0
+[bridges] k12 code_python 1.0
+[bridges] k12_bridges_zero json 1.0
+[bridges] k12_bridges_zero spanish 1.0
+[bridges] k12_bridges_zero translate_en 0.0
+[bridges] k12_bridges_zero arithmetic 0.92
+[bridges] k12_bridges_zero summarize 0.08
+[bridges] k12_bridges_zero uppercase 0.36
+[bridges] k12_bridges_zero sentiment 0.88
+[bridges] k12_bridges_zero entities 1.0
+[bridges] k12_bridges_zero bullets 0.0
+[bridges] k12_bridges_zero code_python 1.0
+[bridges] k12_bridges_trained json 1.0
+[bridges] k12_bridges_trained spanish 1.0
+[bridges] k12_bridges_trained translate_en 1.0
+[bridges] k12_bridges_trained arithmetic 0.44
+[bridges] k12_bridges_trained summarize 0.0
+[bridges] k12_bridges_trained uppercase 1.0
+[bridges] k12_bridges_trained sentiment 0.96
+[bridges] k12_bridges_trained entities 1.0
+[bridges] k12_bridges_trained bullets 0.0
+[bridges] k12_bridges_trained code_python 1.0
+{
+  "means": {
+    "base": 0.594,
+    "k12": 0.624,
+    "k12_bridges_zero": 0.624,
+    "k12_bridges_trained": 0.74
+  },
+  "paired_trained_k12": {
+    "delta": 0.116,
+    "ci95": [
+      0.074,
+      0.16
+    ],
+    "n_boot": 2000,
+    "seed": 0
+  },
+  "secs_train": 1019.1
+}
+{
+  "means": {
+    "base": 0.594,
+    "k12": 0.624,
+    "k12_bridges_zero": 0.624,
+    "k12_bridges_trained": 0.74
+  },
+  "ppl": {
+    "base": 15.911,
+    "k12": 17.185,
+    "zero": 17.185,
+    "trained": 16.247
+  },
+  "paired": {
+    "trained_vs_k12": {
+      "n": 500,
+      "n_other_better": 90,
+      "n_other_worse": 32,
+      "n_both_ok": 280,
+      "n_both_fail": 98,
+      "acc_base": 0.624,
+      "acc_other": 0.74,
+      "delta": 0.116,
+      "bootstrap_ci95": {
+        "delta": 0.116,
+        "ci95": [
+          0.074,
+          0.16
+        ],
+        "n_boot": 2000,
+        "seed": 0
+      },
+      "mcnemar": {
+        "n_discordant": 122,
+        "n01": 90,
+        "n10": 32,
+        "p_two_sided": 0.0
+      }
+    },
+    "trained_vs_base": {
+      "n": 500,
+      "n_other_better": 101,
+      "n_other_worse": 28,
+      "n_both_ok": 269,
+      "n_both_fail": 102,
+      "acc_base": 0.594,
+      "acc_other": 0.74,
+      "delta": 0.146,
+      "bootstrap_ci95": {
+        "delta": 0.146,
+        "ci95": [
+          0.102,
+          0.188
+        ],
+        "n_boot": 2000,
+        "seed": 1
+      }
+    },
+    "zero_vs_k12": {
+      "n": 500,
+      "n_other_better": 0,
+      "n_other_worse": 0,
+      "n_both_ok": 312,
+      "n_both_fail": 188,
+      "acc_base": 0.624,
+      "acc_other": 0.624,
+      "delta": 0.0,
+      "bootstrap_ci95": {
+        "delta": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n_boot": 2000,
+        "seed": 2
+      }
+    },
+    "k12_vs_base": {
+      "n": 500,
+      "n_other_better": 31,
+      "n_other_worse": 16,
+      "n_both_ok": 281,
+      "n_both_fail": 172,
+      "acc_base": 0.594,
+      "acc_other": 0.624,
+      "delta": 0.03,
+      "bootstrap_ci95": {
+        "delta": 0.03,
+        "ci95": [
+          0.004,
+          0.058
+        ],
+        "n_boot": 2000,
+        "seed": 3
+      }
+    }
+  },
+  "identity": {
+    "identity_greedy": true,
+    "out_a": "7",
+    "out_b": "7",
+    "grad_nonzero_any": true,
+    "grad_details": {
+      "bridges.12_16.up.weight": false,
+      "bridges.12_16.down.weight": true,
+      "bridges.12_16.gate.weight": false,
+      "bridges.12_16.gate.bias": false,
+      "bridges.16_20.up.weight": false,
+      "bridges.16_20.down.weight": true,
+      "bridges.16_20.gate.weight": false,
+      "bridges.16_20.gate.bias": false,
+      "bridges.20_23.up.weight": false,
+      "bridges.20_23.down.weight": true,
+      "bridges.20_23.gate.weight": false,
+      "bridges.20_23.gate.bias": false
+    },
+    "base_checksum_match": true
+  },
+  "pilot": {
+    "pilot_steps": 20,
+    "secs": 60.14,
+    "sec_per_step": 3.007,
+    "est_full_secs": 1202.9,
+    "loss_first": 1.7738546133041382,
+    "loss_last": 1.5573859214782715,
+    "rss_mb": 2504.9
+  },
+  "train": {
+    "steps": 400,
+    "best_val": 0.75,
+    "secs": 1019.1,
+    "rss_mb": 2560.9,
+    "n_params": 88707
+  },
+  "n_hold_per_task": 50,
+  "n_total": 500,
+  "rank": 16,
+  "pairs": [
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "k12_sha": "b8cf061d4dbdf427b411cf54ef23cab9d694b013301347d2d28fa93efaa07c06",
+  "base_checksum_ok": true,
+  "split_sha": "97913f500591654916bf33513f0b5f80978d36b6327877e294e5b67713b3bd9a",
+  "limits": [
+    "10 tareas sint\u00e9ticas; holdout n=50/tarea si viable",
+    "Puentes entrenados \u2260 inteligencia general",
+    "Selecci\u00f3n por val; holdout no usado para tuning"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "milestone": "dise\u00f1o+smoke/identidad listos",
+  "branch": "exp/k12-puentes-residuales",
+  "base_commit": "0dc3afd",
+  "architecture": {
+    "base": "Qwen2.5-0.5B frozen",
+    "K12": "late12..23 scale0.4735 L2~1.6404 sha b8cf061d\u2026",
+    "bridges": "12\u219216, 16\u219220, 20\u219223",
+    "module": "up(D\u2192r) GELU down(r\u2192D zero-init) + sigmoid(gate(h_tgt)) bias-4",
+    "n_params_bridges": 88707,
+    "rank": 16
+  },
+  "identity": {
+    "identity_greedy": true,
+    "out_a": "7",
+    "out_b": "7",
+    "grad_nonzero_any": true,
+    "grad_details": {
+      "bridges.12_16.down.weight": true,
+      "bridges.16_20.down.weight": true,
+      "bridges.20_23.down.weight": true
+    },
+    "base_checksum_match": true,
+    "n_params": 88707,
+    "pairs": [
+      [
+        12,
+        16
+      ],
+      [
+        16,
+        20
+      ],
+      [
+        20,
+        23
+      ]
+    ],
+    "rank": 16,
+    "k12_prefix": "b8cf061d"
+  },
+  "splits": "train20/val10/hold50 per task; prompt_sha in split_manifest",
+  "next": "pilot \u2192 train\u226428min \u2192 holdout eval base/K12/zero/trained",
+  "tests": "6 passed (pytest test_bridges)"
+}

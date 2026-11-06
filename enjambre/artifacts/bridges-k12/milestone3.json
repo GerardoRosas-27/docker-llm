@@ -1,0 +1,21 @@
+{
+  "milestone": "resultado_completo",
+  "means": {
+    "base": 0.594,
+    "k12": 0.624,
+    "zero": 0.624,
+    "trained": 0.74
+  },
+  "delta_trained_vs_k12_ci95": [
+    0.074,
+    0.16
+  ],
+  "honest_negatives": [
+    "arithmetic 0.92\u21920.44",
+    "summarize/bullets siguen en 0",
+    "sin OOD externo"
+  ],
+  "train_secs": 1019.1,
+  "rss_mb": 2560.9,
+  "n_params": 88707
+}

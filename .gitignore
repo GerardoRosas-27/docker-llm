@@ -26,3 +26,5 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/fusion-confirm12/**
 !enjambre/artifacts/fusion-20capas/
 !enjambre/artifacts/fusion-20capas/**
+!enjambre/artifacts/bridges-k12/
+!enjambre/artifacts/bridges-k12/**
