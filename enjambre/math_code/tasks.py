@@ -105,9 +105,29 @@ def check_python_function(text: str, fn_name: str, test_cases: List[Tuple[Tuple[
     for node in tree.body:
         if not isinstance(node, (ast.FunctionDef, ast.Return, ast.Assign, ast.Import, ast.ImportFrom, ast.Pass)):
             return False
-    ns: Dict[str, Any] = {}
+    ns: Dict[str, Any] = {
+        "__builtins__": {
+            "abs": abs,
+            "min": min,
+            "max": max,
+            "sum": sum,
+            "len": len,
+            "range": range,
+            "int": int,
+            "bool": bool,
+            "str": str,
+            "list": list,
+            "dict": dict,
+            "tuple": tuple,
+            "set": set,
+            "sorted": sorted,
+            "reversed": reversed,
+            "enumerate": enumerate,
+            "zip": zip,
+        }
+    }
     try:
-        exec(compile(tree, "<generated>", "exec"), {"__builtins__": {"abs": abs, "min": min, "max": max, "sum": sum, "len": len, "range": range, "int": int, "bool": bool}}, ns)
+        exec(compile(tree, "<generated>", "exec"), ns)
         fn = ns.get(fn_name)
         if not callable(fn):
             return False
@@ -122,7 +142,7 @@ def check_python_function(text: str, fn_name: str, test_cases: List[Tuple[Tuple[
 
 def check_python_expr(text: str, required_substr: str, expected_val: Any = None,
                       callable_tests: List[Tuple[Tuple[Any, ...], Any]] = None) -> bool:
-    """Verifica expresiones Python (`[...]`, `lambda ...`) con ast.parse(mode='eval') y evaluación."""
+    """Verifica expresiones Python (`[...]`, `lambda ...`, `{...}`) con ast.parse(mode='eval') y evaluación."""
     if has_trailing_prose(text):
         return False
     code = _strip_code_fences(text)
@@ -140,7 +160,7 @@ def check_python_expr(text: str, required_substr: str, expected_val: Any = None,
             expr_str = parts[1].strip()
     try:
         tree = ast.parse(expr_str, mode="eval")
-        val = eval(compile(tree, "<expr>", "eval"), {"__builtins__": {"abs": abs, "min": min, "max": max, "sum": sum, "len": len, "range": range}}, {})
+        val = eval(compile(tree, "<expr>", "eval"), {"__builtins__": {"abs": abs, "min": min, "max": max, "sum": sum, "len": len, "range": range, "str": str, "list": list, "dict": dict, "tuple": tuple}}, {})
         if callable_tests is not None:
             if not callable(val):
                 return False
@@ -401,3 +421,141 @@ def get_legacy_k12_math_code_holdout(n_hold: int = 50):
         "legacy_code_lax": code_items_lax,
         "legacy_code_strict_ast": code_items_strict,
     }
+
+
+# ─── Benchmark Extendido de Matemáticas y Programación (Nuevos Tests) ────────
+EXT_MATH_TASKS = ["math_poly", "math_seq"]
+EXT_CODE_TASKS = ["code_list_fn", "code_dict_str"]
+EXT_MC_TASKS = EXT_MATH_TASKS + EXT_CODE_TASKS
+
+EXT_MC_SPECS: List[MCTaskSpec] = [
+    MCTaskSpec("math_poly", "math", "Polinomios cuadráticos y potencias (x^2 + c)", MATH_SYSTEM_PROMPT),
+    MCTaskSpec("math_seq", "math", "Sucesiones aritméticas y sumas finitas", MATH_SYSTEM_PROMPT),
+    MCTaskSpec("code_list_fn", "code", "Funciones de listas y agregación (AST + unit tests)", CODE_SYSTEM_PROMPT),
+    MCTaskSpec("code_dict_str", "code", "Comprensiones de diccionarios y cadenas (AST + eval)", CODE_SYSTEM_PROMPT),
+]
+
+
+def build_ext_mc_pool() -> Dict[str, List[Row]]:
+    """Construye el pool de 4 tareas adicionales de Matemáticas y Programación."""
+    pool: Dict[str, List[Row]] = {}
+
+    # 9. math_poly: cuadrados y polinomios cuadráticos
+    rows_poly: List[Row] = []
+    for idx in range(70):
+        x = 3 + (idx % 12)
+        c = 2 + idx
+        if idx % 3 == 0:
+            ans = x * x + c
+            p = f"Compute {x}*{x} + {c}. Reply with ONLY the integer."
+        elif idx % 3 == 1:
+            ans = x * x + (idx % 9)
+            p = f"If x = {x}, what is x*x + {idx % 9}? Reply with ONLY the integer."
+        else:
+            k = 2 + (idx % 3)
+            ans = k * (x * x) - (idx % 5)
+            p = f"Compute {k} * ({x} * {x}) - {idx % 5}. Reply with ONLY the integer."
+        rows_poly.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
+    pool["math_poly"] = rows_poly
+
+    # 10. math_seq: progresiones aritméticas y término siguiente
+    rows_seq: List[Row] = []
+    for idx in range(70):
+        a0 = 5 + idx * 2
+        d = 3 + (idx % 9)
+        if idx % 2 == 0:
+            t1, t2, t3, t4 = a0, a0 + d, a0 + 2 * d, a0 + 3 * d
+            ans = a0 + 4 * d
+            p = f"What is the next integer in the arithmetic sequence {t1}, {t2}, {t3}, {t4}, ? Reply with ONLY the integer."
+        else:
+            t1, t2, t3 = a0, a0 + d, a0 + 2 * d
+            ans = t1 + t2 + t3
+            p = f"Compute the sum {t1} + {t2} + {t3}. Reply with ONLY the integer."
+        rows_seq.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
+    pool["math_seq"] = rows_seq
+
+    # 11. code_list_fn: funciones sobre listas Python verificadas con AST + exec
+    rows_lfn: List[Row] = []
+    for idx in range(70):
+        fname = f"list_op_{idx}"
+        k = (idx % 8) + 2
+        if idx % 3 == 0:
+            body = f"return xs[0] * {k} + xs[-1]"
+            tests = [(([2, 5, 3],), 2 * k + 3), (([1, 9],), 1 * k + 9), (([0, 4, 7],), 7)]
+        elif idx % 3 == 1:
+            body = f"return sum(xs) + {k}"
+            tests = [(([1, 2, 3],), 6 + k), (([10],), 10 + k), (([],), k)]
+        else:
+            body = f"return len(xs) * {k}"
+            tests = [(([1, 2, 3],), 3 * k), (([],), 0), (([9, 8],), 2 * k)]
+        p = f"Write ONLY a Python function `{fname}(xs)` with body `{body}`. No prose."
+        tgt = f"def {fname}(xs):\n    {body}"
+        rows_lfn.append((p, tgt, (lambda t, fn=fname, tc=tests: check_python_function(t, fn, tc))))
+    pool["code_list_fn"] = rows_lfn
+
+    # 12. code_dict_str: comprensiones de diccionarios y funciones de strings
+    rows_ds: List[Row] = []
+    for idx in range(70):
+        n = 3 + (idx % 5)
+        k = 2 + idx
+        if idx % 2 == 0:
+            expr = f"{{x: x * {k} for x in range({n})}}"
+            expected = {x: x * k for x in range(n)}
+            p = f"Write ONLY the Python dict comprehension `{expr}`. No prose."
+            rows_ds.append((p, expr, (lambda t, ex=expected: check_python_expr(t, "{", expected_val=ex))))
+        else:
+            expr = f"lambda s: s[:{n}] + '{k}'"
+            tests = [(("abcdefg",), "abcdefg"[:n] + str(k)), (("xy",), "xy"[:n] + str(k))]
+            p = f"Write ONLY the Python lambda expression `{expr}`. No prose."
+            rows_ds.append((p, expr, (lambda t, tc=tests: check_python_expr(t, "lambda", callable_tests=tc))))
+    pool["code_dict_str"] = rows_ds
+
+    return pool
+
+
+def make_ext_mc_splits(n_train: int = 12, n_val: int = 6, n_hold: int = 10, seed: int = 142):
+    """Genera splits disjuntos para las 4 tareas extendidas (`math_poly`, `math_seq`, `code_list_fn`, `code_dict_str`)."""
+    rng = random.Random(seed)
+    hist = all_prior_mc_prompts()
+    pool = build_ext_mc_pool()
+    train, val, hold_rows = {}, {}, {}
+    seen_global: Set[str] = set()
+    for tid in EXT_MC_TASKS:
+        clean = []
+        for r in pool[tid]:
+            if r[0] not in hist and r[0] not in seen_global:
+                seen_global.add(r[0])
+                clean.append(r)
+        rng.shuffle(clean)
+        need = n_train + n_val + n_hold
+        assert len(clean) >= need, (tid, len(clean), need)
+        train[tid] = clean[:n_train]
+        val[tid] = clean[n_train:n_train + n_val]
+        hold_rows[tid] = clean[n_train + n_val:n_train + n_val + n_hold]
+
+    b_tr = {p for rows in train.values() for p, _, _ in rows}
+    b_va = {p for rows in val.values() for p, _, _ in rows}
+    b_ho = {p for rows in hold_rows.values() for p, _, _ in rows}
+    assert b_tr.isdisjoint(hist) and b_va.isdisjoint(hist) and b_ho.isdisjoint(hist)
+    assert b_tr.isdisjoint(b_va) and b_tr.isdisjoint(b_ho) and b_va.isdisjoint(b_ho)
+
+    def to_items(d):
+        return {
+            tid: [Item(prompt=p, check=chk, meta={"target": tgt, "task": tid}) for p, tgt, chk in rows]
+            for tid, rows in d.items()
+        }
+
+    manifest = {
+        "n_train": n_train,
+        "n_val": n_val,
+        "n_hold": n_hold,
+        "seed": seed,
+        "tasks": EXT_MC_TASKS,
+        "prompt_sha256": hashlib.sha256(json.dumps({
+            "train": {k: [r[0] for r in v] for k, v in train.items()},
+            "val": {k: [r[0] for r in v] for k, v in val.items()},
+            "hold": {k: [r[0] for r in v] for k, v in hold_rows.items()},
+        }, sort_keys=True).encode()).hexdigest(),
+    }
+    return train, val, to_items(hold_rows), manifest
+

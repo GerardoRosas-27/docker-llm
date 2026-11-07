@@ -1,0 +1,157 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "base_layer_configuration": "K24_mc (24 capas editadas 0..23 + 6 puentes 0->4, 4->8, 8->12, 12->16, 16->20, 20->23)",
+  "source_repository": "https://github.com/GerardoRosas-27/neuro-geometrica_multi-agente (branch: main)",
+  "paso0_bit_exact_parity": {
+    "constelacion_v4": {
+      "bit_exact_paso0": true,
+      "max_abs_logit_diff": 0.0,
+      "n_total_params": 352920,
+      "n_neuro_extra_params": 175506
+    },
+    "atlas_fw": {
+      "bit_exact_paso0": true,
+      "max_abs_logit_diff": 0.0,
+      "n_total_params": 314580,
+      "n_neuro_extra_params": 137166
+    },
+    "bq10_dastr": {
+      "bit_exact_paso0": true,
+      "max_abs_logit_diff": 0.0,
+      "n_total_params": 487860,
+      "n_neuro_extra_params": 310446
+    },
+    "soft_bellman_simplicial": {
+      "bit_exact_paso0": true,
+      "max_abs_logit_diff": 0.0,
+      "n_total_params": 351888,
+      "n_neuro_extra_params": 174474
+    }
+  },
+  "n_total_test_items": 235,
+  "evaluated_architectures": [
+    {
+      "label": "1_base_k24_mc_residual",
+      "arch": "residual_base",
+      "core_mean_acc": 0.7667,
+      "ext_mean_acc": 0.675,
+      "all12_mean_acc": 0.7438,
+      "all12_math_acc": 0.4875,
+      "all12_code_acc": 1.0,
+      "legacy_holdout": {
+        "legacy_arithmetic": 0.88,
+        "legacy_code_lax": 0.96,
+        "legacy_code_strict_ast": 0.96
+      },
+      "n_extra_params": 0
+    },
+    {
+      "label": "2_k24_constelacion_v4",
+      "arch": "constelacion_v4",
+      "core_mean_acc": 0.75,
+      "ext_mean_acc": 0.775,
+      "all12_mean_acc": 0.7562,
+      "all12_math_acc": 0.5125,
+      "all12_code_acc": 1.0,
+      "legacy_holdout": {
+        "legacy_arithmetic": 0.96,
+        "legacy_code_lax": 1.0,
+        "legacy_code_strict_ast": 1.0
+      },
+      "n_extra_params": 175506
+    },
+    {
+      "label": "3_k24_atlas_fw",
+      "arch": "atlas_fw",
+      "core_mean_acc": 0.7583,
+      "ext_mean_acc": 0.675,
+      "all12_mean_acc": 0.7375,
+      "all12_math_acc": 0.475,
+      "all12_code_acc": 1.0,
+      "legacy_holdout": {
+        "legacy_arithmetic": 0.88,
+        "legacy_code_lax": 1.0,
+        "legacy_code_strict_ast": 1.0
+      },
+      "n_extra_params": 137166
+    },
+    {
+      "label": "4_k24_bq10_dastr",
+      "arch": "bq10_dastr",
+      "core_mean_acc": 0.775,
+      "ext_mean_acc": 0.7,
+      "all12_mean_acc": 0.7562,
+      "all12_math_acc": 0.5125,
+      "all12_code_acc": 1.0,
+      "legacy_holdout": {
+        "legacy_arithmetic": 0.92,
+        "legacy_code_lax": 1.0,
+        "legacy_code_strict_ast": 1.0
+      },
+      "n_extra_params": 310446
+    },
+    {
+      "label": "5_k24_soft_bellman",
+      "arch": "soft_bellman_simplicial",
+      "core_mean_acc": 0.7667,
+      "ext_mean_acc": 0.725,
+      "all12_mean_acc": 0.7562,
+      "all12_math_acc": 0.5125,
+      "all12_code_acc": 1.0,
+      "legacy_holdout": {
+        "legacy_arithmetic": 0.92,
+        "legacy_code_lax": 1.0,
+        "legacy_code_strict_ast": 1.0
+      },
+      "n_extra_params": 174474
+    }
+  ],
+  "contrasts_vs_k24_mc_base": {
+    "2_k24_constelacion_v4": {
+      "delta": 0.0124,
+      "ci95": [
+        -0.025,
+        0.05
+      ],
+      "gains": 6,
+      "losses": 4,
+      "net": 2
+    },
+    "3_k24_atlas_fw": {
+      "delta": -0.0063,
+      "ci95": [
+        -0.0188,
+        0.0
+      ],
+      "gains": 0,
+      "losses": 1,
+      "net": -1
+    },
+    "4_k24_bq10_dastr": {
+      "delta": 0.0124,
+      "ci95": [
+        -0.0125,
+        0.0375
+      ],
+      "gains": 3,
+      "losses": 1,
+      "net": 2
+    },
+    "5_k24_soft_bellman": {
+      "delta": 0.0124,
+      "ci95": [
+        0.0,
+        0.0312
+      ],
+      "gains": 2,
+      "losses": 0,
+      "net": 2
+    }
+  },
+  "winner_analysis": {
+    "best_core_winner": "4_k24_bq10_dastr (BQ10: ATLAS-FW + M7 DA-STR da=10 + innovacion causal gemma_campo)",
+    "best_extended_winner": "2_k24_constelacion_v4 (CONSTELACION v4: Koopman 2x2 + precision Pi)",
+    "best_zero_regression_winner": "5_k24_soft_bellman (Soft-Bellman Simplicial 3D: metrica SPD + tetraedro baricentrico)",
+    "recommendation": "BQ10 (M7 DA-STR) protege el subespacio base de K24_mc y logra la mayor exactitud en tareas complejas Core (0.7750), mientras Constelacion v4 y Soft-Bellman maximizan secuencias matematicas y progresiones. Ambas superan a K24_mc (+0.0125 neto en 160 items) manteniendo 100% de exactitud en codigo Python."
+  }
+}

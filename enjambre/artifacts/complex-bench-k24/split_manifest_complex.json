@@ -1,0 +1,19 @@
+{
+  "n_train": 12,
+  "n_val": 6,
+  "n_hold": 15,
+  "seed": 242,
+  "tasks": [
+    "complex_math_gcd_lcm",
+    "complex_math_fib_recur",
+    "complex_math_modular_exp",
+    "complex_math_solve_linear",
+    "complex_math_combinatorics",
+    "complex_code_loop_filter",
+    "complex_code_string_algo",
+    "complex_code_recursion",
+    "complex_code_dict_freq",
+    "complex_code_search_nested"
+  ],
+  "prompt_sha256": "ee4d6aec952442c15c66e8341fd14ad24701f53c1f5e130a062e5dd3c77058c3"
+}

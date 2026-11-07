@@ -1,0 +1,7 @@
+{
+  "tag": "soft_bellman_adapted",
+  "arch": "soft_bellman_simplicial",
+  "steps": 30,
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/complex-bench-k24/connectors_complex_soft_bellman_adapted_best.pt",
+  "secs": 124.9
+}

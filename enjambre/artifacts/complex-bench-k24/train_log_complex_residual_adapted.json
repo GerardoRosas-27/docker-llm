@@ -1,0 +1,7 @@
+{
+  "tag": "residual_adapted",
+  "arch": "residual_base",
+  "steps": 30,
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/complex-bench-k24/connectors_complex_residual_adapted_best.pt",
+  "secs": 135.6
+}

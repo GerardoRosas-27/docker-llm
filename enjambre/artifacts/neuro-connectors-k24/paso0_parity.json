@@ -1,0 +1,26 @@
+{
+  "constelacion_v4": {
+    "bit_exact_paso0": true,
+    "max_abs_logit_diff": 0.0,
+    "n_total_params": 352920,
+    "n_neuro_extra_params": 175506
+  },
+  "atlas_fw": {
+    "bit_exact_paso0": true,
+    "max_abs_logit_diff": 0.0,
+    "n_total_params": 314580,
+    "n_neuro_extra_params": 137166
+  },
+  "bq10_dastr": {
+    "bit_exact_paso0": true,
+    "max_abs_logit_diff": 0.0,
+    "n_total_params": 487860,
+    "n_neuro_extra_params": 310446
+  },
+  "soft_bellman_simplicial": {
+    "bit_exact_paso0": true,
+    "max_abs_logit_diff": 0.0,
+    "n_total_params": 351888,
+    "n_neuro_extra_params": 174474
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "title": "Experimento en Suite Compleja de Matemáticas y Programación (150 Ítems)",
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "layers_frozen": "24 capas editadas k24_mc.pt (100% congeladas, requires_grad=False)",
+  "n_test_items": 150,
+  "winner": {
+    "label": "2_base_k24_residual_adapted",
+    "arch": "residual_base",
+    "math_acc": 0.0267,
+    "code_acc": 0.6133,
+    "mean_acc": 0.32,
+    "gain_vs_base_zeroshot": 0.0267,
+    "gain_vs_base_adapted": 0.0
+  },
+  "comparison_table": [
+    {
+      "label": "1_base_k24_residual_zeroshot",
+      "arch": "residual_base",
+      "math_acc": 0.04,
+      "code_acc": 0.5467,
+      "mean_acc": 0.2933,
+      "extra_params": 0,
+      "secs": 159.02
+    },
+    {
+      "label": "2_base_k24_residual_adapted",
+      "arch": "residual_base",
+      "math_acc": 0.0267,
+      "code_acc": 0.6133,
+      "mean_acc": 0.32,
+      "extra_params": 0,
+      "secs": 147.16
+    },
+    {
+      "label": "3_constelacion_v4_adapted",
+      "arch": "constelacion_v4",
+      "math_acc": 0.0533,
+      "code_acc": 0.5867,
+      "mean_acc": 0.32,
+      "extra_params": 175506,
+      "secs": 150.7
+    },
+    {
+      "label": "4_bq10_dastr_adapted",
+      "arch": "bq10_dastr",
+      "math_acc": 0.0533,
+      "code_acc": 0.44,
+      "mean_acc": 0.2467,
+      "extra_params": 310446,
+      "secs": 141.91
+    },
+    {
+      "label": "5_soft_bellman_adapted",
+      "arch": "soft_bellman_simplicial",
+      "math_acc": 0.0133,
+      "code_acc": 0.3867,
+      "mean_acc": 0.2,
+      "extra_params": 174474,
+      "secs": 145.24
+    },
+    {
+      "label": "6_k24_neuro_hybrid_complex",
+      "arch": "bq10_dastr",
+      "math_acc": 0.0267,
+      "code_acc": 0.44,
+      "mean_acc": 0.2333,
+      "extra_params": 242804,
+      "secs": 138.09
+    }
+  ],
+  "per_task_table": {
+    "complex_math_gcd_lcm": {
+      "1_base_k24_residual_zeroshot": 0.0,
+      "2_base_k24_residual_adapted": 0.0,
+      "3_constelacion_v4_adapted": 0.0667,
+      "4_bq10_dastr_adapted": 0.0667,
+      "5_soft_bellman_adapted": 0.0,
+      "6_k24_neuro_hybrid_complex": 0.0
+    },
+    "complex_math_fib_recur": {
+      "1_base_k24_residual_zeroshot": 0.0,
+      "2_base_k24_residual_adapted": 0.0667,
+      "3_constelacion_v4_adapted": 0.0667,
+      "4_bq10_dastr_adapted": 0.0667,
+      "5_soft_bellman_adapted": 0.0,
+      "6_k24_neuro_hybrid_complex": 0.0
+    },
+    "complex_math_modular_exp": {
+      "1_base_k24_residual_zeroshot": 0.0667,
+      "2_base_k24_residual_adapted": 0.0,
+      "3_constelacion_v4_adapted": 0.0,
+      "4_bq10_dastr_adapted": 0.0,
+      "5_soft_bellman_adapted": 0.0,
+      "6_k24_neuro_hybrid_complex": 0.0
+    },
+    "complex_math_solve_linear": {
+      "1_base_k24_residual_zeroshot": 0.0,
+      "2_base_k24_residual_adapted": 0.0,
+      "3_constelacion_v4_adapted": 0.0,
+      "4_bq10_dastr_adapted": 0.0667,
+      "5_soft_bellman_adapted": 0.0,
+      "6_k24_neuro_hybrid_complex": 0.0
+    },
+    "complex_math_combinatorics": {
+      "1_base_k24_residual_zeroshot": 0.1333,
+      "2_base_k24_residual_adapted": 0.0667,
+      "3_constelacion_v4_adapted": 0.1333,
+      "4_bq10_dastr_adapted": 0.0667,
+      "5_soft_bellman_adapted": 0.0667,
+      "6_k24_neuro_hybrid_complex": 0.1333
+    },
+    "complex_code_loop_filter": {
+      "1_base_k24_residual_zeroshot": 1.0,
+      "2_base_k24_residual_adapted": 1.0,
+      "3_constelacion_v4_adapted": 1.0,
+      "4_bq10_dastr_adapted": 1.0,
+      "5_soft_bellman_adapted": 1.0,
+      "6_k24_neuro_hybrid_complex": 1.0
+    },
+    "complex_code_string_algo": {
+      "1_base_k24_residual_zeroshot": 0.6,
+      "2_base_k24_residual_adapted": 0.9333,
+      "3_constelacion_v4_adapted": 0.8,
+      "4_bq10_dastr_adapted": 0.6,
+      "5_soft_bellman_adapted": 0.3333,
+      "6_k24_neuro_hybrid_complex": 0.6
+    },
+    "complex_code_recursion": {
+      "1_base_k24_residual_zeroshot": 0.6,
+      "2_base_k24_residual_adapted": 0.6,
+      "3_constelacion_v4_adapted": 0.6,
+      "4_bq10_dastr_adapted": 0.0667,
+      "5_soft_bellman_adapted": 0.0667,
+      "6_k24_neuro_hybrid_complex": 0.0667
+    },
+    "complex_code_dict_freq": {
+      "1_base_k24_residual_zeroshot": 0.0,
+      "2_base_k24_residual_adapted": 0.0,
+      "3_constelacion_v4_adapted": 0.0,
+      "4_bq10_dastr_adapted": 0.0,
+      "5_soft_bellman_adapted": 0.0,
+      "6_k24_neuro_hybrid_complex": 0.0
+    },
+    "complex_code_search_nested": {
+      "1_base_k24_residual_zeroshot": 0.5333,
+      "2_base_k24_residual_adapted": 0.5333,
+      "3_constelacion_v4_adapted": 0.5333,
+      "4_bq10_dastr_adapted": 0.5333,
+      "5_soft_bellman_adapted": 0.5333,
+      "6_k24_neuro_hybrid_complex": 0.5333
+    }
+  },
+  "contrasts_vs_base_adapted": {
+    "constelacion_v4_vs_base_adapted": {
+      "delta_mean": 0.0,
+      "delta_math": 0.0266,
+      "delta_code": -0.0266,
+      "gains": 2,
+      "losses": 2,
+      "net": 0
+    },
+    "bq10_dastr_vs_base_adapted": {
+      "delta_mean": -0.0733,
+      "delta_math": 0.0266,
+      "delta_code": -0.1733,
+      "gains": 2,
+      "losses": 13,
+      "net": -11
+    },
+    "soft_bellman_vs_base_adapted": {
+      "delta_mean": -0.12,
+      "delta_math": -0.0134,
+      "delta_code": -0.2266,
+      "gains": 0,
+      "losses": 18,
+      "net": -18
+    },
+    "hybrid_vs_base_adapted": {
+      "delta_mean": -0.0867,
+      "delta_math": 0.0,
+      "delta_code": -0.1733,
+      "gains": 1,
+      "losses": 14,
+      "net": -13
+    }
+  },
+  "total_wall_secs": 2.1
+}

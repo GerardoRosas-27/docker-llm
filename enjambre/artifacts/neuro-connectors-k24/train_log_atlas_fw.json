@@ -1,0 +1,57 @@
+{
+  "tag": "atlas_fw",
+  "arch": "atlas_fw",
+  "per_pair_arch": null,
+  "pairs": [
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "n_bridge_params": 314580,
+  "n_neuro_extra_params": 137166,
+  "steps": 28,
+  "best_step": 28,
+  "val0_loss": 0.7284,
+  "val0_math_acc": 0.6111,
+  "best_val_loss": 0.6504,
+  "best_val_math_acc": 0.6111,
+  "secs": 107.9,
+  "history": [
+    {
+      "step": 0,
+      "train_loss": null,
+      "val_loss": 0.7284,
+      "val_math_acc": 0.6111,
+      "secs": 0.0
+    },
+    {
+      "step": 28,
+      "train_loss": 0.4208,
+      "val_loss": 0.6504,
+      "val_math_acc": 0.6111,
+      "secs": 107.9
+    }
+  ],
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/neuro-connectors-k24/connectors_atlas_fw_best.pt"
+}

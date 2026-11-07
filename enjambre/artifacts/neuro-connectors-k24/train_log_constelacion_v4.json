@@ -1,0 +1,57 @@
+{
+  "tag": "constelacion_v4",
+  "arch": "constelacion_v4",
+  "per_pair_arch": null,
+  "pairs": [
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "n_bridge_params": 352920,
+  "n_neuro_extra_params": 175506,
+  "steps": 28,
+  "best_step": 28,
+  "val0_loss": 0.7284,
+  "val0_math_acc": 0.6111,
+  "best_val_loss": 0.6125,
+  "best_val_math_acc": 0.6111,
+  "secs": 107.3,
+  "history": [
+    {
+      "step": 0,
+      "train_loss": null,
+      "val_loss": 0.7284,
+      "val_math_acc": 0.6111,
+      "secs": 0.0
+    },
+    {
+      "step": 28,
+      "train_loss": 0.0746,
+      "val_loss": 0.6125,
+      "val_math_acc": 0.6111,
+      "secs": 107.3
+    }
+  ],
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/neuro-connectors-k24/connectors_constelacion_v4_best.pt"
+}

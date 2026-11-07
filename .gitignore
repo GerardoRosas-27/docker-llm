@@ -30,4 +30,8 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/bridges-k12/**
 !enjambre/artifacts/math-code-k12plus/
 !enjambre/artifacts/math-code-k12plus/**
+!enjambre/artifacts/neuro-connectors-k24/
+!enjambre/artifacts/neuro-connectors-k24/**
+!enjambre/artifacts/complex-bench-k24/
+!enjambre/artifacts/complex-bench-k24/**
 

@@ -1,0 +1,7 @@
+{
+  "tag": "bq10_dastr_adapted",
+  "arch": "bq10_dastr",
+  "steps": 30,
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/complex-bench-k24/connectors_complex_bq10_dastr_adapted_best.pt",
+  "secs": 140.3
+}

@@ -1,0 +1,57 @@
+{
+  "tag": "soft_bellman_simplicial",
+  "arch": "soft_bellman_simplicial",
+  "per_pair_arch": null,
+  "pairs": [
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "n_bridge_params": 351888,
+  "n_neuro_extra_params": 174474,
+  "steps": 28,
+  "best_step": 28,
+  "val0_loss": 0.7284,
+  "val0_math_acc": 0.6111,
+  "best_val_loss": 0.5843,
+  "best_val_math_acc": 0.5556,
+  "secs": 106.8,
+  "history": [
+    {
+      "step": 0,
+      "train_loss": null,
+      "val_loss": 0.7284,
+      "val_math_acc": 0.6111,
+      "secs": 0.0
+    },
+    {
+      "step": 28,
+      "train_loss": 0.2264,
+      "val_loss": 0.5843,
+      "val_math_acc": 0.5556,
+      "secs": 106.8
+    }
+  ],
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/neuro-connectors-k24/connectors_soft_bellman_simplicial_best.pt"
+}

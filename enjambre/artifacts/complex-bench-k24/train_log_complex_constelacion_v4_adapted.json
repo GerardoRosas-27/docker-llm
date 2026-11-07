@@ -1,0 +1,7 @@
+{
+  "tag": "constelacion_v4_adapted",
+  "arch": "constelacion_v4",
+  "steps": 30,
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/complex-bench-k24/connectors_complex_constelacion_v4_adapted_best.pt",
+  "secs": 130.4
+}
