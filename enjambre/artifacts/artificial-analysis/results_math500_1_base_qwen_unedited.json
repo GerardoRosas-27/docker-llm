@@ -1,0 +1,94 @@
+{
+  "label": "1_base_qwen_unedited",
+  "arch": "none",
+  "use_delta": false,
+  "n_problems": 28,
+  "n_correct": 0,
+  "accuracy": 0.0,
+  "by_subject": {
+    "Algebra": 0.0,
+    "Counting & Probability": 0.0,
+    "Geometry": 0.0,
+    "Intermediate Algebra": 0.0,
+    "Number Theory": 0.0,
+    "Prealgebra": 0.0,
+    "Precalculus": 0.0
+  },
+  "by_level": {
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+  },
+  "performance": {
+    "n_runs": 28,
+    "ttft_ms": {
+      "mean": 729.75,
+      "p50": 684.94,
+      "p95": 934.69,
+      "min": 544.69,
+      "max": 1634.53
+    },
+    "output_tps": {
+      "mean": 7.88,
+      "p50": 7.73,
+      "p95": 8.49
+    },
+    "latency_ms": {
+      "mean": 6712.09,
+      "p50": 6747.25,
+      "p95": 7083.52
+    }
+  },
+  "wall_secs": 188.09,
+  "sample_results": [
+    {
+      "id": "test/precalculus/580.json",
+      "subject": "Precalculus",
+      "level": 3,
+      "problem": "Let $A = (1,-11,2),$ $B = (3,-4,1),$ and $C = (-2,1,-1).$  Compute $\\angle ABC,$ in degrees.",
+      "target": "120^\\circ",
+      "pred": null,
+      "generated_text": "To find the angle \\(\\angle ABC\\) between the vectors \\(\\overrightarrow{AB}\\) and \\(\\overrightarrow{AC}\\), we will use the dot product formula and the magnitudes of the vectors. The formula for the",
+      "ok": false,
+      "ttft_ms": 589.09,
+      "tps": 10.28
+    },
+    {
+      "id": "test/precalculus/190.json",
+      "subject": "Precalculus",
+      "level": 4,
+      "problem": "Find $\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\circ \\sin 120^\\circ \\sin 140^\\circ \\sin 160^\\circ.$",
+      "target": "\\frac{9}{256}",
+      "pred": null,
+      "generated_text": "To solve the problem, we need to find the value of \\(\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\",
+      "ok": false,
+      "ttft_ms": 681.3,
+      "tps": 8.79
+    },
+    {
+      "id": "test/precalculus/499.json",
+      "subject": "Precalculus",
+      "level": 4,
+      "problem": "Let\n\\[f(x) = (\\arccos x)^2 + (\\arcsin x)^2.\\]Find the range of $f(x).$  All functions are in radians.",
+      "target": "\\left[ \\frac{\\pi^2}{8}, \\frac{5 \\pi^2}{4} \\right]",
+      "pred": null,
+      "generated_text": "To find the range of the function \\( f(x) = (\\arccos x)^2 + (\\arcsin x)^2 \\), we start by using the identity that relates the square of the sine and cosine functions. Specifically,",
+      "ok": false,
+      "ttft_ms": 701.85,
+      "tps": 7.68
+    },
+    {
+      "id": "test/precalculus/24313.json",
+      "subject": "Precalculus",
+      "level": 2,
+      "problem": "Simplify\n\\[\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}.\\]",
+      "target": "\\cot x",
+      "pred": null,
+      "generated_text": "To simplify the expression \\(\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}\\), we will follow these steps:\n\n1. **Rewrite the expression using trigonometric identities:**\n  ",
+      "ok": false,
+      "ttft_ms": 639.02,
+      "tps": 7.79
+    }
+  ]
+}

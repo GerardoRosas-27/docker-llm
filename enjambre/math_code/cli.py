@@ -27,6 +27,9 @@ def main(argv=None):
     p_comp = sub.add_parser("complex-bench")
     p_comp.add_argument("--stage", default=None)
     sub.add_parser("complex-report")
+    p_aa = sub.add_parser("aa-bench")
+    p_aa.add_argument("--samples", type=int, default=28)
+    sub.add_parser("aa-report")
     args = p.parse_args(argv)
 
     if args.cmd == "report":
@@ -43,6 +46,25 @@ def main(argv=None):
         from .complex_eval import DEFAULT_COMPLEX_OUT
         path = os.path.join(os.path.abspath(args.out or DEFAULT_COMPLEX_OUT), "summary_complex_benchmark.json")
         print(open(path).read() if os.path.isfile(path) else json.dumps({"error": "missing"}))
+        return
+
+    if args.cmd == "aa-report":
+        from enjambre.artificial_analysis.bench import DEFAULT_AA_OUT
+        path = os.path.join(os.path.abspath(args.out or DEFAULT_AA_OUT), "summary_artificial_analysis.json")
+        print(open(path).read() if os.path.isfile(path) else json.dumps({"error": "missing"}))
+        return
+
+    if args.cmd == "aa-bench":
+        from enjambre.artificial_analysis.bench import ArtificialAnalysisHarness
+        samples = getattr(args, "samples", 28)
+        aah = ArtificialAnalysisHarness(out_dir=args.out, rank=args.rank, sample_size=samples)
+        res = aah.run_artificial_analysis_suite()
+        print(json.dumps({
+            "benchmark_name": res["benchmark_name"],
+            "winner": res["winner"],
+            "comparison_table": res["comparison_table"],
+            "total_wall_secs": res["total_wall_secs"],
+        }, indent=2))
         return
 
     if args.cmd == "complex-bench":

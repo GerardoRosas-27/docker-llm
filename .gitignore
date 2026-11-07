@@ -34,4 +34,6 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/neuro-connectors-k24/**
 !enjambre/artifacts/complex-bench-k24/
 !enjambre/artifacts/complex-bench-k24/**
+!enjambre/artifacts/artificial-analysis/
+!enjambre/artifacts/artificial-analysis/**
 

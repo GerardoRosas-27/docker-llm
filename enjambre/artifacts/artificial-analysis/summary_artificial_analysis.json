@@ -1,0 +1,117 @@
+{
+  "benchmark_name": "Artificial Analysis MATH-500 & Performance Benchmark",
+  "benchmark_url": "https://artificialanalysis.ai/evaluations/math-500",
+  "eval_framework": "Artificial Analysis Evaluation Protocol",
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "sample_size": 28,
+  "winner": {
+    "label": "1_base_qwen_unedited",
+    "arch": "none",
+    "math500_accuracy": 0.0,
+    "output_tps": 7.88,
+    "ttft_ms": 729.75
+  },
+  "comparison_table": [
+    {
+      "label": "1_base_qwen_unedited",
+      "arch": "none",
+      "math500_acc": 0.0,
+      "ttft_ms_p50": 684.94,
+      "output_tps_mean": 7.88,
+      "latency_p50_ms": 6747.25,
+      "wall_secs": 188.09
+    },
+    {
+      "label": "2_k24_mc_residual",
+      "arch": "residual_base",
+      "math500_acc": 0.0,
+      "ttft_ms_p50": 689.24,
+      "output_tps_mean": 7.74,
+      "latency_p50_ms": 6737.91,
+      "wall_secs": 190.62
+    },
+    {
+      "label": "3_k24_constelacion_v4",
+      "arch": "constelacion_v4",
+      "math500_acc": 0.0,
+      "ttft_ms_p50": 693.74,
+      "output_tps_mean": 7.67,
+      "latency_p50_ms": 6818.31,
+      "wall_secs": 192.23
+    },
+    {
+      "label": "4_k24_bq10_dastr",
+      "arch": "bq10_dastr",
+      "math500_acc": 0.0,
+      "ttft_ms_p50": 778.53,
+      "output_tps_mean": 6.16,
+      "latency_p50_ms": 7055.05,
+      "wall_secs": 428.38
+    }
+  ],
+  "by_subject_table": {
+    "1_base_qwen_unedited": {
+      "Algebra": 0.0,
+      "Counting & Probability": 0.0,
+      "Geometry": 0.0,
+      "Intermediate Algebra": 0.0,
+      "Number Theory": 0.0,
+      "Prealgebra": 0.0,
+      "Precalculus": 0.0
+    },
+    "2_k24_mc_residual": {
+      "Algebra": 0.0,
+      "Counting & Probability": 0.0,
+      "Geometry": 0.0,
+      "Intermediate Algebra": 0.0,
+      "Number Theory": 0.0,
+      "Prealgebra": 0.0,
+      "Precalculus": 0.0
+    },
+    "3_k24_constelacion_v4": {
+      "Algebra": 0.0,
+      "Counting & Probability": 0.0,
+      "Geometry": 0.0,
+      "Intermediate Algebra": 0.0,
+      "Number Theory": 0.0,
+      "Prealgebra": 0.0,
+      "Precalculus": 0.0
+    },
+    "4_k24_bq10_dastr": {
+      "Algebra": 0.0,
+      "Counting & Probability": 0.0,
+      "Geometry": 0.0,
+      "Intermediate Algebra": 0.0,
+      "Number Theory": 0.0,
+      "Prealgebra": 0.0,
+      "Precalculus": 0.0
+    }
+  },
+  "by_level_table": {
+    "1_base_qwen_unedited": {
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0
+    },
+    "2_k24_mc_residual": {
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0
+    },
+    "3_k24_constelacion_v4": {
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0
+    },
+    "4_k24_bq10_dastr": {
+      "2": 0.0,
+      "3": 0.0,
+      "4": 0.0,
+      "5": 0.0
+    }
+  },
+  "total_wall_secs": 430.35
+}
