@@ -2,7 +2,8 @@
   "label": "1_base_qwen_unedited",
   "arch": "none",
   "use_delta": false,
-  "n_problems": 28,
+  "max_tokens": 120,
+  "n_problems": 14,
   "n_correct": 0,
   "accuracy": 0.0,
   "by_subject": {
@@ -21,26 +22,26 @@
     "5": 0.0
   },
   "performance": {
-    "n_runs": 28,
+    "n_runs": 14,
     "ttft_ms": {
-      "mean": 729.75,
-      "p50": 684.94,
-      "p95": 934.69,
-      "min": 544.69,
-      "max": 1634.53
+      "mean": 748.18,
+      "p50": 715.03,
+      "p95": 947.5,
+      "min": 595.52,
+      "max": 1206.27
     },
     "output_tps": {
-      "mean": 7.88,
-      "p50": 7.73,
-      "p95": 8.49
+      "mean": 7.72,
+      "p50": 7.72,
+      "p95": 7.79
     },
     "latency_ms": {
-      "mean": 6712.09,
-      "p50": 6747.25,
-      "p95": 7083.52
+      "mean": 16160.45,
+      "p50": 16128.34,
+      "p95": 16605.3
     }
   },
-  "wall_secs": 188.09,
+  "wall_secs": 226.33,
   "sample_results": [
     {
       "id": "test/precalculus/580.json",
@@ -49,10 +50,10 @@
       "problem": "Let $A = (1,-11,2),$ $B = (3,-4,1),$ and $C = (-2,1,-1).$  Compute $\\angle ABC,$ in degrees.",
       "target": "120^\\circ",
       "pred": null,
-      "generated_text": "To find the angle \\(\\angle ABC\\) between the vectors \\(\\overrightarrow{AB}\\) and \\(\\overrightarrow{AC}\\), we will use the dot product formula and the magnitudes of the vectors. The formula for the",
+      "generated_text": "To find the angle \\(\\angle ABC\\) between the vectors \\(\\overrightarrow{AB}\\) and \\(\\overrightarrow{AC}\\), we can use the dot product formula. The dot product of two vectors \\(\\overrightarrow{u}\\) and ",
       "ok": false,
-      "ttft_ms": 589.09,
-      "tps": 10.28
+      "ttft_ms": 787.82,
+      "tps": 7.53
     },
     {
       "id": "test/precalculus/190.json",
@@ -61,34 +62,34 @@
       "problem": "Find $\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\circ \\sin 120^\\circ \\sin 140^\\circ \\sin 160^\\circ.$",
       "target": "\\frac{9}{256}",
       "pred": null,
-      "generated_text": "To solve the problem, we need to find the value of \\(\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\",
+      "generated_text": "To solve the problem, we need to find the value of \\(\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\circ \\sin 120^\\circ \\sin 140^\\circ \\sin 160^\\circ\\).\n\nFirst, let's group the angl",
       "ok": false,
-      "ttft_ms": 681.3,
-      "tps": 8.79
+      "ttft_ms": 748.45,
+      "tps": 7.8
     },
     {
-      "id": "test/precalculus/499.json",
-      "subject": "Precalculus",
+      "id": "test/intermediate_algebra/776.json",
+      "subject": "Intermediate Algebra",
       "level": 4,
-      "problem": "Let\n\\[f(x) = (\\arccos x)^2 + (\\arcsin x)^2.\\]Find the range of $f(x).$  All functions are in radians.",
-      "target": "\\left[ \\frac{\\pi^2}{8}, \\frac{5 \\pi^2}{4} \\right]",
+      "problem": "If\n\\[\\sqrt[3]{2} = a + \\cfrac{1}{b + \\cfrac{1}{c + \\cfrac{1}{d + \\dotsb}}},\\]where $a,$ $b,$ $c,$ $d$ are positive integers, compute $b.$",
+      "target": "3",
       "pred": null,
-      "generated_text": "To find the range of the function \\( f(x) = (\\arccos x)^2 + (\\arcsin x)^2 \\), we start by using the identity that relates the square of the sine and cosine functions. Specifically,",
+      "generated_text": "To solve for \\( b \\) in the equation \\(\\sqrt[3]{2} = a + \\cfrac{1}{b + \\cfrac{1}{c + \\cfrac{1}{d + \\dotsb}}}\\), we start by recognizing that the expression inside the cube root is a continued fraction",
       "ok": false,
-      "ttft_ms": 701.85,
-      "tps": 7.68
+      "ttft_ms": 761.46,
+      "tps": 7.7
     },
     {
-      "id": "test/precalculus/24313.json",
-      "subject": "Precalculus",
+      "id": "test/intermediate_algebra/428.json",
+      "subject": "Intermediate Algebra",
       "level": 2,
-      "problem": "Simplify\n\\[\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}.\\]",
-      "target": "\\cot x",
+      "problem": "Find the roots of $(x - 3)^3 + (x -7)^3 = (2x - 10)^3.$",
+      "target": "3, 5, 7",
       "pred": null,
-      "generated_text": "To simplify the expression \\(\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}\\), we will follow these steps:\n\n1. **Rewrite the expression using trigonometric identities:**\n  ",
+      "generated_text": "To solve the equation \\((x - 3)^3 + (x - 7)^3 = (2x - 10)^3\\), we will follow these steps:\n\n1. **Expand both sides of the equation:**\n\n   \\[\n   (x - 3)^3 = x^3 - 3 \\cdot x^2 \\cdot 3 + 3 \\cdot x \\cdot ",
       "ok": false,
-      "ttft_ms": 639.02,
-      "tps": 7.79
+      "ttft_ms": 697.68,
+      "tps": 7.7
     }
   ]
 }

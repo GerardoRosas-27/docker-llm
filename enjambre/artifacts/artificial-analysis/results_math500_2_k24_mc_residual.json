@@ -2,7 +2,8 @@
   "label": "2_k24_mc_residual",
   "arch": "residual_base",
   "use_delta": true,
-  "n_problems": 28,
+  "max_tokens": 120,
+  "n_problems": 14,
   "n_correct": 0,
   "accuracy": 0.0,
   "by_subject": {
@@ -21,26 +22,26 @@
     "5": 0.0
   },
   "performance": {
-    "n_runs": 28,
+    "n_runs": 14,
     "ttft_ms": {
-      "mean": 731.65,
-      "p50": 689.24,
-      "p95": 940.0,
-      "min": 543.59,
-      "max": 1607.74
+      "mean": 744.47,
+      "p50": 721.49,
+      "p95": 937.44,
+      "min": 584.78,
+      "max": 1204.07
     },
     "output_tps": {
-      "mean": 7.74,
-      "p50": 7.76,
-      "p95": 7.82
+      "mean": 7.67,
+      "p50": 7.71,
+      "p95": 7.74
     },
     "latency_ms": {
-      "mean": 6803.53,
-      "p50": 6737.91,
-      "p95": 7093.81
+      "mean": 6818.18,
+      "p50": 1803.3,
+      "p95": 16793.11
     }
   },
-  "wall_secs": 190.62,
+  "wall_secs": 95.52,
   "sample_results": [
     {
       "id": "test/precalculus/580.json",
@@ -49,10 +50,10 @@
       "problem": "Let $A = (1,-11,2),$ $B = (3,-4,1),$ and $C = (-2,1,-1).$  Compute $\\angle ABC,$ in degrees.",
       "target": "120^\\circ",
       "pred": null,
-      "generated_text": "To find the angle between the vectors \\( \\overrightarrow{AB} \\) and \\( \\overrightarrow{AC} \\), we first need to determine the vectors \\( \\overrightarrow{AB} \\) and \\( \\overrightarrow{",
+      "generated_text": "To find the angle between the vectors \\( \\overrightarrow{AB} \\) and \\( \\overrightarrow{AC} \\), we first need to determine the vectors \\( \\overrightarrow{AB} \\) and \\( \\overrightarrow{AC} \\).\n\nThe vect",
       "ok": false,
-      "ttft_ms": 746.94,
-      "tps": 7.82
+      "ttft_ms": 775.51,
+      "tps": 7.67
     },
     {
       "id": "test/precalculus/190.json",
@@ -61,34 +62,34 @@
       "problem": "Find $\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\circ \\sin 120^\\circ \\sin 140^\\circ \\sin 160^\\circ.$",
       "target": "\\frac{9}{256}",
       "pred": null,
-      "generated_text": "To solve the problem, we need to find the value of \\(\\sin 20^\\circ \\sin 40^\\circ \\sin 60^\\circ \\sin 80^\\circ \\sin 100^\\",
+      "generated_text": "\\(\\frac{1}{4}\\)",
       "ok": false,
-      "ttft_ms": 770.97,
-      "tps": 7.78
+      "ttft_ms": 743.29,
+      "tps": 7.75
     },
     {
-      "id": "test/precalculus/499.json",
-      "subject": "Precalculus",
+      "id": "test/intermediate_algebra/776.json",
+      "subject": "Intermediate Algebra",
       "level": 4,
-      "problem": "Let\n\\[f(x) = (\\arccos x)^2 + (\\arcsin x)^2.\\]Find the range of $f(x).$  All functions are in radians.",
-      "target": "\\left[ \\frac{\\pi^2}{8}, \\frac{5 \\pi^2}{4} \\right]",
-      "pred": null,
-      "generated_text": "To find the range of \\( f(x) = (\\arccos x)^2 + (\\arcsin x)^2 \\), we start by expressing \\( \\arccos x \\) and \\( \\arcsin x \\)",
+      "problem": "If\n\\[\\sqrt[3]{2} = a + \\cfrac{1}{b + \\cfrac{1}{c + \\cfrac{1}{d + \\dotsb}}},\\]where $a,$ $b,$ $c,$ $d$ are positive integers, compute $b.$",
+      "target": "3",
+      "pred": "1",
+      "generated_text": "\\(\\boxed{1}\\)",
       "ok": false,
-      "ttft_ms": 672.4,
-      "tps": 7.76
+      "ttft_ms": 761.03,
+      "tps": 7.71
     },
     {
-      "id": "test/precalculus/24313.json",
-      "subject": "Precalculus",
+      "id": "test/intermediate_algebra/428.json",
+      "subject": "Intermediate Algebra",
       "level": 2,
-      "problem": "Simplify\n\\[\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}.\\]",
-      "target": "\\cot x",
+      "problem": "Find the roots of $(x - 3)^3 + (x -7)^3 = (2x - 10)^3.$",
+      "target": "3, 5, 7",
       "pred": null,
-      "generated_text": "To simplify the expression \\(\\frac{\\sec x}{\\sin x} - \\frac{\\sin x}{\\cos x}\\), we start by expressing \\(\\sec x\\) and \\(\\sin x\\) in terms of \\(\\cos",
+      "generated_text": "$x = 1$ or $x = 10$",
       "ok": false,
-      "ttft_ms": 616.45,
-      "tps": 7.78
+      "ttft_ms": 664.49,
+      "tps": 7.74
     }
   ]
 }

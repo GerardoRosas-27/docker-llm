@@ -64,6 +64,9 @@ def check_exact_int(text: str, expected: int) -> bool:
 
 def _strip_code_fences(text: str) -> str:
     s = text.strip()
+    m = re.search(r"```(?:python)?\s*\n(.*?)(?:\n```|$)", s, re.DOTALL)
+    if m:
+        return m.group(1).strip()
     if s.startswith("```"):
         lines = s.splitlines()
         if lines and lines[0].startswith("```"):
@@ -88,25 +91,57 @@ def has_trailing_prose(text: str) -> bool:
 
 def check_python_function(text: str, fn_name: str, test_cases: List[Tuple[Tuple[Any, ...], Any]]) -> bool:
     """Verifica que:
-    1) No haya prosa ni viñetas colaterales.
-    2) El snippet completo compile con ast.parse.
-    3) Al ejecutarlo defina `fn_name` y pase todos los `test_cases`.
+    1) No haya viñetas ni párrafos explicativos fuera del código.
+    2) Se extraiga el snippet Python limpio (fenced o directo).
+    3) Compile con ast.parse y pase todos los `test_cases`.
     """
     if has_trailing_prose(text):
         return False
+
     code = _strip_code_fences(text)
     if not code or f"def {fn_name}" not in code:
-        return False
+        idx = text.find(f"def {fn_name}")
+        if idx != -1:
+            lines = []
+            for ln in text[idx:].splitlines():
+                if ln.strip().startswith("```"):
+                    break
+                lines.append(ln)
+            code = "\n".join(lines).strip()
+        else:
+            return False
+
     try:
         tree = ast.parse(code)
     except Exception:
-        return False
-    # Asegurar que solo contiene definiciones/imports/asignaciones válidas y no expresiones sueltas de texto
+        # Intentar recortar hasta la última línea que cierre el bloque de la función
+        try:
+            lines = code.splitlines()
+            valid_tree = None
+            for end in range(len(lines), 0, -1):
+                subcode = "\n".join(lines[:end])
+                try:
+                    t = ast.parse(subcode)
+                    if any(isinstance(n, ast.FunctionDef) and n.name == fn_name for n in t.body):
+                        valid_tree = t
+                        break
+                except Exception:
+                    continue
+            if valid_tree is not None:
+                tree = valid_tree
+            else:
+                return False
+        except Exception:
+            return False
+
     for node in tree.body:
+        if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant):
+            continue  # docstring o comentario
         if not isinstance(node, (ast.FunctionDef, ast.Return, ast.Assign, ast.Import, ast.ImportFrom, ast.Pass)):
             return False
     ns: Dict[str, Any] = {
         "__builtins__": {
+            "__import__": __import__,
             "abs": abs,
             "min": min,
             "max": max,

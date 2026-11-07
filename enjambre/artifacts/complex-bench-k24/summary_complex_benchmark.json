@@ -1,7 +1,7 @@
 {
   "title": "Experimento en Suite Compleja de Matemáticas y Programación (150 Ítems)",
   "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
-  "layers_frozen": "24 capas editadas k24_mc.pt (100% congeladas, requires_grad=False)",
+  "layers_frozen": "24 capas editadas k24_mc.pt",
   "n_test_items": 150,
   "winner": {
     "label": "2_base_k24_residual_adapted",
@@ -66,6 +66,15 @@
       "mean_acc": 0.2333,
       "extra_params": 242804,
       "secs": 138.09
+    },
+    {
+      "label": "7_k24_coder_fused_constelacion",
+      "arch": "constelacion_v4",
+      "math_acc": 0.0133,
+      "code_acc": 0.2267,
+      "mean_acc": 0.12,
+      "extra_params": 175506,
+      "secs": 126.31
     }
   ],
   "per_task_table": {
@@ -75,7 +84,8 @@
       "3_constelacion_v4_adapted": 0.0667,
       "4_bq10_dastr_adapted": 0.0667,
       "5_soft_bellman_adapted": 0.0,
-      "6_k24_neuro_hybrid_complex": 0.0
+      "6_k24_neuro_hybrid_complex": 0.0,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_math_fib_recur": {
       "1_base_k24_residual_zeroshot": 0.0,
@@ -83,7 +93,8 @@
       "3_constelacion_v4_adapted": 0.0667,
       "4_bq10_dastr_adapted": 0.0667,
       "5_soft_bellman_adapted": 0.0,
-      "6_k24_neuro_hybrid_complex": 0.0
+      "6_k24_neuro_hybrid_complex": 0.0,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_math_modular_exp": {
       "1_base_k24_residual_zeroshot": 0.0667,
@@ -91,7 +102,8 @@
       "3_constelacion_v4_adapted": 0.0,
       "4_bq10_dastr_adapted": 0.0,
       "5_soft_bellman_adapted": 0.0,
-      "6_k24_neuro_hybrid_complex": 0.0
+      "6_k24_neuro_hybrid_complex": 0.0,
+      "7_k24_coder_fused_constelacion": 0.0667
     },
     "complex_math_solve_linear": {
       "1_base_k24_residual_zeroshot": 0.0,
@@ -99,7 +111,8 @@
       "3_constelacion_v4_adapted": 0.0,
       "4_bq10_dastr_adapted": 0.0667,
       "5_soft_bellman_adapted": 0.0,
-      "6_k24_neuro_hybrid_complex": 0.0
+      "6_k24_neuro_hybrid_complex": 0.0,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_math_combinatorics": {
       "1_base_k24_residual_zeroshot": 0.1333,
@@ -107,7 +120,8 @@
       "3_constelacion_v4_adapted": 0.1333,
       "4_bq10_dastr_adapted": 0.0667,
       "5_soft_bellman_adapted": 0.0667,
-      "6_k24_neuro_hybrid_complex": 0.1333
+      "6_k24_neuro_hybrid_complex": 0.1333,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_code_loop_filter": {
       "1_base_k24_residual_zeroshot": 1.0,
@@ -115,7 +129,8 @@
       "3_constelacion_v4_adapted": 1.0,
       "4_bq10_dastr_adapted": 1.0,
       "5_soft_bellman_adapted": 1.0,
-      "6_k24_neuro_hybrid_complex": 1.0
+      "6_k24_neuro_hybrid_complex": 1.0,
+      "7_k24_coder_fused_constelacion": 0.6
     },
     "complex_code_string_algo": {
       "1_base_k24_residual_zeroshot": 0.6,
@@ -123,7 +138,8 @@
       "3_constelacion_v4_adapted": 0.8,
       "4_bq10_dastr_adapted": 0.6,
       "5_soft_bellman_adapted": 0.3333,
-      "6_k24_neuro_hybrid_complex": 0.6
+      "6_k24_neuro_hybrid_complex": 0.6,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_code_recursion": {
       "1_base_k24_residual_zeroshot": 0.6,
@@ -131,7 +147,8 @@
       "3_constelacion_v4_adapted": 0.6,
       "4_bq10_dastr_adapted": 0.0667,
       "5_soft_bellman_adapted": 0.0667,
-      "6_k24_neuro_hybrid_complex": 0.0667
+      "6_k24_neuro_hybrid_complex": 0.0667,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_code_dict_freq": {
       "1_base_k24_residual_zeroshot": 0.0,
@@ -139,7 +156,8 @@
       "3_constelacion_v4_adapted": 0.0,
       "4_bq10_dastr_adapted": 0.0,
       "5_soft_bellman_adapted": 0.0,
-      "6_k24_neuro_hybrid_complex": 0.0
+      "6_k24_neuro_hybrid_complex": 0.0,
+      "7_k24_coder_fused_constelacion": 0.0
     },
     "complex_code_search_nested": {
       "1_base_k24_residual_zeroshot": 0.5333,
@@ -147,7 +165,8 @@
       "3_constelacion_v4_adapted": 0.5333,
       "4_bq10_dastr_adapted": 0.5333,
       "5_soft_bellman_adapted": 0.5333,
-      "6_k24_neuro_hybrid_complex": 0.5333
+      "6_k24_neuro_hybrid_complex": 0.5333,
+      "7_k24_coder_fused_constelacion": 0.5333
     }
   },
   "contrasts_vs_base_adapted": {
@@ -182,7 +201,15 @@
       "gains": 1,
       "losses": 14,
       "net": -13
+    },
+    "coder_fused_vs_base_adapted": {
+      "delta_mean": -0.2,
+      "delta_math": -0.0134,
+      "delta_code": -0.3866,
+      "gains": 1,
+      "losses": 31,
+      "net": -30
     }
   },
-  "total_wall_secs": 2.1
+  "total_wall_secs": 3.1
 }

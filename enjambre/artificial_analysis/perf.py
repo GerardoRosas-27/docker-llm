@@ -42,13 +42,29 @@ def benchmark_generation_perf(
     t1 = time.perf_counter()
     ttft_ms = (t1 - t0) * 1000.0
 
-    # 2. Fase de Decode: Generación autoregresiva token por token
+    # 2. Fase de Decode: Generación autoregresiva token por token con parada temprana dinámica
     generated = [next_token]
     cur_token = next_token
     eos_id = tok.eos_token_id
 
+    def _has_closed_boxed(toks: List[torch.Tensor]) -> bool:
+        t_seq = torch.cat(toks, dim=-1)
+        txt = tok.decode(t_seq[0], skip_special_tokens=True)
+        idx = txt.rfind(r"\boxed{")
+        if idx == -1:
+            return False
+        depth = 0
+        for ch in txt[idx + len(r"\boxed{") :]:
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                if depth == 0:
+                    return True
+                depth -= 1
+        return False
+
     tokens_generated = 1
-    for _ in range(max_new_tokens - 1):
+    for step in range(max_new_tokens - 1):
         if eos_id is not None and int(cur_token[0, 0]) == eos_id:
             break
         with torch.no_grad():
@@ -57,6 +73,11 @@ def benchmark_generation_perf(
             cur_token = torch.argmax(out.logits[:, -1, :], dim=-1, keepdim=True)
             generated.append(cur_token)
             tokens_generated += 1
+
+        # Comprobar parada temprana dinámica si ya se cerró \boxed{...}
+        if tokens_generated >= 12 and (tokens_generated % 3 == 0):
+            if _has_closed_boxed(generated):
+                break
     t2 = time.perf_counter()
 
     decode_s = t2 - t1

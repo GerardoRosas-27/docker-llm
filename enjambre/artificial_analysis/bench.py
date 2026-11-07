@@ -139,13 +139,13 @@ class ArtificialAnalysisHarness:
         arch: str,
         bridge_state: Optional[Dict[str, torch.Tensor]] = None,
         use_delta: bool = True,
-        max_tokens: int = 48,
+        max_tokens: int = 120,
     ) -> Dict[str, Any]:
         """Evalúa un modelo en el subconjunto representativo de MATH-500 y mide rendimiento."""
         out_path = os.path.join(self.out_dir, f"results_math500_{label}.json")
         if os.path.isfile(out_path):
             cached = json.load(open(out_path, encoding="utf-8"))
-            if cached.get("n_problems") == len(self.problems):
+            if cached.get("n_problems") == len(self.problems) and cached.get("max_tokens") == max_tokens:
                 print(f"[aa-math500:{label}] Reutilizando caché acc={cached['accuracy']:.4f}", flush=True)
                 return cached
 
@@ -227,6 +227,7 @@ class ArtificialAnalysisHarness:
             "label": label,
             "arch": arch,
             "use_delta": use_delta,
+            "max_tokens": max_tokens,
             "n_problems": len(self.problems),
             "n_correct": total_ok,
             "accuracy": accuracy,

@@ -218,8 +218,8 @@ class ComplexBenchmarkHarness:
         with self.act.session(self.k24_delta):
             for spec in COMPLEX_SPECS:
                 items = self.hold_items[spec.id]
-                # Para tareas de código usamos max_new=36 (funciones multi-línea) y para math max_new=18
-                toks_limit = 36 if spec.domain == "code" else 18
+                # Para tareas de código usamos max_new=72 (permite implementar cuerpo completo) y para math max_new=20
+                toks_limit = 72 if spec.domain == "code" else 20
                 outs = generate(
                     self.model, self.tok, [it.prompt for it in items],
                     max_new_tokens=toks_limit, batch_size=8,
@@ -509,6 +509,28 @@ class ComplexBenchmarkHarness:
             if only_stage == "6":
                 return rep_hybrid
 
+        # 7. Cirugía de Capas con Qwen2.5-Coder-0.5B + CONSTELACIÓN v4:
+        # Fusión quirúrgica de vectores de tarea en capas 8..16 (núcleo de cómputo algorítmico)
+        if only_stage in (None, "7"):
+            from enjambre.fusion.task_vectors import TaskVectorSurgeon
+            surgeon = TaskVectorSurgeon(self.model, target_layers=list(range(8, 17)), scale=0.6)
+            surg_info = surgeon.extract_and_apply_task_vectors()
+
+            st_cst = self.neuro_states.get("constelacion_v4", self.k24_bridge_state)
+            p_cst_comp = os.path.join(self.out_dir, "connectors_complex_constelacion_v4_adapted_best.pt")
+            if os.path.isfile(p_cst_comp):
+                st_cst = torch.load(p_cst_comp, map_location="cpu", weights_only=False)["state"]
+
+            rep_coder_fused = self.evaluate_condition(
+                "7_k24_coder_fused_constelacion",
+                "constelacion_v4",
+                st_cst,
+            )
+            rep_coder_fused["surgery_info"] = surg_info
+            surgeon.restore_base_weights()
+            if only_stage == "7":
+                return rep_coder_fused
+
         labels = [
             "1_base_k24_residual_zeroshot",
             "2_base_k24_residual_adapted",
@@ -517,18 +539,28 @@ class ComplexBenchmarkHarness:
             "5_soft_bellman_adapted",
             "6_k24_neuro_hybrid_complex",
         ]
+        p7 = os.path.join(self.out_dir, "results_7_k24_coder_fused_constelacion.json")
+        if os.path.isfile(p7):
+            labels.append("7_k24_coder_fused_constelacion")
+
         all_reps = [
             json.load(open(os.path.join(self.out_dir, f"results_{lbl}.json"), encoding="utf-8"))
             for lbl in labels
         ]
-        rep_base_zs, rep_base_adapt, rep_cst, rep_bq10, rep_sbs, rep_hybrid = all_reps
 
         if self.bank is not None:
             self.bank.remove_hooks()
         after_checksum = param_checksum(self.model)
-        assert after_checksum == self.base_checksum, "Base model weights must remain frozen!"
+        assert after_checksum == self.base_checksum, "Base model weights must remain frozen after restore!"
 
-        all_reps = [rep_base_zs, rep_base_adapt, rep_cst, rep_bq10, rep_sbs, rep_hybrid]
+        by_lbl = {r["label"]: r for r in all_reps}
+        rep_base_zs = by_lbl["1_base_k24_residual_zeroshot"]
+        rep_base_adapt = by_lbl["2_base_k24_residual_adapted"]
+        rep_cst = by_lbl["3_constelacion_v4_adapted"]
+        rep_bq10 = by_lbl["4_bq10_dastr_adapted"]
+        rep_sbs = by_lbl["5_soft_bellman_adapted"]
+        rep_hybrid = by_lbl["6_k24_neuro_hybrid_complex"]
+
         best_rep = max(all_reps, key=lambda r: r["mean_acc"])
 
         def diff_stats(ref: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, Any]:
@@ -545,10 +577,19 @@ class ComplexBenchmarkHarness:
                 "net": gains - losses,
             }
 
+        contrasts = {
+            "constelacion_v4_vs_base_adapted": diff_stats(rep_base_adapt, rep_cst),
+            "bq10_dastr_vs_base_adapted": diff_stats(rep_base_adapt, rep_bq10),
+            "soft_bellman_vs_base_adapted": diff_stats(rep_base_adapt, rep_sbs),
+            "hybrid_vs_base_adapted": diff_stats(rep_base_adapt, rep_hybrid),
+        }
+        if "7_k24_coder_fused_constelacion" in by_lbl:
+            contrasts["coder_fused_vs_base_adapted"] = diff_stats(rep_base_adapt, by_lbl["7_k24_coder_fused_constelacion"])
+
         summary = {
             "title": "Experimento en Suite Compleja de Matemáticas y Programación (150 Ítems)",
             "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
-            "layers_frozen": "24 capas editadas k24_mc.pt (100% congeladas, requires_grad=False)",
+            "layers_frozen": "24 capas editadas k24_mc.pt",
             "n_test_items": len(rep_base_zs["flat_ok"]),
             "winner": {
                 "label": best_rep["label"],
@@ -578,12 +619,7 @@ class ComplexBenchmarkHarness:
                 }
                 for t in rep_base_zs["tasks"]
             },
-            "contrasts_vs_base_adapted": {
-                "constelacion_v4_vs_base_adapted": diff_stats(rep_base_adapt, rep_cst),
-                "bq10_dastr_vs_base_adapted": diff_stats(rep_base_adapt, rep_bq10),
-                "soft_bellman_vs_base_adapted": diff_stats(rep_base_adapt, rep_sbs),
-                "hybrid_vs_base_adapted": diff_stats(rep_base_adapt, rep_hybrid),
-            },
+            "contrasts_vs_base_adapted": contrasts,
             "total_wall_secs": round(time.time() - t_start, 1),
         }
         _jdump(os.path.join(self.out_dir, "summary_complex_benchmark.json"), summary)

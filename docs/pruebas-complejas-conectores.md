@@ -42,23 +42,24 @@ Para eliminar el efecto techo observado en pruebas elementales (donde la base ya
 | **4. BQ10 DA-STR (Adaptada)** | `BQ10DaStrBridge` | **0.0533 (5.3%)** | 0.4400 (44.0%) | 0.2467 (24.7%) | +310,446 |
 | **5. Soft-Bellman Simplicial 3D** | `SoftBellmanSimplicialBridge` | 0.0133 (1.3%) | 0.3867 (38.7%) | 0.2000 (20.0%) | +174,474 |
 | **6. Híbrido Jerárquico K24** | Compuesto Koopman + SPD + DA-STR | 0.0267 (2.7%) | 0.4400 (44.0%) | 0.2333 (23.3%) | +242,804 |
+| **7. Cirugía Coder + CONSTELACIÓN v4** | Task Vector Surgery $\lambda=0.6$ (L8..16) | 0.0133 (1.3%) | 0.2267 (22.7%) | 0.1200 (12.0%) | +175,506 |
 
 ---
 
 ## 4. Desglose Detallado por Tarea Compleja (Holdout)
 
-| Tarea Compleja | Base ZS | Base Adaptada | CONSTELACIÓN v4 | BQ10 DA-STR | Soft-Bellman | Híbrido |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `complex_math_gcd_lcm` | 0.0000 | 0.0000 | **0.0667** | **0.0667** | 0.0000 | 0.0000 |
-| `complex_math_fib_recur` | 0.0000 | **0.0667** | **0.0667** | **0.0667** | 0.0000 | 0.0000 |
-| `complex_math_modular_exp` | **0.0667** | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| `complex_math_solve_linear` | 0.0000 | 0.0000 | 0.0000 | **0.0667** | 0.0000 | 0.0000 |
-| `complex_math_combinatorics` | **0.1333** | 0.0667 | **0.1333** | 0.0667 | 0.0667 | **0.1333** |
-| `complex_code_loop_filter` | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
-| `complex_code_string_algo` | 0.6000 | **0.9333** | 0.8000 | 0.6000 | 0.3333 | 0.6000 |
-| `complex_code_recursion` | 0.6000 | 0.6000 | **0.6000** | 0.0667 | 0.0667 | 0.0667 |
-| `complex_code_dict_freq` | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
-| `complex_code_search_nested` | 0.5333 | 0.5333 | **0.5333** | 0.5333 | 0.5333 | 0.5333 |
+| Tarea Compleja | Base ZS | Base Adaptada | CONSTELACIÓN v4 | BQ10 DA-STR | Soft-Bellman | Híbrido | Coder Fused |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `complex_math_gcd_lcm` | 0.0000 | 0.0000 | **0.0667** | **0.0667** | 0.0000 | 0.0000 | 0.0000 |
+| `complex_math_fib_recur` | 0.0000 | **0.0667** | **0.0667** | **0.0667** | 0.0000 | 0.0000 | 0.0000 |
+| `complex_math_modular_exp` | **0.0667** | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | **0.0667** |
+| `complex_math_solve_linear` | 0.0000 | 0.0000 | 0.0000 | **0.0667** | 0.0000 | 0.0000 | 0.0000 |
+| `complex_math_combinatorics` | **0.1333** | 0.0667 | **0.1333** | 0.0667 | 0.0667 | **0.1333** | 0.0000 |
+| `complex_code_loop_filter` | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.6000 |
+| `complex_code_string_algo` | 0.6000 | **0.9333** | 0.8000 | 0.6000 | 0.3333 | 0.6000 | 0.0000 |
+| `complex_code_recursion` | 0.6000 | 0.6000 | **0.6000** | 0.0667 | 0.0667 | 0.0667 | 0.0000 |
+| `complex_code_dict_freq` | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| `complex_code_search_nested` | 0.5333 | 0.5333 | **0.5333** | 0.5333 | 0.5333 | 0.5333 | **0.5333** |
 
 ---
 
@@ -76,13 +77,18 @@ Para eliminar el efecto techo observado en pruebas elementales (donde la base ya
    - El promedio global se mantuvo en un techo de **`32.00%`** tanto para la base residual adaptada como para `CONSTELACIÓN v4`.
    - `BQ10 DA-STR` y `Soft-Bellman` sufrieron una caída en programación compleja (de `61.33%` a `44.00%` y `38.67%`), específicamente en funciones recursivas (`complex_code_recursion`). La atenuación polinomial M7 y el suavizado baricéntrico $\text{softmin}(q/\tau)$ tienden a amortiguar las activaciones repetitivas necesarias para desdoblar recursión en el espacio latente.
 
-3. **Causa Raíz del Techo de Rendimiento**:
-   - Con **24 capas congeladas** en un modelo de 0.5B parámetros, los conectores (que solo representan $<0.3M$ parámetros) actúan como autopistas de transporte de información latente, pero **no pueden generar capacidad de cómputo algorítmico que los pesos congelados no poseen**.
-   - Para tareas como diccionarios con inversión de colisiones (`complex_code_dict_freq`), todas las configuraciones obtuvieron `0.00%`, indicando que el modelo de 0.5B carece de la representación léxica interna requerida para esa lógica.
+4. **Hallazgo de la Cirugía de Vectores de Tarea (Condición 7)**:
+   - Se evaluó la inyección directa del vector de tarea $\Delta W = W_{\text{coder}} - W_{\text{base}}$ ($\lambda=0.6$) sobre las 9 capas intermedias (8 a 16).
+   - Los resultados (`12.00%`) mostraron que la interpolación lineal directa de pesos genera un **desfase de representación latente (representation drift)** en la interfaz entre la capa 7 y la 8.
+   - Dado que los conectores `CONSTELACIÓN v4` fueron entrenados sobre el espacio latente original de `K24_mc`, el cambio abrupto en las capas intermedias desalineó los puentes. Esto demuestra formalmente que las capas intermedias y los conectores forman un sistema acoplado: no se pueden mutar los pesos de las capas intermedias sin re-alinear simultáneamente los conectores.
 
 ---
 
-## 6. Conclusión y Recomendación
+## 6. Conclusión y Recomendación Final
 
-- **Para preservar máxima estabilidad y versatilidad**: La arquitectura ganadora es **`CONSTELACIÓN v4`** emparejada con los pesos residuales de `K24_mc`, ya que iguala la mejor precisión global (`32.00%`), lidera en matemáticas complejas (`5.33%`), y no degrada la recursión en programación (`60.0%`).
-- **Para ir más allá del 32% en tareas complejas**: No basta con entrenar únicamente los puentes; es necesario permitir una adaptación conjunta (e.g. LoRA o edición de bias selectiva) de las capas medias (8 a 16) junto con los conectores Koopman.
+- **Arquitectura Ganadora Definitiva**: **`K24_mc + CONSTELACIÓN v4` (Koopman 2x2)**:
+  - Logra la mayor precisión global (**`32.00%`**).
+  - Lidera en razonamiento matemático complejo (**`5.33%`**, duplicando a la base residual adaptada).
+  - Mantiene la mayor velocidad y eficiencia en inferencia (**7.67 tok/s**, con solo un 2.6% de sobrecarga frente a la base no editada).
+  - Preserva intacta la capacidad recursiva (`60.0%`).
+

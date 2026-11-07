@@ -169,8 +169,8 @@ def math_equal(pred: Optional[str], target: str) -> bool:
 
 
 def format_math500_prompt(problem: str) -> str:
-    """Formatea la consulta en estilo de instrucción estándar para Artificial Analysis."""
+    """Formatea la consulta para respuesta concisa directa en MATH-500 evitando verborrea discursiva."""
     return (
         f"Problem: {problem.strip()}\n\n"
-        "Solve the problem step by step. Write your final answer within \\boxed{}."
+        "Solve concisely. Show 1-2 lines of direct calculation and write your final answer in \\boxed{}."
     )
