@@ -1,0 +1,17 @@
+{
+  "n_train": 12,
+  "n_val": 6,
+  "n_hold": 15,
+  "seed": 42,
+  "tasks": [
+    "math_arith",
+    "math_mul_mod",
+    "math_expr",
+    "math_logic",
+    "code_fn",
+    "code_algo",
+    "code_comp",
+    "code_lambda"
+  ],
+  "prompt_sha256": "9fae41d38e733391184962aa311fa624a91eb446b18ec8177e8ac7a6aac4c26a"
+}

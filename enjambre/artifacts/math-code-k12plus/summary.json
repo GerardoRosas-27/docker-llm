@@ -1,0 +1,590 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "starting_point": "K12 (b8cf061d) + Puentes Entrenados (bridges_best.pt: 12->16, 16->20, 20->23)",
+  "warm_extension_identity": {
+    "warm_extension_exact_match": true,
+    "out_3_bridges": "213",
+    "out_6_bridges_init": "213"
+  },
+  "base_checksum_ok": true,
+  "split_sha256": "9fae41d38e733391184962aa311fa624a91eb446b18ec8177e8ac7a6aac4c26a",
+  "n_hold_per_task": 15,
+  "n_total_mc_holdout": 120,
+  "winner": {
+    "label": "6_k24_mc_bridges_6",
+    "n_layers_edited": 24,
+    "n_bridges": 6,
+    "mean_acc": 0.7667,
+    "math_acc": 0.5333,
+    "code_acc": 1.0
+  },
+  "progression_by_layers": [
+    {
+      "label": "1_base_k12_bridges_trained",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3167,
+      "code_acc": 0.0,
+      "mean_acc": 0.1583,
+      "legacy_arithmetic": 0.4,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 0.0,
+      "ppl": 16.247
+    },
+    {
+      "label": "2_k12_mc_layer_edit_only",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.35,
+      "code_acc": 0.0,
+      "mean_acc": 0.175,
+      "legacy_arithmetic": 0.8,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 0.0,
+      "ppl": 17.303
+    },
+    {
+      "label": "3_k12_mc_bridges_3",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3167,
+      "code_acc": 1.0,
+      "mean_acc": 0.6583,
+      "legacy_arithmetic": 0.92,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 19.672
+    },
+    {
+      "label": "4_k16_mc_bridges_4",
+      "n_layers_edited": 16,
+      "layers_range": "8..23",
+      "n_bridges": 4,
+      "bridge_pairs": [
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.4167,
+      "code_acc": 1.0,
+      "mean_acc": 0.7083,
+      "legacy_arithmetic": 0.92,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 18.329
+    },
+    {
+      "label": "5_k20_mc_bridges_5",
+      "n_layers_edited": 20,
+      "layers_range": "4..23",
+      "n_bridges": 5,
+      "bridge_pairs": [
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3833,
+      "code_acc": 1.0,
+      "mean_acc": 0.6917,
+      "legacy_arithmetic": 0.88,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 17.969
+    },
+    {
+      "label": "6_k24_mc_bridges_6",
+      "n_layers_edited": 24,
+      "layers_range": "0..23",
+      "n_bridges": 6,
+      "bridge_pairs": [
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.5333,
+      "code_acc": 1.0,
+      "mean_acc": 0.7667,
+      "legacy_arithmetic": 0.88,
+      "legacy_code_lax": 0.96,
+      "legacy_code_strict_ast": 0.96,
+      "ppl": 21.766
+    }
+  ],
+  "per_task_table": {
+    "math_arith": {
+      "1_base_k12_bridges_trained": 0.6667,
+      "2_k12_mc_layer_edit_only": 0.6667,
+      "3_k12_mc_bridges_3": 0.6,
+      "4_k16_mc_bridges_4": 0.6667,
+      "5_k20_mc_bridges_5": 0.6,
+      "6_k24_mc_bridges_6": 0.8
+    },
+    "math_mul_mod": {
+      "1_base_k12_bridges_trained": 0.4667,
+      "2_k12_mc_layer_edit_only": 0.5333,
+      "3_k12_mc_bridges_3": 0.5333,
+      "4_k16_mc_bridges_4": 0.5333,
+      "5_k20_mc_bridges_5": 0.4667,
+      "6_k24_mc_bridges_6": 0.6
+    },
+    "math_expr": {
+      "1_base_k12_bridges_trained": 0.0,
+      "2_k12_mc_layer_edit_only": 0.0667,
+      "3_k12_mc_bridges_3": 0.1333,
+      "4_k16_mc_bridges_4": 0.2,
+      "5_k20_mc_bridges_5": 0.0667,
+      "6_k24_mc_bridges_6": 0.2
+    },
+    "math_logic": {
+      "1_base_k12_bridges_trained": 0.1333,
+      "2_k12_mc_layer_edit_only": 0.1333,
+      "3_k12_mc_bridges_3": 0.0,
+      "4_k16_mc_bridges_4": 0.2667,
+      "5_k20_mc_bridges_5": 0.4,
+      "6_k24_mc_bridges_6": 0.5333
+    },
+    "code_fn": {
+      "1_base_k12_bridges_trained": 0.0,
+      "2_k12_mc_layer_edit_only": 0.0,
+      "3_k12_mc_bridges_3": 1.0,
+      "4_k16_mc_bridges_4": 1.0,
+      "5_k20_mc_bridges_5": 1.0,
+      "6_k24_mc_bridges_6": 1.0
+    },
+    "code_algo": {
+      "1_base_k12_bridges_trained": 0.0,
+      "2_k12_mc_layer_edit_only": 0.0,
+      "3_k12_mc_bridges_3": 1.0,
+      "4_k16_mc_bridges_4": 1.0,
+      "5_k20_mc_bridges_5": 1.0,
+      "6_k24_mc_bridges_6": 1.0
+    },
+    "code_comp": {
+      "1_base_k12_bridges_trained": 0.0,
+      "2_k12_mc_layer_edit_only": 0.0,
+      "3_k12_mc_bridges_3": 1.0,
+      "4_k16_mc_bridges_4": 1.0,
+      "5_k20_mc_bridges_5": 1.0,
+      "6_k24_mc_bridges_6": 1.0
+    },
+    "code_lambda": {
+      "1_base_k12_bridges_trained": 0.0,
+      "2_k12_mc_layer_edit_only": 0.0,
+      "3_k12_mc_bridges_3": 1.0,
+      "4_k16_mc_bridges_4": 1.0,
+      "5_k20_mc_bridges_5": 1.0,
+      "6_k24_mc_bridges_6": 1.0
+    }
+  },
+  "paired_vs_base_k12_bridges": {
+    "k12_mc_edit_only_vs_base": {
+      "n": 120,
+      "n_other_better": 3,
+      "n_other_worse": 1,
+      "n_both_ok": 18,
+      "n_both_fail": 98,
+      "acc_base": 0.1583,
+      "acc_other": 0.175,
+      "delta": 0.0167,
+      "bootstrap_ci95": {
+        "delta": 0.0167,
+        "ci95": [
+          -0.0167,
+          0.05
+        ],
+        "n_boot": 2000,
+        "seed": 1
+      },
+      "mcnemar": {
+        "n_discordant": 4,
+        "n01": 3,
+        "n10": 1,
+        "p_two_sided": 0.625
+      },
+      "math_delta": 0.0333,
+      "code_delta": 0.0
+    },
+    "k12_mc_bridges_3_vs_base": {
+      "n": 120,
+      "n_other_better": 65,
+      "n_other_worse": 5,
+      "n_both_ok": 14,
+      "n_both_fail": 36,
+      "acc_base": 0.1583,
+      "acc_other": 0.6583,
+      "delta": 0.5,
+      "bootstrap_ci95": {
+        "delta": 0.5,
+        "ci95": [
+          0.3917,
+          0.6083
+        ],
+        "n_boot": 2000,
+        "seed": 2
+      },
+      "mcnemar": {
+        "n_discordant": 70,
+        "n01": 65,
+        "n10": 5,
+        "p_two_sided": 0.0
+      },
+      "math_delta": 0.0,
+      "code_delta": 1.0
+    },
+    "k16_mc_bridges_4_vs_base": {
+      "n": 120,
+      "n_other_better": 69,
+      "n_other_worse": 3,
+      "n_both_ok": 16,
+      "n_both_fail": 32,
+      "acc_base": 0.1583,
+      "acc_other": 0.7083,
+      "delta": 0.55,
+      "bootstrap_ci95": {
+        "delta": 0.55,
+        "ci95": [
+          0.45,
+          0.65
+        ],
+        "n_boot": 2000,
+        "seed": 3
+      },
+      "mcnemar": {
+        "n_discordant": 72,
+        "n01": 69,
+        "n10": 3,
+        "p_two_sided": 0.0
+      },
+      "math_delta": 0.1,
+      "code_delta": 1.0
+    },
+    "k20_mc_bridges_5_vs_base": {
+      "n": 120,
+      "n_other_better": 68,
+      "n_other_worse": 4,
+      "n_both_ok": 15,
+      "n_both_fail": 33,
+      "acc_base": 0.1583,
+      "acc_other": 0.6917,
+      "delta": 0.5333,
+      "bootstrap_ci95": {
+        "delta": 0.5333,
+        "ci95": [
+          0.4333,
+          0.625
+        ],
+        "n_boot": 2000,
+        "seed": 4
+      },
+      "mcnemar": {
+        "n_discordant": 72,
+        "n01": 68,
+        "n10": 4,
+        "p_two_sided": 0.0
+      },
+      "math_delta": 0.0666,
+      "code_delta": 1.0
+    },
+    "k24_mc_bridges_6_vs_base": {
+      "n": 120,
+      "n_other_better": 74,
+      "n_other_worse": 1,
+      "n_both_ok": 18,
+      "n_both_fail": 27,
+      "acc_base": 0.1583,
+      "acc_other": 0.7667,
+      "delta": 0.6083,
+      "bootstrap_ci95": {
+        "delta": 0.6083,
+        "ci95": [
+          0.5167,
+          0.7
+        ],
+        "n_boot": 2000,
+        "seed": 5
+      },
+      "mcnemar": {
+        "n_discordant": 75,
+        "n01": 74,
+        "n10": 1,
+        "p_two_sided": 0.0
+      },
+      "math_delta": 0.2166,
+      "code_delta": 1.0
+    },
+    "winner_vs_k12_mc_bridges_3": {
+      "n": 120,
+      "n_other_better": 17,
+      "n_other_worse": 4,
+      "n_both_ok": 75,
+      "n_both_fail": 24,
+      "acc_base": 0.6583,
+      "acc_other": 0.7667,
+      "delta": 0.1083,
+      "bootstrap_ci95": {
+        "delta": 0.1083,
+        "ci95": [
+          0.0417,
+          0.1833
+        ],
+        "n_boot": 2000,
+        "seed": 6
+      },
+      "mcnemar": {
+        "n_discordant": 21,
+        "n01": 17,
+        "n10": 4,
+        "p_two_sided": 0.007197
+      },
+      "math_delta": 0.2166,
+      "code_delta": 0.0
+    }
+  },
+  "training_logs": {
+    "k12_mc": {
+      "config_tag": "k12_mc",
+      "pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "n_bridge_params": 88707,
+      "steps": 28,
+      "best_step": 28,
+      "best_val": 0.7083,
+      "secs": 101.3,
+      "history": [
+        {
+          "step": 28,
+          "loss": 1.2167,
+          "val": 0.7083,
+          "secs": 101.3
+        }
+      ],
+      "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/bridges_k12_mc_best.pt"
+    },
+    "k16_mc": {
+      "config_tag": "k16_mc",
+      "pairs": [
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "n_bridge_params": 118276,
+      "steps": 28,
+      "best_step": 28,
+      "best_val": 0.75,
+      "secs": 107.3,
+      "history": [
+        {
+          "step": 28,
+          "loss": 0.7287,
+          "val": 0.75,
+          "secs": 107.3
+        }
+      ],
+      "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/bridges_k16_mc_best.pt"
+    },
+    "k20_mc": {
+      "config_tag": "k20_mc",
+      "pairs": [
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "n_bridge_params": 147845,
+      "steps": 28,
+      "best_step": 28,
+      "best_val": 0.7917,
+      "secs": 116.6,
+      "history": [
+        {
+          "step": 28,
+          "loss": 0.6872,
+          "val": 0.7917,
+          "secs": 116.6
+        }
+      ],
+      "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/bridges_k20_mc_best.pt"
+    },
+    "k24_mc": {
+      "config_tag": "k24_mc",
+      "pairs": [
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "n_bridge_params": 177414,
+      "steps": 28,
+      "best_step": 28,
+      "best_val": 0.875,
+      "secs": 120.7,
+      "history": [
+        {
+          "step": 28,
+          "loss": 0.7053,
+          "val": 0.875,
+          "secs": 120.7
+        }
+      ],
+      "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/bridges_k24_mc_best.pt"
+    }
+  },
+  "total_wall_secs": 1044.5
+}

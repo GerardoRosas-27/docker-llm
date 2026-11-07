@@ -1,0 +1,506 @@
+{
+  "label": "4_k16_mc_bridges_4",
+  "delta_name": "k16_mc",
+  "n_layers_edited": 16,
+  "layers_edited": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "bridge_pairs": [
+    [
+      8,
+      12
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "n_bridges": 4,
+  "n_bridge_params": 118276,
+  "math_acc": 0.4167,
+  "code_acc": 1.0,
+  "mean_acc": 0.7083,
+  "legacy_bridges_k12_holdout": {
+    "legacy_arithmetic": 0.92,
+    "legacy_code_lax": 1.0,
+    "legacy_code_strict_ast": 1.0
+  },
+  "legacy_details": {
+    "legacy_arithmetic": {
+      "n": 25,
+      "n_ok": 23,
+      "acc": 0.92,
+      "examples": [
+        {
+          "prompt": "What is 105+35? Reply with ONLY the number.",
+          "output": "140",
+          "ok": true
+        },
+        {
+          "prompt": "What is 111+36? Reply with ONLY the number.",
+          "output": "147",
+          "ok": true
+        }
+      ]
+    },
+    "legacy_code_lax": {
+      "n": 25,
+      "n_ok": 25,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY a Python function `fn114(x)` with body `return x + 2`. No prose.",
+          "output": "def fn114(x):\n    return x + 2",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY a Python function `fn84(x)` with body `return x + 0`. No prose.",
+          "output": "def fn84(x):\n    return x + 0",
+          "ok": true
+        }
+      ]
+    },
+    "legacy_code_strict_ast": {
+      "n": 25,
+      "n_ok": 25,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY a Python function `fn114(x)` with body `return x + 2`. No prose.",
+          "output": "def fn114(x):\n    return x + 2",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY a Python function `fn84(x)` with body `return x + 0`. No prose.",
+          "output": "def fn84(x):\n    return x + 0",
+          "ok": true
+        }
+      ]
+    }
+  },
+  "ppl": 18.329,
+  "secs": 112.08,
+  "tasks": [
+    {
+      "task": "math_arith",
+      "domain": "math",
+      "n": 15,
+      "n_ok": 10,
+      "acc": 0.6667,
+      "examples": [
+        {
+          "prompt": "What is 257+95? Reply with ONLY the number.",
+          "output": "352",
+          "ok": true
+        },
+        {
+          "prompt": "What is 269+123? Reply with ONLY the number.",
+          "output": "492",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "task": "math_mul_mod",
+      "domain": "math",
+      "n": 15,
+      "n_ok": 8,
+      "acc": 0.5333,
+      "examples": [
+        {
+          "prompt": "Compute 24 * 4. Reply with ONLY the integer.",
+          "output": "96",
+          "ok": true
+        },
+        {
+          "prompt": "Compute 195 % 10. Reply with ONLY the integer.",
+          "output": "15",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "task": "math_expr",
+      "domain": "math",
+      "n": 15,
+      "n_ok": 3,
+      "acc": 0.2,
+      "examples": [
+        {
+          "prompt": "Evaluate (29 + 12) * 6. Reply with ONLY the integer.",
+          "output": "180",
+          "ok": false
+        },
+        {
+          "prompt": "Evaluate (41 + 10) * 3. Reply with ONLY the integer.",
+          "output": "131",
+          "ok": false
+        }
+      ]
+    },
+    {
+      "task": "math_logic",
+      "domain": "math",
+      "n": 15,
+      "n_ok": 4,
+      "acc": 0.2667,
+      "examples": [
+        {
+          "prompt": "Compute 3*120 + 2*80. Reply with ONLY the integer.",
+          "output": "360",
+          "ok": false
+        },
+        {
+          "prompt": "What is max(40, 85, 40)? Reply with ONLY the integer.",
+          "output": "85",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "task": "code_fn",
+      "domain": "code",
+      "n": 15,
+      "n_ok": 15,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY a Python function `calc_41(x)` with body `return (x - 2) * 7`. No prose.",
+          "output": "def calc_41(x):\n    return (x - 2) * 7",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY a Python function `calc_33(x)` with body `return x * 8 + 4`. No prose.",
+          "output": "def calc_33(x):\n    return x * 8 + 4",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "task": "code_algo",
+      "domain": "code",
+      "n": 15,
+      "n_ok": 15,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY a Python function `algo_64(x)` with body `return x if x > 3 else 3`. No prose.",
+          "output": "def algo_64(x):\n    return x if x > 3 else 3",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY a Python function `algo_27(a, b)` with body `return max(a, b) * 8`. No prose.",
+          "output": "def algo_27(a, b):\n    return max(a, b) * 8",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "task": "code_comp",
+      "domain": "code",
+      "n": 15,
+      "n_ok": 15,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY the Python list comprehension `[x * 14 for x in range(8)]`. No prose.",
+          "output": "[x * 14 for x in range(8)]",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY the Python list comprehension `[x * 32 for x in range(5)]`. No prose.",
+          "output": "[x * 32 for x in range(5)]",
+          "ok": true
+        }
+      ]
+    },
+    {
+      "task": "code_lambda",
+      "domain": "code",
+      "n": 15,
+      "n_ok": 15,
+      "acc": 1.0,
+      "examples": [
+        {
+          "prompt": "Write ONLY the Python lambda expression `lambda x: x * 62 + 7`. No prose.",
+          "output": "lambda x: x * 62 + 7",
+          "ok": true
+        },
+        {
+          "prompt": "Write ONLY the Python lambda expression `lambda x: x * 11 + 1`. No prose.",
+          "output": "lambda x: x * 11 + 1",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "flat_ok": [
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "math_flat_ok": [
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true
+  ],
+  "code_flat_ok": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ]
+}

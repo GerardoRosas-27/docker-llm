@@ -1,0 +1,43 @@
+{
+  "config_tag": "k24_mc",
+  "pairs": [
+    [
+      0,
+      4
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      8,
+      12
+    ],
+    [
+      12,
+      16
+    ],
+    [
+      16,
+      20
+    ],
+    [
+      20,
+      23
+    ]
+  ],
+  "n_bridge_params": 177414,
+  "steps": 28,
+  "best_step": 28,
+  "best_val": 0.875,
+  "secs": 120.7,
+  "history": [
+    {
+      "step": 28,
+      "loss": 0.7053,
+      "val": 0.875,
+      "secs": 120.7
+    }
+  ],
+  "ckpt_path": "/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/bridges_k24_mc_best.pt"
+}

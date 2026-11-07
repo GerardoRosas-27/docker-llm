@@ -1,0 +1,250 @@
+Loading weights:   0%|          | 0/290 [00:00<?, ?it/s]Loading weights:   0%|          | 1/290 [00:00<01:09,  4.17it/s]Loading weights:  43%|████▎     | 125/290 [00:00<00:00, 454.73it/s]Loading weights:  67%|██████▋   | 195/290 [00:00<00:00, 531.27it/s]Loading weights:  91%|█████████ | 264/290 [00:00<00:00, 569.30it/s]Loading weights: 100%|██████████| 290/290 [00:00<00:00, 488.47it/s]
+[math_code] Warm extension identity check: {'warm_extension_exact_match': True, 'out_3_bridges': '213', 'out_6_bridges_init': '213'}
+[eval:1_base_k12_bridges_trained] Reutilizando resultado en caché (/home/antigravity/GerardoRosas-27/docker-llm/enjambre/artifacts/math-code-k12plus/results_1_base_k12_bridges_trained.json) mean_acc=0.1583
+[eval:2_k12_mc_layer_edit_only] math_arith (math) acc=0.6667
+[eval:2_k12_mc_layer_edit_only] math_mul_mod (math) acc=0.5333
+[eval:2_k12_mc_layer_edit_only] math_expr (math) acc=0.0667
+[eval:2_k12_mc_layer_edit_only] math_logic (math) acc=0.1333
+[eval:2_k12_mc_layer_edit_only] code_fn (code) acc=0.0000
+[eval:2_k12_mc_layer_edit_only] code_algo (code) acc=0.0000
+[eval:2_k12_mc_layer_edit_only] code_comp (code) acc=0.0000
+[eval:2_k12_mc_layer_edit_only] code_lambda (code) acc=0.0000
+[math_code:k12_mc] start train steps=28 pairs=[(12, 16), (16, 20), (20, 23)] n_params=88707
+[math_code:k12_mc] step=28 loss=1.2167 val=0.7083 (101.3s)
+[eval:3_k12_mc_bridges_3] math_arith (math) acc=0.6000
+[eval:3_k12_mc_bridges_3] math_mul_mod (math) acc=0.5333
+[eval:3_k12_mc_bridges_3] math_expr (math) acc=0.1333
+[eval:3_k12_mc_bridges_3] math_logic (math) acc=0.0000
+[eval:3_k12_mc_bridges_3] code_fn (code) acc=1.0000
+[eval:3_k12_mc_bridges_3] code_algo (code) acc=1.0000
+[eval:3_k12_mc_bridges_3] code_comp (code) acc=1.0000
+[eval:3_k12_mc_bridges_3] code_lambda (code) acc=1.0000
+[math_code:k16_mc] start train steps=28 pairs=[(8, 12), (12, 16), (16, 20), (20, 23)] n_params=118276
+[math_code:k16_mc] step=28 loss=0.7287 val=0.7500 (107.3s)
+[eval:4_k16_mc_bridges_4] math_arith (math) acc=0.6667
+[eval:4_k16_mc_bridges_4] math_mul_mod (math) acc=0.5333
+[eval:4_k16_mc_bridges_4] math_expr (math) acc=0.2000
+[eval:4_k16_mc_bridges_4] math_logic (math) acc=0.2667
+[eval:4_k16_mc_bridges_4] code_fn (code) acc=1.0000
+[eval:4_k16_mc_bridges_4] code_algo (code) acc=1.0000
+[eval:4_k16_mc_bridges_4] code_comp (code) acc=1.0000
+[eval:4_k16_mc_bridges_4] code_lambda (code) acc=1.0000
+[math_code:k20_mc] start train steps=28 pairs=[(4, 8), (8, 12), (12, 16), (16, 20), (20, 23)] n_params=147845
+[math_code:k20_mc] step=28 loss=0.6872 val=0.7917 (116.6s)
+[eval:5_k20_mc_bridges_5] math_arith (math) acc=0.6000
+[eval:5_k20_mc_bridges_5] math_mul_mod (math) acc=0.4667
+[eval:5_k20_mc_bridges_5] math_expr (math) acc=0.0667
+[eval:5_k20_mc_bridges_5] math_logic (math) acc=0.4000
+[eval:5_k20_mc_bridges_5] code_fn (code) acc=1.0000
+[eval:5_k20_mc_bridges_5] code_algo (code) acc=1.0000
+[eval:5_k20_mc_bridges_5] code_comp (code) acc=1.0000
+[eval:5_k20_mc_bridges_5] code_lambda (code) acc=1.0000
+[math_code:k24_mc] start train steps=28 pairs=[(0, 4), (4, 8), (8, 12), (12, 16), (16, 20), (20, 23)] n_params=177414
+[math_code:k24_mc] step=28 loss=0.7053 val=0.8750 (120.7s)
+[eval:6_k24_mc_bridges_6] math_arith (math) acc=0.8000
+[eval:6_k24_mc_bridges_6] math_mul_mod (math) acc=0.6000
+[eval:6_k24_mc_bridges_6] math_expr (math) acc=0.2000
+[eval:6_k24_mc_bridges_6] math_logic (math) acc=0.5333
+[eval:6_k24_mc_bridges_6] code_fn (code) acc=1.0000
+[eval:6_k24_mc_bridges_6] code_algo (code) acc=1.0000
+[eval:6_k24_mc_bridges_6] code_comp (code) acc=1.0000
+[eval:6_k24_mc_bridges_6] code_lambda (code) acc=1.0000
+{
+  "winner": {
+    "label": "6_k24_mc_bridges_6",
+    "n_layers_edited": 24,
+    "n_bridges": 6,
+    "mean_acc": 0.7667,
+    "math_acc": 0.5333,
+    "code_acc": 1.0
+  },
+  "progression_by_layers": [
+    {
+      "label": "1_base_k12_bridges_trained",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3167,
+      "code_acc": 0.0,
+      "mean_acc": 0.1583,
+      "legacy_arithmetic": 0.4,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 0.0,
+      "ppl": 16.247
+    },
+    {
+      "label": "2_k12_mc_layer_edit_only",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.35,
+      "code_acc": 0.0,
+      "mean_acc": 0.175,
+      "legacy_arithmetic": 0.8,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 0.0,
+      "ppl": 17.303
+    },
+    {
+      "label": "3_k12_mc_bridges_3",
+      "n_layers_edited": 12,
+      "layers_range": "12..23",
+      "n_bridges": 3,
+      "bridge_pairs": [
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3167,
+      "code_acc": 1.0,
+      "mean_acc": 0.6583,
+      "legacy_arithmetic": 0.92,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 19.672
+    },
+    {
+      "label": "4_k16_mc_bridges_4",
+      "n_layers_edited": 16,
+      "layers_range": "8..23",
+      "n_bridges": 4,
+      "bridge_pairs": [
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.4167,
+      "code_acc": 1.0,
+      "mean_acc": 0.7083,
+      "legacy_arithmetic": 0.92,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 18.329
+    },
+    {
+      "label": "5_k20_mc_bridges_5",
+      "n_layers_edited": 20,
+      "layers_range": "4..23",
+      "n_bridges": 5,
+      "bridge_pairs": [
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.3833,
+      "code_acc": 1.0,
+      "mean_acc": 0.6917,
+      "legacy_arithmetic": 0.88,
+      "legacy_code_lax": 1.0,
+      "legacy_code_strict_ast": 1.0,
+      "ppl": 17.969
+    },
+    {
+      "label": "6_k24_mc_bridges_6",
+      "n_layers_edited": 24,
+      "layers_range": "0..23",
+      "n_bridges": 6,
+      "bridge_pairs": [
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          12,
+          16
+        ],
+        [
+          16,
+          20
+        ],
+        [
+          20,
+          23
+        ]
+      ],
+      "math_acc": 0.5333,
+      "code_acc": 1.0,
+      "mean_acc": 0.7667,
+      "legacy_arithmetic": 0.88,
+      "legacy_code_lax": 0.96,
+      "legacy_code_strict_ast": 0.96,
+      "ppl": 21.766
+    }
+  ],
+  "total_wall_secs": 1044.5
+}

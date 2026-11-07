@@ -28,3 +28,6 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/fusion-20capas/**
 !enjambre/artifacts/bridges-k12/
 !enjambre/artifacts/bridges-k12/**
+!enjambre/artifacts/math-code-k12plus/
+!enjambre/artifacts/math-code-k12plus/**
+
