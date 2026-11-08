@@ -17,6 +17,7 @@ import torch
 from transformers import AutoTokenizer
 
 from enjambre.artificial_analysis.math500 import (
+    extract_answer_fallback,
     extract_boxed,
     format_math500_prompt,
     load_math500,
@@ -68,7 +69,17 @@ class MacroFieldEvaluator:
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
         print(f"[macro-eval] Cargando Red de {self.n_macro} Macro-Neuronas (Base: {self.base_size.upper()})...", flush=True)
-        if self.base_tag == "1_5b" and self.n_macro == 66:
+        if self.n_macro in (24, 28, 0):
+            from transformers import AutoModelForCausalLM
+            hf_id = "Qwen/Qwen2.5-1.5B-Instruct" if self.base_tag == "1_5b" else "Qwen/Qwen2.5-0.5B-Instruct"
+            self.tok = AutoTokenizer.from_pretrained(hf_id)
+            self.tok.padding_side = "left"
+            if self.tok.pad_token_id is None:
+                self.tok.pad_token = self.tok.eos_token
+            self.model = AutoModelForCausalLM.from_pretrained(hf_id, dtype=torch.bfloat16).eval()
+            self.delta = None
+            pairs = []
+        elif self.base_tag == "1_5b" and self.n_macro == 66:
             self.model, self.tok, self.delta = build_k66_macro_network_1_5b()
             pairs = FIELD_PAIRS_66
         elif self.n_macro == 66:
@@ -89,18 +100,18 @@ class MacroFieldEvaluator:
 
         tag = f"_{self.base_tag}" if self.base_tag else ""
         ckpt_file = checkpoint_path or os.path.join(self.out_dir, f"field_v4_k{self.n_macro}{tag}_best.pt")
-        if os.path.isfile(ckpt_file):
+        if pairs and os.path.isfile(ckpt_file):
             print(f"[macro-eval] Cargando pesos del campo desde {ckpt_file}...", flush=True)
             data = torch.load(ckpt_file, map_location="cpu", weights_only=False)
             state = data["field_state"] if "field_state" in data else data
             self.field.load_state_dict(state)
-        else:
+        elif pairs:
             print(f"[macro-eval] ADVERTENCIA: Checkpoint ({ckpt_file}) no encontrado, evaluando campo en step 0.", flush=True)
 
         self.field.attach(self.model)
 
     def run_artificial_analysis_eval(
-        self, n_samples: int = 28, max_tokens: int = 64, max_per_run: Optional[int] = None
+        self, n_samples: int = 28, max_tokens: int = 96, max_per_run: Optional[int] = None
     ) -> Dict[str, Any]:
         """Ejecuta el protocolo de Artificial Analysis sobre K36 + Campo v4."""
         print(f"[macro-eval] Evaluando Artificial Analysis (MATH-500 + Inferencia, {n_samples} problemas)...", flush=True)
@@ -155,8 +166,10 @@ class MacroFieldEvaluator:
             is_ok = False
             if pred_boxed:
                 is_ok = math_equal(pred_boxed, sol_text) or (ans_text and math_equal(pred_boxed, ans_text))
-            elif ans_text and ans_text.strip() in gen_norm:
-                is_ok = True
+            else:
+                fb = extract_answer_fallback(perf["output_text"])
+                if fb:
+                    is_ok = math_equal(fb, sol_text) or (ans_text and math_equal(fb, ans_text))
 
             if is_ok:
                 correct_count += 1
@@ -238,7 +251,7 @@ class MacroFieldEvaluator:
         t0 = time.time()
         for spec in COMPLEX_SPECS:
             items = hold_items[spec.id]
-            toks_limit = 72 if spec.domain == "code" else 20
+            toks_limit = 72 if spec.domain == "code" else 56
             prompts = [it.prompt for it in items]
             outs = generate(self.model, self.tok, prompts, max_new_tokens=toks_limit, batch_size=8)
             oks = [bool(it.check(o)) for it, o in zip(items, outs)]

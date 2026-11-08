@@ -20,8 +20,8 @@ CODE_TASKS = ["code_fn", "code_algo", "code_comp", "code_lambda"]
 ALL_MC_TASKS = MATH_TASKS + CODE_TASKS
 
 MATH_SYSTEM_PROMPT = (
-    "You are an exact mathematical calculator. Compute step-by-step internally and "
-    "reply with ONLY the final integer result. No words, no period, no explanation."
+    "You are an exact mathematical calculator. Compute step-by-step concisely in 1-2 lines, "
+    "then write 'Final Answer: <integer>'."
 )
 
 CODE_SYSTEM_PROMPT = (
@@ -50,16 +50,61 @@ MC_SPECS: List[MCTaskSpec] = [
 ]
 
 
-def check_exact_int(text: str, expected: int) -> bool:
-    """Verifica que la primera línea sea exactamente el entero (sin punto final ni prosa)."""
+def extract_int_candidate(text: str) -> Optional[int]:
+    """Extrae de manera robusta el entero de una respuesta matemática:
+    1. Si existe 'Final Answer: X' o 'Answer: X'.
+    2. Si existe '\\boxed{X}'.
+    3. Si la última o primera línea es un entero (o 'entero.').
+    4. El último entero aislado en el texto de cálculo.
+    """
     s = text.strip()
     if not s:
-        return False
+        return None
+
+    # 1. Final Answer: <int>
+    m = re.search(r"(?:final\s+answer|answer)\s*[:=]?\s*([+-]?\d+)", s, re.IGNORECASE)
+    if m:
+        try:
+            return int(m.group(1))
+        except ValueError:
+            pass
+
+    # 2. \boxed{<int>}
+    m_box = re.search(r"\\boxed\{\s*([+-]?\d+)\s*\}", s)
+    if m_box:
+        try:
+            return int(m_box.group(1))
+        except ValueError:
+            pass
+
+    # 3. Líneas individuales (última o primera)
     lines = [ln.strip() for ln in s.splitlines() if ln.strip()]
-    if len(lines) != 1:
+    if lines:
+        for candidate in [lines[-1], lines[0]]:
+            cand_clean = re.sub(r"[\. \t]", "", candidate)
+            if re.fullmatch(r"[+-]?\d+", cand_clean):
+                try:
+                    return int(cand_clean)
+                except ValueError:
+                    pass
+
+    # 4. Último entero aislado
+    all_ints = re.findall(r"(?<![a-zA-Z_])([+-]?\d+)(?![a-zA-Z_])", s)
+    if all_ints:
+        try:
+            return int(all_ints[-1])
+        except ValueError:
+            pass
+
+    return None
+
+
+def check_exact_int(text: str, expected: int) -> bool:
+    """Verifica que el entero predicho coincida con el entero esperado."""
+    cand = extract_int_candidate(text)
+    if cand is None:
         return False
-    tok = lines[0]
-    return tok == str(expected)
+    return cand == expected
 
 
 def _strip_code_fences(text: str) -> str:

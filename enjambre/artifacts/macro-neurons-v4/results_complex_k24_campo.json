@@ -1,0 +1,64 @@
+{
+  "condition": "9_k24_macro_campo_v4",
+  "model_desc": "K24 Macro-Neuronas (24L) + Campo CONSTELACIÓN v4 (0 Puentes)",
+  "n_macro_neurons": 24,
+  "n_field_bridges": 0,
+  "trainable_field_params": 0,
+  "mean_acc": 0.2375,
+  "math_acc": 0.4,
+  "code_acc": 0.075,
+  "total_items": 80,
+  "elapsed_seconds": 129.0,
+  "tasks": {
+    "complex_math_gcd_lcm": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8
+    },
+    "complex_math_fib_recur": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
+    },
+    "complex_math_modular_exp": {
+      "acc": 0.375,
+      "correct": 3,
+      "total": 8
+    },
+    "complex_math_solve_linear": {
+      "acc": 0.625,
+      "correct": 5,
+      "total": 8
+    },
+    "complex_math_combinatorics": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8
+    },
+    "complex_code_loop_filter": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
+    },
+    "complex_code_string_algo": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
+    },
+    "complex_code_recursion": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
+    },
+    "complex_code_dict_freq": {
+      "acc": 0.375,
+      "correct": 3,
+      "total": 8
+    },
+    "complex_code_search_nested": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
+    }
+  }
+}

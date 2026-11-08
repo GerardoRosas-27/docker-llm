@@ -133,6 +133,107 @@
         "pareto_frontier": "K66 (1.5B) redefine la frontera de Pareto: domina en código (90.00%), mantiene un rendimiento matemático de primer orden (12.50% y 25.00% en MATH-500), y demuestra que redes profundas de macro-neuronas con campos geométricos v4 son altamente sinérgicas cuando la capacidad base supera 1B.",
         "depth_saturation_overcome": "La degradación sintáctica que afectó a K66-0.5B fue superada al aumentar el ancho de canal latente (d=1536) y recalibrar el amortiguamiento a alpha=0.25 con bias_scale=0.25, preservando la coherencia a lo largo de las 66 macro-neuronas."
       }
+    },
+    "unified_complex_benchmark_cot": {
+      "metric": "Suite Compleja (10 tareas x 8 items = 80 items) bajo CoT conciso (1-2 lineas) y extraccion candidata",
+      "conditions": "hold=8, toks_limit=56 (math) / 72 (code), CoT scratchpad 1-2 lineas + Final Answer: <int>, extract_int_candidate",
+      "results": {
+        "base_qwen_0_5b_k24": {
+          "global_acc": 0.2375,
+          "math_acc": 0.4000,
+          "code_acc": 0.0750,
+          "math_tasks": {
+            "gcd_lcm": 0.500,
+            "fib_recur": 0.000,
+            "modular_exp": 0.375,
+            "solve_linear": 0.625,
+            "combinatorics": 0.500
+          },
+          "code_tasks": {
+            "loop_filter": 0.000,
+            "string_algo": 0.000,
+            "recursion": 0.000,
+            "dict_freq": 0.375,
+            "search_nested": 0.000
+          }
+        },
+        "k32_macro_campo_v4_0_5b": {
+          "global_acc": 0.4625,
+          "math_acc": 0.1250,
+          "code_acc": 0.8000,
+          "math_tasks": {
+            "gcd_lcm": 0.125,
+            "fib_recur": 0.125,
+            "modular_exp": 0.125,
+            "solve_linear": 0.000,
+            "combinatorics": 0.250
+          },
+          "code_tasks": {
+            "loop_filter": 0.625,
+            "string_algo": 1.000,
+            "recursion": 1.000,
+            "dict_freq": 0.375,
+            "search_nested": 1.000
+          }
+        },
+        "k36_macro_campo_v4_0_5b": {
+          "global_acc": 0.2875,
+          "math_acc": 0.1250,
+          "code_acc": 0.4500,
+          "math_tasks": {
+            "gcd_lcm": 0.000,
+            "fib_recur": 0.000,
+            "modular_exp": 0.375,
+            "solve_linear": 0.000,
+            "combinatorics": 0.250
+          },
+          "code_tasks": {
+            "loop_filter": 1.000,
+            "string_algo": 0.250,
+            "recursion": 0.375,
+            "dict_freq": 0.625,
+            "search_nested": 0.000
+          }
+        },
+        "k66_macro_campo_v4_0_5b": {
+          "global_acc": 0.0625,
+          "math_acc": 0.0000,
+          "code_acc": 0.1250,
+          "math_tasks": {
+            "gcd_lcm": 0.000,
+            "fib_recur": 0.000,
+            "modular_exp": 0.000,
+            "solve_linear": 0.000,
+            "combinatorics": 0.000
+          },
+          "code_tasks": {
+            "loop_filter": 0.250,
+            "string_algo": 0.000,
+            "recursion": 0.375,
+            "dict_freq": 0.000,
+            "search_nested": 0.000
+          }
+        },
+        "k66_macro_campo_v4_1_5b": {
+          "global_acc": 0.4875,
+          "math_acc": 0.0750,
+          "code_acc": 0.9000,
+          "math_tasks": {
+            "gcd_lcm": 0.125,
+            "fib_recur": 0.000,
+            "modular_exp": 0.125,
+            "solve_linear": 0.125,
+            "combinatorics": 0.000
+          },
+          "code_tasks": {
+            "loop_filter": 0.750,
+            "string_algo": 0.750,
+            "recursion": 1.000,
+            "dict_freq": 1.000,
+            "search_nested": 1.000
+          }
+        }
+      }
     }
   }
 }

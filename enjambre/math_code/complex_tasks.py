@@ -63,10 +63,10 @@ def build_complex_pool() -> Dict[str, List[Row]]:
         b = k * (7 + idx * 2)
         if idx % 2 == 0:
             ans = math.gcd(a, b)
-            p = f"Compute gcd({a}, {b}). Reply with ONLY the integer."
+            p = f"Compute gcd({a}, {b}). Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         else:
             ans = (a * b) // math.gcd(a, b)
-            p = f"Compute lcm({a}, {b}). Reply with ONLY the integer."
+            p = f"Compute lcm({a}, {b}). Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         rows_gcd.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
     pool["complex_math_gcd_lcm"] = rows_gcd
 
@@ -82,7 +82,7 @@ def build_complex_pool() -> Dict[str, List[Row]]:
         if idx % 2 == 0:
             n = 4 + (idx // 2)
             ans = fib(n)
-            p = f"What is the {n}-th Fibonacci number F({n}) where F(0)=0 and F(1)=1? Reply with ONLY the integer."
+            p = f"What is the {n}-th Fibonacci number F({n}) where F(0)=0 and F(1)=1? Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         else:
             c = 1 + (idx % 5)
             steps = 3 + (idx // 10)
@@ -91,7 +91,7 @@ def build_complex_pool() -> Dict[str, List[Row]]:
             for _ in range(steps):
                 curr = mult * curr + 1
             ans = curr
-            p = f"Given a(0) = {c} and a(n) = {mult}*a(n-1) + 1 for episode {idx}, what is a({steps})? Reply with ONLY the integer."
+            p = f"Given a(0) = {c} and a(n) = {mult}*a(n-1) + 1 for episode {idx}, what is a({steps})? Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         rows_fib.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
     pool["complex_math_fib_recur"] = rows_fib
 
@@ -102,7 +102,7 @@ def build_complex_pool() -> Dict[str, List[Row]]:
         exp = 3 + (idx // 5)
         mod = 7 + idx
         ans = pow(base, exp, mod)
-        p = f"Compute {base}^{exp} mod {mod}. Reply with ONLY the integer."
+        p = f"Compute {base}^{exp} mod {mod}. Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         rows_modexp.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
     pool["complex_math_modular_exp"] = rows_modexp
 
@@ -114,10 +114,10 @@ def build_complex_pool() -> Dict[str, List[Row]]:
         b = 5 + (idx * 3)
         if idx % 2 == 0:
             c = a * x_val + b
-            p = f"Solve for x: {a}*x + {b} = {c}. Reply with ONLY the integer."
+            p = f"Solve for x: {a}*x + {b} = {c}. Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         else:
             c = a * x_val - b
-            p = f"Solve for x: {a}*x - {b} = {c}. Reply with ONLY the integer."
+            p = f"Solve for x: {a}*x - {b} = {c}. Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         rows_solve.append((p, str(x_val), (lambda t, e=x_val: check_exact_int(t, e))))
     pool["complex_math_solve_linear"] = rows_solve
 
@@ -130,10 +130,10 @@ def build_complex_pool() -> Dict[str, List[Row]]:
             k = 2
         if idx % 2 == 0:
             ans = math.comb(n, k)
-            p = f"Compute the combination C({n}, {k}). Reply with ONLY the integer."
+            p = f"Compute the combination C({n}, {k}). Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         else:
             ans = math.perm(n, k)
-            p = f"Compute the permutation P({n}, {k}). Reply with ONLY the integer."
+            p = f"Compute the permutation P({n}, {k}). Calculate concisely in 1-2 lines, then write Final Answer: <integer>."
         rows_comb.append((p, str(ans), (lambda t, e=ans: check_exact_int(t, e))))
     pool["complex_math_combinatorics"] = rows_comb
 

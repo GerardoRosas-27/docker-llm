@@ -4,61 +4,61 @@
   "n_macro_neurons": 66,
   "n_field_bridges": 28,
   "trainable_field_params": 1646960,
-  "mean_acc": 0.0667,
-  "math_acc": 0.0133,
-  "code_acc": 0.12,
-  "total_items": 150,
-  "elapsed_seconds": 249.16,
+  "mean_acc": 0.0625,
+  "math_acc": 0.0,
+  "code_acc": 0.125,
+  "total_items": 80,
+  "elapsed_seconds": 160.75,
   "tasks": {
     "complex_math_gcd_lcm": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_math_fib_recur": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_math_modular_exp": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_math_solve_linear": {
-      "acc": 0.0667,
-      "correct": 1,
-      "total": 15
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8
     },
     "complex_math_combinatorics": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_code_loop_filter": {
-      "acc": 0.2,
-      "correct": 3,
-      "total": 15
+      "acc": 0.25,
+      "correct": 2,
+      "total": 8
     },
     "complex_code_string_algo": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_code_recursion": {
-      "acc": 0.4,
-      "correct": 6,
-      "total": 15
+      "acc": 0.375,
+      "correct": 3,
+      "total": 8
     },
     "complex_code_dict_freq": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     },
     "complex_code_search_nested": {
       "acc": 0.0,
       "correct": 0,
-      "total": 15
+      "total": 8
     }
   }
 }

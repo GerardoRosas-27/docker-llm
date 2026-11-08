@@ -26,7 +26,7 @@ def main() -> None:
     p_aa.add_argument("--macro", type=int, default=66, help="Número de macro-neuronas (32, 36 o 66)")
     p_aa.add_argument("--base", type=str, default="0.5b", help="Tamaño del modelo base (0.5b o 1.5b)")
     p_aa.add_argument("--samples", type=int, default=28, help="Muestra de MATH-500")
-    p_aa.add_argument("--tokens", type=int, default=64, help="Tokens de generación")
+    p_aa.add_argument("--tokens", type=int, default=96, help="Tokens de generación")
     p_aa.add_argument("--limit-per-run", type=int, default=None, help="Límite de problemas por corrida")
     p_aa.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint del campo")
 

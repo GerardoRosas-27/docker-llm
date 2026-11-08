@@ -115,7 +115,7 @@ class ConstelacionV4Field(nn.Module):
         super().__init__()
         self.hidden = hidden
         self.rank = rank
-        self.pairs = list(pairs or FIELD_PAIRS_32)
+        self.pairs = list(pairs if pairs is not None else FIELD_PAIRS_32)
         self.bridges = nn.ModuleDict()
 
         for s, t in self.pairs:
@@ -137,6 +137,8 @@ class ConstelacionV4Field(nn.Module):
     def attach(self, model: nn.Module) -> None:
         """Registra pre-hook y hooks en las capas para gestionar el flujo del campo."""
         self.remove_hooks()
+        if not self.pairs:
+            return
         layers = model.model.layers
 
         src_set = {s for s, _ in self.pairs}
