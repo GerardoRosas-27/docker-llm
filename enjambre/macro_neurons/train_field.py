@@ -29,9 +29,10 @@ from enjambre.math_code.tasks import (
 from .network import (
     build_k32_macro_network,
     build_k36_macro_network,
+    build_k66_macro_network,
     macro_param_checksum,
 )
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
 
 DEFAULT_OUT_DIR = os.path.join(
     os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4"
@@ -69,19 +70,25 @@ class FieldTrainer:
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
         print(f"[macro-field] Construyendo red de {self.n_macro} macro-neuronas...", flush=True)
-        if self.n_macro == 36:
+        if self.n_macro == 66:
+            self.model, self.tok, self.delta = build_k66_macro_network()
+            pairs = FIELD_PAIRS_66
+        elif self.n_macro == 36:
             self.model, self.tok, self.delta = build_k36_macro_network()
             pairs = FIELD_PAIRS_36
         else:
             self.model, self.tok, self.delta = build_k32_macro_network()
             pairs = FIELD_PAIRS_32
 
+        if self.n_macro == 66:
+            self.batch_size = min(self.batch_size, 2)
+
         self.eos = self.tok.eos_token or ""
         self.base_checksum = macro_param_checksum(self.model)
 
-        # Crear y acoplar el Campo CONSTELACIÓN v4 (12 o 18 puentes)
+        # Crear y acoplar el Campo CONSTELACIÓN v4 (12, 18 o 28 puentes)
         hidden = self.model.config.hidden_size
-        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs)
+        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs).to(self.model.dtype)
         self.field.attach(self.model)
 
         # Splits para entrenamiento y validación (Core + Ext + Complex)

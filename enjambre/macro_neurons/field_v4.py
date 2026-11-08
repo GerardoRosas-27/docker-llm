@@ -62,6 +62,46 @@ FIELD_PAIRS_36: List[Tuple[int, int]] = [
     (28, 35),   # Síntesis -> Salida Final
 ]
 
+# Topología del Hiper-Campo CONSTELACIÓN v4 para K66 (Red de 66 Macro-Neuronas, 28 Puentes):
+# 1. Tronco Continuo (11 puentes): Enlace serial entre las 11 etapas funcionales (pasos de 6 capas)
+# 2. Autopistas Armónicas Trans-Campo (8 puentes): Resonancia inter-cluster
+# 3. Resonadores de Largo Alcance (6 puentes): Conexión directa a síntesis y decodificación
+# 4. Canales Causales de Innovación (3 puentes): Coordinación multi-escala cruzada
+FIELD_PAIRS_66: List[Tuple[int, int]] = [
+    # 1. Tronco Continuo (11)
+    (0, 5),     # Entrada -> Sintaxis temprana
+    (5, 11),    # Sintaxis -> Álgebra Simbólica
+    (11, 17),   # Álgebra -> Teoría de Números / Euclides
+    (17, 23),   # Euclides -> Núcleo Semántico Inicial
+    (23, 29),   # Semántica -> Aritmética Modular & Exp
+    (29, 35),   # Aritmética -> Combinatoria & Recurrencias
+    (35, 41),   # Combinatoria -> Núcleo Semántico Intermedio
+    (41, 47),   # Semántica Intermedia -> Estructuras de Datos / Dicts
+    (47, 53),   # Dicts -> Búsqueda, Recursión & Grafos
+    (53, 59),   # Búsqueda -> Algoritmia Python & Filtrado
+    (59, 65),   # Algoritmia -> Síntesis Superior & Salida
+    # 2. Autopistas Armónicas Trans-Campo (8)
+    (5, 17),    # Sintaxis -> Euclides
+    (11, 23),   # Álgebra -> Núcleo Semántico
+    (17, 29),   # Euclides -> Aritmética Modular
+    (23, 35),   # Semántica -> Combinatoria
+    (29, 41),   # Aritmética Modular -> Semántica Intermedia
+    (35, 47),   # Combinatoria -> Diccionarios
+    (41, 53),   # Semántica Intermedia -> Búsqueda / Recursión
+    (47, 59),   # Diccionarios -> Algoritmia Python
+    # 3. Resonadores de Largo Alcance (6)
+    (11, 29),   # Álgebra Simbólica -> Aritmética Modular
+    (17, 47),   # Euclides -> Diccionarios y Tablas Hash
+    (29, 59),   # Aritmética Modular -> Algoritmia Python
+    (35, 65),   # Combinatoria -> Salida Final
+    (47, 65),   # Diccionarios -> Salida Final
+    (53, 65),   # Búsqueda / Recursión -> Salida Final
+    # 4. Canales Causales de Innovación Cruzada (3)
+    (5, 29),    # Sintaxis Temprana -> Aritmética Modular
+    (11, 47),   # Álgebra Simbólica -> Diccionarios (representación simbólica a hash)
+    (23, 59),   # Semántica Base -> Algoritmia Python
+]
+
 
 class ConstelacionV4Field(nn.Module):
     """Campo Geométrico de Conexión de Macro-Neuronas basado en CONSTELACIÓN v4."""

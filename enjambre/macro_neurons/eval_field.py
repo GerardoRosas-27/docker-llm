@@ -30,9 +30,10 @@ from enjambre.math_code.complex_tasks import COMPLEX_SPECS, make_complex_mc_spli
 from .network import (
     build_k32_macro_network,
     build_k36_macro_network,
+    build_k66_macro_network,
     macro_param_checksum,
 )
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
 
 DEFAULT_OUT_DIR = os.path.join(
     os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4"
@@ -63,7 +64,10 @@ class MacroFieldEvaluator:
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
         print(f"[macro-eval] Cargando Red de {self.n_macro} Macro-Neuronas...", flush=True)
-        if self.n_macro == 36:
+        if self.n_macro == 66:
+            self.model, self.tok, self.delta = build_k66_macro_network()
+            pairs = FIELD_PAIRS_66
+        elif self.n_macro == 36:
             self.model, self.tok, self.delta = build_k36_macro_network()
             pairs = FIELD_PAIRS_36
         else:
@@ -74,7 +78,7 @@ class MacroFieldEvaluator:
         self.base_checksum = macro_param_checksum(self.model)
 
         hidden = self.model.config.hidden_size
-        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs)
+        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs).to(self.model.dtype)
 
         ckpt_file = checkpoint_path or os.path.join(self.out_dir, f"field_v4_k{self.n_macro}_best.pt")
         if os.path.isfile(ckpt_file):

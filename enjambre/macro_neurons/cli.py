@@ -15,27 +15,27 @@ def main() -> None:
 
     # train
     p_train = sub.add_parser("train", help="Entrena el Campo CONSTELACIÓN v4")
-    p_train.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32 o 36)")
+    p_train.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32, 36 o 66)")
     p_train.add_argument("--steps", type=int, default=60, help="Pasos de entrenamiento")
     p_train.add_argument("--batch-size", type=int, default=4, help="Tamaño de batch")
     p_train.add_argument("--lr", type=float, default=8e-4, help="Learning rate del campo")
 
     # eval-aa
     p_aa = sub.add_parser("eval-aa", help="Ejecuta exclusivamente el benchmark de Artificial Analysis")
-    p_aa.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32 o 36)")
+    p_aa.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32, 36 o 66)")
     p_aa.add_argument("--samples", type=int, default=28, help="Muestra de MATH-500")
     p_aa.add_argument("--tokens", type=int, default=64, help="Tokens de generación")
     p_aa.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint del campo")
 
     # eval-complex
     p_comp = sub.add_parser("eval-complex", help="Ejecuta exclusivamente la suite de 10 tareas complejas")
-    p_comp.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32 o 36)")
+    p_comp.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32, 36 o 66)")
     p_comp.add_argument("--hold", type=int, default=15, help="Ítems holdout por tarea compleja")
     p_comp.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint del campo")
 
     # eval (ambos)
     p_eval = sub.add_parser("eval", help="Ejecuta Artificial Analysis y Complex Benchmarks")
-    p_eval.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32 o 36)")
+    p_eval.add_argument("--macro", type=int, default=36, help="Número de macro-neuronas (32, 36 o 66)")
     p_eval.add_argument("--samples", type=int, default=28, help="Muestra de MATH-500")
     p_eval.add_argument("--hold", type=int, default=15, help="Ítems holdout por tarea compleja")
     p_eval.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint del campo")

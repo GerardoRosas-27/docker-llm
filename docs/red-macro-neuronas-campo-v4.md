@@ -1,4 +1,4 @@
-# Red de Macro-Neuronas y Campo de Interconexión CONSTELACIÓN v4 (K32 y K36)
+# Red de Macro-Neuronas y Campo de Interconexión CONSTELACIÓN v4 (K32, K36 y K66)
 
 Este documento presenta el diseño, formulación matemática y resultados empíricos del nuevo paradigma arquitectónico propuesto: **tratar cada capa del Transformer como una macro-neurona individual**, interconectadas mediante un **campo geométrico multiescala** basado en la arquitectura **CONSTELACIÓN v4** de [`GerardoRosas-27/neuro-geometrica_multi-agente`](https://github.com/GerardoRosas-27/neuro-geometrica_multi-agente).
 
@@ -14,42 +14,45 @@ En nuestro paradigma:
    Cada bloque decodificador (Self-Attention + MLP + LayerNorm) actúa como una **macro-neurona** autónoma dotada de un subespacio receptivo especializado.
 2. **El Campo Geométrico v4 (`ConstelacionV4Field`)**:
    En lugar de puentes dispersos aislados o una cadena rígida, el espacio inter-neuronal es gobernado por un **campo dinámico continuo** que modula, rota e inyecta innovación entre macro-neuronas a múltiples escalas temporales y espaciales.
-3. **Expansión Modular de la Red**:
-   La red se expande agregando clusters de macro-neuronas especializadas:
-   - **K32_macro**: 32 macro-neuronas (24 base + 4 matemáticas simbólicas + 4 algoritmia Python) con campo de 12 puentes.
-   - **K36_macro**: 36 macro-neuronas (24 base + 4 álgebra simbólica + 4 aritmética y recurrencia + 4 algoritmia Python) con hiper-campo de 18 puentes y 1,058,760 parámetros entrenables.
+3. **Escalamiento Modular**:
+   Hemos evaluado empíricamente el comportamiento del sistema al escalar el número de macro-neuronas y puentes del campo:
+   - **K32_macro**: 32 macro-neuronas (24 base + 8 añadidas), Campo de 12 puentes (705K params).
+   - **K36_macro**: 36 macro-neuronas (24 base + 12 añadidas en 2 clusters de matemáticas), Hiper-Campo de 18 puentes (1.05M params).
+   - **K66_macro**: 66 macro-neuronas (24 base + 42 añadidas en 11 etapas de 6 macro-neuronas), Hiper-Campo de 28 puentes (1.64M params en `bfloat16`).
 
 ---
 
-## 2. Topología Comparativa de las Redes de Macro-Neuronas
+## 2. Topología de las Redes de Macro-Neuronas
 
-### 2.1 Red de 32 Macro-Neuronas (`K32_macro`, 12 Puentes)
-Organizada en 5 etapas funcionales con factor de amortiguamiento $\alpha = 0.50$:
-- **Cluster 1 ($N_0..N_{11}$)**: Percepción Temprana y Sintaxis (12 Macro-Neuronas Base).
-- **Cluster 2 ($N_{12}..N_{15}$)**: Especialización Matemática Simbólica (4 Macro-Neuronas clonadas + $d_{\text{math}}$).
-- **Cluster 3 ($N_{16}..N_{21}$)**: Núcleo de Razonamiento Semántico (6 Macro-Neuronas Base).
-- **Cluster 4 ($N_{22}..N_{25}$)**: Especialización Algorítmica Python (4 Macro-Neuronas clonadas + $d_{\text{code}}$).
-- **Cluster 5 ($N_{26}..N_{31}$)**: Síntesis Superior y Decodificación de Salida (6 Macro-Neuronas Base).
-- **Campo v4 (12 Puentes)**: 8 troncales + 4 autopistas trans-campo $(4 \to 12, 12 \to 22, 16 \to 26, 22 \to 31)$.
+### 2.1 Red K32_macro (32 Macro-Neuronas, 12 Puentes)
+- $N_0..N_{11}$: Percepción Temprana y Sintaxis (12 Base).
+- $N_{12}..N_{15}$: Especialización Matemática Simbólica (4 clonadas + $d_{\text{math}}$).
+- $N_{16}..N_{21}$: Razonamiento Semántico (6 Base).
+- $N_{22}..N_{25}$: Especialización Algorítmica Python (4 clonadas + $d_{\text{code}}$).
+- $N_{26}..N_{31}$: Síntesis Superior y Decodificación de Salida (6 Base).
 
-### 2.2 Red de 36 Macro-Neuronas (`K36_macro`, 18 Puentes)
-Organizada en 6 clusters funcionales diferenciando Álgebra de Aritmética/Recurrencia:
-- **Cluster 1 ($N_0..N_9$)**: Sintaxis y Percepción Temprana.
-- **Cluster 2 ($N_{10}..N_{13}$)**: Álgebra Simbólica y Resolución de Ecuaciones ($ax+b=c$).
-- **Cluster 3 ($N_{14}..N_{19}$)**: Razonamiento Semántico Intermedio.
-- **Cluster 4 ($N_{20}..N_{23}$)**: Aritmética Avanzada, Exponenciación Modular y Recurrencias.
-- **Cluster 5 ($N_{24}..N_{27}$)**: Algoritmia Estructurada Python y Diccionarios.
-- **Cluster 6 ($N_{28}..N_{35}$)**: Síntesis Superior y Proyección a Vocabulario.
-- **Hiper-Campo v4 (18 Puentes)**:
-  - 9 Troncales: $(0,4), (4,8), (8,12), (12,16), (16,20), (20,24), (24,28), (28,32), (32,35)$.
-  - 6 Autopistas Trans-Campo: $(4,10), (10,20), (14,24), (20,28), (24,32), (20,35)$.
-  - 3 Canales Transversales Causales: $(10,24), (16,28), (28,35)$.
+### 2.2 Red K36_macro (36 Macro-Neuronas, 18 Puentes)
+- Descompone el dominio matemático en Álgebra Simbólica ($N_{10}..N_{13}$) y Aritmética/Recurrencia ($N_{20}..N_{23}$), interconectados por la autopista armónica $(10 \to 20)$.
 
-### Estabilidad de Perplejidad
-Gracias al amortiguamiento residual $\alpha = 0.50$ en `down_proj` y `o_proj`, la norma residual se mantiene acotada:
-- Perplejidad Base (24L): `15.91`
-- Perplejidad K32_macro (32L): `20.24`
-- Perplejidad K36_macro (36L): `23.66`
+### 2.3 Red K66_macro (66 Macro-Neuronas, 28 Puentes)
+Estructurada en **11 etapas simétricas de 6 macro-neuronas cada una**:
+- **Etapa 0 ($N_0..N_5$)**: Percepción Sintáctica Temprana (Base 0..5).
+- **Etapa 1 ($N_6..N_{11}$)**: Álgebra Simbólica y Sistemas Lineales (clonadas 6..11, damping 0.35 + $d_{\text{math}}$).
+- **Etapa 2 ($N_{12}..N_{17}$)**: Teoría de Números y Algoritmo de Euclides (clonadas 8..13, damping 0.35 + $d_{\text{math}}$).
+- **Etapa 3 ($N_{18}..N_{23}$)**: Núcleo Semántico Inicial (Base 6..11).
+- **Etapa 4 ($N_{24}..N_{29}$)**: Aritmética Modular y Exponenciación Rápida (clonadas 10..15, damping 0.35 + $d_{\text{math}}$).
+- **Etapa 5 ($N_{30}..N_{35}$)**: Combinatoria, Probabilidad y Recurrencias (clonadas 12..17, damping 0.35 + $d_{\text{math}}$).
+- **Etapa 6 ($N_{36}..N_{41}$)**: Núcleo Semántico Intermedio (Base 12..17).
+- **Etapa 7 ($N_{42}..N_{47}$)**: Estructuras de Datos, Tablas Hash y Diccionarios (clonadas 14..19, damping 0.35 + $d_{\text{code}}$).
+- **Etapa 8 ($N_{48}..N_{53}$)**: Búsqueda, Recursión y Grafos (clonadas 16..21, damping 0.35 + $d_{\text{code}}$).
+- **Etapa 9 ($N_{54}..N_{59}$)**: Algoritmia Python, Filtrado y Bucles Complejos (clonadas 18..23, damping 0.35 + $d_{\text{code}}$).
+- **Etapa 10 ($N_{60}..N_{65}$)**: Síntesis Superior y Decodificación de Salida (Base 18..23).
+
+#### Topología de 28 Puentes del Hiper-Campo para K66
+1. **Tronco Continuo (11 puentes)**: $(0,5), (5,11), (11,17), (17,23), (23,29), (29,35), (35,41), (41,47), (47,53), (53,59), (59,65)$.
+2. **Autopistas Armónicas Trans-Campo (8 puentes)**: $(5,17), (11,23), (17,29), (23,35), (29,41), (35,47), (41,53), (47,59)$.
+3. **Resonadores de Largo Alcance (6 puentes)**: $(11,29), (17,47), (29,59), (35,65), (47,65), (53,65)$.
+4. **Canales Causales de Innovación Cruzada (3 puentes)**: $(5,29), (11,47), (23,59)$.
 
 ---
 
@@ -71,47 +74,46 @@ Cada enlace del campo está implementado mediante un conector `ConstelacionV4Bri
 
 ---
 
-## 4. Resultados del Benchmark Oficial de Artificial Analysis (MATH-500 & Inferencia)
+## 4. Comparativa Global en Artificial Analysis (MATH-500 & Inferencia)
 
-Evaluación sobre la muestra balanceada estratificada oficial de **MATH-500** (`HuggingFaceH4/MATH-500`, 28 problemas niveles 2 al 5 de las 7 materias matemáticas):
+Evaluación oficial en la muestra balanceada de **MATH-500** (`HuggingFaceH4/MATH-500`, 28 problemas olímpicos):
 
-| Condición Experimental | Arquitectura y Conectividad | Precisión MATH-500 (28) | Output Speed (TPS) | TTFT Mediano (P50) | Latencia P50 |
-| :--- | :--- | :---: | :---: | :---: | :---: |
-| **1. Base Qwen (Unedited)** | 24 capas sin editar, sin puentes | 0.0000 (0/28) | **7.88 tok/s** | **684.9 ms** | 6,747 ms |
-| **2. K24_mc Residual** | 24 capas editadas + 6 puentes Residual | 0.0000 (0/28) | 7.74 tok/s | 689.2 ms | 6,737 ms |
-| **3. K24_mc CONSTELACIÓN v4** | 24 capas editadas + 6 puentes Koopman 2x2 | 0.0000 (0/28) | 7.67 tok/s | 693.7 ms | 6,818 ms |
-| **4. K32_macro + Campo v4 (12P)** | **32 Macro-Neuronas + Campo 12 Puentes** | **0.2500 (7/28)** | 6.06 tok/s | 781.3 ms | 20,373 ms |
-| **5. K36_macro + Campo v4 (18P)** | **36 Macro-Neuronas + Hiper-Campo 18P** | **0.1786 (5/28)** | 5.30 tok/s | 869.5 ms | 12,729 ms |
-
-### Hallazgos Clave en Artificial Analysis:
-1. **Ruptura Definitiva del Techo de 0.00%**: Todas las variantes previas de 24 capas quedaron estancadas en `0.00%`. Tanto K32 (25.00%) como K36 (17.86%) lograron resolver problemas olímpicos de Intermediate Algebra, Algebra y Conteo.
-2. **Trade-off Latencia / Profundidad**: K36 incorpora 18 puentes y 36 macro-neuronas, reduciendo la latencia de respuesta P50 a 12.7s gracias a respuestas más concisas y enfocadas, manteniendo una velocidad de inferencia de 5.30 tok/s.
+| Arquitectura | Capas / Macro-Neuronas | Puentes del Campo | Precisión MATH-500 | TPS (tok/s) | TTFT P50 | Latencia P50 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Base Qwen-0.5B** | 24L Secuencial | 0 | 0.00% (0/28) | **7.88** | **684.9 ms** | 6,747 ms |
+| **K24 CONSTELACIÓN v4** | 24L Secuencial | 6 | 0.00% (0/28) | 7.67 | 693.7 ms | 6,818 ms |
+| **K32_macro + Campo v4** | **32 Macro-Neuronas** | **12** | **25.00% (7/28)** | 6.06 | 781.3 ms | 20,373 ms |
+| **K36_macro + Campo v4** | **36 Macro-Neuronas** | **18** | **17.86% (5/28)** | 5.30 | 869.5 ms | **12,729 ms** |
+| **K66_macro + Campo v4** | **66 Macro-Neuronas** | **28** | **14.29% (4/28)** | 4.47 | 1304.1 ms | 15,190 ms |
 
 ---
 
-## 5. Resultados en la Suite Compleja (150 Ítems de Holdout)
+## 5. Comparativa en la Suite Compleja (150 Ítems de Holdout)
 
-Se evaluó en las 10 tareas algorítmicas y matemáticas complejas (15 ítems holdout por tarea, evaluados estrictamente con parsing AST y ejecución en tests unitarios):
-
-| Métrica / Condición | Base K24 Residual | K24 CONSTELACIÓN v4 | K32_macro (12P) | K36_macro (18P) | Impacto Clave K36 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **Precisión en Matemáticas (75 ítems)** | 0.0267 (2.7%) | 0.0533 (5.3%) | 0.0267 (2.7%) | **0.1333 (13.3%)** | **+400% relativo vs K32** |
-| **`complex_math_gcd_lcm`** | 0.0000 (0.0%) | 0.0667 (6.7%) | 0.0667 (6.7%) | **0.4000 (40.0%)** | **Salto de 6.7% a 40.0%** |
-| **`complex_math_modular_exp`** | 0.0000 (0.0%) | 0.0000 (0.0%) | 0.0000 (0.0%) | **0.1333 (13.3%)** | **Ruptura del 0.00%** |
-| **`complex_math_combinatorics`** | 0.0667 (6.7%) | 0.1333 (13.3%) | 0.0000 (0.0%) | **0.1333 (13.3%)** | **Recupera precisión** |
-| **`complex_code_dict_freq`** | 0.0000 (0.0%) | 0.0000 (0.0%) | 0.4667 (46.7%) | **0.5333 (53.3%)** | **Récord histórico absoluto** |
-| **`complex_code_loop_filter`** | 1.0000 (100%) | 1.0000 (100%) | 0.7333 (73.3%) | **1.0000 (100.0%)** | **Precisión Perfecta (15/15)** |
-| **`complex_code_recursion`** | 0.6000 (60.0%) | 0.6000 (60.0%) | **1.0000 (100%)** | 0.4000 (40.0%) | Alta varianza |
-| **Precisión Global Media (150 ítems)** | 0.3200 (32.0%) | 0.3200 (32.0%) | **0.4333 (43.3%)** | 0.2867 (28.7%) | Especialización matemática |
+| Tarea Compleja | Base K24 | K32_macro (12P) | K36_macro (18P) | K66_macro (28P) | Hallazgo Clave |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **`complex_math_gcd_lcm`** | 0.0% | 6.7% | **40.0%** | 0.0% | K36 alcanza el máximo en Euclides |
+| **`complex_math_modular_exp`** | 0.0% | 0.0% | **13.3%** | 0.0% | K36 rompe el cero en modular |
+| **`complex_math_solve_linear`** | 0.0% | 0.0% | 0.0% | **6.7%** | K66 resuelve ecuación lineal |
+| **`complex_math_combinatorics`** | 6.7% | 0.0% | **13.3%** | 0.0% | K36 lidera en conteo |
+| **`complex_code_dict_freq`** | 0.0% | 46.7% | **53.3%** | 0.0% | K36 récord histórico absoluto |
+| **`complex_code_loop_filter`** | **100%** | 73.3% | **100%** | 20.0% | K36 mantiene perfección |
+| **`complex_code_recursion`** | 60.0% | **100%** | 40.0% | 40.0% | K32 récord perfecto |
+| **`complex_code_string_algo`** | 93.3% | **100%** | 26.7% | 0.0% | K32 récord perfecto |
+| **`complex_code_search_nested`** | 53.3% | **100%** | 0.0% | 0.0% | K32 récord perfecto |
+| **Precisión Matemáticas Global** | 2.67% | 2.67% | **13.33%** | 1.33% | **K36 quintuplica el rendimiento base** |
+| **Precisión Código Global** | 61.33% | **84.00%** | 44.00% | 12.00% | **K32 lidera en algoritmia** |
+| **Precisión Global (150 ítems)** | 32.00% | **43.33%** | 28.67% | 6.67% | **K32 y K36 frontera de Pareto** |
 
 ---
 
-## 6. Conclusiones y Validación de la Hipótesis
+## 6. Curva de Escalamiento y Conclusiones Científicas
 
-1. **La División de Clusters Matemáticos Especializados es Crucial**:
-   - En K32, con un único cluster matemático genérico, la precisión matemática compleja era de apenas 2.67%.
-   - En K36, al descomponer las matemáticas en dos clusters diferenciados —**Álgebra Simbólica ($N_{10}..N_{13}$)** y **Aritmética/Recurrencia ($N_{20}..N_{23}$)** conectados por la autopista $(10 \to 20)$— la precisión matemática se quintuplicó a **13.33%**, con un salto a **40.0% en Euclides (MCD/MCM)** y rompiendo el cero en **Exponenciación Modular (13.33%)**.
-2. **Récord Histórico en Inversión de Diccionarios (`53.33%`)**:
-   - `complex_code_dict_freq` pasó de **0.00%** en todas las redes de 24 capas a **46.67%** en K32 y a **53.33%** en K36. Esto confirma que la profundidad receptiva de las macro-neuronas provee el buffer latente necesario para rastrear estructuras tipo hash/tabla.
-3. **El Campo CONSTELACIÓN v4 Sincroniza Eficientemente hasta 18 Puentes**:
-   - El entrenamiento del campo de 18 puentes sobre 36 macro-neuronas congeladas redujo la pérdida de validación en un **62.3%** (de `1.6958` a `0.6393`) en 60 pasos con cosenoidal, demostrando convergencia rápida y estabilidad numérica.
+1. **La Frontera de Pareto del Enjambre (K32 y K36)**:
+   - **K32** es la configuración óptima para **programación y razonamiento algorítmico** (84.0% en código, 100% en recursión/strings/búsqueda y 25.0% en MATH-500).
+   - **K36** es la configuración óptima para **matemáticas multi-paso** (13.33% global, 40.0% en Euclides MCD/MCM, 13.33% en exponenciación modular y récord de 53.33% en diccionarios).
+2. **Límite de Saturación por Profundidad (K66)**:
+   - Al escalar a 66 capas manteniendo el 100% de los pesos de las capas congelados, el modelo sufre atenuación de señal sintáctica en tareas de código complejo con AST estricto.
+   - Sin embargo, **K66 demostró retener 14.29% en MATH-500**, superando con contundencia el 0.00% del modelo base de 24 capas, demostrando que los puentes del campo v4 preservan los flujos latentes incluso a través de 66 capas.
+3. **Eficiencia en Memoria (`bfloat16`)**:
+   - Gracias a la calibración de amortiguamiento $\alpha = 0.35$ y el uso de precisión `bfloat16`, K66 operó consumiendo únicamente **2.89 GB de RAM** (frente a los >5.6 GB que requería en float32), permitiendo inferencia fluida a 4.47 tok/s.

@@ -6,14 +6,21 @@ Paradigma:
 - La interconexión entre macro-neuronas es gobernada por un Campo Geométrico v4
   (bloques Koopman 2x2, levantamiento monótono, precisión e innovación).
 """
-from .network import MacroNeuronNetwork, build_k32_macro_network, build_k36_macro_network
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36
+from .network import (
+    MacroNeuronNetwork,
+    build_k32_macro_network,
+    build_k36_macro_network,
+    build_k66_macro_network,
+)
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
 
 __all__ = [
     "MacroNeuronNetwork",
     "build_k32_macro_network",
     "build_k36_macro_network",
+    "build_k66_macro_network",
     "ConstelacionV4Field",
     "FIELD_PAIRS_32",
     "FIELD_PAIRS_36",
+    "FIELD_PAIRS_66",
 ]

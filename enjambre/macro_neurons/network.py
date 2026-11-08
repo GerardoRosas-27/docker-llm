@@ -316,3 +316,210 @@ def build_k36_macro_network(
 
     return base_model, tok, macro_delta
 
+
+def build_k66_macro_network(
+    model_hf_id: str = "Qwen/Qwen2.5-0.5B-Instruct",
+    damping: float = 0.35,
+    directions_path: str = DEFAULT_DIRS,
+    dtype: torch.dtype = torch.bfloat16,
+) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
+    """Construye y calibra la Red de 66 Macro-Neuronas (K66_macro) partiendo del modelo base:
+
+    Distribución topológica en 11 etapas balanceadas de 6 macro-neuronas (66 Macro-Neuronas):
+    - Etapa 0 (0..5):   Percepción Sintáctica Temprana (Base 0..5).
+    - Etapa 1 (6..11):  [CLUSTER ÁLGEBRA SIMBÓLICA] 6 macro-neuronas clonadas de 6..11
+                        con damping residual 0.35 y editadas con dirección matemática pura.
+    - Etapa 2 (12..17): [CLUSTER TEORÍA DE NÚMEROS Y EUCLIDES] 6 macro-neuronas clonadas de 8..13
+                        con damping residual 0.35 y editadas con dirección matemática pura.
+    - Etapa 3 (18..23): Núcleo Semántico Inicial (Base 6..11).
+    - Etapa 4 (24..29): [CLUSTER ARITMÉTICA MODULAR Y EXPONENCIACIÓN] 6 macro-neuronas clonadas de 10..15
+                        con damping residual 0.35 y editadas con dirección matemática pura.
+    - Etapa 5 (30..35): [CLUSTER COMBINATORIA Y RECURRENCIAS] 6 macro-neuronas clonadas de 12..17
+                        con damping residual 0.35 y editadas con dirección matemática pura.
+    - Etapa 6 (36..41): Núcleo Semántico Intermedio (Base 12..17).
+    - Etapa 7 (42..47): [CLUSTER ESTRUCTURAS DE DATOS Y DICCIONARIOS] 6 macro-neuronas clonadas de 14..19
+                        con damping residual 0.35 y editadas con dirección de algoritmia Python.
+    - Etapa 8 (48..53): [CLUSTER BÚSQUEDA, RECURSIÓN Y GRAFOS] 6 macro-neuronas clonadas de 16..21
+                        con damping residual 0.35 y editadas con dirección de algoritmia Python.
+    - Etapa 9 (54..59): [CLUSTER ALGORITMIA PYTHON Y FILTRADO] 6 macro-neuronas clonadas de 18..23
+                        con damping residual 0.35 y editadas con dirección de algoritmia Python.
+    - Etapa 10 (60..65): Síntesis Superior y Decodificación de Salida (Base 18..23).
+    """
+    tok = AutoTokenizer.from_pretrained(model_hf_id)
+    tok.padding_side = "left"
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+
+    base_model = AutoModelForCausalLM.from_pretrained(model_hf_id, dtype=dtype).eval()
+    spec_vecs = build_layer_specialist_vectors(directions_path)
+    deltas = build_math_code_layer_deltas(directions_path)
+    k24_delta = deltas["k24_mc"]
+
+    k24_by_layer = {b.layer: b for b in k24_delta.bias_edits}
+    scale_ref = float(k24_delta.bias_edits[0].scale)
+
+    new_layers: List[nn.Module] = []
+    edits: List[BiasEdit] = []
+
+    # Etapa 0: Macro-Neuronas 0..5 (Base 0..5)
+    for orig_idx in range(6):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # Etapa 1: Macro-Neuronas 6..11 [Álgebra Simbólica: clonadas de 6..11]
+    for j in range(6):
+        src_idx = 6 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 2: Macro-Neuronas 12..17 [Teoría de Números y Euclides: clonadas de 8..13]
+    for j in range(6):
+        src_idx = 8 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 3: Macro-Neuronas 18..23 (Base 6..11)
+    for orig_idx in range(6, 12):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # Etapa 4: Macro-Neuronas 24..29 [Aritmética Modular y Exp: clonadas de 10..15]
+    for j in range(6):
+        src_idx = 10 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 5: Macro-Neuronas 30..35 [Combinatoria y Recurrencias: clonadas de 12..17]
+    for j in range(6):
+        src_idx = 12 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 6: Macro-Neuronas 36..41 (Base 12..17)
+    for orig_idx in range(12, 18):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # Etapa 7: Macro-Neuronas 42..47 [Estructuras y Diccionarios: clonadas de 14..19]
+    for j in range(6):
+        src_idx = 14 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_code = spec_vecs[src_idx]["code"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_code.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 8: Macro-Neuronas 48..53 [Búsqueda y Recursión: clonadas de 16..21]
+    for j in range(6):
+        src_idx = 16 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_code = spec_vecs[src_idx]["code"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_code.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 9: Macro-Neuronas 54..59 [Algoritmia Python y Filtrado: clonadas de 18..23]
+    for j in range(6):
+        src_idx = 18 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_code = spec_vecs[src_idx]["code"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_code.clone(), scale=scale_ref * 0.40))
+
+    # Etapa 10: Macro-Neuronas 60..65 (Base 18..23)
+    for orig_idx in range(18, 24):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # Re-indexación estricta de layer_idx
+    for i, l in enumerate(new_layers):
+        l.self_attn.layer_idx = i
+
+    base_model.model.layers = nn.ModuleList(new_layers)
+    base_model.config.num_hidden_layers = len(new_layers)
+    base_model.config.layer_types = ["full_attention"] * len(new_layers)
+
+    # Aplicar físicamente las ediciones a los sesgos de down_proj
+    for b in edits:
+        lin = base_model.model.layers[b.layer].mlp.down_proj
+        vec = (b.scale * b.vec).to(dtype=lin.weight.dtype, device=lin.weight.device)
+        with torch.no_grad():
+            if lin.bias is None:
+                lin.bias = nn.Parameter(vec.clone())
+            else:
+                lin.bias.add_(vec)
+
+    # Congelar el 100% de los pesos de la red de macro-neuronas
+    for p in base_model.parameters():
+        p.requires_grad_(False)
+
+    macro_delta = EditDelta(
+        name="k66_macro",
+        bias_edits=edits,
+        meta={
+            "n_macro": 66,
+            "damping": damping,
+            "stages": 11,
+            "stage_size": 6,
+            "algebra_cluster": list(range(6, 12)),
+            "euclid_cluster": list(range(12, 18)),
+            "arithmetic_cluster": list(range(24, 30)),
+            "combinatorics_cluster": list(range(30, 36)),
+            "dicts_cluster": list(range(42, 48)),
+            "recursion_cluster": list(range(48, 54)),
+            "algorithms_cluster": list(range(54, 60)),
+        },
+    )
+
+    return base_model, tok, macro_delta
+
