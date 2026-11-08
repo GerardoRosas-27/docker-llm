@@ -1,0 +1,298 @@
+{
+  "model": "K32_macro + Campo CONSTELACIÓN v4",
+  "n_macro_neurons": 32,
+  "n_field_bridges": 12,
+  "samples_evaluated": 28,
+  "math500_accuracy": 0.25,
+  "correct": 7,
+  "inference_performance": {
+    "ttft_ms_p50": 781.26,
+    "ttft_ms_mean": 803.52,
+    "tps_mean": 6.06,
+    "tps_p50": 6.07,
+    "latency_ms_p50": 20373.48,
+    "latency_ms_p95": 21239.74
+  },
+  "sample_results": [
+    {
+      "subject": "Precalculus",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 781.26,
+      "tps": 6.08,
+      "latency_ms": 20357.24,
+      "pred_boxed": null,
+      "gold_answer": "120^\\circ"
+    },
+    {
+      "subject": "Precalculus",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 853.34,
+      "tps": 6.15,
+      "latency_ms": 20202.31,
+      "pred_boxed": null,
+      "gold_answer": "\\frac{9}{256}"
+    },
+    {
+      "subject": "Precalculus",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 720.42,
+      "tps": 6.19,
+      "latency_ms": 19946.19,
+      "pred_boxed": null,
+      "gold_answer": "\\left[ \\frac{\\pi^2}{8}, \\frac{5 \\pi^2}{4} \\right]"
+    },
+    {
+      "subject": "Precalculus",
+      "level": 2,
+      "is_correct": false,
+      "ttft_ms": 641.58,
+      "tps": 6.06,
+      "latency_ms": 20278.31,
+      "pred_boxed": null,
+      "gold_answer": "\\cot x"
+    },
+    {
+      "subject": "Intermediate Algebra",
+      "level": 4,
+      "is_correct": true,
+      "ttft_ms": 858.14,
+      "tps": 6.1,
+      "latency_ms": 20372.52,
+      "pred_boxed": null,
+      "gold_answer": "3"
+    },
+    {
+      "subject": "Intermediate Algebra",
+      "level": 2,
+      "is_correct": false,
+      "ttft_ms": 649.45,
+      "tps": 6.19,
+      "latency_ms": 19859.86,
+      "pred_boxed": null,
+      "gold_answer": "3, 5, 7"
+    },
+    {
+      "subject": "Intermediate Algebra",
+      "level": 4,
+      "is_correct": true,
+      "ttft_ms": 872.06,
+      "tps": 6.16,
+      "latency_ms": 20176.06,
+      "pred_boxed": null,
+      "gold_answer": "2"
+    },
+    {
+      "subject": "Intermediate Algebra",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 858.83,
+      "tps": 5.96,
+      "latency_ms": 20839.57,
+      "pred_boxed": null,
+      "gold_answer": "-256"
+    },
+    {
+      "subject": "Algebra",
+      "level": 5,
+      "is_correct": true,
+      "ttft_ms": 796.04,
+      "tps": 6.03,
+      "latency_ms": 20516.01,
+      "pred_boxed": null,
+      "gold_answer": "4"
+    },
+    {
+      "subject": "Algebra",
+      "level": 5,
+      "is_correct": false,
+      "ttft_ms": 647.62,
+      "tps": 6.12,
+      "latency_ms": 20099.59,
+      "pred_boxed": null,
+      "gold_answer": "x=5"
+    },
+    {
+      "subject": "Algebra",
+      "level": 3,
+      "is_correct": true,
+      "ttft_ms": 669.38,
+      "tps": 6.02,
+      "latency_ms": 20452.04,
+      "pred_boxed": null,
+      "gold_answer": "2"
+    },
+    {
+      "subject": "Algebra",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 845.22,
+      "tps": 5.93,
+      "latency_ms": 20906.33,
+      "pred_boxed": null,
+      "gold_answer": "56"
+    },
+    {
+      "subject": "Number Theory",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 888.96,
+      "tps": 6.03,
+      "latency_ms": 20628.68,
+      "pred_boxed": null,
+      "gold_answer": "66"
+    },
+    {
+      "subject": "Number Theory",
+      "level": 2,
+      "is_correct": true,
+      "ttft_ms": 662.4,
+      "tps": 6.01,
+      "latency_ms": 20466.54,
+      "pred_boxed": null,
+      "gold_answer": "9"
+    },
+    {
+      "subject": "Number Theory",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 668.41,
+      "tps": 6.06,
+      "latency_ms": 20313.71,
+      "pred_boxed": null,
+      "gold_answer": "204_5"
+    },
+    {
+      "subject": "Number Theory",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 846.73,
+      "tps": 5.99,
+      "latency_ms": 20719.74,
+      "pred_boxed": null,
+      "gold_answer": "4"
+    },
+    {
+      "subject": "Prealgebra",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 658.8,
+      "tps": 6.08,
+      "latency_ms": 20234.1,
+      "pred_boxed": null,
+      "gold_answer": "\\dfrac{33}{100}"
+    },
+    {
+      "subject": "Prealgebra",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 520.59,
+      "tps": 5.96,
+      "latency_ms": 20479.15,
+      "pred_boxed": null,
+      "gold_answer": "11\\sqrt2"
+    },
+    {
+      "subject": "Prealgebra",
+      "level": 3,
+      "is_correct": true,
+      "ttft_ms": 722.27,
+      "tps": 6.01,
+      "latency_ms": 20531.22,
+      "pred_boxed": null,
+      "gold_answer": "\\frac{3}{2}"
+    },
+    {
+      "subject": "Prealgebra",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 706.61,
+      "tps": 6.17,
+      "latency_ms": 20007.93,
+      "pred_boxed": null,
+      "gold_answer": "1"
+    },
+    {
+      "subject": "Geometry",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 1098.43,
+      "tps": 5.92,
+      "latency_ms": 21201.22,
+      "pred_boxed": null,
+      "gold_answer": "54"
+    },
+    {
+      "subject": "Geometry",
+      "level": 3,
+      "is_correct": false,
+      "ttft_ms": 847.23,
+      "tps": 6.04,
+      "latency_ms": 20543.24,
+      "pred_boxed": null,
+      "gold_answer": "30"
+    },
+    {
+      "subject": "Geometry",
+      "level": 5,
+      "is_correct": false,
+      "ttft_ms": 901.42,
+      "tps": 6.11,
+      "latency_ms": 20373.48,
+      "pred_boxed": null,
+      "gold_answer": "\\frac{14}{3}"
+    },
+    {
+      "subject": "Geometry",
+      "level": 2,
+      "is_correct": false,
+      "ttft_ms": 1802.76,
+      "tps": 6.07,
+      "latency_ms": 21404.8,
+      "pred_boxed": null,
+      "gold_answer": "90^\\circ"
+    },
+    {
+      "subject": "Counting & Probability",
+      "level": 4,
+      "is_correct": false,
+      "ttft_ms": 652.7,
+      "tps": 6.16,
+      "latency_ms": 19957.82,
+      "pred_boxed": null,
+      "gold_answer": "-125"
+    },
+    {
+      "subject": "Counting & Probability",
+      "level": 2,
+      "is_correct": true,
+      "ttft_ms": 585.38,
+      "tps": 6.15,
+      "latency_ms": 19941.03,
+      "pred_boxed": null,
+      "gold_answer": "6"
+    },
+    {
+      "subject": "Counting & Probability",
+      "level": 5,
+      "is_correct": false,
+      "ttft_ms": 1006.47,
+      "tps": 5.88,
+      "latency_ms": 21239.74,
+      "pred_boxed": null,
+      "gold_answer": "110"
+    },
+    {
+      "subject": "Counting & Probability",
+      "level": 5,
+      "is_correct": false,
+      "ttft_ms": 736.19,
+      "tps": 6.11,
+      "latency_ms": 20218.23,
+      "pred_boxed": null,
+      "gold_answer": "\\frac{1}{2}"
+    }
+  ]
+}

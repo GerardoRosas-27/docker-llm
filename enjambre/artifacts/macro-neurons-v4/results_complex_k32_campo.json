@@ -1,0 +1,64 @@
+{
+  "condition": "8_k32_macro_campo_v4",
+  "model_desc": "K32 Macro-Neuronas (32L) + Campo CONSTELACIÓN v4 (12 Puentes)",
+  "n_macro_neurons": 32,
+  "n_field_bridges": 12,
+  "trainable_field_params": 705840,
+  "mean_acc": 0.4333,
+  "math_acc": 0.0267,
+  "code_acc": 0.84,
+  "total_items": 150,
+  "elapsed_seconds": 234.66,
+  "tasks": {
+    "complex_math_gcd_lcm": {
+      "acc": 0.0667,
+      "correct": 1,
+      "total": 15
+    },
+    "complex_math_fib_recur": {
+      "acc": 0.0667,
+      "correct": 1,
+      "total": 15
+    },
+    "complex_math_modular_exp": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 15
+    },
+    "complex_math_solve_linear": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 15
+    },
+    "complex_math_combinatorics": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 15
+    },
+    "complex_code_loop_filter": {
+      "acc": 0.7333,
+      "correct": 11,
+      "total": 15
+    },
+    "complex_code_string_algo": {
+      "acc": 1.0,
+      "correct": 15,
+      "total": 15
+    },
+    "complex_code_recursion": {
+      "acc": 1.0,
+      "correct": 15,
+      "total": 15
+    },
+    "complex_code_dict_freq": {
+      "acc": 0.4667,
+      "correct": 7,
+      "total": 15
+    },
+    "complex_code_search_nested": {
+      "acc": 1.0,
+      "correct": 15,
+      "total": 15
+    }
+  }
+}
