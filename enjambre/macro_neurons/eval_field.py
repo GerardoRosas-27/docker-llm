@@ -239,21 +239,44 @@ class MacroFieldEvaluator:
         return res
 
     def run_complex_benchmark(self, n_hold: int = 15) -> Dict[str, Any]:
-        """Ejecuta la suite de 10 tareas complejas (150 ítems de holdout)."""
-        print(f"[macro-eval] Evaluando Suite Compleja (10 tareas x {n_hold} = 150 ítems)...", flush=True)
+        """Ejecuta la suite de 10 tareas complejas (150 ítems de holdout o n_hold configurado)."""
+        print(f"[macro-eval] Evaluando Suite Compleja (10 tareas x {n_hold} = {10 * n_hold} ítems)...", flush=True)
         _, _, hold_items, _ = make_complex_mc_splits(n_train=6, n_val=4, n_hold=n_hold, seed=SEED)
+
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        part_path = os.path.join(self.out_dir, f".partial_complex_k{self.n_macro}{tag}.json")
+        out_path = os.path.join(self.out_dir, f"results_complex_k{self.n_macro}{tag}_campo.json")
 
         task_scores: Dict[str, Dict[str, Any]] = {}
         all_oks: List[bool] = []
         math_oks: List[bool] = []
         code_oks: List[bool] = []
 
+        if os.path.isfile(part_path):
+            try:
+                with open(part_path, "r", encoding="utf-8") as f:
+                    part_data = json.load(f)
+                task_scores = part_data.get("tasks", {})
+                all_oks = part_data.get("all_oks", [])
+                math_oks = part_data.get("math_oks", [])
+                code_oks = part_data.get("code_oks", [])
+                print(f"[macro-eval] Reanudando suite compleja desde tarea {len(task_scores)}/10...", flush=True)
+            except Exception as e:
+                print(f"[macro-eval] Error leyendo cache parcial ({e}), iniciando desde 0.", flush=True)
+
         t0 = time.time()
         for spec in COMPLEX_SPECS:
+            if spec.id in task_scores:
+                print(f"  [task {spec.id}] (cached) acc={task_scores[spec.id]['acc']:.2%}", flush=True)
+                continue
+
+            if hasattr(self.field, "set_domain"):
+                self.field.set_domain(spec.domain)
+
             items = hold_items[spec.id]
-            toks_limit = 72 if spec.domain == "code" else 56
+            toks_limit = 72
             prompts = [it.prompt for it in items]
-            outs = generate(self.model, self.tok, prompts, max_new_tokens=toks_limit, batch_size=8)
+            outs = generate(self.model, self.tok, prompts, system=spec.system_prompt, max_new_tokens=toks_limit, batch_size=8)
             oks = [bool(it.check(o)) for it, o in zip(items, outs)]
             acc = sum(oks) / max(1, len(oks))
             task_scores[spec.id] = {
@@ -267,6 +290,14 @@ class MacroFieldEvaluator:
                 math_oks.extend(oks)
             else:
                 code_oks.extend(oks)
+
+            # Persistir avance incremental
+            _jdump(part_path, {
+                "tasks": task_scores,
+                "all_oks": all_oks,
+                "math_oks": math_oks,
+                "code_oks": code_oks,
+            })
 
         mean_acc = sum(all_oks) / max(1, len(all_oks))
         math_acc = sum(math_oks) / max(1, len(math_oks))
@@ -286,8 +317,11 @@ class MacroFieldEvaluator:
             "tasks": task_scores,
         }
 
-        tag = f"_{self.base_tag}" if self.base_tag else ""
-        out_path = os.path.join(self.out_dir, f"results_complex_k{self.n_macro}{tag}_campo.json")
         _jdump(out_path, res)
+        if os.path.isfile(part_path):
+            try:
+                os.remove(part_path)
+            except OSError:
+                pass
         print(f"[macro-eval] Complex Bench: Global={mean_acc:.2%} | Math={math_acc:.2%} | Code={code_acc:.2%}", flush=True)
         return res

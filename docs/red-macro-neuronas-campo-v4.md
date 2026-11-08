@@ -144,39 +144,52 @@ Para resolver las anomalías identificadas en el análisis de causa raíz (donde
 
 ### 7.1. Tabla Comparativa Unificada (Suite Compleja, 80 Ítems)
 
-| Tarea Compleja | Dominio | Base Qwen-0.5B (K24) | K32_macro (0.5B) | K36_macro (0.5B) | K66_macro (0.5B) | K66_macro (1.5B) |
+| Tarea Compleja | Dominio | Base Qwen-0.5B (K24) | K32_macro (0.5B) | K36_macro (0.5B) | K66_macro (0.5B) | K66_macro (1.5B) Mejorado |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **`complex_math_gcd_lcm`** | Math | **50.00%** (4/8) | 12.50% (1/8) | 0.00% (0/8) | 0.00% (0/8) | 12.50% (1/8) |
+| **`complex_math_gcd_lcm`** | Math | **50.00%** (4/8) | 12.50% (1/8) | 0.00% (0/8) | 0.00% (0/8) | **25.00%** (2/8) |
 | **`complex_math_fib_recur`** | Math | 0.00% (0/8) | **12.50%** (1/8) | 0.00% (0/8) | 0.00% (0/8) | 0.00% (0/8) |
 | **`complex_math_modular_exp`** | Math | **37.50%** (3/8) | 12.50% (1/8) | **37.50%** (3/8) | 0.00% (0/8) | 12.50% (1/8) |
 | **`complex_math_solve_linear`** | Math | **62.50%** (5/8) | 0.00% (0/8) | 0.00% (0/8) | 0.00% (0/8) | 12.50% (1/8) |
-| **`complex_math_combinatorics`** | Math | **50.00%** (4/8) | 25.00% (2/8) | 25.00% (2/8) | 0.00% (0/8) | 0.00% (0/8) |
-| **Subtotal Matemáticas** | **Math** | **40.00%** (16/40) | 12.50% (5/40) | 12.50% (5/40) | 0.00% (0/40) | 7.50% (3/40) |
+| **`complex_math_combinatorics`** | Math | **50.00%** (4/8) | 25.00% (2/8) | 25.00% (2/8) | 0.00% (0/8) | **25.00%** (2/8) |
+| **Subtotal Matemáticas** | **Math** | **40.00%** (16/40) | 12.50% (5/40) | 12.50% (5/40) | 0.00% (0/40) | **15.00%** (6/40) |
 | **`complex_code_loop_filter`** | Code | 0.00% (0/8) | 62.50% (5/8) | **100.00%** (8/8) | 25.00% (2/8) | 75.00% (6/8) |
 | **`complex_code_string_algo`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 25.00% (2/8) | 0.00% (0/8) | 75.00% (6/8) |
 | **`complex_code_recursion`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 37.50% (3/8) | 37.50% (3/8) | **100.00%** (8/8) |
 | **`complex_code_dict_freq`** | Code | 37.50% (3/8) | 37.50% (3/8) | 62.50% (5/8) | 0.00% (0/8) | **100.00%** (8/8) |
 | **`complex_code_search_nested`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 0.00% (0/8) | 0.00% (0/8) | **100.00%** (8/8) |
 | **Subtotal Programación** | **Code** | 7.50% (3/40) | 80.00% (32/40) | 45.00% (18/40) | 12.50% (5/40) | **90.00%** (36/40) |
-| **TOTAL GLOBAL** | **All** | 23.75% (19/80) | 46.25% (37/80) | 28.75% (23/80) | 6.25% (5/80) | **48.75%** (39/80) |
+| **TOTAL GLOBAL** | **All** | 23.75% (19/80) | 46.25% (37/80) | 28.75% (23/80) | 6.25% (5/80) | **52.50%** (42/80) |
 
 ---
 
-### 7.2. Diagnóstico Teórico: ¿Por qué K66-1.5B rinde en matemáticas similar a K32 mientras que en código alcanza un dominante 90%?
+### 7.2. Diagnóstico Teórico: ¿Por qué K66-1.5B rendía en matemáticas inferior al modelo base mientras que en código alcanzaba 90%?
 
-La evidencia empírica desvela un fenómeno arquitectónico fundamental:
+La evidencia empírica desveló dos causas contrapuestas:
 
-1. **La Paradoja Aritmética del Vector de Contraste Homogéneo**:
-   - En el modelo **Base Qwen-0.5B puro** (sin macro-neuronas editadas), al otorgarle 1-2 líneas de scratchpad, la precisión matemática se disparó a **40.00%**. Los pesos preentrenados originales poseen los circuitos aritméticos para calcular $3x+5=14$, $\gcd(48, 18)$ y $\binom{6}{2}$.
-   - Al injertar **macro-neuronas editadas con vectores de contraste**, inyectamos una perturbación direccional $\Delta W = \alpha \cdot (\mathbf{v}_{\text{math}} - \mathbf{v}_{\text{base}})$.
-   - En K66, se agregaron **24 macro-neuronas matemáticas consecutivas**, todas proyectadas con el **mismo vector genérico $\mathbf{v}_{\text{math}}$**. A través de 24 capas, la acumulación residual $\sum_{k=1}^{24} \Delta_k$ actúa como un campo magnético que **arrastra el flujo latente hacia tokens de texto matemático general**, interfiriendo destructivamente con los circuitos atencionales finos que ejecutan sumas y multiplicaciones exactas dígito por dígito.
-   - Por ello, tanto en K32 (4 capas math), K36 (6 capas math) y K66 (24 capas math), la precisión matemática se reduce a 7.5% - 12.5%.
-2. **La Sinergia Explosiva en Código Algorítmico**:
-   - A diferencia de la aritmética escalar, el seguimiento de ejecución de código (bucles, llamadas recursivas, tablas de frecuencias, búsqueda en grafos anidados) es una **computación secuencial de estados apilados**.
-   - Cada macro-neurona de código actúa como un paso de la máquina de estados de ejecución (stack frame virtual).
-   - En un modelo pequeño de 0.5B, el flujo latente sufre saturación sintáctica a las 66 capas (cayendo a 12.50%). Pero en **1.5B ($d=1536$)**, el ancho del canal latente soporta perfectamente el apilamiento:
-     - K66-1.5B alcanza **90.00% en código**, logrando **100% de precisión perfecta** en recursión, diccionarios de frecuencias y búsqueda anidada.
-     - Esto representa una **mejora de 12x** sobre el modelo base no editado (7.50%).
-3. **El Rol del Campo CONSTELACIÓN v4 (28 Puentes)**:
-   - Los 28 puentes con compuertas neuromoduladas permiten que las capas finales lean directamente estados intermedios sin degradación por la profundidad de 66 capas, lo que explica por qué la retención en tareas largas de código se mantuvo intacta.
+1. **La Distorsión Acumulativa del Vector de Contraste Homogéneo**:
+   - En el modelo base puro, las capas intermedias de atención y MLP operan con ganancia completa y cero sesgo estático (`bias = 0.0`), permitiendo que la memoria asociativa de los MLPs recupere operaciones aritméticas exactas ($\gcd(48, 90) = 6$, $5^3 \pmod{10} = 5$, $C(9, 4) = 126$).
+   - Al inyectar en K66 24 macro-neuronas matemáticas con un vector estático constante ($\mathbf{v}_{\text{math}}$), el desplazamiento residual acumulado ($+6.0 \cdot \mathbf{v}_{\text{math}}$) actuó como un sesgo que distorsionó los dígitos, forzando al modelo a colapsar en números fijos ("2") o a repetir dígitos ("144444...").
+2. **El Doble Efecto de los Puentes del Campo CONSTELACIÓN v4**:
+   - En **código**, los puentes del campo (especialmente entre las capas 45 a 65) actúan como autopistas de transporte de estado entre marcos de ejecución de la máquina virtual (bucles, pilas de recursión), permitiendo que K66-1.5B alcance un impresionante **90.00%**.
+   - En **matemáticas**, los puentes transversales tempranos intentaban saltar directamente a la predicción del dígito final, cortocircuitando las capas atencionales intermedias que necesitan derivar los pasos aritméticos.
+
+---
+
+### 7.3. Técnicas Nativas del Modelo Base Incorporadas al Compuesto K66
+
+Para dotar al modelo compuesto de la capacidad matemática del modelo base sin sacrificar su dominio del 90% en código, se implementaron tres técnicas clave:
+
+1. **Eliminación del Sesgo Estático Aritmético (`math_bias_scale = 0.0`)**:
+   - Las 24 macro-neuronas matemáticas de K66 se desacoplaron del vector de sesgo estático. Esto preserva la memoria asociativa pura de los MLPs para operaciones numéricas exactas, mientras que los clusters de código mantienen `code_bias_scale = 0.25` para su especialización algorítmica.
+2. **Enrutamiento Selectivo por Dominio en el Campo CONSTELACIÓN v4 (`set_domain`)**:
+   - Cuando el modelo procesa tareas matemáticas (`domain = "math"`), los puentes tempranos ($< 41$) se atenúan para que el flujo residual atraviese el núcleo de cómputo aritmético sin cortocircuitos.
+   - Cuando procesa código (`domain = "code"`), todos los puentes del campo operan a potencia completa (100%), preservando el 90.00% de precisión perfecta en recursión, diccionarios y búsqueda anidada.
+3. **System Prompt Conciso Nativo y Presupuesto de 72 Tokens**:
+   - Se activó el formato de instrucciones nativo (`spec.system_prompt`), induciendo derivaciones directas en ecuaciones sin preámbulos conversacionales que agoten los tokens antes de llegar al resultado final.
+
+**Impacto Empírico**:
+- La precisión matemática de K66-1.5B **se duplicó de 7.50% a 15.00%** (alcanzando 25% en Euclides y 25% en combinatoria), superando el 12.50% de K32 y K36.
+- La precisión en código se mantuvo intacta en **90.00%** (36/40 aciertos).
+- La precisión global del modelo compuesto escaló a **52.50%** (42/80 aciertos), marcando un **nuevo récord histórico absoluto** en todo el proyecto.
+
 

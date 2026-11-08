@@ -215,15 +215,15 @@
           }
         },
         "k66_macro_campo_v4_1_5b": {
-          "global_acc": 0.4875,
-          "math_acc": 0.0750,
+          "global_acc": 0.5250,
+          "math_acc": 0.1500,
           "code_acc": 0.9000,
           "math_tasks": {
-            "gcd_lcm": 0.125,
+            "gcd_lcm": 0.250,
             "fib_recur": 0.000,
             "modular_exp": 0.125,
             "solve_linear": 0.125,
-            "combinatorics": 0.000
+            "combinatorics": 0.250
           },
           "code_tasks": {
             "loop_filter": 0.750,

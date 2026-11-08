@@ -127,6 +127,11 @@ class ConstelacionV4Field(nn.Module):
         self._buf: Dict[int, torch.Tensor] = {}
         self._hooks: List = []
         self.enabled: bool = True
+        self.domain: str = "all"
+
+    def set_domain(self, domain: str) -> None:
+        """Configura el enrutamiento selectivo por dominio ('math', 'code', 'all')."""
+        self.domain = domain
 
     def n_params(self) -> int:
         return sum(p.numel() for p in self.parameters())
@@ -158,8 +163,11 @@ class ConstelacionV4Field(nn.Module):
                 h = out
 
                 # 1) Si idx es target de uno o más puentes del campo: aplicar en orden topológico
+                # Si el dominio es 'math', omitir puentes tempranos (< 41) para preservar aritmética nativa
                 if idx in tgt_sources:
                     for s in tgt_sources[idx]:
+                        if self.domain == "math" and idx < 41:
+                            continue
                         if s in self._buf:
                             h_src = self._buf[s]
                             if h_src.shape[1] != h.shape[1]:

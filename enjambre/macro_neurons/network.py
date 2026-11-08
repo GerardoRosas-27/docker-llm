@@ -320,6 +320,7 @@ def build_k36_macro_network(
 def build_k66_macro_network(
     model_hf_id: str = "Qwen/Qwen2.5-0.5B-Instruct",
     damping: float = 0.35,
+    math_bias_scale: float = 0.0,
     directions_path: str = DEFAULT_DIRS,
     dtype: torch.dtype = torch.bfloat16,
 ) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
@@ -328,14 +329,14 @@ def build_k66_macro_network(
     Distribución topológica en 11 etapas balanceadas de 6 macro-neuronas (66 Macro-Neuronas):
     - Etapa 0 (0..5):   Percepción Sintáctica Temprana (Base 0..5).
     - Etapa 1 (6..11):  [CLUSTER ÁLGEBRA SIMBÓLICA] 6 macro-neuronas clonadas de 6..11
-                        con damping residual 0.35 y editadas con dirección matemática pura.
+                        con damping residual 0.35.
     - Etapa 2 (12..17): [CLUSTER TEORÍA DE NÚMEROS Y EUCLIDES] 6 macro-neuronas clonadas de 8..13
-                        con damping residual 0.35 y editadas con dirección matemática pura.
+                        con damping residual 0.35.
     - Etapa 3 (18..23): Núcleo Semántico Inicial (Base 6..11).
     - Etapa 4 (24..29): [CLUSTER ARITMÉTICA MODULAR Y EXPONENCIACIÓN] 6 macro-neuronas clonadas de 10..15
-                        con damping residual 0.35 y editadas con dirección matemática pura.
+                        con damping residual 0.35.
     - Etapa 5 (30..35): [CLUSTER COMBINATORIA Y RECURRENCIAS] 6 macro-neuronas clonadas de 12..17
-                        con damping residual 0.35 y editadas con dirección matemática pura.
+                        con damping residual 0.35.
     - Etapa 6 (36..41): Núcleo Semántico Intermedio (Base 12..17).
     - Etapa 7 (42..47): [CLUSTER ESTRUCTURAS DE DATOS Y DICCIONARIOS] 6 macro-neuronas clonadas de 14..19
                         con damping residual 0.35 y editadas con dirección de algoritmia Python.
@@ -379,8 +380,9 @@ def build_k66_macro_network(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = spec_vecs[src_idx]["math"]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+        if math_bias_scale > 0.0:
+            v_math = spec_vecs[src_idx]["math"]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * math_bias_scale))
 
     # Etapa 2: Macro-Neuronas 12..17 [Teoría de Números y Euclides: clonadas de 8..13]
     for j in range(6):
@@ -391,8 +393,9 @@ def build_k66_macro_network(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = spec_vecs[src_idx]["math"]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+        if math_bias_scale > 0.0:
+            v_math = spec_vecs[src_idx]["math"]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * math_bias_scale))
 
     # Etapa 3: Macro-Neuronas 18..23 (Base 6..11)
     for orig_idx in range(6, 12):
@@ -412,8 +415,9 @@ def build_k66_macro_network(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = spec_vecs[src_idx]["math"]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+        if math_bias_scale > 0.0:
+            v_math = spec_vecs[src_idx]["math"]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * math_bias_scale))
 
     # Etapa 5: Macro-Neuronas 30..35 [Combinatoria y Recurrencias: clonadas de 12..17]
     for j in range(6):
@@ -424,8 +428,9 @@ def build_k66_macro_network(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = spec_vecs[src_idx]["math"]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.40))
+        if math_bias_scale > 0.0:
+            v_math = spec_vecs[src_idx]["math"]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * math_bias_scale))
 
     # Etapa 6: Macro-Neuronas 36..41 (Base 12..17)
     for orig_idx in range(12, 18):
@@ -528,6 +533,7 @@ def build_k66_macro_network_1_5b(
     model_hf_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
     damping: float = 0.25,
     bias_scale: float = 0.25,
+    math_bias_scale: float = 0.0,
     directions_path: Optional[str] = None,
     dtype: torch.dtype = torch.bfloat16,
 ) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
@@ -535,11 +541,11 @@ def build_k66_macro_network_1_5b(
 
     Distribución topológica en 10 etapas (66 Macro-Neuronas, d=1536):
     - Etapa 0 (0..6):   Percepción Sintáctica Temprana (Base 0..6, 7 capas).
-    - Etapa 1 (7..12):  [CLUSTER ÁLGEBRA SIMBÓLICA] 6 macro-neuronas clonadas de 7..12 con damping 0.25 + d_math.
-    - Etapa 2 (13..18): [CLUSTER TEORÍA DE NÚMEROS Y EUCLIDES] 6 macro-neuronas clonadas de 9..14 con damping 0.25 + d_math.
+    - Etapa 1 (7..12):  [CLUSTER ÁLGEBRA SIMBÓLICA] 6 macro-neuronas clonadas de 7..12 con damping 0.25.
+    - Etapa 2 (13..18): [CLUSTER TEORÍA DE NÚMEROS Y EUCLIDES] 6 macro-neuronas clonadas de 9..14 con damping 0.25.
     - Etapa 3 (19..25): Núcleo Semántico Inicial (Base 7..13, 7 capas).
-    - Etapa 4 (26..31): [CLUSTER ARITMÉTICA MODULAR Y EXP] 6 macro-neuronas clonadas de 11..16 con damping 0.25 + d_math.
-    - Etapa 5 (32..37): [CLUSTER COMBINATORIA Y RECURRENCIAS] 6 macro-neuronas clonadas de 13..18 con damping 0.25 + d_math.
+    - Etapa 4 (26..31): [CLUSTER ARITMÉTICA MODULAR Y EXP] 6 macro-neuronas clonadas de 11..16 con damping 0.25.
+    - Etapa 5 (32..37): [CLUSTER COMBINATORIA Y RECURRENCIAS] 6 macro-neuronas clonadas de 13..18 con damping 0.25.
     - Etapa 6 (38..44): Núcleo Semántico Intermedio (Base 14..20, 7 capas).
     - Etapa 7 (45..51): [CLUSTER ESTRUCTURAS Y DICCIONARIOS] 7 macro-neuronas clonadas de 15..21 con damping 0.25 + d_code.
     - Etapa 8 (52..58): [CLUSTER ALGORITMIA, RECURSIÓN Y BÚSQUEDA] 7 macro-neuronas clonadas de 17..23 con damping 0.25 + d_code.
@@ -580,8 +586,9 @@ def build_k66_macro_network_1_5b(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = math_dirs[src_idx + 1]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=bias_scale))
+        if math_bias_scale > 0.0:
+            v_math = math_dirs[src_idx + 1]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=math_bias_scale))
 
     # Etapa 2: 13..18 (Euclides / Números: clonadas de 9..14, 6 capas)
     for j in range(6):
@@ -592,8 +599,9 @@ def build_k66_macro_network_1_5b(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = math_dirs[src_idx + 1]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=bias_scale))
+        if math_bias_scale > 0.0:
+            v_math = math_dirs[src_idx + 1]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=math_bias_scale))
 
     # Etapa 3: 19..25 (Base 7..13, 7 capas)
     for orig_idx in range(7, 14):
@@ -608,8 +616,9 @@ def build_k66_macro_network_1_5b(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = math_dirs[src_idx + 1]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=bias_scale))
+        if math_bias_scale > 0.0:
+            v_math = math_dirs[src_idx + 1]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=math_bias_scale))
 
     # Etapa 5: 32..37 (Combinatoria: clonadas de 13..18, 6 capas)
     for j in range(6):
@@ -620,8 +629,9 @@ def build_k66_macro_network_1_5b(
             cloned.self_attn.o_proj.weight.mul_(damping)
         new_layers.append(cloned)
         new_idx = len(new_layers) - 1
-        v_math = math_dirs[src_idx + 1]
-        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=bias_scale))
+        if math_bias_scale > 0.0:
+            v_math = math_dirs[src_idx + 1]
+            edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=math_bias_scale))
 
     # Etapa 6: 38..44 (Base 14..20, 7 capas)
     for orig_idx in range(14, 21):

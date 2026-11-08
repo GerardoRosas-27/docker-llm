@@ -4,15 +4,15 @@
   "n_macro_neurons": 66,
   "n_field_bridges": 28,
   "trainable_field_params": 2811760,
-  "mean_acc": 0.4875,
-  "math_acc": 0.075,
+  "mean_acc": 0.525,
+  "math_acc": 0.15,
   "code_acc": 0.9,
   "total_items": 80,
-  "elapsed_seconds": 611.89,
+  "elapsed_seconds": 457.91,
   "tasks": {
     "complex_math_gcd_lcm": {
-      "acc": 0.125,
-      "correct": 1,
+      "acc": 0.25,
+      "correct": 2,
       "total": 8
     },
     "complex_math_fib_recur": {
@@ -31,8 +31,8 @@
       "total": 8
     },
     "complex_math_combinatorics": {
-      "acc": 0.0,
-      "correct": 0,
+      "acc": 0.25,
+      "correct": 2,
       "total": 8
     },
     "complex_code_loop_filter": {
