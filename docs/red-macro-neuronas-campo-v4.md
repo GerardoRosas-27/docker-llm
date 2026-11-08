@@ -18,7 +18,8 @@ En nuestro paradigma:
    Hemos evaluado empíricamente el comportamiento del sistema al escalar el número de macro-neuronas y puentes del campo:
    - **K32_macro**: 32 macro-neuronas (24 base + 8 añadidas), Campo de 12 puentes (705K params).
    - **K36_macro**: 36 macro-neuronas (24 base + 12 añadidas en 2 clusters de matemáticas), Hiper-Campo de 18 puentes (1.05M params).
-   - **K66_macro**: 66 macro-neuronas (24 base + 42 añadidas en 11 etapas de 6 macro-neuronas), Hiper-Campo de 28 puentes (1.64M params en `bfloat16`).
+   - **K66_macro (0.5B)**: 66 macro-neuronas (24 base + 42 añadidas en 11 etapas de 6 macro-neuronas), Hiper-Campo de 28 puentes (1.64M params en `bfloat16`).
+   - **K66_macro (1.5B)**: 66 macro-neuronas sobre `Qwen2.5-1.5B` ($d=1536$, 28 base preservadas + 38 añadidas en 10 etapas funcionales), Hiper-Campo de 28 puentes (2.81M params en `bfloat16`).
 
 ---
 
@@ -54,6 +55,15 @@ Estructurada en **11 etapas simétricas de 6 macro-neuronas cada una**:
 3. **Resonadores de Largo Alcance (6 puentes)**: $(11,29), (17,47), (29,59), (35,65), (47,65), (53,65)$.
 4. **Canales Causales de Innovación Cruzada (3 puentes)**: $(5,29), (11,47), (23,59)$.
 
+### 2.4 Red K66_macro sobre Qwen2.5-1.5B (Escalamiento de Capacidad Base)
+Basada en `Qwen/Qwen2.5-1.5B-Instruct` ($d=1536$, 28 capas base):
+- Preserva las **28 capas originales intactas y en orden causal** como espina dorsal perceptiva y sintáctica.
+- Intercala **38 macro-neuronas clonadas y especializadas** en 10 etapas funcionales:
+  - Etapas 0, 3, 6, 9: Macro-neuronas base (7, 7, 7, 7 capas respectivamente).
+  - Etapas 1, 2, 4, 5 (Matemáticas): Álgebra (6), Euclides (6), Modular (6), Combinatoria (6) con amortiguamiento $\alpha=0.25$ y sesgo $d_{\text{math}}$ (escala 0.25).
+  - Etapas 7, 8 (Código): Diccionarios (7), Algoritmos/Recursión (7) con amortiguamiento $\alpha=0.25$ y sesgo $d_{\text{code}}$ (escala 0.25).
+- Campo CONSTELACIÓN v4 adaptado a $d=1536$ con 28 puentes ($2.81\text{M}$ parámetros entrenables en `bfloat16`). PPL inicial: $4.32$.
+
 ---
 
 ## 3. Dinámica del Campo de Interconexión CONSTELACIÓN v4
@@ -82,38 +92,42 @@ Evaluación oficial en la muestra balanceada de **MATH-500** (`HuggingFaceH4/MAT
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Base Qwen-0.5B** | 24L Secuencial | 0 | 0.00% (0/28) | **7.88** | **684.9 ms** | 6,747 ms |
 | **K24 CONSTELACIÓN v4** | 24L Secuencial | 6 | 0.00% (0/28) | 7.67 | 693.7 ms | 6,818 ms |
-| **K32_macro + Campo v4** | **32 Macro-Neuronas** | **12** | **25.00% (7/28)** | 6.06 | 781.3 ms | 20,373 ms |
-| **K36_macro + Campo v4** | **36 Macro-Neuronas** | **18** | **17.86% (5/28)** | 5.30 | 869.5 ms | **12,729 ms** |
-| **K66_macro + Campo v4** | **66 Macro-Neuronas** | **28** | **14.29% (4/28)** | 4.47 | 1304.1 ms | 15,190 ms |
+| **K32_macro + Campo v4 (0.5B)** | **32 Macro-Neuronas** | **12** | **25.00% (7/28)** | 6.06 | 781.3 ms | 20,373 ms |
+| **K36_macro + Campo v4 (0.5B)** | **36 Macro-Neuronas** | **18** | **17.86% (5/28)** | 5.30 | 869.5 ms | **12,729 ms** |
+| **K66_macro + Campo v4 (0.5B)** | **66 Macro-Neuronas** | **28** | **14.29% (4/28)** | 4.47 | 1304.1 ms | 15,190 ms |
+| **K66_macro + Campo v4 (1.5B)** | **66 Macro-Neuronas** | **28** | **25.00% (7/28)** | 2.15 | 3462.6 ms | 32,831 ms |
 
 ---
 
-## 5. Comparativa en la Suite Compleja (150 Ítems de Holdout)
+## 5. Comparativa en la Suite Compleja
 
-| Tarea Compleja | Base K24 | K32_macro (12P) | K36_macro (18P) | K66_macro (28P) | Hallazgo Clave |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| **`complex_math_gcd_lcm`** | 0.0% | 6.7% | **40.0%** | 0.0% | K36 alcanza el máximo en Euclides |
-| **`complex_math_modular_exp`** | 0.0% | 0.0% | **13.3%** | 0.0% | K36 rompe el cero en modular |
-| **`complex_math_solve_linear`** | 0.0% | 0.0% | 0.0% | **6.7%** | K66 resuelve ecuación lineal |
-| **`complex_math_combinatorics`** | 6.7% | 0.0% | **13.3%** | 0.0% | K36 lidera en conteo |
-| **`complex_code_dict_freq`** | 0.0% | 46.7% | **53.3%** | 0.0% | K36 récord histórico absoluto |
-| **`complex_code_loop_filter`** | **100%** | 73.3% | **100%** | 20.0% | K36 mantiene perfección |
-| **`complex_code_recursion`** | 60.0% | **100%** | 40.0% | 40.0% | K32 récord perfecto |
-| **`complex_code_string_algo`** | 93.3% | **100%** | 26.7% | 0.0% | K32 récord perfecto |
-| **`complex_code_search_nested`** | 53.3% | **100%** | 0.0% | 0.0% | K32 récord perfecto |
-| **Precisión Matemáticas Global** | 2.67% | 2.67% | **13.33%** | 1.33% | **K36 quintuplica el rendimiento base** |
-| **Precisión Código Global** | 61.33% | **84.00%** | 44.00% | 12.00% | **K32 lidera en algoritmia** |
-| **Precisión Global (150 ítems)** | 32.00% | **43.33%** | 28.67% | 6.67% | **K32 y K36 frontera de Pareto** |
+| Tarea Compleja | Base K24 (0.5B) | K32_macro (0.5B) | K36_macro (0.5B) | K66_macro (0.5B) | K66_macro (1.5B) | Hallazgo Clave |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **`complex_math_gcd_lcm`** | 0.0% | 6.7% | **40.0%** | 0.0% | 12.5% | K36 lidera en Euclides; K66-1.5B reactiva capacidad |
+| **`complex_math_modular_exp`** | 0.0% | 0.0% | **13.3%** | 0.0% | 0.0% | K36 exclusivo en modular |
+| **`complex_math_solve_linear`** | 0.0% | 0.0% | 0.0% | 6.7% | **12.5%** | K66-1.5B duplica aciertos en lineal |
+| **`complex_math_combinatorics`** | 6.7% | 0.0% | 13.3% | 0.0% | **37.5%** | **K66-1.5B récord histórico en combinatoria** |
+| **`complex_code_dict_freq`** | 0.0% | 46.7% | 53.3% | 0.0% | **100.0%** | **K66-1.5B perfección absoluta (8/8)** |
+| **`complex_code_loop_filter`** | **100%** | 73.3% | **100%** | 20.0% | 75.0% | Robustez sintáctica en bucles |
+| **`complex_code_recursion`** | 60.0% | **100%** | 40.0% | 40.0% | **100.0%** | **K66-1.5B perfección absoluta (8/8)** |
+| **`complex_code_string_algo`** | 93.3% | **100%** | 26.7% | 0.0% | 75.0% | Recuperación drástica sobre 0.5B |
+| **`complex_code_search_nested`** | 53.3% | **100%** | 0.0% | 0.0% | **100.0%** | **K66-1.5B perfección absoluta (8/8)** |
+| **Precisión Matemáticas Global** | 2.67% | 2.67% | **13.33%** | 1.33% | 12.50% | K66-1.5B multiplica x9 a K66-0.5B |
+| **Precisión Código Global** | 61.33% | 84.00% | 44.00% | 12.00% | **90.00%** | **K66-1.5B nuevo récord histórico absoluto** |
+| **Precisión Global de la Suite** | 32.00% | 43.33% | 28.67% | 6.67% | **51.25%** | **K66-1.5B rompe la barrera del 50%** |
 
 ---
 
 ## 6. Curva de Escalamiento y Conclusiones Científicas
 
-1. **La Frontera de Pareto del Enjambre (K32 y K36)**:
-   - **K32** es la configuración óptima para **programación y razonamiento algorítmico** (84.0% en código, 100% en recursión/strings/búsqueda y 25.0% en MATH-500).
-   - **K36** es la configuración óptima para **matemáticas multi-paso** (13.33% global, 40.0% en Euclides MCD/MCM, 13.33% en exponenciación modular y récord de 53.33% en diccionarios).
-2. **Límite de Saturación por Profundidad (K66)**:
-   - Al escalar a 66 capas manteniendo el 100% de los pesos de las capas congelados, el modelo sufre atenuación de señal sintáctica en tareas de código complejo con AST estricto.
-   - Sin embargo, **K66 demostró retener 14.29% en MATH-500**, superando con contundencia el 0.00% del modelo base de 24 capas, demostrando que los puentes del campo v4 preservan los flujos latentes incluso a través de 66 capas.
-3. **Eficiencia en Memoria (`bfloat16`)**:
-   - Gracias a la calibración de amortiguamiento $\alpha = 0.35$ y el uso de precisión `bfloat16`, K66 operó consumiendo únicamente **2.89 GB de RAM** (frente a los >5.6 GB que requería en float32), permitiendo inferencia fluida a 4.47 tok/s.
+1. **El Avance Cuántico del Escalamiento de Capacidad Base (1.5B vs 0.5B)**:
+   - Al elevar el modelo base de 0.5B ($d=896$) a 1.5B ($d=1536$), **la red K66 rompió la saturación de profundidad**:
+     - La precisión en código escaló de **12.00% a 90.00%** (+78 puntos porcentuales), alcanzando el 100% perfecto en recursión, tablas hash / diccionarios y búsqueda anidada.
+     - La precisión matemática global escaló de **1.33% a 12.50%** (x9), con un pico de **37.50% en combinatoria**.
+     - La precisión global de la suite escaló a **51.25%**, convirtiéndose en la arquitectura más potente probada.
+2. **Artificial Analysis (MATH-500)**:
+   - K66 (1.5B) alcanzó **25.00% de precisión (7/28 problemas olímpicos resueltos)**, superando el 14.29% de K66-0.5B y dejando muy atrás el 0.00% del modelo base de 24 capas.
+3. **Calibración Dinámica de Amortiguamiento y Escala**:
+   - En $d=1536$, la calibración óptima fue $\alpha = 0.25$ para el amortiguamiento de las macro-neuronas clonadas y `scale_ref = 0.25` para los contrastes. Esto redujo la perplejidad de referencia a **4.32** y evitó la degradación latente.
+4. **Eficiencia de Cómputo y Memoria**:
+   - Gracias a la formulación en `bfloat16`, K66 (1.5B) operó consumiendo **5.74 GB de RAM** durante inferencia, manteniéndose cómodamente dentro de los límites del sistema y ejecutando a 2.15 TPS en CPU pura.

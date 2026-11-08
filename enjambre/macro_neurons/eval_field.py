@@ -31,6 +31,7 @@ from .network import (
     build_k32_macro_network,
     build_k36_macro_network,
     build_k66_macro_network,
+    build_k66_macro_network_1_5b,
     macro_param_checksum,
 )
 from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
@@ -50,12 +51,15 @@ def _jdump(path: str, obj: Any) -> None:
 class MacroFieldEvaluator:
     def __init__(
         self,
-        n_macro: int = 36,
+        n_macro: int = 66,
+        base_size: str = "0.5b",
         checkpoint_path: Optional[str] = None,
         out_dir: Optional[str] = None,
         rank: int = 16,
     ):
         self.n_macro = n_macro
+        self.base_size = base_size.lower().strip()
+        self.base_tag = "1_5b" if self.base_size in ("1.5b", "1b") else ""
         self.out_dir = os.path.abspath(out_dir or DEFAULT_OUT_DIR)
         os.makedirs(self.out_dir, exist_ok=True)
         self.rank = rank
@@ -63,8 +67,11 @@ class MacroFieldEvaluator:
         torch.manual_seed(SEED)
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
-        print(f"[macro-eval] Cargando Red de {self.n_macro} Macro-Neuronas...", flush=True)
-        if self.n_macro == 66:
+        print(f"[macro-eval] Cargando Red de {self.n_macro} Macro-Neuronas (Base: {self.base_size.upper()})...", flush=True)
+        if self.base_tag == "1_5b" and self.n_macro == 66:
+            self.model, self.tok, self.delta = build_k66_macro_network_1_5b()
+            pairs = FIELD_PAIRS_66
+        elif self.n_macro == 66:
             self.model, self.tok, self.delta = build_k66_macro_network()
             pairs = FIELD_PAIRS_66
         elif self.n_macro == 36:
@@ -80,29 +87,54 @@ class MacroFieldEvaluator:
         hidden = self.model.config.hidden_size
         self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs).to(self.model.dtype)
 
-        ckpt_file = checkpoint_path or os.path.join(self.out_dir, f"field_v4_k{self.n_macro}_best.pt")
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        ckpt_file = checkpoint_path or os.path.join(self.out_dir, f"field_v4_k{self.n_macro}{tag}_best.pt")
         if os.path.isfile(ckpt_file):
             print(f"[macro-eval] Cargando pesos del campo desde {ckpt_file}...", flush=True)
             data = torch.load(ckpt_file, map_location="cpu", weights_only=False)
             state = data["field_state"] if "field_state" in data else data
             self.field.load_state_dict(state)
         else:
-            print("[macro-eval] ADVERTENCIA: Checkpoint no encontrado, evaluando campo en step 0.", flush=True)
+            print(f"[macro-eval] ADVERTENCIA: Checkpoint ({ckpt_file}) no encontrado, evaluando campo en step 0.", flush=True)
 
         self.field.attach(self.model)
 
-    def run_artificial_analysis_eval(self, n_samples: int = 28, max_tokens: int = 64) -> Dict[str, Any]:
+    def run_artificial_analysis_eval(
+        self, n_samples: int = 28, max_tokens: int = 64, max_per_run: Optional[int] = None
+    ) -> Dict[str, Any]:
         """Ejecuta el protocolo de Artificial Analysis sobre K36 + Campo v4."""
         print(f"[macro-eval] Evaluando Artificial Analysis (MATH-500 + Inferencia, {n_samples} problemas)...", flush=True)
         problems = load_math500(sample_size=n_samples, seed=SEED)
 
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        part_path = os.path.join(self.out_dir, f".partial_aa_k{self.n_macro}{tag}.json")
+
+        sample_results: List[Dict[str, Any]] = []
         ttfts: List[float] = []
         tpss: List[float] = []
         latencies: List[float] = []
         correct_count = 0
-        sample_results = []
 
-        for idx, p in enumerate(problems):
+        if os.path.isfile(part_path):
+            try:
+                with open(part_path, "r", encoding="utf-8") as f:
+                    part_data = json.load(f)
+                sample_results = part_data.get("sample_results", [])
+                ttfts = part_data.get("ttfts", [])
+                tpss = part_data.get("tpss", [])
+                latencies = part_data.get("latencies", [])
+                correct_count = part_data.get("correct_count", 0)
+                print(f"[macro-eval] Reanudando AA desde problema {len(sample_results)}/{len(problems)} (correctos previos={correct_count})...", flush=True)
+            except Exception as e:
+                print(f"[macro-eval] Error leyendo cache parcial ({e}), iniciando desde 0.", flush=True)
+
+        run_count = 0
+        for idx in range(len(sample_results), len(problems)):
+            if max_per_run is not None and run_count >= max_per_run:
+                print(f"[macro-eval] Límite por corrida alcanzado ({run_count} ítems). Avance: {len(sample_results)}/{len(problems)}.", flush=True)
+                break
+            run_count += 1
+            p = problems[idx]
             prob_text = p.get("problem", "")
             sol_text = p.get("solution", "")
             ans_text = p.get("answer", "")
@@ -140,6 +172,22 @@ class MacroFieldEvaluator:
                 "gold_answer": ans_text,
             })
 
+            # Guardar estado parcial incremental
+            _jdump(part_path, {
+                "sample_results": sample_results,
+                "ttfts": ttfts,
+                "tpss": tpss,
+                "latencies": latencies,
+                "correct_count": correct_count,
+            })
+
+            if (idx + 1) % 4 == 0 or idx == len(problems) - 1:
+                print(f"  [aa-eval] {idx + 1}/{len(problems)} procesados (correctos={correct_count})...", flush=True)
+
+        if len(sample_results) < len(problems):
+            print(f"[macro-eval] Lote parcial completado ({len(sample_results)}/{len(problems)}, correctos={correct_count}). Ejecuta nuevamente para procesar el siguiente lote.", flush=True)
+            return {"status": "partial", "completed": len(sample_results), "total": len(problems), "correct": correct_count}
+
         def p50(v):
             s = sorted(v)
             return s[len(s) // 2] if s else 0.0
@@ -166,8 +214,14 @@ class MacroFieldEvaluator:
             "sample_results": sample_results,
         }
 
-        out_path = os.path.join(self.out_dir, f"results_artificial_analysis_k{self.n_macro}_campo.json")
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        out_path = os.path.join(self.out_dir, f"results_artificial_analysis_k{self.n_macro}{tag}_campo.json")
         _jdump(out_path, res)
+        if os.path.isfile(part_path):
+            try:
+                os.remove(part_path)
+            except OSError:
+                pass
         print(f"[macro-eval] Artificial Analysis: TPS={res['inference_performance']['tps_mean']:.2f} | TTFT P50={res['inference_performance']['ttft_ms_p50']:.1f}ms | MATH-500 Acc={res['math500_accuracy']:.2%}", flush=True)
         return res
 
@@ -194,6 +248,7 @@ class MacroFieldEvaluator:
                 "correct": sum(oks),
                 "total": len(items),
             }
+            print(f"  [task {spec.id}] acc={acc:.2%} ({sum(oks)}/{len(items)})", flush=True)
             all_oks.extend(oks)
             if spec.domain == "math":
                 math_oks.extend(oks)
@@ -218,7 +273,8 @@ class MacroFieldEvaluator:
             "tasks": task_scores,
         }
 
-        out_path = os.path.join(self.out_dir, f"results_complex_k{self.n_macro}_campo.json")
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        out_path = os.path.join(self.out_dir, f"results_complex_k{self.n_macro}{tag}_campo.json")
         _jdump(out_path, res)
         print(f"[macro-eval] Complex Bench: Global={mean_acc:.2%} | Math={math_acc:.2%} | Code={code_acc:.2%}", flush=True)
         return res

@@ -6,6 +6,7 @@ from enjambre.macro_neurons.network import (
     build_k32_macro_network,
     build_k36_macro_network,
     build_k66_macro_network,
+    build_k66_macro_network_1_5b,
     macro_param_checksum,
 )
 from enjambre.macro_neurons.field_v4 import (
@@ -98,7 +99,7 @@ def test_build_k66_macro_network():
 def test_constelacion_v4_field_66_attachment_and_step0_identity():
     model, tok, delta = build_k66_macro_network()
     hidden = model.config.hidden_size
-    field = ConstelacionV4Field(hidden=hidden, rank=16, pairs=FIELD_PAIRS_66)
+    field = ConstelacionV4Field(hidden=hidden, rank=16, pairs=FIELD_PAIRS_66).to(model.dtype)
 
     assert len(field.bridges) == 28
     assert field.n_params() > 1_600_000
@@ -112,7 +113,49 @@ def test_constelacion_v4_field_66_attachment_and_step0_identity():
     with torch.no_grad():
         out_field = model(**inputs).logits
 
-    diff = (out_base - out_field).abs().max().item()
-    assert diff < 1e-4, f"Diferencia en step 0: {diff} (debe ser casi 0)"
+    diff = (out_base.float() - out_field.float()).abs().max().item()
+    assert diff < 1e-3, f"Diferencia en step 0: {diff} (debe ser casi 0)"
 
     field.remove_hooks()
+
+
+def test_build_k66_macro_network_1_5b():
+    model, tok, delta = build_k66_macro_network_1_5b()
+    assert len(model.model.layers) == 66
+    assert model.config.num_hidden_layers == 66
+    assert model.config.hidden_size == 1536
+    assert delta.meta["n_macro"] == 66
+    assert delta.meta["base_size"] == "1.5b"
+    assert delta.meta["base_layers"] == 28
+    assert delta.meta["added_layers"] == 38
+
+    for i, l in enumerate(model.model.layers):
+        assert l.self_attn.layer_idx == i
+
+    for p in model.parameters():
+        assert not p.requires_grad
+
+
+def test_constelacion_v4_field_66_1_5b_attachment_and_step0_identity():
+    model, tok, delta = build_k66_macro_network_1_5b()
+    hidden = model.config.hidden_size
+    assert hidden == 1536
+    field = ConstelacionV4Field(hidden=hidden, rank=16, pairs=FIELD_PAIRS_66).to(model.dtype)
+
+    assert len(field.bridges) == 28
+    assert field.n_params() > 2_800_000
+
+    inputs = tok("Calcula: 2 + 2 =", return_tensors="pt")
+
+    with torch.no_grad():
+        out_base = model(**inputs).logits
+
+    field.attach(model)
+    with torch.no_grad():
+        out_field = model(**inputs).logits
+
+    diff = (out_base.float() - out_field.float()).abs().max().item()
+    assert diff < 1e-3, f"Diferencia en step 0: {diff} (debe ser casi 0)"
+
+    field.remove_hooks()
+

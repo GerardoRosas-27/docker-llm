@@ -30,6 +30,7 @@ from .network import (
     build_k32_macro_network,
     build_k36_macro_network,
     build_k66_macro_network,
+    build_k66_macro_network_1_5b,
     macro_param_checksum,
 )
 from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
@@ -49,7 +50,8 @@ def _jdump(path: str, obj: Any) -> None:
 class FieldTrainer:
     def __init__(
         self,
-        n_macro: int = 36,
+        n_macro: int = 66,
+        base_size: str = "0.5b",
         out_dir: Optional[str] = None,
         rank: int = 16,
         n_train: int = 12,
@@ -59,6 +61,8 @@ class FieldTrainer:
         lr_field: float = 8e-4,
     ):
         self.n_macro = n_macro
+        self.base_size = base_size.lower().strip()
+        self.base_tag = "1_5b" if self.base_size in ("1.5b", "1b") else ""
         self.out_dir = os.path.abspath(out_dir or DEFAULT_OUT_DIR)
         os.makedirs(self.out_dir, exist_ok=True)
         self.rank = rank
@@ -69,8 +73,11 @@ class FieldTrainer:
         torch.manual_seed(SEED)
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
-        print(f"[macro-field] Construyendo red de {self.n_macro} macro-neuronas...", flush=True)
-        if self.n_macro == 66:
+        print(f"[macro-field] Construyendo red de {self.n_macro} macro-neuronas (Base: {self.base_size.upper()})...", flush=True)
+        if self.base_tag == "1_5b" and self.n_macro == 66:
+            self.model, self.tok, self.delta = build_k66_macro_network_1_5b()
+            pairs = FIELD_PAIRS_66
+        elif self.n_macro == 66:
             self.model, self.tok, self.delta = build_k66_macro_network()
             pairs = FIELD_PAIRS_66
         elif self.n_macro == 36:
@@ -80,7 +87,7 @@ class FieldTrainer:
             self.model, self.tok, self.delta = build_k32_macro_network()
             pairs = FIELD_PAIRS_32
 
-        if self.n_macro == 66:
+        if self.n_macro == 66 or self.base_tag == "1_5b":
             self.batch_size = min(self.batch_size, 2)
 
         self.eos = self.tok.eos_token or ""
@@ -213,7 +220,8 @@ class FieldTrainer:
             optimizer.step()
             scheduler.step()
 
-            if step % 5 == 0 or step == self.train_steps:
+            val_freq = 10 if (self.n_macro == 66 and self.base_tag == "1_5b") else 5
+            if step % val_freq == 0 or step == self.train_steps:
                 val_l = self.eval_val_loss()
                 cur_lr = scheduler.get_last_lr()[0]
                 print(
@@ -229,8 +237,22 @@ class FieldTrainer:
                 if val_l < best_val:
                     best_val = val_l
                     best_state = {k: v.cpu().clone() for k, v in self.field.state_dict().items()}
+                    tag = f"_{self.base_tag}" if self.base_tag else ""
+                    ckpt_name = f"field_v4_k{self.n_macro}{tag}_best.pt"
+                    torch.save(
+                        {
+                            "field_state": best_state,
+                            "history": history,
+                            "n_macro": self.n_macro,
+                            "pairs": self.field.pairs,
+                            "best_val_loss": best_val,
+                            "base_checksum": self.base_checksum,
+                        },
+                        os.path.join(self.out_dir, ckpt_name),
+                    )
 
-        ckpt_name = f"field_v4_k{self.n_macro}_best.pt"
+        tag = f"_{self.base_tag}" if self.base_tag else ""
+        ckpt_name = f"field_v4_k{self.n_macro}{tag}_best.pt"
         out_path = os.path.join(self.out_dir, ckpt_name)
         torch.save(
             {
