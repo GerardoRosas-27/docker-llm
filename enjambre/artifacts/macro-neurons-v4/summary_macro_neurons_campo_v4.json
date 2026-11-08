@@ -1,23 +1,50 @@
 {
-  "experiment": "Red de 32 Macro-Neuronas (K32_macro) + Campo CONSTELACIÓN v4 (12 Puentes)",
-  "date": "2026-11-08T04:57:00Z",
-  "branch": "exp/macro-neuronas-v4-campo",
-  "architecture_summary": {
-    "paradigm": "Transformer Layers as Macro-Neurons + Multiscale Geometric Interconnection Field",
-    "n_macro_neurons": 32,
-    "base_frozen_layers": 24,
-    "added_macro_neurons": 8,
-    "math_cluster_neurons": [12, 13, 14, 15],
-    "code_cluster_neurons": [22, 23, 24, 25],
-    "damping_factor": 0.50,
-    "field_architecture": "ConstelacionV4Bridge (Koopman 2x2 + Monotonic Lifting + Precision Pi + Adaptive Gate)",
-    "n_field_bridges": 12,
-    "field_pairs": [
-      [0, 4], [4, 8], [8, 12], [12, 16], [16, 20], [20, 24], [24, 28], [28, 31],
-      [4, 12], [12, 22], [16, 26], [22, 31]
-    ],
-    "trainable_field_params": 705840,
-    "macro_neurons_params_status": "100% frozen"
+  "experiment": "Red de Macro-Neuronas (K32 y K36) + Campo CONSTELACIÓN v4 (12 y 18 Puentes)",
+  "date": "2026-11-08T08:52:00Z",
+  "branch": "exp/macro-neurons-v4-campo",
+  "architectures": {
+    "k32_macro_campo_v4": {
+      "n_macro_neurons": 32,
+      "base_frozen_layers": 24,
+      "added_macro_neurons": 8,
+      "clusters": {
+        "perception_early": [0, 11],
+        "math_symbolic": [12, 15],
+        "semantic_core": [16, 21],
+        "code_algorithmic": [22, 25],
+        "output_synthesis": [26, 31]
+      },
+      "damping_factor": 0.50,
+      "n_field_bridges": 12,
+      "trainable_field_params": 705840,
+      "training_steps": 30,
+      "loss_reduction": "0.7634 -> 0.4437 (-41.9%)",
+      "macro_neurons_params_status": "100% frozen"
+    },
+    "k36_macro_campo_v4": {
+      "n_macro_neurons": 36,
+      "base_frozen_layers": 24,
+      "added_macro_neurons": 12,
+      "clusters": {
+        "cluster_1_perception_syntax": [0, 9],
+        "cluster_2_algebra_symbolic": [10, 13],
+        "cluster_3_intermediate_reasoning": [14, 19],
+        "cluster_4_arithmetic_recurrence": [20, 23],
+        "cluster_5_python_algorithmic": [24, 27],
+        "cluster_6_output_synthesis": [28, 35]
+      },
+      "damping_factor": 0.50,
+      "n_field_bridges": 18,
+      "field_pairs": [
+        [0, 4], [4, 8], [8, 12], [12, 16], [16, 20], [20, 24], [24, 28], [28, 32], [32, 35],
+        [4, 10], [10, 20], [14, 24], [20, 28], [24, 32], [20, 35],
+        [10, 24], [16, 28], [28, 35]
+      ],
+      "trainable_field_params": 1058760,
+      "training_steps": 60,
+      "loss_reduction": "1.6958 -> 0.6393 (-62.3%)",
+      "macro_neurons_params_status": "100% frozen"
+    }
   },
   "benchmarks": {
     "artificial_analysis_math500": {
@@ -26,12 +53,20 @@
         "1_base_qwen_unedited": 0.0000,
         "2_k24_mc_residual": 0.0000,
         "3_k24_constelacion_v4": 0.0000,
-        "4_k24_bq10_dastr": 0.0000,
-        "5_k32_macro_campo_v4": 0.2500
+        "4_k32_macro_campo_v4": 0.2500,
+        "5_k36_macro_campo_v4": 0.1786
       },
-      "breakthrough": "+25.00% (7/28 problemas de competición matemática resueltos vs 0% previo)"
+      "breakthrough": "Tanto K32 (25.00%) como K36 (17.86%) rompen el techo histórico de 0.00% que tenían todas las arquitecturas de 24 capas."
     },
     "inference_performance_artificial_analysis": {
+      "base_qwen_ref": {
+        "tps_mean": 7.88,
+        "ttft_ms_p50": 684.90
+      },
+      "k24_constelacion_v4_ref": {
+        "tps_mean": 7.67,
+        "ttft_ms_p50": 693.70
+      },
       "k32_macro_campo_v4": {
         "tps_mean": 6.06,
         "tps_p50": 6.07,
@@ -39,46 +74,61 @@
         "ttft_ms_mean": 803.52,
         "latency_ms_p50": 20373.48
       },
-      "k24_constelacion_v4_ref": {
-        "tps_mean": 7.67,
-        "ttft_ms_p50": 693.70
-      },
-      "base_qwen_ref": {
-        "tps_mean": 7.88,
-        "ttft_ms_p50": 684.90
+      "k36_macro_campo_v4": {
+        "tps_mean": 5.30,
+        "tps_p50": 5.31,
+        "ttft_ms_p50": 869.45,
+        "ttft_ms_mean": 969.56,
+        "latency_ms_p50": 12728.96
       }
     },
     "complex_tasks_suite_150_items": {
-      "mean_accuracy": {
-        "1_base_k24_residual_zeroshot": 0.2933,
-        "2_base_k24_residual_adapted": 0.3200,
-        "3_k24_constelacion_v4_adapted": 0.3200,
-        "4_k24_bq10_dastr_adapted": 0.2467,
-        "5_k32_macro_campo_v4": 0.4333
+      "global_metrics": {
+        "mean_accuracy": {
+          "base_k24_residual": 0.3200,
+          "k24_constelacion_v4": 0.3200,
+          "k32_macro_campo_v4": 0.4333,
+          "k36_macro_campo_v4": 0.2867
+        },
+        "math_accuracy": {
+          "base_k24_residual": 0.0267,
+          "k24_constelacion_v4": 0.0533,
+          "k32_macro_campo_v4": 0.0267,
+          "k36_macro_campo_v4": 0.1333
+        },
+        "code_accuracy": {
+          "base_k24_residual": 0.6133,
+          "k24_constelacion_v4": 0.5867,
+          "k32_macro_campo_v4": 0.8400,
+          "k36_macro_campo_v4": 0.4400
+        }
       },
-      "math_accuracy": {
-        "base_k24_residual_adapted": 0.0267,
-        "k24_constelacion_v4_adapted": 0.0533,
-        "k32_macro_campo_v4": 0.0267
+      "math_specialization_breakthrough_k36": {
+        "complex_math_gcd_lcm": {
+          "k24": 0.0667,
+          "k32": 0.0667,
+          "k36": 0.4000,
+          "gain": "+33.33% absoluto (+500% rel)"
+        },
+        "complex_math_modular_exp": {
+          "k24": 0.0000,
+          "k32": 0.0000,
+          "k36": 0.1333,
+          "gain": "Ruptura del 0%"
+        },
+        "complex_math_combinatorics": {
+          "k24": 0.0667,
+          "k32": 0.0000,
+          "k36": 0.1333,
+          "gain": "+13.33% vs K32"
+        }
       },
-      "code_accuracy": {
-        "base_k24_residual_adapted": 0.6133,
-        "k24_constelacion_v4_adapted": 0.5867,
-        "k32_macro_campo_v4": 0.8400
-      },
-      "task_breakdown_k32_macro_campo_v4": {
-        "complex_math_gcd_lcm": 0.0667,
-        "complex_math_fib_recur": 0.0667,
-        "complex_math_modular_exp": 0.0000,
-        "complex_math_solve_linear": 0.0000,
-        "complex_math_combinatorics": 0.0000,
-        "complex_code_loop_filter": 0.7333,
-        "complex_code_string_algo": 1.0000,
-        "complex_code_recursion": 1.0000,
-        "complex_code_dict_freq": 0.4667,
-        "complex_code_search_nested": 1.0000
-      },
-      "breakthrough_code": "code_dict_freq rompe el techo de 0.00% pasando a 46.67%; recursion, string_algo y search_nested alcanzan 100% de precisión perfecta."
+      "code_record_dict_freq": {
+        "k24": 0.0000,
+        "k32": 0.4667,
+        "k36": 0.5333,
+        "record": "Nuevo récord histórico en inversión de diccionarios (53.33% vs 0% base)"
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-"""Evaluación integral de la Red de Macro-Neuronas K32 + Campo CONSTELACIÓN v4.
+"""Evaluación integral de la Red de Macro-Neuronas (K32 / K36) + Campo CONSTELACIÓN v4.
 
 Ejecuta:
 1. Benchmark Oficial de Artificial Analysis:
@@ -27,8 +27,12 @@ from enjambre.artificial_analysis.perf import benchmark_generation_perf
 from enjambre.generate import generate
 from enjambre.math_code.complex_tasks import COMPLEX_SPECS, make_complex_mc_splits
 
-from .network import build_k32_macro_network, macro_param_checksum
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32
+from .network import (
+    build_k32_macro_network,
+    build_k36_macro_network,
+    macro_param_checksum,
+)
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36
 
 DEFAULT_OUT_DIR = os.path.join(
     os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4"
@@ -45,10 +49,12 @@ def _jdump(path: str, obj: Any) -> None:
 class MacroFieldEvaluator:
     def __init__(
         self,
+        n_macro: int = 36,
         checkpoint_path: Optional[str] = None,
         out_dir: Optional[str] = None,
         rank: int = 16,
     ):
+        self.n_macro = n_macro
         self.out_dir = os.path.abspath(out_dir or DEFAULT_OUT_DIR)
         os.makedirs(self.out_dir, exist_ok=True)
         self.rank = rank
@@ -56,15 +62,21 @@ class MacroFieldEvaluator:
         torch.manual_seed(SEED)
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
-        print("[macro-eval] Cargando Red de 32 Macro-Neuronas (K32_macro)...", flush=True)
-        self.model, self.tok, self.delta = build_k32_macro_network()
+        print(f"[macro-eval] Cargando Red de {self.n_macro} Macro-Neuronas...", flush=True)
+        if self.n_macro == 36:
+            self.model, self.tok, self.delta = build_k36_macro_network()
+            pairs = FIELD_PAIRS_36
+        else:
+            self.model, self.tok, self.delta = build_k32_macro_network()
+            pairs = FIELD_PAIRS_32
+
         self.eos = self.tok.eos_token or ""
         self.base_checksum = macro_param_checksum(self.model)
 
         hidden = self.model.config.hidden_size
-        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=FIELD_PAIRS_32)
+        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs)
 
-        ckpt_file = checkpoint_path or os.path.join(self.out_dir, "field_v4_k32_best.pt")
+        ckpt_file = checkpoint_path or os.path.join(self.out_dir, f"field_v4_k{self.n_macro}_best.pt")
         if os.path.isfile(ckpt_file):
             print(f"[macro-eval] Cargando pesos del campo desde {ckpt_file}...", flush=True)
             data = torch.load(ckpt_file, map_location="cpu", weights_only=False)
@@ -75,8 +87,8 @@ class MacroFieldEvaluator:
 
         self.field.attach(self.model)
 
-    def run_artificial_analysis_eval(self, n_samples: int = 28, max_tokens: int = 120) -> Dict[str, Any]:
-        """Ejecuta el protocolo de Artificial Analysis sobre K32 + Campo v4."""
+    def run_artificial_analysis_eval(self, n_samples: int = 28, max_tokens: int = 64) -> Dict[str, Any]:
+        """Ejecuta el protocolo de Artificial Analysis sobre K36 + Campo v4."""
         print(f"[macro-eval] Evaluando Artificial Analysis (MATH-500 + Inferencia, {n_samples} problemas)...", flush=True)
         problems = load_math500(sample_size=n_samples, seed=SEED)
 
@@ -133,9 +145,9 @@ class MacroFieldEvaluator:
             return s[int(len(s) * 0.95)] if s else 0.0
 
         res = {
-            "model": "K32_macro + Campo CONSTELACIÓN v4",
-            "n_macro_neurons": 32,
-            "n_field_bridges": 12,
+            "model": f"K{self.n_macro}_macro + Campo CONSTELACIÓN v4",
+            "n_macro_neurons": self.n_macro,
+            "n_field_bridges": len(self.field.bridges),
             "samples_evaluated": len(problems),
             "math500_accuracy": round(correct_count / max(1, len(problems)), 4),
             "correct": correct_count,
@@ -150,7 +162,7 @@ class MacroFieldEvaluator:
             "sample_results": sample_results,
         }
 
-        out_path = os.path.join(self.out_dir, "results_artificial_analysis_k32_campo.json")
+        out_path = os.path.join(self.out_dir, f"results_artificial_analysis_k{self.n_macro}_campo.json")
         _jdump(out_path, res)
         print(f"[macro-eval] Artificial Analysis: TPS={res['inference_performance']['tps_mean']:.2f} | TTFT P50={res['inference_performance']['ttft_ms_p50']:.1f}ms | MATH-500 Acc={res['math500_accuracy']:.2%}", flush=True)
         return res
@@ -189,10 +201,10 @@ class MacroFieldEvaluator:
         code_acc = sum(code_oks) / max(1, len(code_oks))
 
         res = {
-            "condition": "8_k32_macro_campo_v4",
-            "model_desc": "K32 Macro-Neuronas (32L) + Campo CONSTELACIÓN v4 (12 Puentes)",
-            "n_macro_neurons": 32,
-            "n_field_bridges": 12,
+            "condition": f"9_k{self.n_macro}_macro_campo_v4",
+            "model_desc": f"K{self.n_macro} Macro-Neuronas ({self.n_macro}L) + Campo CONSTELACIÓN v4 ({len(self.field.bridges)} Puentes)",
+            "n_macro_neurons": self.n_macro,
+            "n_field_bridges": len(self.field.bridges),
             "trainable_field_params": self.field.n_params(),
             "mean_acc": round(mean_acc, 4),
             "math_acc": round(math_acc, 4),
@@ -202,7 +214,7 @@ class MacroFieldEvaluator:
             "tasks": task_scores,
         }
 
-        out_path = os.path.join(self.out_dir, "results_complex_k32_campo.json")
+        out_path = os.path.join(self.out_dir, f"results_complex_k{self.n_macro}_campo.json")
         _jdump(out_path, res)
         print(f"[macro-eval] Complex Bench: Global={mean_acc:.2%} | Math={math_acc:.2%} | Code={code_acc:.2%}", flush=True)
         return res

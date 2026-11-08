@@ -34,6 +34,34 @@ FIELD_PAIRS_32: List[Tuple[int, int]] = [
     (22, 31),   # Cluster Code -> Salida Final
 ]
 
+# Topología Ampliada del Hiper-Campo CONSTELACIÓN v4 (Red de 36 Macro-Neuronas, 18 Puentes):
+# 1. Tronco Principal (9): Flujo continuo a través de las 36 capas
+# 2. Autopistas Armónicas (6): Resonancia inter-cluster (Álgebra, Aritmética, Código y Salida)
+# 3. Canales Causales Cruzados (3): Inyección de innovación directa entre polos funcionales
+FIELD_PAIRS_36: List[Tuple[int, int]] = [
+    # Tronco Principal (9)
+    (0, 4),
+    (4, 8),
+    (8, 12),    # Enlace hacia Cluster Álgebra
+    (12, 16),   # Salida de Álgebra hacia Núcleo
+    (16, 20),   # Núcleo hacia Cluster Aritmética
+    (20, 24),   # Aritmética hacia Cluster Código
+    (24, 28),   # Código hacia Síntesis
+    (28, 32),   # Síntesis intermedia
+    (32, 35),   # Salida Final
+    # Autopistas Armónicas Trans-Campo (6)
+    (4, 10),    # Sintaxis temprana -> Cluster Álgebra
+    (10, 20),   # Álgebra -> Aritmética y Exponenciación
+    (14, 24),   # Núcleo Semántico -> Cluster Código
+    (20, 28),   # Aritmética -> Síntesis
+    (24, 32),   # Código -> Síntesis avanzada
+    (20, 35),   # Aritmética directa -> Salida Final
+    # Canales de Innovación Causal Cruzada (3)
+    (10, 24),   # Álgebra -> Código (coordinación simbólica)
+    (16, 28),   # Núcleo Semántico -> Síntesis
+    (28, 35),   # Síntesis -> Salida Final
+]
+
 
 class ConstelacionV4Field(nn.Module):
     """Campo Geométrico de Conexión de Macro-Neuronas basado en CONSTELACIÓN v4."""

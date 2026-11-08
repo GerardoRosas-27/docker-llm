@@ -1,8 +1,8 @@
-"""Entrenamiento del Campo de Interconexión CONSTELACIÓN v4 sobre la Red de Macro-Neuronas K32.
+"""Entrenamiento del Campo de Interconexión CONSTELACIÓN v4 sobre la Red de Macro-Neuronas (K32 / K36).
 
-Mantiene el 100% de las 32 macro-neuronas congeladas y entrena exclusivamente
+Mantiene el 100% de las macro-neuronas congeladas y entrena exclusivamente
 los parámetros del campo geométrico (rotaciones Koopman, levantamiento monótono,
-precisión Π̂ y compuertas adaptativas).
+precisión Π̂ e innovación causal) con énfasis focalizado en Álgebra y Ecuaciones.
 """
 from __future__ import annotations
 import json
@@ -16,6 +16,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from enjambre.config import resolve
+from enjambre.math_code.complex_tasks import make_complex_mc_splits
 from enjambre.math_code.tasks import (
     ALL_MC_TASKS,
     CODE_TASKS,
@@ -25,8 +26,12 @@ from enjambre.math_code.tasks import (
     make_ext_mc_splits,
     make_mc_splits,
 )
-from .network import build_k32_macro_network, macro_param_checksum
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32
+from .network import (
+    build_k32_macro_network,
+    build_k36_macro_network,
+    macro_param_checksum,
+)
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36
 
 DEFAULT_OUT_DIR = os.path.join(
     os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4"
@@ -43,14 +48,16 @@ def _jdump(path: str, obj: Any) -> None:
 class FieldTrainer:
     def __init__(
         self,
+        n_macro: int = 36,
         out_dir: Optional[str] = None,
         rank: int = 16,
         n_train: int = 12,
         n_val: int = 6,
-        train_steps: int = 30,
+        train_steps: int = 60,
         batch_size: int = 4,
         lr_field: float = 8e-4,
     ):
+        self.n_macro = n_macro
         self.out_dir = os.path.abspath(out_dir or DEFAULT_OUT_DIR)
         os.makedirs(self.out_dir, exist_ok=True)
         self.rank = rank
@@ -61,19 +68,26 @@ class FieldTrainer:
         torch.manual_seed(SEED)
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
-        print("[macro-field] Construyendo red de 32 macro-neuronas...", flush=True)
-        self.model, self.tok, self.delta = build_k32_macro_network()
+        print(f"[macro-field] Construyendo red de {self.n_macro} macro-neuronas...", flush=True)
+        if self.n_macro == 36:
+            self.model, self.tok, self.delta = build_k36_macro_network()
+            pairs = FIELD_PAIRS_36
+        else:
+            self.model, self.tok, self.delta = build_k32_macro_network()
+            pairs = FIELD_PAIRS_32
+
         self.eos = self.tok.eos_token or ""
         self.base_checksum = macro_param_checksum(self.model)
 
-        # Crear y acoplar el Campo CONSTELACIÓN v4 (12 puentes)
+        # Crear y acoplar el Campo CONSTELACIÓN v4 (12 o 18 puentes)
         hidden = self.model.config.hidden_size
-        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=FIELD_PAIRS_32)
+        self.field = ConstelacionV4Field(hidden=hidden, rank=rank, pairs=pairs)
         self.field.attach(self.model)
 
-        # Splits para entrenamiento y validación
+        # Splits para entrenamiento y validación (Core + Ext + Complex)
         self.train_rows, self.val_rows, _, _ = make_mc_splits(n_train=n_train, n_val=n_val, n_hold=10, seed=SEED)
         self.ext_train_rows, self.ext_val_rows, _, _ = make_ext_mc_splits(n_train=n_train, n_val=n_val, n_hold=10, seed=142)
+        self.comp_train, self.comp_val, _, _ = make_complex_mc_splits(n_train=6, n_val=4, n_hold=15, seed=SEED)
 
         print(f"[macro-field] Campo v4 inicializado con {len(self.field.bridges)} puentes ({self.field.n_params():,} parámetros entrenables)", flush=True)
 
@@ -113,8 +127,9 @@ class FieldTrainer:
         ).view(shift_labels.size(0), shift_labels.size(1))
         valid = (shift_labels != -100).float()
         seq_losses = (per_tok * valid).sum(dim=1) / valid.sum(dim=1).clamp_min(1.0)
+        # Mayor ponderación a problemas concisos y cálculos algebraicos numéricos
         weights = torch.tensor(
-            [1.40 if len(t.strip()) <= 6 else 1.0 for t in targets],
+            [1.50 if len(t.strip()) <= 6 else 1.0 for t in targets],
             dtype=seq_losses.dtype,
             device=seq_losses.device,
         )
@@ -123,10 +138,13 @@ class FieldTrainer:
         return loss
 
     def build_dataset(self) -> List[Tuple[str, str]]:
+        """Construye un dataset multiescala enriquecido con tareas complejas (ecuaciones y álgebra)."""
         math_tids = MATH_TASKS + EXT_MATH_TASKS
         code_tids = CODE_TASKS + EXT_CODE_TASKS
         all_rows = {**self.train_rows, **self.ext_train_rows}
         out: List[Tuple[str, str]] = []
+
+        # 1. Tareas base y extendidas
         max_len = max(len(all_rows[tid]) for tid in (math_tids + code_tids))
         for i in range(max_len):
             for tid in math_tids:
@@ -136,6 +154,15 @@ class FieldTrainer:
                 for tid in code_tids:
                     if i < len(all_rows[tid]):
                         out.append((all_rows[tid][i][0], all_rows[tid][i][1]))
+
+        # 2. Inyección de tareas complejas de entrenamiento (Ecuaciones, GCD, Recursión, Diccionarios)
+        for tid, rows in self.comp_train.items():
+            for p, tgt, _ in rows:
+                out.append((p, str(tgt)))
+                # Duplicar álgebra y ecuaciones para reforzar convergencia matemática
+                if "solve_linear" in tid or "modular_exp" in tid or "gcd_lcm" in tid:
+                    out.append((p, str(tgt)))
+
         return out
 
     @torch.no_grad()
@@ -155,9 +182,11 @@ class FieldTrainer:
         dataset = self.build_dataset()
         random.seed(SEED)
         random.shuffle(dataset)
-        print(f"[macro-field] Dataset preparado con {len(dataset)} pares (Math + Code)", flush=True)
+        print(f"[macro-field] Dataset ampliado con {len(dataset)} pares (Math Core + Ext + Complex)", flush=True)
 
         optimizer = torch.optim.AdamW(self.field.parameters(), lr=self.lr_field, weight_decay=1e-4)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=self.train_steps, eta_min=1e-5)
+
         best_val = self.eval_val_loss()
         print(f"[macro-field] Val Loss inicial (step 0): {best_val:.4f}", flush=True)
 
@@ -175,22 +204,33 @@ class FieldTrainer:
             loss.backward()
             torch.nn.utils.clip_grad_norm_(self.field.parameters(), 1.0)
             optimizer.step()
+            scheduler.step()
 
             if step % 5 == 0 or step == self.train_steps:
                 val_l = self.eval_val_loss()
-                print(f"[macro-field] Step {step}/{self.train_steps} | Train Loss: {loss.item():.4f} | Val Loss: {val_l:.4f} | Elapsed: {time.time()-t0:.1f}s", flush=True)
-                history.append({"step": step, "train_loss": round(float(loss.item()), 4), "val_loss": round(val_l, 4)})
+                cur_lr = scheduler.get_last_lr()[0]
+                print(
+                    f"[macro-field] Step {step}/{self.train_steps} | LR: {cur_lr:.2e} | Train Loss: {loss.item():.4f} | Val Loss: {val_l:.4f} | Elapsed: {time.time()-t0:.1f}s",
+                    flush=True,
+                )
+                history.append({
+                    "step": step,
+                    "train_loss": round(float(loss.item()), 4),
+                    "val_loss": round(val_l, 4),
+                    "lr": cur_lr,
+                })
                 if val_l < best_val:
                     best_val = val_l
                     best_state = {k: v.cpu().clone() for k, v in self.field.state_dict().items()}
 
-        out_path = os.path.join(self.out_dir, "field_v4_k32_best.pt")
+        ckpt_name = f"field_v4_k{self.n_macro}_best.pt"
+        out_path = os.path.join(self.out_dir, ckpt_name)
         torch.save(
             {
                 "field_state": best_state,
                 "history": history,
-                "n_macro": 32,
-                "pairs": FIELD_PAIRS_32,
+                "n_macro": self.n_macro,
+                "pairs": self.field.pairs,
                 "best_val_loss": best_val,
                 "base_checksum": self.base_checksum,
             },

@@ -181,3 +181,138 @@ def build_k32_macro_network(
     )
 
     return base_model, tok, macro_delta
+
+
+def build_k36_macro_network(
+    model_hf_id: str = "Qwen/Qwen2.5-0.5B-Instruct",
+    damping: float = 0.50,
+    directions_path: str = DEFAULT_DIRS,
+) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
+    """Construye y calibra la Red de 36 Macro-Neuronas partiendo del modelo base:
+
+    Distribución topológica (36 Macro-Neuronas):
+    - Capas 0..9:    Macro-neuronas de percepción sintáctica temprana (Base 0..9).
+    - Capas 10..13:  [CLUSTER ÁLGEBRA Y ECUACIONES] 4 macro-neuronas clonadas de 8..11
+                     con damping 0.50 y editadas para cálculo algebraico simbólico.
+    - Capas 14..19:  Macro-neuronas intermedias de razonamiento semántico (Base 10..15).
+    - Capas 20..23:  [CLUSTER ARITMÉTICA Y RECURRENCIAS] 4 macro-neuronas clonadas de 12..15
+                     con damping 0.50 y editadas para recurrencia y exponenciación modular.
+    - Capas 24..27:  [CLUSTER ALGORITMIA Y DICCIONARIOS] 4 macro-neuronas clonadas de 16..19
+                     con damping 0.50 y editadas para algoritmos y estructuras de datos Python.
+    - Capas 28..35:  Macro-neuronas de síntesis superior y decodificación final (Base 16..23).
+    """
+    tok = AutoTokenizer.from_pretrained(model_hf_id)
+    tok.padding_side = "left"
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+
+    base_model = AutoModelForCausalLM.from_pretrained(model_hf_id, dtype=torch.float32).eval()
+    spec_vecs = build_layer_specialist_vectors(directions_path)
+    deltas = build_math_code_layer_deltas(directions_path)
+    k24_delta = deltas["k24_mc"]
+
+    k24_by_layer = {b.layer: b for b in k24_delta.bias_edits}
+    scale_ref = float(k24_delta.bias_edits[0].scale)
+
+    new_layers: List[nn.Module] = []
+    edits: List[BiasEdit] = []
+
+    # 1. Macro-Neuronas 0..9 (Base 0..9)
+    for orig_idx in range(10):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # 2. Macro-Neuronas 10..13: Cluster Álgebra y Ecuaciones (clonadas de 8..11)
+    for j in range(4):
+        src_idx = 8 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.50))
+
+    # 3. Macro-Neuronas 14..19: Razonamiento Semántico Intermedio (Base 10..15)
+    for orig_idx in range(10, 16):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # 4. Macro-Neuronas 20..23: Cluster Aritmética y Recurrencias (clonadas de 12..15)
+    for j in range(4):
+        src_idx = 12 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_math = spec_vecs[src_idx]["math"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=scale_ref * 0.50))
+
+    # 5. Macro-Neuronas 24..27: Cluster Algoritmia y Diccionarios (clonadas de 16..19)
+    for j in range(4):
+        src_idx = 16 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_code = spec_vecs[src_idx]["code"]
+        edits.append(BiasEdit(layer=new_idx, vec=v_code.clone(), scale=scale_ref * 0.50))
+
+    # 6. Macro-Neuronas 28..35: Síntesis Superior y Salida (Base 16..23)
+    for orig_idx in range(16, 24):
+        l = base_model.model.layers[orig_idx]
+        new_layers.append(l)
+        new_idx = len(new_layers) - 1
+        if orig_idx in k24_by_layer:
+            b = k24_by_layer[orig_idx]
+            edits.append(BiasEdit(layer=new_idx, vec=b.vec.clone(), scale=float(b.scale)))
+
+    # Re-indexación estricta de layer_idx para KV cache y rotary embeddings
+    for i, l in enumerate(new_layers):
+        l.self_attn.layer_idx = i
+
+    base_model.model.layers = nn.ModuleList(new_layers)
+    base_model.config.num_hidden_layers = len(new_layers)
+    base_model.config.layer_types = ["full_attention"] * len(new_layers)
+
+    # Aplicar físicamente las ediciones a los sesgos de down_proj
+    for b in edits:
+        lin = base_model.model.layers[b.layer].mlp.down_proj
+        vec = (b.scale * b.vec).to(dtype=lin.weight.dtype, device=lin.weight.device)
+        with torch.no_grad():
+            if lin.bias is None:
+                lin.bias = nn.Parameter(vec.clone())
+            else:
+                lin.bias.add_(vec)
+
+    # Congelar el 100% de los pesos de la red de macro-neuronas
+    for p in base_model.parameters():
+        p.requires_grad_(False)
+
+    macro_delta = EditDelta(
+        name="k36_macro",
+        bias_edits=edits,
+        meta={
+            "n_macro": 36,
+            "damping": damping,
+            "algebra_cluster": [10, 11, 12, 13],
+            "arithmetic_cluster": [20, 21, 22, 23],
+            "code_cluster": [24, 25, 26, 27],
+        },
+    )
+
+    return base_model, tok, macro_delta
+
