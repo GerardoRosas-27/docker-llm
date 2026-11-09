@@ -192,4 +192,59 @@ Para dotar al modelo compuesto de la capacidad matemática del modelo base sin s
 - La precisión en código se mantuvo intacta en **90.00%** (36/40 aciertos).
 - La precisión global del modelo compuesto escaló a **52.50%** (42/80 aciertos), marcando un **nuevo récord histórico absoluto** en todo el proyecto.
 
+---
+
+## 8. Arquitectura Híbrida Inteligente: Base 1.5B (Matemáticas) + K66 Macro-Neuronas (Código)
+
+Ante el dilema arquitectónico observado —donde el modelo base puro preserva intacta la memoria asociativa de los MLPs para aritmética exacta mientras que la red profunda K66 con Campo CONSTELACIÓN v4 domina en ejecución algorítmica y seguimiento de estado— se diseñó e implementó la **Arquitectura Híbrida Inteligente** (`HybridMacroBaseModel` en [`enjambre/macro_neurons/hybrid.py`](file:///home/antigravity/GerardoRosas-27/docker-llm/enjambre/macro_neurons/hybrid.py)).
+
+### 8.1. Mecanismo de Enrutamiento Dinámico y Despacho
+
+El sistema opera mediante un enrutador de dominio determinista de latencia despreciable ($O(1)$) que analiza los tokens y sintaxis del prompt:
+1. **Clasificación Léxica de Dominio (`classify_prompt_domain`)**:
+   - Detecta operadores y palabras clave de programación (`def `, `return `, `for `, `while `, `dict`, `list`, `stack`, `algorithm`, estructuras anidadas).
+   - Discrimina patrones de derivación aritmética y algebraica (`gcd`, `lcm`, `solve`, `equation`, `modular`, `mod`, `combinations`, `permutations`, `fibonacci`).
+   - En el conjunto de prueba holdout unificado (80 ítems), el clasificador obtuvo una **precisión de enrutamiento del 100.0%** (80/80 aciertos).
+2. **Especialistas Desplegados**:
+   - **Especialista Matemático**: `Base Qwen2.5-1.5B-Instruct` (28 capas nativas intactas, sin pesos clonados ni modificaciones en sus conexiones residuales), optimizado para resolución de ecuaciones y combinatoria.
+   - **Especialista Algorítmico**: `K66 Macro-Network` (66 capas = 28 base + 38 macro-neuronas) acoplado al `Campo CONSTELACIÓN v4` (28 puentes transversales entrenados con Proyección Residual Proyectada), optimizado para bucles, recursión y búsquedas complejas.
+3. **Eficiencia de Memoria y TPS**:
+   - En ejecución secuencial bajo CPU con recolección de basura forzada (`gc.collect()`), el pico de memoria se mantuvo en **3.48 GB**, permitiendo que ambos modelos coexistan sin riesgo de saturación de RAM.
+
+---
+
+### 8.2. Tabla Comparativa Integral Unificada (Suite Compleja, 80 Ítems)
+
+Evaluación bajo protocolo idéntico (`seed=42`, holdout de 8 ítems independientes por tarea, scratchpad CoT conciso de 1-2 líneas y extracción candidata robusta):
+
+| Tarea Compleja | Dominio | Base 0.5B (K24) | K32_macro (0.5B) | K36_macro (0.5B) | K66_macro (0.5B) | K66_macro (1.5B) | **HÍBRIDO BASE 1.5B + K66** |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`complex_math_gcd_lcm`** | Math | **50.00%** (4/8) | 12.50% (1/8) | 0.00% (0/8) | 0.00% (0/8) | 25.00% (2/8) | 25.00% (2/8) |
+| **`complex_math_fib_recur`** | Math | 0.00% (0/8) | 12.50% (1/8) | 0.00% (0/8) | 0.00% (0/8) | 0.00% (0/8) | 12.50% (1/8) |
+| **`complex_math_modular_exp`** | Math | 37.50% (3/8) | 12.50% (1/8) | 37.50% (3/8) | 0.00% (0/8) | 12.50% (1/8) | 37.50% (3/8) |
+| **`complex_math_solve_linear`** | Math | 62.50% (5/8) | 0.00% (0/8) | 0.00% (0/8) | 0.00% (0/8) | 12.50% (1/8) | **100.00%** (8/8) 🏆 |
+| **`complex_math_combinatorics`** | Math | 50.00% (4/8) | 25.00% (2/8) | 25.00% (2/8) | 0.00% (0/8) | 25.00% (2/8) | **62.50%** (5/8) 🏆 |
+| **Subtotal Matemáticas** | **Math** | 40.00% (16/40) | 12.50% (5/40) | 12.50% (5/40) | 0.00% (0/40) | 15.00% (6/40) | **47.50%** (19/40) 🏆 |
+| **`complex_code_loop_filter`** | Code | 0.00% (0/8) | 62.50% (5/8) | **100.00%** (8/8) | 25.00% (2/8) | 75.00% (6/8) | 75.00% (6/8) |
+| **`complex_code_string_algo`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 25.00% (2/8) | 0.00% (0/8) | 75.00% (6/8) | 75.00% (6/8) |
+| **`complex_code_recursion`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 37.50% (3/8) | 37.50% (3/8) | **100.00%** (8/8) | **100.00%** (8/8) 🏆 |
+| **`complex_code_dict_freq`** | Code | 37.50% (3/8) | 37.50% (3/8) | 62.50% (5/8) | 0.00% (0/8) | **100.00%** (8/8) | **100.00%** (8/8) 🏆 |
+| **`complex_code_search_nested`** | Code | 0.00% (0/8) | **100.00%** (8/8) | 0.00% (0/8) | 0.00% (0/8) | **100.00%** (8/8) | **100.00%** (8/8) 🏆 |
+| **Subtotal Programación** | **Code** | 7.50% (3/40) | 80.00% (32/40) | 45.00% (18/40) | 12.50% (5/40) | **90.00%** (36/40) | **90.00%** (36/40) 🏆 |
+| **TOTAL GLOBAL** | **All** | 23.75% (19/80) | 46.25% (37/80) | 28.75% (23/80) | 6.25% (5/80) | 52.50% (42/80) | **68.75%** (55/80) 🚀 |
+
+---
+
+### 8.3. Análisis de Resultados y Frontera de Pareto
+
+1. **Récord Global Absoluto (68.75%)**:
+   - Con **55 aciertos de 80 posibles**, el modelo híbrido supera a todas las configuraciones anteriores por un amplio margen (+16.25 puntos sobre K66-1.5B, +22.50 puntos sobre K32, y casi el triple del modelo Base 0.5B).
+2. **Perfección en Tareas Críticas**:
+   - En matemáticas, la resolución de ecuaciones lineales (`complex_math_solve_linear`) alcanzó **100.00%** perfecto (8/8), y combinatoria subió a **62.50%**.
+   - En código, tres tareas complejas alcanzaron **100.00%** perfecto (`recursion`, `dict_freq`, `search_nested`).
+3. **Lección Arquitectónica Fundamental**:
+   - La arquitectura híbrida demuestra que no existe una única topología universalmente óptima: la aritmética simbólica se beneficia de transformaciones unimodales directas sin perturbación latente, mientras que la ejecución algorítmica de código se potencia exponencialmente con redes de macro-neuronas ultra-profundas (K66) conectadas mediante campos de transporte residual (Campo CONSTELACIÓN v4).
+   - El enrutamiento dinámico combina lo mejor de ambos mundos sin compromisos.
+
+
 

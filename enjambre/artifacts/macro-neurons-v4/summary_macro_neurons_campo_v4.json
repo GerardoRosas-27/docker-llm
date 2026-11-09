@@ -232,6 +232,27 @@
             "dict_freq": 1.000,
             "search_nested": 1.000
           }
+        },
+        "hybrid_base_math_k66_code_campo_v4": {
+          "global_acc": 0.6875,
+          "math_acc": 0.4750,
+          "code_acc": 0.9000,
+          "math_specialist": "Base Qwen-1.5B (28 capas nativas intactas)",
+          "code_specialist": "K66_macro (66 macro-neuronas + Campo CONSTELACIÓN v4, 28 puentes)",
+          "math_tasks": {
+            "gcd_lcm": 0.250,
+            "fib_recur": 0.125,
+            "modular_exp": 0.375,
+            "solve_linear": 1.000,
+            "combinatorics": 0.625
+          },
+          "code_tasks": {
+            "loop_filter": 0.750,
+            "string_algo": 0.750,
+            "recursion": 1.000,
+            "dict_freq": 1.000,
+            "search_nested": 1.000
+          }
         }
       }
     }
