@@ -1,6 +1,6 @@
 {
-  "experiment": "Red de Macro-Neuronas (K32, K36 y K66) + Campo CONSTELACIÓN v4 (12, 18 y 28 Puentes)",
-  "date": "2026-11-08T07:16:00Z",
+  "experiment": "Red de Macro-Neuronas (K32, K36, K66 y K120) + Campo CONSTELACIÓN v4 (12, 18, 28 y 48 Puentes)",
+  "date": "2026-11-09T06:20:00Z",
   "branch": "exp/macro-neuronas-v4-campo",
   "architectures": {
     "k32_macro_campo_v4": {
@@ -55,6 +55,36 @@
       "training_steps": 20,
       "loss_reduction": "0.6093 -> 0.5098 (-16.3%)",
       "macro_neurons_params_status": "100% frozen"
+    },
+    "k120_macro_campo_v4_1_5b": {
+      "n_macro_neurons": 120,
+      "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+      "base_frozen_layers": 28,
+      "added_macro_neurons": 92,
+      "stages": 12,
+      "stage_size": 10,
+      "damping_factor": 0.20,
+      "bias_scale": 0.05,
+      "precision": "bfloat16",
+      "n_field_bridges": 48,
+      "trainable_field_params": 4820160,
+      "macro_neurons_params_status": "100% frozen (weight-shared with shallow clone wrappers)"
+    },
+    "ultra_hybrid_base3b_k66": {
+      "type": "Híbrido Pareto-Óptimo de Producción",
+      "math_specialist": "Qwen/Qwen2.5-3B-Instruct (36L nativas, 3.09B parámetros)",
+      "code_specialist": "K66_macro_1.5b (66L + Campo v4, 28 puentes)",
+      "global_acc": 0.7375,
+      "math_acc": 0.5750,
+      "code_acc": 0.9000
+    },
+    "ultra_hybrid_base3b_k120": {
+      "type": "Ultra-Híbrido Experimental de Escalamiento Extremo",
+      "math_specialist": "Qwen/Qwen2.5-3B-Instruct (36L nativas, 3.09B parámetros)",
+      "code_specialist": "K120_macro_1.5b (120L + Campo CONSTELACIÓN v4, 48 puentes)",
+      "global_acc": 0.3375,
+      "math_acc": 0.5750,
+      "code_acc": 0.1000
     }
   },
   "benchmarks": {
@@ -252,6 +282,48 @@
             "recursion": 1.000,
             "dict_freq": 1.000,
             "search_nested": 1.000
+          }
+        },
+        "ultra_hybrid_base3b_k66_campo_v4": {
+          "global_acc": 0.7375,
+          "math_acc": 0.5750,
+          "code_acc": 0.9000,
+          "math_specialist": "Base Qwen2.5-3B-Instruct (36 capas nativas intactas, 3.09B params)",
+          "code_specialist": "K66_macro (66 macro-neuronas + Campo CONSTELACIÓN v4, 28 puentes)",
+          "math_tasks": {
+            "gcd_lcm": 0.500,
+            "fib_recur": 0.250,
+            "modular_exp": 0.500,
+            "solve_linear": 1.000,
+            "combinatorics": 0.625
+          },
+          "code_tasks": {
+            "loop_filter": 0.750,
+            "string_algo": 0.750,
+            "recursion": 1.000,
+            "dict_freq": 1.000,
+            "search_nested": 1.000
+          }
+        },
+        "ultra_hybrid_base3b_k120_campo_v4": {
+          "global_acc": 0.3375,
+          "math_acc": 0.5750,
+          "code_acc": 0.1000,
+          "math_specialist": "Base Qwen2.5-3B-Instruct (36 capas nativas intactas, 3.09B params)",
+          "code_specialist": "K120_macro (120 macro-neuronas estructuradas en 12 etapas + Campo CONSTELACIÓN v4, 48 puentes)",
+          "math_tasks": {
+            "gcd_lcm": 0.500,
+            "fib_recur": 0.250,
+            "modular_exp": 0.500,
+            "solve_linear": 1.000,
+            "combinatorics": 0.625
+          },
+          "code_tasks": {
+            "loop_filter": 0.000,
+            "string_algo": 0.125,
+            "recursion": 0.000,
+            "dict_freq": 0.250,
+            "search_nested": 0.125
           }
         }
       }

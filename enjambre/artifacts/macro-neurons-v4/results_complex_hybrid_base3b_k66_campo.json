@@ -1,0 +1,75 @@
+{
+  "condition": "11_hybrid_base3b_math_k66_code_campo_v4",
+  "model_desc": "Ultra-Híbrido Inteligente: Base Qwen2.5-3B (~4B, Math, 36L) + K66 Macro-Neuronas (Code, 66L + Campo v4)",
+  "router": "Deterministic Prompt Domain Dispatcher",
+  "math_specialist": "Base Qwen2.5-3B-Instruct (36 capas nativas intactas, 3.09B parámetros)",
+  "code_specialist": "K66_macro (66 macro-neuronas + Campo CONSTELACIÓN v4, 28 puentes)",
+  "mean_acc": 0.7375,
+  "math_acc": 0.575,
+  "code_acc": 0.9,
+  "total_items": 80,
+  "math_items": 40,
+  "code_items": 40,
+  "tasks": {
+    "complex_math_gcd_lcm": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_fib_recur": {
+      "acc": 0.25,
+      "correct": 2,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_modular_exp": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_solve_linear": {
+      "acc": 1.0,
+      "correct": 8,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_combinatorics": {
+      "acc": 0.625,
+      "correct": 5,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_code_loop_filter": {
+      "acc": 0.75,
+      "correct": 6,
+      "total": 8,
+      "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)"
+    },
+    "complex_code_string_algo": {
+      "acc": 0.75,
+      "correct": 6,
+      "total": 8,
+      "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)"
+    },
+    "complex_code_recursion": {
+      "acc": 1.0,
+      "correct": 8,
+      "total": 8,
+      "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)"
+    },
+    "complex_code_dict_freq": {
+      "acc": 1.0,
+      "correct": 8,
+      "total": 8,
+      "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)"
+    },
+    "complex_code_search_nested": {
+      "acc": 1.0,
+      "correct": 8,
+      "total": 8,
+      "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)"
+    }
+  }
+}

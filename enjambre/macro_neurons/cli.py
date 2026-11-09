@@ -46,8 +46,9 @@ def main() -> None:
     p_eval.add_argument("--checkpoint", type=str, default=None, help="Ruta al checkpoint del campo")
 
     # eval-hybrid
-    p_hyb = sub.add_parser("eval-hybrid", help="Ejecuta la evaluación de la Arquitectura Híbrida (Base 1.5B [Math] + K66 [Code])")
-    p_hyb.add_argument("--base", type=str, default="Qwen/Qwen2.5-1.5B-Instruct", help="Modelo base para matemáticas")
+    p_hyb = sub.add_parser("eval-hybrid", help="Ejecuta la evaluación de la Arquitectura Híbrida (Base 3B/1.5B [Math] + K120/K66 [Code])")
+    p_hyb.add_argument("--base", type=str, default="Qwen/Qwen2.5-3B-Instruct", help="Modelo base para matemáticas")
+    p_hyb.add_argument("--macro", type=int, default=120, help="Macro-neuronas para código (66 o 120)")
     p_hyb.add_argument("--hold", type=int, default=8, help="Ítems holdout por tarea")
 
     # all
@@ -74,7 +75,8 @@ def main() -> None:
 
     elif args.cmd == "eval-hybrid":
         from .hybrid import run_hybrid_complex_benchmark
-        run_hybrid_complex_benchmark(base_model_id=args.base, n_hold=args.hold)
+        run_hybrid_complex_benchmark(base_model_id=args.base, code_macro=args.macro, n_hold=args.hold)
+
 
     elif args.cmd == "eval":
         evaluator = MacroFieldEvaluator(n_macro=args.macro, base_size=args.base, checkpoint_path=args.checkpoint)

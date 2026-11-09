@@ -102,6 +102,67 @@ FIELD_PAIRS_66: List[Tuple[int, int]] = [
     (23, 59),   # Semántica Base -> Algoritmia Python
 ]
 
+# Topología del Hiper-Campo CONSTELACIÓN v4 para K120 (Red de 120 Macro-Neuronas, 48 Puentes):
+# 1. Tronco Continuo (19 puentes): Flujo residual a través de las 12 etapas funcionales
+# 2. Autopistas Armónicas Trans-Campo (15 puentes): Resonancia de mediano alcance inter-etapas
+# 3. Resonadores de Largo Alcance (8 puentes): Inyección directa a decodificación y síntesis
+# 4. Canales Causales de Innovación (6 puentes): Sincronización multi-escala para máquinas de pila
+FIELD_PAIRS_120: List[Tuple[int, int]] = [
+    # 1. Tronco Continuo (19 puentes)
+    (0, 10),
+    (10, 20),
+    (20, 30),
+    (30, 40),
+    (40, 50),
+    (50, 60),
+    (60, 70),
+    (70, 80),
+    (80, 90),
+    (90, 100),
+    (100, 110),
+    (110, 119),
+    (5, 15),
+    (15, 25),
+    (25, 35),
+    (45, 55),
+    (65, 75),
+    (85, 95),
+    (105, 115),
+    # 2. Autopistas Armónicas Trans-Campo (15 puentes)
+    (10, 30),
+    (20, 40),
+    (30, 50),
+    (40, 60),
+    (50, 70),
+    (60, 80),
+    (70, 90),
+    (80, 100),
+    (90, 110),
+    (100, 119),
+    (15, 45),
+    (35, 65),
+    (55, 85),
+    (75, 105),
+    (85, 115),
+    # 3. Resonadores de Largo Alcance (8 puentes)
+    (40, 110),
+    (50, 115),
+    (60, 119),
+    (70, 119),
+    (80, 119),
+    (90, 119),
+    (100, 119),
+    (30, 90),
+    # 4. Canales Causales de Innovación Cruzada (6 puentes)
+    (10, 50),
+    (20, 70),
+    (30, 80),
+    (50, 90),
+    (70, 100),
+    (60, 110),
+]
+
+
 
 class ConstelacionV4Field(nn.Module):
     """Campo Geométrico de Conexión de Macro-Neuronas basado en CONSTELACIÓN v4."""

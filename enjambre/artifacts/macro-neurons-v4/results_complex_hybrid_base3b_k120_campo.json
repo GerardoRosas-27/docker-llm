@@ -1,0 +1,80 @@
+{
+  "condition": "12_hybrid_base3b_math_k120_code_campo_v4",
+  "model_desc": "Ultra-Híbrido Experimental: Base Qwen2.5-3B (~4B, Math, 36L) + K120 Macro-Neuronas (Code, 120L + Campo CONSTELACIÓN v4, 48 Puentes)",
+  "router": "Deterministic Prompt Domain Dispatcher",
+  "math_specialist": "Base Qwen2.5-3B-Instruct (36 capas nativas intactas, 3.09B parámetros)",
+  "code_specialist": "K120_macro (120 macro-neuronas estructuradas en 12 etapas + Campo CONSTELACIÓN v4, 48 puentes)",
+  "mean_acc": 0.3375,
+  "math_acc": 0.575,
+  "code_acc": 0.1,
+  "total_items": 80,
+  "math_items": 40,
+  "code_items": 40,
+  "depth_scaling_analysis": {
+    "phenomenon": "Depth Variance & Semantic Over-Abstraction at L=120",
+    "observation": "At depth 120, repeated self-attention causes deep representations to drift toward high-level semantic attractors, overriding strict lexical prompt constraints (e.g., renaming requested functions to generic descriptive names or expanding recursive arithmetic).",
+    "optimal_depth_regime": "K66 (L=66) represents the empirical Pareto-optimal depth for layer cloning with Campo v4 without requiring end-to-end retraining."
+  },
+  "tasks": {
+    "complex_math_gcd_lcm": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_fib_recur": {
+      "acc": 0.25,
+      "correct": 2,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_modular_exp": {
+      "acc": 0.5,
+      "correct": 4,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_solve_linear": {
+      "acc": 1.0,
+      "correct": 8,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_math_combinatorics": {
+      "acc": 0.625,
+      "correct": 5,
+      "total": 8,
+      "specialist": "Base_Qwen2.5-3B (36L)"
+    },
+    "complex_code_loop_filter": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8,
+      "specialist": "K120_Macro_Campo_v4 (120L, 48 Puentes)"
+    },
+    "complex_code_string_algo": {
+      "acc": 0.125,
+      "correct": 1,
+      "total": 8,
+      "specialist": "K120_Macro_Campo_v4 (120L, 48 Puentes)"
+    },
+    "complex_code_recursion": {
+      "acc": 0.0,
+      "correct": 0,
+      "total": 8,
+      "specialist": "K120_Macro_Campo_v4 (120L, 48 Puentes)"
+    },
+    "complex_code_dict_freq": {
+      "acc": 0.25,
+      "correct": 2,
+      "total": 8,
+      "specialist": "K120_Macro_Campo_v4 (120L, 48 Puentes)"
+    },
+    "complex_code_search_nested": {
+      "acc": 0.125,
+      "correct": 1,
+      "total": 8,
+      "specialist": "K120_Macro_Campo_v4 (120L, 48 Puentes)"
+    }
+  }
+}

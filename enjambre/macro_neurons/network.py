@@ -706,3 +706,162 @@ def build_k66_macro_network_1_5b(
 
     return base_model, tok, macro_delta
 
+
+def build_k120_macro_network_1_5b(
+    model_hf_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
+    damping: float = 0.20,
+    bias_scale: float = 0.20,
+    math_bias_scale: float = 0.0,
+    directions_path: Optional[str] = None,
+    dtype: torch.dtype = torch.bfloat16,
+) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
+    """Construye la Red de 120 Macro-Neuronas (K120_macro) a partir del modelo base de 1.5B (28 capas):
+
+    Distribución topológica en 12 etapas funcionales (120 Macro-Neuronas, d=1536):
+    - Etapa 0 (0..9):     Percepción Sintáctica y Representaciones Tempranas (10 capas).
+    - Etapa 1 (10..19):   [CLUSTER ÁLGEBRA Y TEORÍA DE NÚMEROS] (10 capas).
+    - Etapa 2 (20..29):   Núcleo Semántico Inicial (10 capas).
+    - Etapa 3 (30..39):   [CLUSTER ARITMÉTICA MODULAR Y COMBINATORIA] (10 capas).
+    - Etapa 4 (40..49):   Núcleo Semántico Intermedio (10 capas).
+    - Etapa 5 (50..59):   [CLUSTER SECUENCIAS Y STRINGS] (10 capas + code_bias).
+    - Etapa 6 (60..69):   [CLUSTER BUCLES Y FILTRADO ITERATIVO] (10 capas + code_bias).
+    - Etapa 7 (70..79):   [CLUSTER ESTRUCTURAS HASH Y DICCIONARIOS] (10 capas + code_bias).
+    - Etapa 8 (80..89):   [CLUSTER RECURSIÓN Y PILAS VIRTUALES] (10 capas + code_bias).
+    - Etapa 9 (90..99):   [CLUSTER BÚSQUEDA ANIDADA Y ÁRBOLES] (10 capas + code_bias).
+    - Etapa 10 (100..109): [CLUSTER INTEGRACIÓN Y SIMULACIÓN PYTHON] (10 capas + code_bias).
+    - Etapa 11 (110..119): Síntesis Superior y Salida Final (10 capas).
+
+    Para operar dentro de los 7.8 GB de RAM sin riesgo de OOM, las macro-neuronas clonadas
+    comparten la memoria de tensores de pesos con los bloques base, poseyendo proyecciones de sesgo
+    independientes (lin.bias) e índices atencionales propios (layer_idx).
+    """
+    tok = AutoTokenizer.from_pretrained(model_hf_id)
+    tok.padding_side = "left"
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+
+    base_model = AutoModelForCausalLM.from_pretrained(model_hf_id, dtype=dtype).eval()
+    base_layers = list(base_model.model.layers)
+    n_base = len(base_layers)  # 28
+
+    dirs_file = directions_path or os.path.join(
+        os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4", "directions_qwen1.5b.pt"
+    )
+    if os.path.isfile(dirs_file):
+        d_loaded = torch.load(dirs_file, map_location="cpu", weights_only=False)
+        math_dirs = d_loaded["math_fresh"]
+        code_dirs = d_loaded["code_fresh"]
+    else:
+        hidden_sz = base_model.config.hidden_size
+        math_dirs = torch.zeros(29, hidden_sz)
+        code_dirs = torch.zeros(29, hidden_sz)
+
+    new_layers: List[nn.Module] = []
+    edits: List[BiasEdit] = []
+
+    # Construcción sistemática de las 12 etapas (120 capas)
+    # Mapeo de etapas a capas base de referencia y vectores de especialización
+    stage_configs = [
+        # (etapa_idx, src_range, is_code, is_math)
+        (0, list(range(0, 7)) + [5, 6, 6], False, False),       # 0..9: Sintaxis
+        (1, [7, 8, 9, 10, 11, 12, 9, 10, 11, 12], False, True),  # 10..19: Álgebra/Teoría Números
+        (2, list(range(7, 14)) + [11, 12, 13], False, False),   # 20..29: Semántica 1
+        (3, [11, 12, 13, 14, 15, 16, 13, 14, 15, 16], False, True), # 30..39: Aritmética/Comb
+        (4, list(range(14, 21)) + [18, 19, 20], False, False),  # 40..49: Semántica 2
+        (5, [15, 16, 17, 18, 19, 20, 17, 18, 19, 20], True, False), # 50..59: Strings/Secuencias
+        (6, [16, 17, 18, 19, 20, 21, 18, 19, 20, 21], True, False), # 60..69: Bucles/Filtro
+        (7, [17, 18, 19, 20, 21, 22, 19, 20, 21, 22], True, False), # 70..79: Dicts/Hash
+        (8, [18, 19, 20, 21, 22, 23, 20, 21, 22, 23], True, False), # 80..89: Recursión
+        (9, [19, 20, 21, 22, 23, 24, 21, 22, 23, 24], True, False), # 90..99: Búsqueda Anidada
+        (10, [20, 21, 22, 23, 24, 25, 22, 23, 24, 25], True, False), # 100..109: Integración VM
+        (11, list(range(21, 28)) + [25, 26, 27], False, False),  # 110..119: Síntesis y Salida
+    ]
+
+    def _shallow_clone_layer(src_layer: nn.Module, dtype: torch.dtype) -> nn.Module:
+        layer = copy.copy(src_layer)
+        layer._modules = copy.copy(src_layer._modules)
+        layer._parameters = copy.copy(src_layer._parameters)
+        layer._buffers = copy.copy(src_layer._buffers)
+
+        attn = copy.copy(src_layer.self_attn)
+        attn._modules = copy.copy(src_layer.self_attn._modules)
+        attn._parameters = copy.copy(src_layer.self_attn._parameters)
+        attn._buffers = copy.copy(src_layer.self_attn._buffers)
+        layer.self_attn = attn
+
+        mlp = copy.copy(src_layer.mlp)
+        mlp._modules = copy.copy(src_layer.mlp._modules)
+        mlp._parameters = copy.copy(src_layer.mlp._parameters)
+        mlp._buffers = copy.copy(src_layer.mlp._buffers)
+
+        down_proj = nn.Linear(
+            src_layer.mlp.down_proj.in_features,
+            src_layer.mlp.down_proj.out_features,
+            bias=True,
+            dtype=dtype,
+        )
+        down_proj.weight = src_layer.mlp.down_proj.weight
+        mlp.down_proj = down_proj
+        layer.mlp = mlp
+
+        return layer
+
+    for stage_idx, src_indices, is_code, is_math in stage_configs:
+        for k, src_idx in enumerate(src_indices):
+            src_layer = base_layers[src_idx]
+            layer_obj = _shallow_clone_layer(src_layer, dtype)
+            new_layers.append(layer_obj)
+            new_idx = len(new_layers) - 1
+            layer_obj.self_attn.layer_idx = new_idx
+
+
+            if is_code and bias_scale > 0.0:
+                v_code = code_dirs[src_idx + 1]
+                edits.append(BiasEdit(layer=new_idx, vec=v_code.clone(), scale=bias_scale))
+            elif is_math and math_bias_scale > 0.0:
+                v_math = math_dirs[src_idx + 1]
+                edits.append(BiasEdit(layer=new_idx, vec=v_math.clone(), scale=math_bias_scale))
+
+    # Asignar layer_idx unívoco de 0 a 119
+    for i, l in enumerate(new_layers):
+        l.self_attn.layer_idx = i
+
+    base_model.model.layers = nn.ModuleList(new_layers)
+    base_model.config.num_hidden_layers = len(new_layers)
+    base_model.model.config.num_hidden_layers = len(new_layers)
+    base_model.config.layer_types = ["full_attention"] * len(new_layers)
+    base_model.model.config.layer_types = ["full_attention"] * len(new_layers)
+
+    # Aplicar ediciones de sesgo a las macro-neuronas
+    for b in edits:
+        lin = base_model.model.layers[b.layer].mlp.down_proj
+        vec = (b.scale * b.vec).to(dtype=lin.weight.dtype, device=lin.weight.device)
+        with torch.no_grad():
+            if lin.bias is None:
+                lin.bias = nn.Parameter(vec.clone())
+            else:
+                lin.bias.add_(vec)
+
+    for p in base_model.parameters():
+        p.requires_grad_(False)
+
+    macro_delta = EditDelta(
+        name="k120_macro_1_5b",
+        bias_edits=edits,
+        meta={
+            "n_macro": 120,
+            "base_model": model_hf_id,
+            "base_size": "1.5b",
+            "base_layers": 28,
+            "added_layers": 92,
+            "stages": 12,
+            "stage_size": 10,
+            "damping": damping,
+            "bias_scale": bias_scale,
+            "code_clusters": list(range(50, 110)),
+        },
+    )
+
+    return base_model, tok, macro_delta
+
+

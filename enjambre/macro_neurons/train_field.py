@@ -74,7 +74,10 @@ class FieldTrainer:
         torch.set_num_threads(min(8, os.cpu_count() or 8))
 
         print(f"[macro-field] Construyendo red de {self.n_macro} macro-neuronas (Base: {self.base_size.upper()})...", flush=True)
-        if self.base_tag == "1_5b" and self.n_macro == 66:
+        if self.n_macro == 120:
+            self.model, self.tok, self.delta = build_k120_macro_network_1_5b()
+            pairs = FIELD_PAIRS_120
+        elif self.base_tag == "1_5b" and self.n_macro == 66:
             self.model, self.tok, self.delta = build_k66_macro_network_1_5b()
             pairs = FIELD_PAIRS_66
         elif self.n_macro == 66:
@@ -87,8 +90,9 @@ class FieldTrainer:
             self.model, self.tok, self.delta = build_k32_macro_network()
             pairs = FIELD_PAIRS_32
 
-        if self.n_macro == 66 or self.base_tag == "1_5b":
+        if self.n_macro in (66, 120) or self.base_tag == "1_5b":
             self.batch_size = min(self.batch_size, 2)
+
 
         self.eos = self.tok.eos_token or ""
         self.base_checksum = macro_param_checksum(self.model)

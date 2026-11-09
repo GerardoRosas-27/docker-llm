@@ -11,9 +11,17 @@ from .network import (
     build_k32_macro_network,
     build_k36_macro_network,
     build_k66_macro_network,
+    build_k66_macro_network,
     build_k66_macro_network_1_5b,
+    build_k120_macro_network_1_5b,
 )
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_32, FIELD_PAIRS_36, FIELD_PAIRS_66
+from .field_v4 import (
+    ConstelacionV4Field,
+    FIELD_PAIRS_32,
+    FIELD_PAIRS_36,
+    FIELD_PAIRS_66,
+    FIELD_PAIRS_120,
+)
 
 __all__ = [
     "MacroNeuronNetwork",
@@ -21,8 +29,10 @@ __all__ = [
     "build_k36_macro_network",
     "build_k66_macro_network",
     "build_k66_macro_network_1_5b",
+    "build_k120_macro_network_1_5b",
     "ConstelacionV4Field",
     "FIELD_PAIRS_32",
     "FIELD_PAIRS_36",
     "FIELD_PAIRS_66",
+    "FIELD_PAIRS_120",
 ]

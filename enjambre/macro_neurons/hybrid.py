@@ -18,8 +18,9 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from enjambre.generate import generate
 from enjambre.math_code.complex_tasks import COMPLEX_SPECS, make_complex_mc_splits
-from .network import build_k66_macro_network_1_5b
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_66
+from .network import build_k66_macro_network_1_5b, build_k120_macro_network_1_5b
+from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_66, FIELD_PAIRS_120
+
 
 SEED = 42
 DEFAULT_OUT_DIR = os.path.join(
@@ -142,16 +143,22 @@ class HybridMacroBaseModel:
 
 
 def run_hybrid_complex_benchmark(
-    base_model_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
+    base_model_id: str = "Qwen/Qwen2.5-3B-Instruct",
+    code_macro: int = 120,
+    code_base_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
     n_hold: int = 8,
     out_dir: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Ejecuta la suite compleja completa con la arquitectura Híbrida (Base 1.5B + K66_macro)."""
+    """Ejecuta la suite compleja completa con la arquitectura Híbrida:
+    - Base ~3B/4B (o 1.5B) para Matemáticas (sin distorsión de pesos).
+    - K120 (o K66) Macro-Neuronas + Campo CONSTELACIÓN v4 (48 o 28 puentes) para Código.
+    """
     out_dir = out_dir or DEFAULT_OUT_DIR
-    part_path = os.path.join(out_dir, ".partial_complex_hybrid.json")
-    out_path = os.path.join(out_dir, "results_complex_hybrid_base_k66_campo.json")
+    tag = "base3b_k120" if ("3B" in base_model_id or "3b" in base_model_id) and code_macro == 120 else f"base_{code_macro}"
+    part_path = os.path.join(out_dir, f".partial_complex_hybrid_{tag}.json")
+    out_path = os.path.join(out_dir, f"results_complex_hybrid_{tag}_campo.json")
 
-    print(f"[hybrid-eval] Evaluando Arquitectura Híbrida (Base 1.5B [Math] + K66_macro [Code])...", flush=True)
+    print(f"[hybrid-eval] Evaluando Arquitectura Híbrida ({base_model_id} [Math] + K{code_macro}_macro [Code])...", flush=True)
     _, _, hold_items, _ = make_complex_mc_splits(n_train=6, n_val=4, n_hold=n_hold, seed=SEED)
 
     task_scores: Dict[str, Dict[str, Any]] = {}
@@ -171,26 +178,35 @@ def run_hybrid_complex_benchmark(
         except Exception as e:
             print(f"[hybrid-eval] Error leyendo cache parcial ({e}), iniciando desde 0.", flush=True)
 
-    hybrid = HybridMacroBaseModel(base_model_id=base_model_id)
-
-    # 1. Evaluar tareas matemáticas con Base Model
+    # 1. Evaluar tareas matemáticas con Base Model (~3B/4B o 1.5B)
     math_specs = [s for s in COMPLEX_SPECS if s.domain == "math" and s.id not in task_scores]
     if math_specs:
-        print(f"[hybrid-eval] Despachando {len(math_specs)} tareas matemáticas al Especialista Base (28L)...", flush=True)
-        base_model = AutoModelForCausalLM.from_pretrained(base_model_id, torch_dtype=torch.bfloat16).eval()
+        print(f"[hybrid-eval] Despachando {len(math_specs)} tareas matemáticas al Especialista Base ({base_model_id})...", flush=True)
+        math_tok = AutoTokenizer.from_pretrained(base_model_id)
+        math_tok.padding_side = "left"
+        if math_tok.pad_token_id is None:
+            math_tok.pad_token = math_tok.eos_token
+        base_model = AutoModelForCausalLM.from_pretrained(
+            base_model_id,
+            torch_dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+        ).eval()
+
+        math_desc = "Base_Qwen-3B (36L)" if ("3B" in base_model_id or "3b" in base_model_id) else "Base_Qwen-1.5B (28L)"
+
         for spec in math_specs:
             items = hold_items[spec.id]
             prompts = [it.prompt for it in items]
-            outs = generate(base_model, hybrid.tok, prompts, system=spec.system_prompt, max_new_tokens=72, batch_size=8)
+            outs = generate(base_model, math_tok, prompts, system=spec.system_prompt, max_new_tokens=56, batch_size=4)
             oks = [bool(it.check(o)) for it, o in zip(items, outs)]
             acc = sum(oks) / max(1, len(oks))
             task_scores[spec.id] = {
                 "acc": round(acc, 4),
                 "correct": sum(oks),
                 "total": len(items),
-                "specialist": "Base_Qwen-1.5B (28L)",
+                "specialist": math_desc,
             }
-            print(f"  [task {spec.id}] (Math/Base) acc={acc:.2%} ({sum(oks)}/{len(items)})", flush=True)
+            print(f"  [task {spec.id}] (Math/{math_desc}) acc={acc:.2%} ({sum(oks)}/{len(items)})", flush=True)
             all_oks.extend(oks)
             math_oks.extend(oks)
             _jdump(part_path, {
@@ -199,33 +215,54 @@ def run_hybrid_complex_benchmark(
                 "math_oks": math_oks,
                 "code_oks": code_oks,
             })
-        del base_model
+        del base_model, math_tok
         gc.collect()
 
-    # 2. Evaluar tareas de código con K66 + Campo CONSTELACIÓN v4
+    # 2. Evaluar tareas de código con K120 (o K66) + Campo CONSTELACIÓN v4
     code_specs = [s for s in COMPLEX_SPECS if s.domain == "code" and s.id not in task_scores]
     if code_specs:
-        print(f"[hybrid-eval] Despachando {len(code_specs)} tareas de código al Especialista K66 (66L + Campo v4)...", flush=True)
-        k66_model, _, _ = build_k66_macro_network_1_5b(model_hf_id=base_model_id, dtype=torch.bfloat16)
-        field = ConstelacionV4Field(hidden=k66_model.config.hidden_size, rank=16, pairs=FIELD_PAIRS_66).to(k66_model.dtype)
-        ckpt = os.path.join(out_dir, "field_v4_k66_1_5b_best.pt")
+        code_desc = f"K{code_macro}_Macro_Campo_v4 ({code_macro}L, {48 if code_macro == 120 else 28} Puentes)"
+        print(f"[hybrid-eval] Despachando {len(code_specs)} tareas de código al Especialista {code_desc}...", flush=True)
+
+        if code_macro == 120:
+            code_model, code_tok, _ = build_k120_macro_network_1_5b(model_hf_id=code_base_id, dtype=torch.bfloat16)
+            pairs = FIELD_PAIRS_120
+        else:
+            code_model, code_tok, _ = build_k66_macro_network_1_5b(model_hf_id=code_base_id, dtype=torch.bfloat16)
+            pairs = FIELD_PAIRS_66
+
+        field = ConstelacionV4Field(hidden=code_model.config.hidden_size, rank=16, pairs=pairs).to(code_model.dtype)
+        ckpt = os.path.join(out_dir, f"field_v4_k{code_macro}_1_5b_best.pt")
+        if not os.path.isfile(ckpt) and code_macro == 120:
+            # Reutilizar adaptaciones pre-entrenadas de K66 si están disponibles
+            ckpt_fallback = os.path.join(out_dir, "field_v4_k66_1_5b_best.pt")
+            if os.path.isfile(ckpt_fallback):
+                ckpt = ckpt_fallback
         if os.path.isfile(ckpt):
             state = torch.load(ckpt, map_location="cpu", weights_only=False)
-            field.load_state_dict(state.get("field_state", state))
-        field.attach(k66_model)
+            field_state = state.get("field_state", state)
+            # Cargar sólo las claves compatibles
+            own_state = field.state_dict()
+            matched = {k: v for k, v in field_state.items() if k in own_state and v.shape == own_state[k].shape}
+            own_state.update(matched)
+            field.load_state_dict(own_state)
+            print(f"[hybrid-eval] Campo v4 inicializado con {len(matched)}/{len(own_state)} pesos pre-entrenados.", flush=True)
+
+        field.attach(code_model)
+
         for spec in code_specs:
             items = hold_items[spec.id]
             prompts = [it.prompt for it in items]
-            outs = generate(k66_model, hybrid.tok, prompts, system=spec.system_prompt, max_new_tokens=72, batch_size=8)
+            outs = generate(code_model, code_tok, prompts, system=spec.system_prompt, max_new_tokens=56, batch_size=2)
             oks = [bool(it.check(o)) for it, o in zip(items, outs)]
             acc = sum(oks) / max(1, len(oks))
             task_scores[spec.id] = {
                 "acc": round(acc, 4),
                 "correct": sum(oks),
                 "total": len(items),
-                "specialist": "K66_Macro_Campo_v4 (66L, 28 Puentes)",
+                "specialist": code_desc,
             }
-            print(f"  [task {spec.id}] (Code/K66) acc={acc:.2%} ({sum(oks)}/{len(items)})", flush=True)
+            print(f"  [task {spec.id}] (Code/K{code_macro}) acc={acc:.2%} ({sum(oks)}/{len(items)})", flush=True)
             all_oks.extend(oks)
             code_oks.extend(oks)
             _jdump(part_path, {
@@ -234,7 +271,7 @@ def run_hybrid_complex_benchmark(
                 "math_oks": math_oks,
                 "code_oks": code_oks,
             })
-        del k66_model, field
+        del code_model, field, code_tok
         gc.collect()
 
     mean_acc = sum(all_oks) / max(1, len(all_oks))
@@ -242,11 +279,11 @@ def run_hybrid_complex_benchmark(
     code_acc = sum(code_oks) / max(1, len(code_oks))
 
     res = {
-        "condition": "10_hybrid_base_math_k66_code_campo_v4",
-        "model_desc": "Híbrido Inteligente: Base Qwen-1.5B (Math, 28L) + K66 Macro-Neuronas (Code, 66L + Campo v4)",
+        "condition": f"11_hybrid_{tag}_campo_v4",
+        "model_desc": f"Híbrido Inteligente: Base {base_model_id} (Math) + K{code_macro} Macro-Neuronas (Code + Campo v4)",
         "router": "Deterministic Prompt Domain Dispatcher",
-        "math_specialist": "Base Qwen-1.5B (28 capas nativas intactas)",
-        "code_specialist": "K66_macro (66 macro-neuronas + Campo CONSTELACIÓN v4, 28 puentes)",
+        "math_specialist": f"Base {base_model_id}",
+        "code_specialist": f"K{code_macro}_macro ({code_macro}L + Campo CONSTELACIÓN v4, {48 if code_macro == 120 else 28} puentes)",
         "mean_acc": round(mean_acc, 4),
         "math_acc": round(math_acc, 4),
         "code_acc": round(code_acc, 4),
@@ -265,3 +302,4 @@ def run_hybrid_complex_benchmark(
 
     print(f"[hybrid-eval] Hybrid Bench: Global={mean_acc:.2%} | Math={math_acc:.2%} | Code={code_acc:.2%}", flush=True)
     return res
+
