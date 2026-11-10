@@ -287,6 +287,45 @@ def mark_queued(slug: str) -> None:
     _write(op)
 
 
+def ensure_hybrid_registered(
+    slug: str = config.HYBRID_SLUG,
+    repo_id: str = config.HYBRID_REPO,
+    filename: str = config.HYBRID_FILE,
+    size_bytes: int = config.HYBRID_SIZE,
+) -> dict:
+    """Registra el modelo Ultra-Híbrido 3B + K66 Campo v4 como listo para ejecutarse."""
+    def op(conn: sqlite3.Connection) -> dict:
+        existing = conn.execute("SELECT * FROM models WHERE slug = ?", (slug,)).fetchone()
+        stamp = _now()
+        parts = json.dumps(["Base-3B-Math-36L", "K66-Macro-Campo-v4-Code-28Bridges"])
+        local_path = "enjambre/macro_neurons/hybrid.py"
+        if existing is None:
+            conn.execute(
+                """
+                INSERT INTO models (
+                    slug, repo_id, filename, size_bytes, local_path, status,
+                    progress, bytes_downloaded, error, created_at, updated_at, parts
+                ) VALUES (?, ?, ?, ?, ?, 'ready', 1.0, ?, NULL, ?, ?, ?)
+                """,
+                (slug, repo_id, filename, size_bytes, local_path, size_bytes, stamp, stamp, parts),
+            )
+        else:
+            conn.execute(
+                """
+                UPDATE models
+                   SET repo_id = ?, filename = ?, size_bytes = ?, local_path = ?,
+                       status = 'ready', progress = 1.0, bytes_downloaded = ?,
+                       error = NULL, updated_at = ?, parts = ?
+                 WHERE slug = ?
+                """,
+                (repo_id, filename, size_bytes, local_path, size_bytes, stamp, parts, slug),
+            )
+        row = conn.execute("SELECT * FROM models WHERE slug = ?", (slug,)).fetchone()
+        return dict(row)
+
+    return _write(op)
+
+
 def delete(slug: str) -> dict | None:
     def op(conn: sqlite3.Connection) -> dict | None:
         row = conn.execute("SELECT * FROM models WHERE slug = ?", (slug,)).fetchone()

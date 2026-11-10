@@ -1,10 +1,23 @@
 # Obrador
 
-Panel en Docker para buscar modelos GGUF abiertos, descargar los que pesan **9 GB o menos**, ejecutarlos con llama.cpp y hablar con cada uno por su propia API.
+Panel en Docker para buscar modelos GGUF abiertos, descargar los que pesan **9 GB o menos**, ejecutarlos y hablar con cada uno por su propia API OpenAI-compatible.
 
-La API está hecha en Python (FastAPI). La interfaz es el panel de administración: catálogo, descargas, arranque y un chat para probar cada modelo. Todo el cómputo corre dentro del contenedor. Los pesos se guardan en un volumen, no en la imagen.
+## 🏆 Modelo Ganador por Defecto: Ultra-Híbrido 3B + K66 Campo CONSTELACIÓN v4
 
-## Modelo incluido
+La rama principal (`main`) integra el modelo ganador absoluto de la investigación, alcanzando un **récord histórico de 73.75% de precisión global** (57.50% en matemáticas y 90.00% en código algorítmico):
+
+| Componente | Especificación | Desempeño |
+| :--- | :--- | :--- |
+| **Especialista Matemático** | Base Qwen2.5-3B-Instruct (36 capas nativas, d=2048) | **57.50%** en razonamiento cuantitativo (MATH-500) |
+| **Especialista en Programación** | Red K66 Macro-Neuronas (66L) + Campo CONSTELACIÓN v4 (28 puentes) | **90.00%** en código (100% en recursión, diccionarios y búsqueda) |
+| **Enrutador Dinámico** | Despachador determinista de dominio sin latencia | **73.75%** global (59/80 aciertos en holdout unificado) |
+| **Consumo en Memoria** | Virtualización de capas compartidas | ~1.20 GB RAM (opera bajo el límite de 7.8 GB del sistema) |
+
+> 📖 **Documentación Completa**: Consulta el informe detallado de toda la investigación y resultados en [`docs/proceso-modelo-hibrido-3b-k66-ganador.md`](docs/proceso-modelo-hibrido-3b-k66-ganador.md) y [`docs/red-macro-neuronas-campo-v4.md`](docs/red-macro-neuronas-campo-v4.md).
+
+Este modelo viene **seleccionado por defecto en la interfaz UI** (`Chat`) y listo para ejecutarse tanto en el navegador como por API OpenAI-compatible (`/v1/chat/completions`).
+
+## Modelo GGUF Incluido para Fallback
 
 Al primer arranque se descarga solo, se comprueba su sha256 y se deja cargado en memoria:
 

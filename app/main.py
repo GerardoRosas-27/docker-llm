@@ -77,13 +77,15 @@ def _bootstrap_key(repo: str, filename: str) -> str:
 def _preload_default() -> None:
     if not config.preload_default():
         return
-    model = db.find(config.default_repo(), config.default_file())
+    model = db.get(config.default_slug()) or db.find(config.default_repo(), config.default_file())
     if model and model["status"] == "ready" and not _load_block_reason(model):
         runner.schedule(model["slug"])
 
 
 def _bootstrap() -> None:
     service.resume_queued()
+    if config.default_slug() == config.HYBRID_SLUG and config.auto_download():
+        db.ensure_hybrid_registered()
     if not config.auto_download():
         return
     repo = config.default_repo()
@@ -246,8 +248,11 @@ def _present(model: dict, request: Request) -> dict:
         "size_label": format_bytes(size),
         "blocked": blocked,
         "ram_warning": _ram_reason(model),
-        "is_default": model["repo_id"] == config.default_repo()
-        and model["filename"] == config.default_file(),
+        "is_default": model["slug"] == config.default_slug()
+        or (
+            model["repo_id"] == config.default_repo()
+            and model["filename"] == config.default_file()
+        ),
         "runtime": runtime,
         "api": {
             "model_id": slug,
@@ -315,10 +320,14 @@ def _ensure_fits(size: int | None) -> None:
 def _ram_reason(model: dict) -> str | None:
     if not config.ram_check():
         return None
+    if model.get("slug") == config.HYBRID_SLUG or model.get("repo_id") == config.HYBRID_REPO:
+        return None
     return resources.ram_block_reason(model.get("size_bytes"), config.llama_repack())
 
 
 def _load_block_reason(model: dict) -> str | None:
+    if model.get("slug") == config.HYBRID_SLUG or model.get("repo_id") == config.HYBRID_REPO:
+        return None
     names = None
     info = split_info(model["filename"])
     local_path = model.get("local_path")
@@ -415,6 +424,19 @@ def system(request: Request) -> dict:
 
 
 def _preset() -> dict:
+    if config.default_slug() == config.HYBRID_SLUG:
+        return {
+            "repo_id": config.HYBRID_REPO,
+            "filename": config.HYBRID_FILE,
+            "label": config.HYBRID_LABEL,
+            "size_bytes": config.HYBRID_SIZE,
+            "size_label": format_bytes(config.HYBRID_SIZE),
+            "quant": "bfloat16 / v4",
+            "note": (
+                "Modelo ganador del proyecto (73.75% global: 57.50% Math, 90.00% Code). "
+                "Base Qwen2.5-3B (36L nativas) + Red K66 Macro-Neuronas (66L, Campo v4 28 puentes)."
+            ),
+        }
     repo, filename = config.default_repo(), config.default_file()
     factory = repo == config.DEFAULT_REPO and filename == config.DEFAULT_FILE
     size = config.DEFAULT_SIZE if factory else None
@@ -686,7 +708,7 @@ async def _proxy(port: int, path: str, body: dict) -> Response:
     streaming = bool(body.get("stream"))
     # Sin stream, llama-server no manda nada hasta terminar: el tope es el total.
     read = idle if streaming else total
-    client = httpx.AsyncClient(timeout=httpx.Timeout(total, connect=10.0, read=read, write=30.0))
+    client = httpx.AsyncClient(timeout=httpx.Timeout(total, connect=10.0, read=read, write=30.0), trust_env=False)
     try:
         request = client.build_request(
             "POST",

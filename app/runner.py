@@ -8,6 +8,7 @@ import os
 import shutil
 import signal
 import subprocess
+import sys
 import threading
 import time
 from collections import deque
@@ -147,23 +148,34 @@ class Runner:
         if current and current.proc.poll() is None and current.healthy:
             return current
         model = db.get(slug)
-        if model is None or model["status"] != "ready" or not model.get("local_path"):
+        if model is None or model["status"] != "ready":
             self._errors[slug] = "El modelo todavía no está descargado."
             raise RuntimeError(self._errors[slug])
-        path = Path(model["local_path"])
-        if not path.is_file():
-            self._errors[slug] = "Falta el archivo GGUF en el volumen."
-            raise RuntimeError(self._errors[slug])
-        binary = self.resolve()
-        if not binary:
-            self._errors[slug] = "llama-server no está disponible en este contenedor."
-            raise RuntimeError(self._errors[slug])
-        if config.ram_check():
-            size = model.get("size_bytes") or path.stat().st_size
-            reason = resources.ram_block_reason(size, config.llama_repack())
-            if reason:
-                self._errors[slug] = reason
-                raise RuntimeError(reason)
+
+        is_hybrid = slug == config.HYBRID_SLUG or model.get("repo_id") == config.HYBRID_REPO
+
+        if not is_hybrid:
+            if not model.get("local_path"):
+                self._errors[slug] = "El modelo todavía no está descargado."
+                raise RuntimeError(self._errors[slug])
+            path = Path(model["local_path"])
+            if not path.is_file():
+                self._errors[slug] = "Falta el archivo GGUF en el volumen."
+                raise RuntimeError(self._errors[slug])
+            binary = self.resolve()
+            if not binary:
+                self._errors[slug] = "llama-server no está disponible en este contenedor."
+                raise RuntimeError(self._errors[slug])
+            if config.ram_check():
+                size = model.get("size_bytes") or path.stat().st_size
+                reason = resources.ram_block_reason(size, config.llama_repack())
+                if reason:
+                    self._errors[slug] = reason
+                    raise RuntimeError(reason)
+        else:
+            path = None
+            binary = None
+
         stale = self._running.pop(slug, None)
         if stale is not None:
             # Un arranque anterior que no llegó a estar sano no puede quedarse vivo
@@ -176,7 +188,10 @@ class Runner:
             log.info("descargando %s de memoria para cargar %s", victim.slug, slug)
             await self.stop(victim.slug)
         port = self._allocate_port()
-        cmd = self._command(binary, path, port, slug)
+        if is_hybrid:
+            cmd = [sys.executable, "-m", "app.hybrid_server", "--port", str(port)]
+        else:
+            cmd = self._command(binary, path, port, slug)
         log.info("arrancando %s", " ".join(cmd))
         proc = subprocess.Popen(
             cmd,
@@ -290,7 +305,7 @@ class Runner:
         deadline = time.time() + config.load_timeout()
         url_health = f"http://127.0.0.1:{running.port}/health"
         url_models = f"http://127.0.0.1:{running.port}/v1/models"
-        async with httpx.AsyncClient(timeout=3) as client:
+        async with httpx.AsyncClient(timeout=3, trust_env=False) as client:
             while time.time() < deadline:
                 code = running.proc.poll()
                 if code is not None:

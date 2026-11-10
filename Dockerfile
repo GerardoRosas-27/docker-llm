@@ -12,6 +12,8 @@ RUN python3 -m pip install --no-cache-dir --break-system-packages -r /srv/requir
     || python3 -m pip install --no-cache-dir -r /srv/requirements.txt
 
 COPY app /srv/app
+COPY enjambre /srv/enjambre
+COPY docs /srv/docs
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh && mkdir -p /data/models
 
@@ -21,6 +23,7 @@ RUN chmod +x /entrypoint.sh && mkdir -p /data/models
 # respuesta que se quede colgada y el chat enseña el error.
 ENV DATA_DIR=/data \
     PORT=8080 \
+    PYTHONPATH=/srv \
     AUTO_DOWNLOAD_DEFAULT=1 \
     PRELOAD_DEFAULT=1 \
     CTX_SIZE=2048 \

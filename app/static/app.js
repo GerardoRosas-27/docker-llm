@@ -321,11 +321,12 @@ function fillChatModels() {
   status.textContent = `${chosen.size_label} · ${label}. URL ${chosen.api.chat}${warn}${err}`;
 }
 
-// Primero el que ya está en marcha, luego el modelo por defecto, luego el resto.
+// Primero el que ya está en marcha, luego el modelo ganador o por defecto, luego el resto.
 function rank(model) {
   if (model.ram_warning) return 3;
   if (model.runtime?.status === "running") return 0;
-  if (model.is_default) return 1;
+  if (model.slug === "hibrido-3b-k66-campo-v4") return 1;
+  if (model.is_default) return 1.5;
   return 2;
 }
 

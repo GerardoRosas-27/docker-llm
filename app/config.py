@@ -16,6 +16,13 @@ DEFAULT_SIZE = 1_396_198_496
 DEFAULT_SHA256 = "57a1085840f497d764a7fc5d346922dbde961efb54cc792ea81d694fd846a1d8"
 DEFAULT_LABEL = "Qwen 3.5 2B · Q4_K_M"
 
+# Ultra-Híbrido 3B + K66 Macro-Neuronas Campo v4 (Modelo ganador con 73.75% global).
+HYBRID_SLUG = "hibrido-3b-k66-campo-v4"
+HYBRID_REPO = "enjambre/macro-neurons"
+HYBRID_FILE = "hibrido-3b-k66-campo-v4"
+HYBRID_LABEL = "Ultra-Híbrido 3B + K66 Campo v4 (Ganador 73.75%)"
+HYBRID_SIZE = 3_200_000_000
+
 
 def _env(name: str, default: str) -> str:
     return os.environ.get(name, default)
@@ -102,6 +109,10 @@ def default_repo() -> str:
 
 def default_file() -> str:
     return _env("DEFAULT_FILE", DEFAULT_FILE)
+
+
+def default_slug() -> str:
+    return _env("DEFAULT_SLUG", HYBRID_SLUG)
 
 
 def default_sha256() -> str:
