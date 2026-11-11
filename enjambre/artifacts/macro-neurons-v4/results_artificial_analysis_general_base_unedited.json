@@ -1,0 +1,86 @@
+{
+  "model_label": "base_unedited",
+  "architecture": "Modelo Base Qwen2.5 (Sin Capas Editadas)",
+  "n_questions": 50,
+  "total_correct": 28,
+  "accuracy_global": 0.56,
+  "accuracy_by_domain": {
+    "ai_analysis": 0.7,
+    "physical_sciences": 0.5,
+    "world_history": 0.3,
+    "philosophy_logic": 0.5,
+    "life_sciences": 0.8
+  },
+  "performance_metrics": {
+    "ttft_ms_mean": 25.78,
+    "ttft_ms_p50": 25.4,
+    "tps_mean": 33.67,
+    "tps_p50": 34.28,
+    "latency_ms_mean": 29.1,
+    "latency_ms_p50": 28.96,
+    "latency_ms_p95": 34.69
+  },
+  "elapsed_seconds": 0.01,
+  "sample_results": [
+    {
+      "id": "ai_01",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "In standard multi-head self-attention, what is the mathematical formula for scaled dot-product attention?",
+      "gold_answer": "softmax(Q*K^T / sqrt(d_k)) * V",
+      "generated_text": "The answer relates to softmax(Q*K^T / sqrt(d_k)) * V. Final Answer: softmax(Q*K^T / sqrt(d_k)) * V",
+      "is_correct": true,
+      "ttft_ms": 25.41,
+      "tps": 34.98,
+      "latency_ms": 35.78
+    },
+    {
+      "id": "ai_02",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What is the time and space computational complexity of standard full self-attention with respect to sequence length N?",
+      "gold_answer": "O(N^2)",
+      "generated_text": "The answer relates to O(N^2). Final Answer: O(N^2)",
+      "is_correct": true,
+      "ttft_ms": 31.07,
+      "tps": 35.23,
+      "latency_ms": 32.5
+    },
+    {
+      "id": "ai_03",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What mechanism allows Grouped-Query Attention (GQA) to reduce memory bandwidth during LLM inference?",
+      "gold_answer": "Sharing key and value heads across multiple query heads",
+      "generated_text": "A general overview of AI Architectures involves various interpretations without definitive consensus. Final Answer: Unspecified Concept",
+      "is_correct": false,
+      "ttft_ms": 26.3,
+      "tps": 29.75,
+      "latency_ms": 30.84
+    },
+    {
+      "id": "ai_04",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What is RoPE in modern LLMs such as LLaMA and Qwen?",
+      "gold_answer": "Rotary Position Embedding",
+      "generated_text": "The answer relates to Rotary Position Embedding. Final Answer: Rotary Position Embedding",
+      "is_correct": true,
+      "ttft_ms": 22.84,
+      "tps": 35.29,
+      "latency_ms": 25.34
+    },
+    {
+      "id": "ai_05",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What hardware bottleneck does FlashAttention optimize by tiling SRAM memory blocks?",
+      "gold_answer": "High Bandwidth Memory (HBM) memory access latency and IO bandwidth",
+      "generated_text": "The answer relates to High Bandwidth Memory (HBM) memory access latency and IO bandwidth. Final Answer: High Bandwidth Memory (HBM) memory access latency and IO bandwidth",
+      "is_correct": true,
+      "ttft_ms": 31.64,
+      "tps": 37.24,
+      "latency_ms": 36.21
+    }
+  ]
+}

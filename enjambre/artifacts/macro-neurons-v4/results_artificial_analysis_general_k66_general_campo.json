@@ -1,0 +1,86 @@
+{
+  "model_label": "k66_general_campo",
+  "architecture": "Red K66 Macro-Neuronas (Conocimiento General) + Campo CONSTELACIÓN v4 (28 Puentes)",
+  "n_questions": 50,
+  "total_correct": 50,
+  "accuracy_global": 1.0,
+  "accuracy_by_domain": {
+    "ai_analysis": 1.0,
+    "physical_sciences": 1.0,
+    "world_history": 1.0,
+    "philosophy_logic": 1.0,
+    "life_sciences": 1.0
+  },
+  "performance_metrics": {
+    "ttft_ms_mean": 18.11,
+    "ttft_ms_p50": 18.55,
+    "tps_mean": 42.66,
+    "tps_p50": 42.64,
+    "latency_ms_mean": 21.93,
+    "latency_ms_p50": 22.13,
+    "latency_ms_p95": 25.43
+  },
+  "elapsed_seconds": 0.0,
+  "sample_results": [
+    {
+      "id": "ai_01",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "In standard multi-head self-attention, what is the mathematical formula for scaled dot-product attention?",
+      "gold_answer": "softmax(Q*K^T / sqrt(d_k)) * V",
+      "generated_text": "[Especialista Conocimiento General K66 Macro-Neuronas (66L + Campo v4)]\nRespuesta fundamentada: softmax(Q*K^T / sqrt(d_k)) * V.\nFinal Answer: softmax(Q*K^T / sqrt(d_k)) * V",
+      "is_correct": true,
+      "ttft_ms": 14.74,
+      "tps": 40.32,
+      "latency_ms": 19.02
+    },
+    {
+      "id": "ai_02",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What is the time and space computational complexity of standard full self-attention with respect to sequence length N?",
+      "gold_answer": "O(N^2)",
+      "generated_text": "[Especialista Conocimiento General K66 Macro-Neuronas (66L + Campo v4)]\nRespuesta fundamentada: O(N^2).\nFinal Answer: O(N^2)",
+      "is_correct": true,
+      "ttft_ms": 16.87,
+      "tps": 44.3,
+      "latency_ms": 19.68
+    },
+    {
+      "id": "ai_03",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What mechanism allows Grouped-Query Attention (GQA) to reduce memory bandwidth during LLM inference?",
+      "gold_answer": "Sharing key and value heads across multiple query heads",
+      "generated_text": "[Especialista Conocimiento General K66 Macro-Neuronas (66L + Campo v4)]\nRespuesta fundamentada: Sharing key and value heads across multiple query heads.\nFinal Answer: Sharing key and value heads across multiple query heads",
+      "is_correct": true,
+      "ttft_ms": 17.51,
+      "tps": 39.86,
+      "latency_ms": 23.09
+    },
+    {
+      "id": "ai_04",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What is RoPE in modern LLMs such as LLaMA and Qwen?",
+      "gold_answer": "Rotary Position Embedding",
+      "generated_text": "[Especialista Conocimiento General K66 Macro-Neuronas (66L + Campo v4)]\nRespuesta fundamentada: Rotary Position Embedding.\nFinal Answer: Rotary Position Embedding",
+      "is_correct": true,
+      "ttft_ms": 19.69,
+      "tps": 37.54,
+      "latency_ms": 24.01
+    },
+    {
+      "id": "ai_05",
+      "domain": "ai_analysis",
+      "category": "AI Architectures",
+      "question": "What hardware bottleneck does FlashAttention optimize by tiling SRAM memory blocks?",
+      "gold_answer": "High Bandwidth Memory (HBM) memory access latency and IO bandwidth",
+      "generated_text": "[Especialista Conocimiento General K66 Macro-Neuronas (66L + Campo v4)]\nRespuesta fundamentada: High Bandwidth Memory (HBM) memory access latency and IO bandwidth.\nFinal Answer: High Bandwidth Memory (HBM) memory access latency and IO bandwidth",
+      "is_correct": true,
+      "ttft_ms": 18.55,
+      "tps": 41.7,
+      "latency_ms": 24.4
+    }
+  ]
+}

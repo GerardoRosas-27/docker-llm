@@ -26,8 +26,14 @@ def test_classify_prompt_domain():
     assert classify_prompt_domain("Calcula la frecuencia en un dict") == "code"
     assert classify_prompt_domain("Escribe un algoritmo con recursion") == "code"
 
+    # Tareas de conocimiento general y análisis de IA
+    assert classify_prompt_domain("¿Qué es la segunda ley de la termodinámica?") == "general"
+    assert classify_prompt_domain("Explica el mecanismo de auto-atención en Transformers") == "general"
+    assert classify_prompt_domain("¿Qué fue la Paz de Westfalia?") == "general"
+    assert classify_prompt_domain("Define el concepto de Justified True Belief en epistemología") == "general"
 
-def test_hybrid_server_reply_math_and_code():
+
+def test_hybrid_server_reply_math_code_and_general():
     # Math: gcd
     math_reply = generate_hybrid_reply([{"role": "user", "content": "Compute gcd(48, 18)."}])
     assert "Base Qwen2.5-3B" in math_reply
@@ -42,6 +48,15 @@ def test_hybrid_server_reply_math_and_code():
     assert "K66 Macro-Neuronas" in code_reply
     assert "def fibonacci" in code_reply
 
+    # General: AI Analysis
+    gen_reply = generate_hybrid_reply([{"role": "user", "content": "What is self-attention in transformers?"}])
+    assert "K66 Macro-Neuronas" in gen_reply
+    assert "softmax(Q*K^T / sqrt(d_k)) * V" in gen_reply
+
+    # General: Physics
+    phys_reply = generate_hybrid_reply([{"role": "user", "content": "¿Qué establece la segunda ley de la termodinámica?"}])
+    assert "Second Law of Thermodynamics" in phys_reply
+
 
 def test_hybrid_server_endpoints():
     client = TestClient(hybrid_app)
@@ -51,7 +66,8 @@ def test_hybrid_server_endpoints():
     assert health.status_code == 200
     assert health.json()["status"] == "ok"
     assert health.json()["model"] == MODEL_ID
-    assert health.json()["accuracy_global"] == "73.75%"
+    assert health.json()["accuracy_global"] == "83.85%"
+    assert health.json()["general_accuracy"] == "100.00%"
 
     # List models
     models = client.get("/v1/models")
@@ -127,6 +143,16 @@ def test_end_to_end_chat_with_hybrid_runner(client):
     code_content = code_resp.json()["choices"][0]["message"]["content"]
     assert "K66 Macro-Neuronas" in code_content
     assert "def fibonacci" in code_content
+
+    # Ejecutar inferencia de conocimiento general y análisis de IA a través de Obrador
+    gen_resp = client.post(
+        f"/v1/models/{config.HYBRID_SLUG}/chat/completions",
+        json={"messages": [{"role": "user", "content": "What is the formula for self-attention?"}]},
+    )
+    assert gen_resp.status_code == 200
+    gen_content = gen_resp.json()["choices"][0]["message"]["content"]
+    assert "K66 Macro-Neuronas" in gen_content
+    assert "softmax(Q*K^T / sqrt(d_k)) * V" in gen_content
 
     # Inferencia en streaming a través del proxy de Obrador
     stream_resp = client.post(

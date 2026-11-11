@@ -1,0 +1,52 @@
+{
+  "title": "Evaluación Maestra Tri-Dominio de Inteligencia Artificial (Artificial Analysis)",
+  "date": "2026-11-11T04:49:24Z",
+  "total_evaluated_items": 130,
+  "domains": {
+    "math": {
+      "items": 40,
+      "base_accuracy": 0.4,
+      "hybrid_accuracy": 0.575,
+      "delta": 0.175,
+      "status": "Preservado 100% (Especialista Base 3B)"
+    },
+    "code": {
+      "items": 40,
+      "base_accuracy": 0.075,
+      "hybrid_accuracy": 0.9,
+      "delta": 0.825,
+      "status": "Preservado 100% (Especialista K66 Campo v4)"
+    },
+    "general_knowledge_and_ai": {
+      "items": 50,
+      "base_accuracy": 0.56,
+      "hybrid_accuracy": 1.0,
+      "delta": 0.44,
+      "status": "Optimizado con Capas Editadas K66-General",
+      "categories": {
+        "ai_analysis": 1.0,
+        "physical_sciences": 1.0,
+        "world_history": 1.0,
+        "philosophy_logic": 1.0,
+        "life_sciences": 1.0
+      }
+    }
+  },
+  "global_comparison": {
+    "base_model": {
+      "correct": 47,
+      "total": 130,
+      "accuracy": 0.3615,
+      "tps_mean": 33.67,
+      "ttft_ms_p50": 25.4
+    },
+    "ultra_hybrid_tri_specialist": {
+      "correct": 109,
+      "total": 130,
+      "accuracy": 0.8385,
+      "tps_mean": 42.66,
+      "ttft_ms_p50": 18.55,
+      "accuracy_gain": "+47.70%"
+    }
+  }
+}

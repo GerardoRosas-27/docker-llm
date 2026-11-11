@@ -7,6 +7,7 @@ from enjambre.macro_neurons.network import (
     build_k36_macro_network,
     build_k66_macro_network,
     build_k66_macro_network_1_5b,
+    build_k66_macro_network_general_1_5b,
     macro_param_checksum,
 )
 from enjambre.macro_neurons.field_v4 import (
@@ -14,6 +15,7 @@ from enjambre.macro_neurons.field_v4 import (
     FIELD_PAIRS_32,
     FIELD_PAIRS_36,
     FIELD_PAIRS_66,
+    FIELD_PAIRS_66_GENERAL,
 )
 
 
@@ -158,4 +160,22 @@ def test_constelacion_v4_field_66_1_5b_attachment_and_step0_identity():
     assert diff < 1e-3, f"Diferencia en step 0: {diff} (debe ser casi 0)"
 
     field.remove_hooks()
+
+
+def test_build_k66_macro_network_general_1_5b():
+    model, tok, delta = build_k66_macro_network_general_1_5b()
+    assert len(model.model.layers) == 66
+    assert model.config.num_hidden_layers == 66
+    assert model.config.hidden_size == 1536
+    assert delta.meta["n_macro"] == 66
+    assert delta.meta["domain"] == "general_knowledge"
+    assert delta.meta["base_size"] == "1.5b"
+    assert len(delta.meta["ai_analysis_cluster"]) == 7
+    assert len(delta.meta["causal_deduction_cluster"]) == 7
+
+    for i, l in enumerate(model.model.layers):
+        assert l.self_attn.layer_idx == i
+
+    for p in model.parameters():
+        assert not p.requires_grad
 

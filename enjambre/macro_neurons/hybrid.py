@@ -18,8 +18,17 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from enjambre.generate import generate
 from enjambre.math_code.complex_tasks import COMPLEX_SPECS, make_complex_mc_splits
-from .network import build_k66_macro_network_1_5b, build_k120_macro_network_1_5b
-from .field_v4 import ConstelacionV4Field, FIELD_PAIRS_66, FIELD_PAIRS_120
+from .network import (
+    build_k66_macro_network_1_5b,
+    build_k66_macro_network_general_1_5b,
+    build_k120_macro_network_1_5b,
+)
+from .field_v4 import (
+    ConstelacionV4Field,
+    FIELD_PAIRS_66,
+    FIELD_PAIRS_66_GENERAL,
+    FIELD_PAIRS_120,
+)
 
 
 SEED = 42
@@ -35,23 +44,44 @@ def _jdump(path: str, obj: Any) -> None:
 
 
 def classify_prompt_domain(prompt: str) -> str:
-    """Clasificador de enrutamiento rápido y determinista (Matemáticas vs Código)."""
+    """Clasificador de enrutamiento rápido y determinista:
+    - 'code': Programación, Python, estructuras de datos, recursión, bucles.
+    - 'math': Cálculos exactos, álgebra, ecuaciones, combinatoria, teoría de números.
+    - 'general': Conocimiento general, ciencias, historia, filosofía, análisis de IA.
+    """
+    import re
     p_lower = prompt.lower()
     code_keywords = [
         "python", "def ", "function", "return", "list", "dict",
         "array", "loop", "string", "recursion", "search", "matrix",
         "nested", "algorithm", "filter", "sort", "indices", "sublist",
+        "código", "codigo", "programa", "clase", "class", "javascript",
+        "lambda ", "snippet",
     ]
     if any(k in p_lower for k in code_keywords):
         return "code"
-    return "math"
+
+    math_patterns = [
+        r"gcd\(", r"lcm\(", r"\d+\^\d+\s*mod", r"\d+\s*\*\s*x",
+        r"[cp]\(\d+,\s*\d+\)", r"f\(\d+\)", r"calculate concisely",
+        r"final answer:", r"\\boxed", r"compute ", r"calculate ",
+    ]
+    math_keywords = [
+        "gcd", "lcm", "modular", "arithmetic", "aritmética", "algebra",
+        "álgebra", "combinatorics", "combinatoria", "fibonacci",
+    ]
+    if any(re.search(pat, p_lower) for pat in math_patterns) or any(k in p_lower for k in math_keywords):
+        return "math"
+
+    return "general"
 
 
 class HybridMacroBaseModel:
-    """Modelo Híbrido que enruta dinámicamente cada prompt a su subsistema óptimo:
+    """Modelo Ultra-Híbrido Tri-Especialista que enruta dinámicamente cada prompt:
 
-    - Prompts de Matemáticas -> Modelo Base (28 capas nativas intactas)
-    - Prompts de Código -> Red K66 Macro-Neuronas (66 capas + Campo CONSTELACIÓN v4)
+    - Prompts de Matemáticas -> Modelo Base (36 capas nativas en 3B o 28 en 1.5B, circuitos aritméticos puros)
+    - Prompts de Código -> Red K66 Macro-Neuronas (66 capas + Campo CONSTELACIÓN v4, 28 puentes)
+    - Prompts de Conocimiento General -> Red K66-General Macro-Neuronas (66 capas editadas + Campo v4 General)
     """
 
     def __init__(
@@ -81,7 +111,6 @@ class HybridMacroBaseModel:
         if not prompts:
             return []
 
-        # Determinar dominios por prompt
         domains = [domain if domain is not None else classify_prompt_domain(p) for p in prompts]
 
         # Si todos pertenecen al mismo dominio, procesar en un solo paso
@@ -107,9 +136,23 @@ class HybridMacroBaseModel:
             gc.collect()
             return outs
 
+        if all(d == "general" for d in domains):
+            k66_gen_model, _, _ = build_k66_macro_network_general_1_5b(model_hf_id=self.base_model_id, dtype=self.dtype)
+            field = ConstelacionV4Field(hidden=k66_gen_model.config.hidden_size, rank=16, pairs=FIELD_PAIRS_66_GENERAL).to(k66_gen_model.dtype)
+            ckpt = os.path.join(DEFAULT_OUT_DIR, "field_v4_k66_general_1_5b_best.pt")
+            if os.path.isfile(ckpt):
+                state = torch.load(ckpt, map_location="cpu", weights_only=False)
+                field.load_state_dict(state.get("field_state", state))
+            field.attach(k66_gen_model)
+            outs = generate(k66_gen_model, self.tok, prompts, system=system, max_new_tokens=max_new_tokens, batch_size=batch_size)
+            del k66_gen_model, field
+            gc.collect()
+            return outs
+
         # Batch mixto: indexar y despachar
         math_indices = [i for i, d in enumerate(domains) if d == "math"]
         code_indices = [i for i, d in enumerate(domains) if d == "code"]
+        gen_indices = [i for i, d in enumerate(domains) if d == "general"]
 
         results = [""] * len(prompts)
 
@@ -137,6 +180,21 @@ class HybridMacroBaseModel:
             for idx, out in zip(code_indices, code_outs):
                 results[idx] = out
             del k66_model, field
+            gc.collect()
+
+        if gen_indices:
+            gen_prompts = [prompts[i] for i in gen_indices]
+            k66_gen_model, _, _ = build_k66_macro_network_general_1_5b(model_hf_id=self.base_model_id, dtype=self.dtype)
+            field = ConstelacionV4Field(hidden=k66_gen_model.config.hidden_size, rank=16, pairs=FIELD_PAIRS_66_GENERAL).to(k66_gen_model.dtype)
+            ckpt = os.path.join(DEFAULT_OUT_DIR, "field_v4_k66_general_1_5b_best.pt")
+            if os.path.isfile(ckpt):
+                state = torch.load(ckpt, map_location="cpu", weights_only=False)
+                field.load_state_dict(state.get("field_state", state))
+            field.attach(k66_gen_model)
+            gen_outs = generate(k66_gen_model, self.tok, gen_prompts, system=system, max_new_tokens=max_new_tokens, batch_size=batch_size)
+            for idx, out in zip(gen_indices, gen_outs):
+                results[idx] = out
+            del k66_gen_model, field
             gc.collect()
 
         return results

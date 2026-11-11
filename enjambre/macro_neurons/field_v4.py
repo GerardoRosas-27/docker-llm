@@ -102,6 +102,46 @@ FIELD_PAIRS_66: List[Tuple[int, int]] = [
     (23, 59),   # Semántica Base -> Algoritmia Python
 ]
 
+# Topología del Hiper-Campo CONSTELACIÓN v4 para K66 Conocimiento General (Red de 66 Macro-Neuronas, 28 Puentes):
+# 1. Tronco Epistémico Continuo (11 puentes): Enlace serial entre las 10 etapas de conocimiento
+# 2. Autopistas Armónicas Trans-Disciplinares (8 puentes): Resonancia cruzada entre ciencias y humanidades
+# 3. Resonadores Epistémicos de Largo Alcance (6 puentes): Conexión directa desde hechos tempranos a síntesis
+# 4. Canales Causales de Innovación (3 puentes): Coordinación multi-escala para deducción lógica
+FIELD_PAIRS_66_GENERAL: List[Tuple[int, int]] = [
+    # 1. Tronco Epistémico Continuo (11)
+    (0, 5),     # Entrada y sintaxis contextual -> Percepción enciclopédica temprana
+    (5, 11),    # Percepción -> Cluster Ciencias Físicas, Químicas y Cosmología
+    (11, 17),   # Ciencias Físicas -> Cluster Ciencias Biológicas, Medicina y Ecosistemas
+    (17, 23),   # Ciencias Biológicas -> Núcleo Semántico Enciclopédico
+    (23, 29),   # Núcleo Semántico -> Cluster Historia Universal, Geopolítica y Civilizaciones
+    (29, 35),   # Historia Universal -> Cluster Filosofía, Ética, Epistemología y Lingüística
+    (35, 41),   # Filosofía y Ética -> Núcleo Semántico Intermedio de Razonamiento
+    (41, 47),   # Núcleo Semántico -> Cluster Análisis de Inteligencia Artificial y Machine Learning
+    (47, 53),   # Análisis de IA -> Cluster Inferencia Causal, Lógica Formal y Deducción Multi-Paso
+    (53, 59),   # Inferencia Causal -> Calibración Factual de Alta Confianza
+    (59, 65),   # Calibración Factual -> Síntesis Epistémica Superior y Salida Final
+    # 2. Autopistas Armónicas Trans-Disciplinares (8)
+    (5, 17),    # Percepción temprana -> Ciencias Biológicas y Medicina
+    (11, 23),   # Ciencias Físicas -> Núcleo Semántico
+    (17, 29),   # Ciencias Biológicas -> Historia Universal y Evolución
+    (23, 35),   # Núcleo Semántico -> Filosofía y Ética
+    (29, 41),   # Historia Universal -> Razonamiento Abstracto
+    (35, 47),   # Filosofía y Lógica -> Análisis de Inteligencia Artificial
+    (41, 53),   # Razonamiento Abstracto -> Inferencia Causal
+    (47, 59),   # Análisis de IA -> Calibración Factual
+    # 3. Resonadores Epistémicos de Largo Alcance (6)
+    (11, 29),   # Ciencias Físicas -> Historia y Civilización Técnica
+    (17, 47),   # Ciencias Biológicas -> Redes Neuronales e IA
+    (29, 59),   # Historia Universal -> Calibración Factual de Salida
+    (35, 65),   # Filosofía y Ética -> Salida Final
+    (47, 65),   # Análisis de IA -> Salida Final
+    (53, 65),   # Inferencia Causal -> Salida Final
+    # 4. Canales Causales de Innovación Cruzada (3)
+    (5, 29),    # Percepción Temprana -> Historia y Geopolítica
+    (11, 47),   # Leyes Físicas Fundamentales -> Arquitectura de Modelos de IA
+    (23, 59),   # Núcleo Semántico -> Calibración de Salida
+]
+
 # Topología del Hiper-Campo CONSTELACIÓN v4 para K120 (Red de 120 Macro-Neuronas, 48 Puentes):
 # 1. Tronco Continuo (19 puentes): Flujo residual a través de las 12 etapas funcionales
 # 2. Autopistas Armónicas Trans-Campo (15 puentes): Resonancia de mediano alcance inter-etapas

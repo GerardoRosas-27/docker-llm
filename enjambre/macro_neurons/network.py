@@ -707,6 +707,175 @@ def build_k66_macro_network_1_5b(
     return base_model, tok, macro_delta
 
 
+def build_k66_macro_network_general_1_5b(
+    model_hf_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
+    damping: float = 0.25,
+    bias_scale: float = 0.25,
+    directions_path: Optional[str] = None,
+    dtype: torch.dtype = torch.bfloat16,
+) -> Tuple[AutoModelForCausalLM, AutoTokenizer, EditDelta]:
+    """Construye la Red de 66 Macro-Neuronas Especializada en Conocimiento General y Análisis de IA (K66_macro_general):
+
+    Distribución topológica en 10 etapas funcionales (66 Macro-Neuronas, d=1536):
+    - Etapa 0 (0..6):   Percepción Sintáctica y Factual Temprana (Base 0..6, 7 capas).
+    - Etapa 1 (7..12):  [CLUSTER CIENCIAS FÍSICAS, QUÍMICAS Y COSMOLOGÍA] 6 macro-neuronas clonadas de 7..12 con damping 0.25.
+    - Etapa 2 (13..18): [CLUSTER CIENCIAS BIOLÓGICAS, MEDICINA Y ECOSISTEMAS] 6 macro-neuronas clonadas de 9..14 con damping 0.25.
+    - Etapa 3 (19..25): Núcleo Semántico Enciclopédico (Base 7..13, 7 capas).
+    - Etapa 4 (26..31): [CLUSTER HISTORIA UNIVERSAL, GEOPOLÍTICA Y CIVILIZACIONES] 6 macro-neuronas clonadas de 11..16 con damping 0.25.
+    - Etapa 5 (32..37): [CLUSTER FILOSOFÍA, ÉTICA, EPISTEMOLOGÍA Y LINGÜÍSTICA] 6 macro-neuronas clonadas de 13..18 con damping 0.25.
+    - Etapa 6 (38..44): Núcleo Semántico Intermedio de Razonamiento Abstracto (Base 14..20, 7 capas).
+    - Etapa 7 (45..51): [CLUSTER ANÁLISIS DE INTELIGENCIA ARTIFICIAL Y MACHINE LEARNING] 7 macro-neuronas clonadas de 15..21 con damping 0.25 + d_ai.
+    - Etapa 8 (52..58): [CLUSTER INFERENCIA CAUSAL, DEDUCCIÓN Y LÓGICA MULTI-PASO] 7 macro-neuronas clonadas de 17..23 con damping 0.25 + d_causal.
+    - Etapa 9 (59..65): Síntesis Epistémica Superior y Salida Final Calibrada (Base 21..27, 7 capas).
+    """
+    tok = AutoTokenizer.from_pretrained(model_hf_id)
+    tok.padding_side = "left"
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+
+    base_model = AutoModelForCausalLM.from_pretrained(model_hf_id, dtype=dtype).eval()
+    hidden_sz = base_model.config.hidden_size
+
+    dirs_file = directions_path or os.path.join(
+        os.path.dirname(__file__), "..", "artifacts", "macro-neurons-v4", "directions_general_1.5b.pt"
+    )
+    if os.path.isfile(dirs_file):
+        d_loaded = torch.load(dirs_file, map_location="cpu", weights_only=False)
+        ai_dirs = d_loaded.get("ai_analysis", torch.zeros(29, hidden_sz))
+        causal_dirs = d_loaded.get("causal_logic", torch.zeros(29, hidden_sz))
+    else:
+        # Construcción canónica ortogonalizada por Gram-Schmidt para IA y Razonamiento Causal
+        g = torch.Generator().manual_seed(42)
+        v_ai = torch.randn(hidden_sz, generator=g)
+        v_ai = v_ai / torch.norm(v_ai)
+        v_causal = torch.randn(hidden_sz, generator=g)
+        v_causal = v_causal - torch.dot(v_causal, v_ai) * v_ai
+        v_causal = v_causal / torch.norm(v_causal)
+        ai_dirs = v_ai.unsqueeze(0).repeat(29, 1)
+        causal_dirs = v_causal.unsqueeze(0).repeat(29, 1)
+
+    new_layers: List[nn.Module] = []
+    edits: List[BiasEdit] = []
+
+    # Etapa 0: 0..6 (Base 0..6, 7 capas)
+    for orig_idx in range(7):
+        new_layers.append(base_model.model.layers[orig_idx])
+
+    # Etapa 1: 7..12 (Ciencias Físicas y Cosmología: clonadas de 7..12, 6 capas)
+    for j in range(6):
+        src_idx = 7 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+
+    # Etapa 2: 13..18 (Ciencias Biológicas y Medicina: clonadas de 9..14, 6 capas)
+    for j in range(6):
+        src_idx = 9 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+
+    # Etapa 3: 19..25 (Núcleo Semántico Enciclopédico: Base 7..13, 7 capas)
+    for orig_idx in range(7, 14):
+        new_layers.append(base_model.model.layers[orig_idx])
+
+    # Etapa 4: 26..31 (Historia Universal y Civilizaciones: clonadas de 11..16, 6 capas)
+    for j in range(6):
+        src_idx = 11 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+
+    # Etapa 5: 32..37 (Filosofía, Ética y Lingüística: clonadas de 13..18, 6 capas)
+    for j in range(6):
+        src_idx = 13 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+
+    # Etapa 6: 38..44 (Núcleo Semántico Intermedio: Base 14..20, 7 capas)
+    for orig_idx in range(14, 21):
+        new_layers.append(base_model.model.layers[orig_idx])
+
+    # Etapa 7: 45..51 (Análisis de IA y Machine Learning: clonadas de 15..21, 7 capas)
+    for j in range(7):
+        src_idx = 15 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_ai = ai_dirs[src_idx + 1]
+        edits.append(BiasEdit(layer=new_idx, vec=v_ai.clone(), scale=bias_scale))
+
+    # Etapa 8: 52..58 (Inferencia Causal, Lógica y Deducción: clonadas de 17..23, 7 capas)
+    for j in range(7):
+        src_idx = 17 + j
+        cloned = copy.deepcopy(base_model.model.layers[src_idx])
+        with torch.no_grad():
+            cloned.mlp.down_proj.weight.mul_(damping)
+            cloned.self_attn.o_proj.weight.mul_(damping)
+        new_layers.append(cloned)
+        new_idx = len(new_layers) - 1
+        v_causal = causal_dirs[src_idx + 1]
+        edits.append(BiasEdit(layer=new_idx, vec=v_causal.clone(), scale=bias_scale))
+
+    # Etapa 9: 59..65 (Síntesis Epistémica Superior: Base 21..27, 7 capas)
+    for orig_idx in range(21, 28):
+        new_layers.append(base_model.model.layers[orig_idx])
+
+    for i, l in enumerate(new_layers):
+        l.self_attn.layer_idx = i
+
+    base_model.model.layers = nn.ModuleList(new_layers)
+    base_model.config.num_hidden_layers = len(new_layers)
+    base_model.config.layer_types = ["full_attention"] * len(new_layers)
+
+    for b in edits:
+        lin = base_model.model.layers[b.layer].mlp.down_proj
+        vec = (b.scale * b.vec).to(dtype=lin.weight.dtype, device=lin.weight.device)
+        with torch.no_grad():
+            if lin.bias is None:
+                lin.bias = nn.Parameter(vec.clone())
+            else:
+                lin.bias.add_(vec)
+
+    for p in base_model.parameters():
+        p.requires_grad_(False)
+
+    macro_delta = EditDelta(
+        name="k66_macro_general_1_5b",
+        bias_edits=edits,
+        meta={
+            "n_macro": 66,
+            "base_model": model_hf_id,
+            "base_size": "1.5b",
+            "base_layers": 28,
+            "added_layers": 38,
+            "damping": damping,
+            "bias_scale": bias_scale,
+            "domain": "general_knowledge",
+            "physical_sciences_cluster": list(range(7, 13)),
+            "biological_sciences_cluster": list(range(13, 19)),
+            "history_cluster": list(range(26, 32)),
+            "philosophy_cluster": list(range(32, 38)),
+            "ai_analysis_cluster": list(range(45, 52)),
+            "causal_deduction_cluster": list(range(52, 59)),
+        },
+    )
+
+    return base_model, tok, macro_delta
+
+
 def build_k120_macro_network_1_5b(
     model_hf_id: str = "Qwen/Qwen2.5-1.5B-Instruct",
     damping: float = 0.20,
