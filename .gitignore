@@ -36,4 +36,5 @@ enjambre/artifacts/*/*.pt
 !enjambre/artifacts/complex-bench-k24/**
 !enjambre/artifacts/artificial-analysis/
 !enjambre/artifacts/artificial-analysis/**
+!enjambre/artifacts/metacognitive/*.json
 

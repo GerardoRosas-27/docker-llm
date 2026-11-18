@@ -1,0 +1,691 @@
+{
+  "evaluated_at_epoch": 1794984705,
+  "total_eval_s": 625.98,
+  "memory_mb": {
+    "before_load": 544.6,
+    "dual_models_simultaneous": 1829.9,
+    "peak_part1": 5304.7,
+    "peak_with_generation_and_kv": 5304.7
+  },
+  "quantitative_introspection": {
+    "s2_observes_s1": {
+      "train": {
+        "n_samples": 122,
+        "role_acc": 1.0,
+        "damping_mae": 0.0112,
+        "frob_mae": 1.1547,
+        "sr_mae": 11.1461,
+        "bias_mae": 0.0265,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.0042,
+        "koopman_innov_pert": 0.5062,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9984,
+        "log_frob_r2": 0.998,
+        "frob_r2": 0.9973,
+        "log_sr_r2": 0.9898,
+        "edit_acc": 1.0,
+        "health_mae": 0.0187
+      },
+      "val": {
+        "n_samples": 28,
+        "role_acc": 1.0,
+        "damping_mae": 0.0113,
+        "frob_mae": 0.8428,
+        "sr_mae": 5.2195,
+        "bias_mae": 0.0426,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.0097,
+        "koopman_innov_pert": 0.5928,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9986,
+        "log_frob_r2": 0.9984,
+        "frob_r2": 0.9976,
+        "log_sr_r2": 0.9882,
+        "edit_acc": 1.0,
+        "health_mae": 0.0196
+      },
+      "holdout_unseen": {
+        "n_samples": 38,
+        "role_acc": 1.0,
+        "damping_mae": 0.0208,
+        "frob_mae": 4.78,
+        "sr_mae": 14.3203,
+        "bias_mae": 0.0349,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.0081,
+        "koopman_innov_pert": 0.4766,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9946,
+        "log_frob_r2": 0.9929,
+        "frob_r2": 0.9046,
+        "log_sr_r2": 0.9839,
+        "edit_acc": 0.9474,
+        "health_mae": 0.0252
+      }
+    },
+    "s1_observes_s2": {
+      "train": {
+        "n_samples": 80,
+        "role_acc": 1.0,
+        "damping_mae": 0.0155,
+        "frob_mae": 0.7381,
+        "sr_mae": 3.9825,
+        "bias_mae": 0.022,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.0042,
+        "koopman_innov_pert": 0.9745,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9956,
+        "log_frob_r2": 0.9981,
+        "frob_r2": 0.9938,
+        "log_sr_r2": 0.9967,
+        "edit_acc": 1.0,
+        "health_mae": 0.0103
+      },
+      "val": {
+        "n_samples": 28,
+        "role_acc": 0.9643,
+        "damping_mae": 0.0297,
+        "frob_mae": 1.2844,
+        "sr_mae": 20.9467,
+        "bias_mae": 0.0278,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.0093,
+        "koopman_innov_pert": 0.8251,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9859,
+        "log_frob_r2": 0.9906,
+        "frob_r2": 0.9821,
+        "log_sr_r2": 0.9589,
+        "edit_acc": 1.0,
+        "health_mae": 0.0368
+      },
+      "holdout_unseen": {
+        "n_samples": 33,
+        "role_acc": 1.0,
+        "damping_mae": 0.0303,
+        "frob_mae": 1.3715,
+        "sr_mae": 15.9692,
+        "bias_mae": 0.0323,
+        "pert_acc": 1.0,
+        "pert_f1": 1.0,
+        "koopman_innov_clean": 0.008,
+        "koopman_innov_pert": 0.761,
+        "koopman_anomaly_acc": 1.0,
+        "damping_r2": 0.9804,
+        "log_frob_r2": 0.9929,
+        "frob_r2": 0.9809,
+        "log_sr_r2": 0.9766,
+        "edit_acc": 1.0,
+        "health_mae": 0.0257
+      }
+    },
+    "contrastive_alignment": {
+      "holdout_same_state_cos": 0.7869,
+      "holdout_diff_state_cos": -0.4693,
+      "contrastive_gap": 1.2562
+    }
+  },
+  "generative_weight_descriptions_holdout": {
+    "s2_to_s1_qwen_0_5b": {
+      "n_evaluated": 8,
+      "format_valid_rate": 1.0,
+      "lm_role_match_rate": 1.0,
+      "lm_state_match_rate": 1.0,
+      "lm_health_match_rate": 0.875,
+      "lm_damping_mae": 0.0176,
+      "lm_frob_rel_err": 0.0278,
+      "mean_lm_latency_ms": 8001.6,
+      "samples": [
+        {
+          "target_layer": 35,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: ai_causal_cluster; Estado: editada; Damping: 0.25; NormaF: 24.1; RangoEspectral: 82.8; Bias: 0.18; Salud: estable.",
+          "generated_text": "Rol: ai_causal_cluster; Estado: editada; Damping: 0.25; NormaF: 24.5; RangoEspectral: 75.9; Bias: 0.18; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: ai_causal_cluster; Estado: editada; Damping: 0.25; NormaF: 24.5; RangoEspectral: 75.9; Bias: 0.18; Salud: estable.",
+            "role": "ai_causal_cluster",
+            "state": "editada",
+            "damping": 0.25,
+            "frob_down": 24.5,
+            "stable_rank": 75.9,
+            "health": "estable"
+          },
+          "gt_role": "ai_causal_cluster",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.25,
+          "gt_frob": 24.11,
+          "lm_latency_ms": 8060.21
+        },
+        {
+          "target_layer": 48,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 24.8; RangoEspectral: 163.0; Bias: 0.25; Salud: estable.",
+          "generated_text": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Bias: 0.25; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Bias: 0.25; Salud: estable.",
+            "role": "code_cluster",
+            "state": "editada",
+            "damping": 0.25,
+            "frob_down": 25.8,
+            "stable_rank": 216.5,
+            "health": "estable"
+          },
+          "gt_role": "code_cluster",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.25,
+          "gt_frob": 24.84,
+          "lm_latency_ms": 7773.51
+        },
+        {
+          "target_layer": 1,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 103.1; RangoEspectral: 177.9; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 101.1; RangoEspectral: 193.6; Bias: 0.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 101.1; RangoEspectral: 193.6; Bias: 0.00; Salud: estable.",
+            "role": "early_syntax",
+            "state": "base_nativa",
+            "damping": 1.0,
+            "frob_down": 101.1,
+            "stable_rank": 193.6,
+            "health": "estable"
+          },
+          "gt_role": "early_syntax",
+          "gt_state": "base_nativa",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 103.11,
+          "lm_latency_ms": 8034.21
+        },
+        {
+          "target_layer": 22,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: general_epistemic; Estado: base_nativa; Damping: 1.00; NormaF: 100.1; RangoEspectral: 65.6; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: general_epistemic; Estado: base_nativa; Damping: 1.00; NormaF: 101.2; RangoEspectral: 107.4; Bias: 0.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: general_epistemic; Estado: base_nativa; Damping: 1.00; NormaF: 101.2; RangoEspectral: 107.4; Bias: 0.00; Salud: estable.",
+            "role": "general_epistemic",
+            "state": "base_nativa",
+            "damping": 1.0,
+            "frob_down": 101.2,
+            "stable_rank": 107.4,
+            "health": "estable"
+          },
+          "gt_role": "general_epistemic",
+          "gt_state": "base_nativa",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 100.07,
+          "lm_latency_ms": 8417.83
+        },
+        {
+          "target_layer": 10,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: math_cluster; Estado: editada; Damping: 0.25; NormaF: 25.0; RangoEspectral: 65.6; Bias: 0.12; Salud: estable.",
+          "generated_text": "Rol: math_cluster; Estado: editada; Damping: 0.25; NormaF: 24.4; RangoEspectral: 67.5; Bias: 0.12; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: math_cluster; Estado: editada; Damping: 0.25; NormaF: 24.4; RangoEspectral: 67.5; Bias: 0.12; Salud: estable.",
+            "role": "math_cluster",
+            "state": "editada",
+            "damping": 0.25,
+            "frob_down": 24.4,
+            "stable_rank": 67.5,
+            "health": "estable"
+          },
+          "gt_role": "math_cluster",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.25,
+          "gt_frob": 25.02,
+          "lm_latency_ms": 7606.46
+        },
+        {
+          "target_layer": 2,
+          "module_type": "meta_bridge",
+          "gt_canonical": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.98; NormaF: 3.1; RangoEspectral: 13.7; Bias: 4.00; Salud: estable.",
+          "generated_text": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.98; NormaF: 3.1; RangoEspectral: 13.6; Bias: 4.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.98; NormaF: 3.1; RangoEspectral: 13.6; Bias: 4.00; Salud: estable.",
+            "role": "meta_bridge_koopman",
+            "state": "editada",
+            "damping": 0.98,
+            "frob_down": 3.1,
+            "stable_rank": 13.6,
+            "health": "estable"
+          },
+          "gt_role": "meta_bridge_koopman",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.98,
+          "gt_frob": 3.14,
+          "lm_latency_ms": 7946.49
+        },
+        {
+          "target_layer": 1,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 1.24; NormaF: 127.9; RangoEspectral: 178.1; Bias: 1.28; Salud: deriva_espectral.",
+          "generated_text": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 1.38; NormaF: 130.7; RangoEspectral: 201.8; Salud: 1.60",
+          "parsed": {
+            "raw": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 1.38; NormaF: 130.7; RangoEspectral: 201.8; Salud: 1.60",
+            "role": "perturbed_anomaly",
+            "state": "editada_perturbada",
+            "damping": 1.38,
+            "frob_down": 130.7,
+            "stable_rank": 201.8,
+            "health": "1"
+          },
+          "gt_role": "perturbed_anomaly",
+          "gt_state": "editada_perturbada",
+          "gt_health": "deriva_espectral",
+          "gt_damping": 1.24,
+          "gt_frob": 127.93,
+          "lm_latency_ms": 8242.57
+        },
+        {
+          "target_layer": 62,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 108.5; RangoEspectral: 340.2; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 100.0; RangoEspectral: 275.0; Bias: 0.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 100.0; RangoEspectral: 275.0; Bias: 0.00; Salud: estable.",
+            "role": "synthesis_head",
+            "state": "base_nativa",
+            "damping": 1.0,
+            "frob_down": 100.0,
+            "stable_rank": 275.0,
+            "health": "estable"
+          },
+          "gt_role": "synthesis_head",
+          "gt_state": "base_nativa",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 108.46,
+          "lm_latency_ms": 7931.52
+        }
+      ]
+    },
+    "s1_to_s2_qwen_1_5b": {
+      "n_evaluated": 7,
+      "format_valid_rate": 1.0,
+      "lm_role_match_rate": 1.0,
+      "lm_state_match_rate": 1.0,
+      "lm_health_match_rate": 0.8571,
+      "lm_damping_mae": 0.0117,
+      "lm_frob_rel_err": 0.0477,
+      "mean_lm_latency_ms": 34959.7,
+      "samples": [
+        {
+          "target_layer": 2,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 35.4; RangoEspectral: 141.8; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 37.5; RangoEspectral: 121.4; Bias: 0.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: early_syntax; Estado: base_nativa; Damping: 1.00; NormaF: 37.5; RangoEspectral: 121.4; Bias: 0.00; Salud: estable.",
+            "role": "early_syntax",
+            "state": "base_nativa",
+            "damping": 1.0,
+            "frob_down": 37.5,
+            "stable_rank": 121.4,
+            "health": "estable"
+          },
+          "gt_role": "early_syntax",
+          "gt_state": "base_nativa",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 35.45,
+          "lm_latency_ms": 34267.04
+        },
+        {
+          "target_layer": 2,
+          "module_type": "meta_bridge",
+          "gt_canonical": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 12.6; Bias: 4.00; Salud: estable.",
+          "generated_text": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 11.3; Bias: 4.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 11.3; Bias: 4.00; Salud: estable.",
+            "role": "meta_bridge_koopman",
+            "state": "editada",
+            "damping": 0.95,
+            "frob_down": 2.4,
+            "stable_rank": 11.3,
+            "health": "estable"
+          },
+          "gt_role": "meta_bridge_koopman",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.949,
+          "gt_frob": 2.39,
+          "lm_latency_ms": 34447.15
+        },
+        {
+          "target_layer": 13,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.7; RangoEspectral: 54.9; Bias: 0.15; Salud: estable.",
+          "generated_text": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: estable.",
+            "role": "meta_observer_core",
+            "state": "editada",
+            "damping": 0.5,
+            "frob_down": 18.3,
+            "stable_rank": 49.6,
+            "health": "estable"
+          },
+          "gt_role": "meta_observer_core",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.5,
+          "gt_frob": 18.7,
+          "lm_latency_ms": 33846.12
+        },
+        {
+          "target_layer": 2,
+          "module_type": "observer_with_probe",
+          "gt_canonical": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 0.28; NormaF: 10.5; RangoEspectral: 9.4; Bias: 1.28; Salud: deriva_espectral.",
+          "generated_text": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 0.20; NormaF: 8.1; RangoEspectral: 7.6; Bias: 1.21; Salud: deriva_espectral.",
+          "parsed": {
+            "raw": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 0.20; NormaF: 8.1; RangoEspectral: 7.6; Bias: 1.21; Salud: deriva_espectral.",
+            "role": "perturbed_anomaly",
+            "state": "editada_perturbada",
+            "damping": 0.2,
+            "frob_down": 8.1,
+            "stable_rank": 7.6,
+            "health": "deriva_espectral"
+          },
+          "gt_role": "perturbed_anomaly",
+          "gt_state": "editada_perturbada",
+          "gt_health": "deriva_espectral",
+          "gt_damping": 0.28,
+          "gt_frob": 10.49,
+          "lm_latency_ms": 36641.69
+        },
+        {
+          "target_layer": 28,
+          "module_type": "decoder_layer",
+          "gt_canonical": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 40.7; RangoEspectral: 256.1; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 41.3; RangoEspectral: 211.2; Bias: 0.00; Salud: 4.00.",
+          "parsed": {
+            "raw": "Rol: synthesis_head; Estado: base_nativa; Damping: 1.00; NormaF: 41.3; RangoEspectral: 211.2; Bias: 0.00; Salud: 4.00.",
+            "role": "synthesis_head",
+            "state": "base_nativa",
+            "damping": 1.0,
+            "frob_down": 41.3,
+            "stable_rank": 211.2,
+            "health": "4"
+          },
+          "gt_role": "synthesis_head",
+          "gt_state": "base_nativa",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 40.71,
+          "lm_latency_ms": 36298.85
+        },
+        {
+          "target_layer": 2,
+          "module_type": "observer_with_probe",
+          "gt_canonical": "Rol: early_syntax; Estado: editada; Damping: 1.00; NormaF: 35.4; RangoEspectral: 141.8; Bias: 0.00; Salud: estable.",
+          "generated_text": "Rol: early_syntax; Estado: editada; Damping: 1.00; NormaF: 35.3; RangoEspectral: 101.8; Bias: 0.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: early_syntax; Estado: editada; Damping: 1.00; NormaF: 35.3; RangoEspectral: 101.8; Bias: 0.00; Salud: estable.",
+            "role": "early_syntax",
+            "state": "editada",
+            "damping": 1.0,
+            "frob_down": 35.3,
+            "stable_rank": 101.8,
+            "health": "estable"
+          },
+          "gt_role": "early_syntax",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 1.0,
+          "gt_frob": 35.45,
+          "lm_latency_ms": 34265.1
+        },
+        {
+          "target_layer": 6,
+          "module_type": "meta_bridge",
+          "gt_canonical": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 13.3; Bias: 4.00; Salud: estable.",
+          "generated_text": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 11.3; Bias: 4.00; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: meta_bridge_koopman; Estado: editada; Damping: 0.95; NormaF: 2.4; RangoEspectral: 11.3; Bias: 4.00; Salud: estable.",
+            "role": "meta_bridge_koopman",
+            "state": "editada",
+            "damping": 0.95,
+            "frob_down": 2.4,
+            "stable_rank": 11.3,
+            "health": "estable"
+          },
+          "gt_role": "meta_bridge_koopman",
+          "gt_state": "editada",
+          "gt_health": "estable",
+          "gt_damping": 0.949,
+          "gt_frob": 2.39,
+          "lm_latency_ms": 34952.27
+        }
+      ]
+    }
+  },
+  "counterfactual_live_interventions": {
+    "s2_detects_s1_layer_48_mutation": {
+      "before": {
+        "role_pred": "code_cluster",
+        "damping_pred": 0.3011,
+        "is_perturbed_pred": false,
+        "anomaly_score": 0.0,
+        "innov_norm": 0.0007,
+        "generated": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Salud: 0.25."
+      },
+      "after_mutation": {
+        "role_pred": "perturbed_anomaly",
+        "damping_pred": 0.063,
+        "is_perturbed_pred": true,
+        "anomaly_score": 1.0,
+        "innov_norm": 1.0144,
+        "generated": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 0.05; NormaF: 6.7; RangoEspectral: 4.9; Salud: 1.28."
+      },
+      "after_restore": {
+        "is_perturbed_pred": false,
+        "damping_pred": 0.3011
+      },
+      "detected": true,
+      "anomaly_delta": 1.0,
+      "innov_delta": 1.0137
+    },
+    "s1_detects_s2_layer_13_mutation": {
+      "before": {
+        "role_pred": "meta_observer_core",
+        "damping_pred": 0.5863,
+        "is_perturbed_pred": false,
+        "anomaly_score": 0.2159,
+        "innov_norm": 0.0592,
+        "generated": "Rol: meta_observer_core; Estado: editada; Damping: 0.51; NormaF: 15.3; RangoEspectral: 29.6; Bias: 0.15; Salud: estable."
+      },
+      "after_mutation": {
+        "role_pred": "perturbed_anomaly",
+        "damping_pred": 0.1974,
+        "is_perturbed_pred": true,
+        "anomaly_score": 0.9999,
+        "innov_norm": 1.1413,
+        "generated": "Rol: perturbed_anomaly; Estado: editada; Damping: 0.20; NormaF: 8.1; RangoEspectral: 4.2; Bias: 1.31; Salud: deriva_espectral."
+      },
+      "detected": true,
+      "anomaly_delta": 0.784,
+      "innov_delta": 1.0821
+    },
+    "s1_detects_s2_probe_only_corruption": {
+      "before_probe_frob": 41.451,
+      "corrupted_probe_frob": 53.44,
+      "is_perturbed_pred": true,
+      "role_pred": "perturbed_anomaly",
+      "anomaly_score": 1.0,
+      "innov_norm": 0.2327,
+      "generated": "Rol: perturbed_anomaly; Estado: editada_perturbada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: deriva_espectral.",
+      "detected": true
+    }
+  },
+  "execution_modes": {
+    "realtime_with_primary_task_and_hooks": {
+      "n_episodes": 3,
+      "mean_s2_obs_ms": 164.91,
+      "mean_s1_obs_ms": 47.34,
+      "mean_primary_task_ms": 11032.4,
+      "full_bidirectional_with_lm_episode": {
+        "prompt": "Compute lcm(12, 15). Final Answer:",
+        "total_episode_ms": 52558.1,
+        "primary_execution": {
+          "prompt": "Compute lcm(12, 15). Final Answer:",
+          "reply": "The least common multiple (LCM) of two numbers is the smallest positive integer that is",
+          "latency_ms": 10535.03,
+          "tokens_generated": 18,
+          "captured_layers": 2
+        },
+        "s2_observes_s1": {
+          "target_layer": 48,
+          "ground_truth": {
+            "system_id": "S1_principal",
+            "layer_idx": 48,
+            "module_type": "decoder_layer",
+            "role_label": "code_cluster",
+            "damping": 0.25,
+            "frob_down": 24.837,
+            "frob_o": 9.949,
+            "frob_up": 103.755,
+            "bias_norm": 0.25,
+            "spectral_norm": 1.9454,
+            "stable_rank": 163.0,
+            "spectral_entropy": 0.996,
+            "sparsity": 0.0438,
+            "probe_frob_norm": 0.0,
+            "runtime_act_norm": 99.807,
+            "runtime_delta_norm": 7.694,
+            "is_edited": true,
+            "is_perturbed": false,
+            "health_score": 1.0,
+            "domain_cosines": {
+              "ai_analysis": -0.0,
+              "causal_logic": -0.0,
+              "math": 0.0,
+              "code": 1.0,
+              "meta_observer": -0.0
+            }
+          },
+          "predicted": {
+            "role_pred": "code_cluster",
+            "role_confidence": 0.9888,
+            "damping_pred": 0.2534,
+            "frob_down_pred": 24.226,
+            "stable_rank_pred": 171.79,
+            "bias_norm_pred": 0.2559,
+            "health_pred": 0.9905,
+            "is_edited_pred": true,
+            "is_perturbed_pred": false,
+            "innov_norm": 0.0004,
+            "anomaly_score": 0.0,
+            "lm_latency_ms": 7783.98
+          },
+          "generated_description": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Bias: 0.25; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Bias: 0.25; Salud: estable.",
+            "role": "code_cluster",
+            "state": "editada",
+            "damping": 0.25,
+            "frob_down": 25.8,
+            "stable_rank": 216.5,
+            "health": "estable"
+          },
+          "koopman_innov": 0.0004,
+          "latency_ms": 7940.82
+        },
+        "s1_observes_s2": {
+          "target_layer": 13,
+          "ground_truth": {
+            "system_id": "S2_observer",
+            "layer_idx": 13,
+            "module_type": "observer_with_probe",
+            "role_label": "meta_observer_core",
+            "damping": 0.5,
+            "frob_down": 18.697,
+            "frob_o": 7.815,
+            "frob_up": 38.683,
+            "bias_norm": 0.15,
+            "spectral_norm": 2.5232,
+            "stable_rank": 54.91,
+            "spectral_entropy": 0.9794,
+            "sparsity": 0.0524,
+            "probe_frob_norm": 41.451,
+            "runtime_act_norm": 14.207,
+            "runtime_delta_norm": 1.665,
+            "is_edited": true,
+            "is_perturbed": false,
+            "health_score": 1.0,
+            "domain_cosines": {
+              "ai_analysis": -0.0,
+              "causal_logic": -0.0,
+              "math": -0.0001,
+              "code": -0.0001,
+              "meta_observer": 1.0
+            }
+          },
+          "predicted": {
+            "role_pred": "meta_observer_core",
+            "role_confidence": 0.9821,
+            "damping_pred": 0.5224,
+            "frob_down_pred": 18.935,
+            "stable_rank_pred": 50.2,
+            "bias_norm_pred": 0.1521,
+            "health_pred": 0.9882,
+            "is_edited_pred": true,
+            "is_perturbed_pred": false,
+            "innov_norm": 0.0024,
+            "anomaly_score": 0.0001,
+            "lm_latency_ms": 34046.43
+          },
+          "generated_description": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: estable.",
+          "parsed": {
+            "raw": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: estable.",
+            "role": "meta_observer_core",
+            "state": "editada",
+            "damping": 0.5,
+            "frob_down": 18.3,
+            "stable_rank": 49.6,
+            "health": "estable"
+          },
+          "koopman_innov": 0.0024,
+          "latency_ms": 34081.89
+        }
+      }
+    },
+    "episodic_batch": {
+      "batch_size": 12,
+      "elapsed_ms": 44459.76,
+      "ms_per_episode": 3704.98,
+      "s2_to_s1_role_acc": 0.9167,
+      "s1_to_s2_role_acc": 0.8333,
+      "mean_s2_innov": 0.0026,
+      "mean_s1_innov": 0.0237,
+      "last_episode_s2_to_s1_desc": "Rol: code_cluster; Estado: editada; Damping: 0.25; NormaF: 25.8; RangoEspectral: 216.5; Bias: 0.25; Salud: estable.",
+      "last_episode_s1_to_s2_desc": "Rol: meta_observer_core; Estado: editada; Damping: 0.50; NormaF: 18.3; RangoEspectral: 49.6; Bias: 0.15; Salud: estable."
+    }
+  },
+  "primary_task_preservation": {
+    "math_reply": "The greatest common divisor (gcd) of 48 and 18 is 4.\n\nFinal",
+    "math_ok": false,
+    "code_reply": "```python\ndef reverse_string(s):\n    return s[::-1]\n```",
+    "code_ok": true,
+    "general_reply": "Self-attention, also known as self-attention or intra-token attention, is a feature introduced in",
+    "general_ok": true,
+    "live_hooks_captured_s1": [
+      2,
+      2,
+      2
+    ]
+  }
+}
