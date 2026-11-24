@@ -17,7 +17,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from app import access, config, db, hfclient, resources
+from app import access, config, db, hfclient, orchestrator, resources
 from app.downloader import service
 from app.policy import (
     PolicyError,
@@ -66,6 +66,58 @@ class LoginRequest(BaseModel):
 class ApiKeyRequest(BaseModel):
     label: str = ""
     expires_in_days: float | None = None
+
+
+class OrchestratorWorkerSpec(BaseModel):
+    id: str = ""
+    name: str = ""
+    role: str = ""
+    model: str
+
+
+class OrchestratorConfigRequest(BaseModel):
+    orchestrator_model: str
+    verifier_model: str
+    workers: list[OrchestratorWorkerSpec]
+    pacing_mode: str = "auto"
+    pace_seconds: float = 1.5
+    max_rounds: int = 4
+    execution_enabled: bool = True
+    execution_timeout: int = 15
+    temperature: float = 0.4
+    max_tokens: int = 768
+
+
+class OrchestratorRunRequest(BaseModel):
+    objective: str
+    criteria: list[str] = []
+    start_immediately: bool = True
+    orchestrator_model: str | None = None
+    verifier_model: str | None = None
+    workers: list[OrchestratorWorkerSpec] | None = None
+    pacing_mode: str | None = None
+    pace_seconds: float | None = None
+    max_rounds: int | None = None
+    execution_enabled: bool | None = None
+    execution_timeout: int | None = None
+    temperature: float | None = None
+    max_tokens: int | None = None
+
+
+class OrchestratorResumeRequest(BaseModel):
+    extra_rounds: int = 0
+    pacing_mode: str | None = None
+
+
+class OrchestratorNoteRequest(BaseModel):
+    text: str
+    author: str = "Operador"
+
+
+class OrchestratorFileRequest(BaseModel):
+    filename: str
+    content: str
+    summary: str = ""
 
 
 def _bootstrap_key(repo: str, filename: str) -> str:
@@ -133,6 +185,7 @@ async def lifespan(_app: FastAPI):
     _bootstrap()
     _preload_default()
     yield
+    orchestrator.manager.stop_all()
     service.stop()
     runner.stop_all()
 
@@ -154,6 +207,11 @@ app.add_middleware(
 @app.exception_handler(PolicyError)
 async def _policy_error(_request: Request, exc: PolicyError) -> JSONResponse:
     return JSONResponse(status_code=400, content={"detail": str(exc)})
+
+
+@app.exception_handler(orchestrator.OrchestratorError)
+async def _orchestrator_error(_request: Request, exc: orchestrator.OrchestratorError) -> JSONResponse:
+    return JSONResponse(status_code=exc.status, content={"detail": exc.detail})
 
 
 @app.exception_handler(access.AuthError)
@@ -603,6 +661,131 @@ async def delete_model(slug: str, request: Request) -> dict:
     if not await _erase(slug):
         raise HTTPException(status_code=404, detail="Modelo no encontrado.")
     return {"deleted": slug}
+
+
+# --------------------------------------------------------------------------
+# Modo Orquestador por objetivos (cuaderno NOTES.md, sandbox y verificador)
+
+@app.get("/api/orchestrator/config")
+def orchestrator_get_config(request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.get_config()
+
+
+@app.put("/api/orchestrator/config")
+def orchestrator_save_config(body: OrchestratorConfigRequest, request: Request) -> dict:
+    _require_admin(request)
+    payload = body.model_dump()
+    return orchestrator.save_config(payload)
+
+
+@app.get("/api/orchestrator/runs")
+def orchestrator_list_runs(request: Request, limit: int = 30) -> dict:
+    _require_admin(request)
+    return {"runs": orchestrator.manager.list_runs(limit=limit)}
+
+
+@app.post("/api/orchestrator/runs")
+async def orchestrator_create_run(body: OrchestratorRunRequest, request: Request) -> dict:
+    _require_admin(request)
+    data = body.model_dump()
+    objective = data.pop("objective")
+    criteria = data.pop("criteria")
+    start_immediately = data.pop("start_immediately")
+    return orchestrator.manager.create_run(
+        objective=objective,
+        criteria=criteria,
+        overrides=data,
+        start_immediately=start_immediately,
+    )
+
+
+@app.get("/api/orchestrator/runs/{run_id}")
+def orchestrator_get_run(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.get_run_detail(run_id)
+
+
+@app.delete("/api/orchestrator/runs/{run_id}")
+async def orchestrator_delete_run(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    if not await orchestrator.manager.delete_run(run_id):
+        raise HTTPException(status_code=404, detail="Misión de orquestación no encontrada.")
+    return {"deleted": run_id}
+
+
+@app.get("/api/orchestrator/runs/{run_id}/stream")
+async def orchestrator_stream_run(run_id: str, request: Request, after_id: int = 0) -> StreamingResponse:
+    _require_admin(request)
+    # Validar existencia antes de abrir el stream SSE
+    orchestrator.manager.get_run_detail(run_id)
+    return StreamingResponse(
+        orchestrator.manager.stream_events(run_id, after_id=after_id),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
+
+
+@app.post("/api/orchestrator/runs/{run_id}/pause")
+async def orchestrator_pause_run(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.pause(run_id)
+
+
+@app.post("/api/orchestrator/runs/{run_id}/resume")
+async def orchestrator_resume_run(
+    run_id: str,
+    request: Request,
+    body: OrchestratorResumeRequest | None = None,
+) -> dict:
+    _require_admin(request)
+    req = body or OrchestratorResumeRequest()
+    return orchestrator.manager.resume(
+        run_id,
+        extra_rounds=req.extra_rounds,
+        pacing_mode=req.pacing_mode,
+    )
+
+
+@app.post("/api/orchestrator/runs/{run_id}/step")
+async def orchestrator_step_run(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.step(run_id)
+
+
+@app.post("/api/orchestrator/runs/{run_id}/stop")
+async def orchestrator_stop_run(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    return await orchestrator.manager.stop(run_id)
+
+
+@app.get("/api/orchestrator/runs/{run_id}/notes")
+def orchestrator_get_notes(run_id: str, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.read_file(run_id, "NOTES.md")
+
+
+@app.post("/api/orchestrator/runs/{run_id}/notes")
+async def orchestrator_add_note(run_id: str, body: OrchestratorNoteRequest, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.add_human_note(run_id, body.text, author=body.author)
+
+
+@app.get("/api/orchestrator/runs/{run_id}/files/{filename:path}")
+def orchestrator_get_file(run_id: str, filename: str, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.read_file(run_id, filename)
+
+
+@app.post("/api/orchestrator/runs/{run_id}/files")
+async def orchestrator_deposit_file(run_id: str, body: OrchestratorFileRequest, request: Request) -> dict:
+    _require_admin(request)
+    return orchestrator.manager.deposit_shared_file(
+        run_id,
+        filename=body.filename,
+        content=body.content,
+        summary=body.summary,
+    )
 
 
 @app.get("/v1/models")

@@ -341,6 +341,7 @@ async function refresh() {
     renderPreset();
     renderDownloads();
     if (state.tab === "installed") renderInstalled();
+    window.ObradorOrch?.onModelsUpdated?.();
   }
   if (state.tab === "chat") fillChatModels();
 }
@@ -358,7 +359,7 @@ function showTab(name) {
   for (const button of document.querySelectorAll(".tab")) {
     button.classList.toggle("is-on", button.dataset.tab === name);
   }
-  for (const view of ["installed", "downloads", "catalog", "chat"]) {
+  for (const view of ["installed", "downloads", "catalog", "chat", "orchestrator"]) {
     $(`view-${view}`).hidden = view !== name;
   }
   if (name === "installed") renderInstalled();
@@ -366,6 +367,9 @@ function showTab(name) {
   if (name === "chat") {
     fillChatModels();
     paintHistory();
+  }
+  if (name === "orchestrator") {
+    window.ObradorOrch?.onTabShow?.();
   }
 }
 
@@ -863,6 +867,7 @@ async function afterAccessChange() {
   renderAccess(accessStatus);
   await loadSystem();
   await refresh();
+  window.ObradorOrch?.onModelsUpdated?.();
   banner("");
 }
 
@@ -981,3 +986,17 @@ setInterval(() => {
 setInterval(() => {
   loadAccess().catch(() => {});
 }, 60000);
+
+window.Obrador = {
+  $,
+  api,
+  banner,
+  copyText,
+  esc,
+  formatBytes,
+  headers,
+  session,
+  showTab,
+  state,
+};
+

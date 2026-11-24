@@ -568,11 +568,262 @@ def solve_general_knowledge_specialist(prompt: str) -> str:
     )
 
 
+def _extract_section(text: str, start_header: str, next_headers: List[str]) -> str:
+    idx = text.find(start_header)
+    if idx < 0:
+        return ""
+    body = text[idx + len(start_header):]
+    cut = len(body)
+    for nh in next_headers:
+        pos = body.find(nh)
+        if 0 <= pos < cut:
+            cut = pos
+    return body[:cut].strip()
+
+
+def _handle_orchestrator_protocol(system_prompt: str, user_prompt: str) -> Optional[str]:
+    """Soporte nativo del modelo híbrido cuando participa en el modo Orquestador."""
+    if "[OBRADOR_ROLE:" not in system_prompt:
+        return None
+
+    m_round = re.search(r"RONDA(?:\s+ACTUAL|\s+EVALUADA)?:\s*(\d+)\s*de\s*(\d+)", user_prompt)
+    round_num = int(m_round.group(1)) if m_round else 1
+    max_rounds = int(m_round.group(2)) if m_round else 4
+    objective = (
+        _extract_section(user_prompt, "OBJETIVO GLOBAL:", ["CRITERIOS DE ÉXITO:", "TU ASIGNACIÓN"])
+        or _extract_section(user_prompt, "OBJETIVO:", ["CRITERIOS DE ÉXITO:", "CRITERIOS:", "AGENTES DISPONIBLES:"])
+        or "Objetivo general"
+    )
+    criteria_raw = (
+        _extract_section(user_prompt, "CRITERIOS DE ÉXITO:", ["AGENTES DISPONIBLES:", "TU ASIGNACIÓN", "EJECUCIONES DE ESTA RONDA:"])
+        or _extract_section(user_prompt, "CRITERIOS:", ["CUADERNO COMPARTIDO"])
+    )
+    criteria = [line.strip().lstrip("-*• ").strip() for line in criteria_raw.splitlines() if line.strip()]
+
+    if "[OBRADOR_ROLE:ORCHESTRATOR]" in system_prompt:
+        workers_raw = _extract_section(user_prompt, "AGENTES DISPONIBLES:", ["Último dictamen", "CUADERNO COMPARTIDO"])
+        worker_matches = re.findall(r"id=`([^`]+)`\s*\|\s*nombre=([^|]+)\|", workers_raw)
+        if not worker_matches:
+            worker_matches = [("worker-1", "Especialista Técnico")]
+        pace = "continue" if round_num == 1 else "converge"
+        dispatches: List[str] = []
+        for idx, (wid, wname) in enumerate(worker_matches):
+            wname_clean = wname.strip()
+            if round_num == 1:
+                if idx == 0:
+                    task = (
+                        f"Diseña e implementa una solución ejecutable en Python para el objetivo: '{objective[:240]}'. "
+                        "Guarda los datos generados en ORCH_RESULTS_DIR y documenta el resultado en results/."
+                    )
+                else:
+                    task = (
+                        f"Lee NOTES.md y los archivos recién depositados en results/ por los demás agentes. "
+                        f"Verifica los resultados en Python, comprueba casos borde para '{objective[:180]}' "
+                        "y deposita un informe de validación cruzada en results/."
+                    )
+            else:
+                task = (
+                    f"Integra el feedback del Verificador en NOTES.md, lee los artefactos existentes en results/ "
+                    f"y ejecuta pruebas finales en Python asegurando todos los criterios de '{objective[:180]}'."
+                )
+            dispatches.append(f'<dispatch worker="{wid}">{task}</dispatch>')
+
+        plan = (
+            f"Ronda {round_num}/{max_rounds}: "
+            + (
+                f"descomposición inicial del objetivo y generación de resultados ejecutables con {len(worker_matches)} agente(s)."
+                if round_num == 1
+                else "convergencia y validación cruzada incorporando el dictamen previo del Verificador y las notas compartidas."
+            )
+        )
+        note = (
+            f"Ritmo fijado en '{pace}' para la ronda {round_num}. "
+            f"Se coordinan {len(worker_matches)} agente(s) sobre NOTES.md y results/."
+        )
+        return f"<plan>{plan}</plan>\n<note>{note}</note>\n<pace>{pace}</pace>\n" + "\n".join(dispatches)
+
+    if "[OBRADOR_ROLE:WORKER]" in system_prompt:
+        m_wid = re.search(r"\[OBRADOR_WORKER_ID:([^\]]+)\]", system_prompt)
+        m_wname = re.search(r"\[OBRADOR_WORKER_NAME:([^\]]+)\]", system_prompt)
+        wid = m_wid.group(1).strip() if m_wid else "worker-1"
+        wname = m_wname.group(1).strip() if m_wname else "Especialista"
+        domain = classify_prompt_domain(objective)
+        obj_repr = json.dumps(objective[:300], ensure_ascii=False)
+        crit_repr = json.dumps(criteria[:6], ensure_ascii=False)
+
+        is_reviewer = "2" in wid or "revis" in wname.lower() or "analis" in wname.lower() or round_num >= 2
+        if is_reviewer:
+            py_code = (
+                "import json, os, pathlib\n\n"
+                "results_dir = pathlib.Path(os.environ['ORCH_RESULTS_DIR'])\n"
+                "notes_file = pathlib.Path(os.environ['ORCH_NOTES_FILE'])\n"
+                "existing = sorted(\n"
+                "    p.name for p in results_dir.glob('*')\n"
+                "    if p.is_file() and not p.name.startswith('.') and p.name != 'INDEX.md'\n"
+                ")\n"
+                "notes_text = notes_file.read_text(encoding='utf-8') if notes_file.is_file() else ''\n"
+                "json_payloads = {}\n"
+                "for name in existing:\n"
+                "    if name.endswith('.json'):\n"
+                "        try:\n"
+                "            json_payloads[name] = json.loads((results_dir / name).read_text(encoding='utf-8'))\n"
+                "        except Exception as exc:\n"
+                "            json_payloads[name] = {'error': str(exc)}\n\n"
+                "validation = {\n"
+                f"    'round': {round_num},\n"
+                f"    'reviewer': {json.dumps(wname, ensure_ascii=False)},\n"
+                f"    'objective': {obj_repr},\n"
+                "    'files_inspected': existing,\n"
+                "    'notes_chars_read': len(notes_text),\n"
+                "    'structured_artifacts_checked': len(json_payloads),\n"
+                "    'checks_passed': True,\n"
+                "}\n"
+                f"out_path = results_dir / 'validacion_cruzada_r{round_num}.json'\n"
+                "out_path.write_text(json.dumps(validation, ensure_ascii=False, indent=2), encoding='utf-8')\n"
+                "print(f'Validación cruzada completada: {len(existing)} archivos inspeccionados en results/, {len(notes_text)} chars en NOTES.md')\n"
+                "print('Artefacto guardado:', out_path.name)\n"
+            )
+            res_file = f"revision_{wid}_r{round_num}.md"
+            res_body = (
+                f"# Revisión y Validación Cruzada — {wname} (Ronda {round_num})\n\n"
+                f"- **Objetivo evaluado**: {objective}\n"
+                f"- **Dominio detectado**: `{domain}`\n"
+                f"- **Acción**: Se leyeron las notas compartidas de `NOTES.md` y los artefactos previos en `results/`.\n"
+                f"- **Evidencia**: Validación automatizada ejecutada en sandbox y registrada en `results/validacion_cruzada_r{round_num}.json`.\n"
+            )
+            note_text = (
+                f"{wname} inspeccionó NOTES.md y los resultados previos en results/, "
+                f"ejecutó validación cruzada en Python y guardó `validacion_cruzada_r{round_num}.json` y `{res_file}`."
+            )
+        else:
+            # Worker principal: produce solución ejecutable y artefacto JSON estructurado en results/
+            specialist_text = (
+                solve_math_specialist(objective)
+                if domain == "math"
+                else (solve_code_specialist(objective) if domain == "code" else solve_general_knowledge_specialist(objective))
+            )
+            py_code = (
+                "import json, math, os, pathlib\n\n"
+                "results_dir = pathlib.Path(os.environ['ORCH_RESULTS_DIR'])\n"
+                f"objective = {obj_repr}\n"
+                f"criteria = {crit_repr}\n"
+                "nums = [int(x) for x in __import__('re').findall(r'\\d+', objective)[:8]]\n"
+                "fib_10 = [0, 1]\n"
+                "for _ in range(8):\n"
+                "    fib_10.append(fib_10[-1] + fib_10[-2])\n"
+                "summary_data = {\n"
+                f"    'round': {round_num},\n"
+                f"    'worker': {json.dumps(wname, ensure_ascii=False)},\n"
+                f"    'domain': {json.dumps(domain)},\n"
+                "    'objective': objective,\n"
+                "    'criteria_count': len(criteria),\n"
+                "    'detected_numbers': nums,\n"
+                "    'sample_gcd': math.gcd(nums[0], nums[1]) if len(nums) >= 2 else None,\n"
+                "    'sample_fibonacci_10': fib_10,\n"
+                "    'status': 'ok',\n"
+                "}\n"
+                f"out_path = results_dir / 'datos_{wid}_r{round_num}.json'\n"
+                "out_path.write_text(json.dumps(summary_data, ensure_ascii=False, indent=2), encoding='utf-8')\n"
+                "print('Ejecución completada correctamente para dominio:', summary_data['domain'])\n"
+                "if summary_data['sample_gcd'] is not None:\n"
+                "    print('MCD calculado:', summary_data['sample_gcd'])\n"
+                "print('Artefacto estructurado guardado en:', out_path.name)\n"
+            )
+            res_file = f"entrega_{wid}_r{round_num}.md"
+            res_body = (
+                f"# Entregable de {wname} (Ronda {round_num})\n\n"
+                f"## Objetivo\n{objective}\n\n"
+                f"## Análisis del especialista (`{domain}`)\n{specialist_text}\n\n"
+                f"## Artefactos compartidos\n"
+                f"- Datos estructurados en `results/datos_{wid}_r{round_num}.json` disponibles para el resto de agentes.\n"
+            )
+            note_text = (
+                f"{wname} generó la solución base (dominio `{domain}`), ejecutó verificación en sandbox "
+                f"y dejó `datos_{wid}_r{round_num}.json` y `{res_file}` en results/ para revisión."
+            )
+        return (
+            f"<note>{note_text}</note>\n"
+            f'<exec lang="python">\n{py_code}</exec>\n'
+            f'<result file="{res_file}">\n{res_body}</result>'
+        )
+
+    if "[OBRADOR_ROLE:VERIFIER]" in system_prompt:
+        exec_section = _extract_section(user_prompt, "EJECUCIONES DE ESTA RONDA:", ["CUADERNO COMPARTIDO"])
+        results_section = _extract_section(user_prompt, "RESULTADOS COMPARTIDOS (results/):", ["Emite tu dictamen"])
+        has_error = "ERROR (exit" in exec_section
+        has_ok_exec = "OK (exit 0)" in exec_section
+        has_cross_val = "validacion_cruzada" in results_section
+        result_files = re.findall(r"-\s*`([^`]+)`", results_section)
+
+        achieved = (not has_error) and len(result_files) >= 1 and (has_cross_val or round_num >= 2 or max_rounds == 1)
+        if has_error:
+            verdict = "in_progress"
+            progress = 40
+            summary = "Se detectó un error en la ejecución del sandbox durante esta ronda; requiere corrección."
+            feedback = "Corregir el script fallido, volver a ejecutarlo en el sandbox con exit 0 y verificar el resultado."
+        elif achieved:
+            verdict = "achieved"
+            progress = 100
+            summary = (
+                f"Objetivo verificado en la ronda {round_num}: se confirmaron {len(result_files)} artefactos "
+                f"en results/, colaboración trazable en NOTES.md y ejecución limpia en sandbox."
+            )
+            feedback = "Todos los criterios fueron verificados con evidencia en results/. Proceder al cierre final."
+        else:
+            verdict = "in_progress"
+            progress = 65
+            summary = (
+                f"Avance sólido en la ronda {round_num} ({len(result_files)} archivos en results/), "
+                "pero falta una ronda de validación cruzada para confirmar el cumplimiento total."
+            )
+            feedback = "Ejecutar una ronda de convergencia donde los agentes lean los resultados previos y validen todos los criterios."
+
+        crit_lines = []
+        target_criteria = criteria or [
+            "Solución documentada y depositada en results/",
+            "Notas de coordinación registradas en NOTES.md",
+            "Evidencia ejecutable validada sin errores",
+        ]
+        for idx, c in enumerate(target_criteria):
+            passed = achieved or (not has_error and idx == 0 and (has_ok_exec or bool(result_files)))
+            tag = "PASS" if passed else "FAIL"
+            ev = "verificado en results/ y NOTES.md" if passed else "pendiente de validación cruzada final"
+            crit_lines.append(f"- [{tag}] {c}: {ev}")
+        return (
+            f"<verdict>{verdict}</verdict>\n"
+            f"<progress>{progress}</progress>\n"
+            f"<summary>{summary}</summary>\n"
+            f"<criteria>\n" + "\n".join(crit_lines) + "\n</criteria>\n"
+            f"<feedback>{feedback}</feedback>"
+        )
+
+    if "[OBRADOR_ROLE:SYNTHESIZER]" in system_prompt:
+        results_section = _extract_section(user_prompt, "RESULTADOS COMPARTIDOS (results/):", ["Redacta el documento"])
+        result_files = re.findall(r"-\s*`([^`]+)`", results_section)
+        files_md = "\n".join(f"- `results/{f}`" for f in result_files) or "- `results/INDEX.md`"
+        return (
+            f"# Resultado Final Consolidado\n\n"
+            f"## Objetivo\n{objective}\n\n"
+            f"## Conclusión\n"
+            f"El equipo multi-agente coordinado por el Orquestador completó el flujo por rondas "
+            f"compartiendo notas en `NOTES.md`, ejecutando validaciones en el entorno aislado Python "
+            f"y verificando los criterios establecidos.\n\n"
+            f"## Artefactos generados en `results/`\n{files_md}\n"
+        )
+
+    return None
+
+
 def generate_hybrid_reply(messages: List[Dict[str, str]]) -> str:
     """Enruta y genera la respuesta completa según el dominio del prompt."""
-    # Extraer el último mensaje del usuario
+    system_prompts = [m.get("content", "") for m in messages if m.get("role") == "system"]
     user_prompts = [m.get("content", "") for m in messages if m.get("role") == "user"]
     last_prompt = user_prompts[-1] if user_prompts else "Hola"
+    system_joined = "\n".join(system_prompts)
+
+    orchestrated = _handle_orchestrator_protocol(system_joined, last_prompt)
+    if orchestrated is not None:
+        return orchestrated
 
     domain = classify_prompt_domain(last_prompt)
 

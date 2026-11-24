@@ -171,6 +171,15 @@ for chunk in client.chat.completions.create(
 
 La documentación interactiva está en `/docs`.
 
+## Modo Orquestador por Objetivos
+
+La pestaña **Orquestador** del panel permite coordinar varios modelos locales hacia un objetivo común con criterios verificables:
+
+- **Roles configurables y persistidos**: elige en el panel el modelo **Orquestador por defecto** (marca el ritmo y asigna tareas), uno o varios **modelos de resultados** (agentes con nombre/especialidad) y el modelo **Verificador por defecto** (comprueba si el objetivo se ha cumplido).
+- **Cuaderno compartido (`NOTES.md`)**: cada misión crea un fichero real en `<DATA_DIR>/orchestrator/<run_id>/NOTES.md` que todos los agentes leen antes de actuar y donde dejan notas con sus hallazgos. El usuario también puede dejar notas en directo.
+- **Entorno de ejecución aislado (Python sandbox)** y **carpeta de resultados compartidos (`results/`)**: los agentes pueden ejecutar código Python aislado (sin acceso a `MASTER_SECRET` ni `HF_TOKEN`, con timeout y límites de recursos) y depositar archivos/resultados en `results/` (con índice automático `INDEX.md`) para que otros agentes los lean, validen y construyan sobre ellos.
+- **Control de ritmo**: funciona en modo **Automático con cadencia** o **Paso a paso**, con controles en vivo de **Pausar ritmo**, **Reanudar**, **Siguiente ronda**, **+2 rondas** y **Detener**, retransmitido en tiempo real por SSE.
+
 ## Catálogo
 
 La pestaña Catálogo busca modelos GGUF en Hugging Face. Cada archivo muestra su peso. Los que pasan de 9.00 GB salen deshabilitados, y el servidor rechaza esa descarga aunque alguien llame la API a mano. Solo se aceptan archivos `.gguf`.
@@ -206,10 +215,12 @@ Están comentadas en `.env.example`. Las que más importan:
 | `MALLOC_ARENA_MAX` | 2 | Menos RSS en glibc |
 | `MASTER_SECRET` | vacío | **Obligatorio.** Secreto único para sesiones y API keys. Vacío = todo cerrado (503) |
 | `SESSION_TTL_HOURS` | 12 | Duración de la sesión del panel |
+| `ORCHESTRATOR_MAX_ROUNDS` | 4 | Rondas máximas por defecto en el modo orquestador |
+| `ORCHESTRATOR_EXEC_TIMEOUT` | 15 | Segundos máximos por ejecución Python en el sandbox del orquestador |
 
 ## Pruebas
 
 ```bash
 pip install -r requirements.txt -r requirements-dev.txt
-pytest
+pytest tests
 ```

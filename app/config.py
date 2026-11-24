@@ -36,8 +36,22 @@ def models_dir() -> Path:
     return data_dir() / "models"
 
 
+def orchestrator_dir() -> Path:
+    return data_dir() / "orchestrator"
+
+
 def db_path() -> Path:
     return data_dir() / "obrador.sqlite"
+
+
+def orchestrator_exec_timeout() -> int:
+    """Segundos máximos por ejecución en el entorno sandbox del orquestador."""
+    return max(2, min(60, int(_env("ORCHESTRATOR_EXEC_TIMEOUT", "15"))))
+
+
+def orchestrator_max_rounds() -> int:
+    """Rondas máximas por defecto en una misión del orquestador."""
+    return max(1, min(20, int(_env("ORCHESTRATOR_MAX_ROUNDS", "4"))))
 
 
 def ctx_size() -> int:
@@ -127,6 +141,7 @@ def default_sha256() -> str:
 
 def ensure_dirs() -> None:
     models_dir().mkdir(parents=True, exist_ok=True)
+    orchestrator_dir().mkdir(parents=True, exist_ok=True)
     cache = data_dir() / "hf-home"
     cache.mkdir(parents=True, exist_ok=True)
     # El caché de Hugging Face tiene que vivir en el volumen, no en el disco del sistema.

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,650&family=Outfit:wght@380;520;640&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/app.css?v=20260929-mobile2">
+  <link rel="stylesheet" href="/static/app.css?v=20261124-orch1">
 </head>
 <body>
   <header class="top">
@@ -35,6 +35,7 @@
     <button type="button" data-tab="downloads" class="tab" id="tab-downloads">Descargas en curso</button>
     <button type="button" data-tab="catalog" class="tab">Catálogo</button>
     <button type="button" data-tab="chat" class="tab">Chat</button>
+    <button type="button" data-tab="orchestrator" class="tab" id="tab-orchestrator">Orquestador</button>
   </nav>
 
   <p id="banner" class="banner" hidden></p>
@@ -108,6 +109,234 @@
         </form>
       </div>
     </section>
+
+    <section id="view-orchestrator" class="view" hidden>
+      <div class="orch-top-bar">
+        <div class="lede">
+          <h2>Orquestador por objetivos</h2>
+          <p>Un modelo orquestador marca el ritmo por rondas, los modelos de resultados ejecutan código Python y depositan artefactos en <code>results/</code>, todos leen y dejan notas en <code>NOTES.md</code>, y un modelo verificador decide cuándo se ha cumplido el objetivo.</p>
+        </div>
+        <button type="button" id="orch-toggle-config" class="ghost">Configurar modelos por defecto</button>
+      </div>
+
+      <article id="orch-config-panel" class="card orch-config-card" hidden>
+        <div class="card-top">
+          <div>
+            <p class="kicker">Configuración por defecto</p>
+            <h3>Roles, modelos y ritmo de orquestación</h3>
+          </div>
+          <span id="orch-config-status" class="meta"></span>
+        </div>
+
+        <p id="orch-swap-notice" class="orch-notice" hidden>
+          Este contenedor mantiene 1 modelo cargado a la vez (<code>MAX_LOADED_MODELS=1</code>). Al combinar modelos distintos, Obrador los turna automáticamente en memoria en cada paso sin saturar la RAM.
+        </p>
+
+        <div class="orch-role-grid">
+          <label class="orch-field">
+            <span>Modelo orquestador por defecto (da el ritmo)</span>
+            <select id="orch-cfg-orchestrator"></select>
+            <small class="meta">Planifica cada ronda, lee NOTES.md y asigna tareas a los agentes.</small>
+          </label>
+          <label class="orch-field">
+            <span>Modelo verificador por defecto (comprueba el objetivo)</span>
+            <select id="orch-cfg-verifier"></select>
+            <small class="meta">Inspecciona resultados, ejecuciones y criterios para emitir el dictamen final.</small>
+          </label>
+        </div>
+
+        <div class="orch-workers-block">
+          <div class="card-top">
+            <div>
+              <h4>Modelos de resultados (agentes)</h4>
+              <p class="meta">Cada agente recibe el cuaderno <code>NOTES.md</code>, lee los resultados de otros agentes en <code>results/</code> y deja sus propios entregables.</p>
+            </div>
+            <button type="button" id="orch-add-worker" class="ghost">+ Añadir agente</button>
+          </div>
+          <div id="orch-workers-list" class="orch-workers-list"></div>
+        </div>
+
+        <div class="orch-params-grid">
+          <label class="orch-field">
+            <span>Ritmo por defecto</span>
+            <select id="orch-cfg-pacing">
+              <option value="auto">Automático con cadencia</option>
+              <option value="step">Paso a paso (pausa tras cada ronda)</option>
+            </select>
+          </label>
+          <label class="orch-field">
+            <span>Cadencia entre rondas (s)</span>
+            <input id="orch-cfg-pace" type="number" min="0" max="30" step="0.5" value="1.5">
+          </label>
+          <label class="orch-field">
+            <span>Máximo de rondas</span>
+            <input id="orch-cfg-rounds" type="number" min="1" max="20" step="1" value="4">
+          </label>
+          <label class="orch-field">
+            <span>Timeout sandbox (s)</span>
+            <input id="orch-cfg-timeout" type="number" min="2" max="60" step="1" value="15">
+          </label>
+          <label class="orch-field">
+            <span>Temperatura</span>
+            <input id="orch-cfg-temp" type="number" min="0" max="1.5" step="0.1" value="0.4">
+          </label>
+          <label class="orch-field">
+            <span>Máx. tokens / turno</span>
+            <input id="orch-cfg-tokens" type="number" min="128" max="4096" step="64" value="768">
+          </label>
+        </div>
+
+        <div class="card-top orch-config-foot">
+          <label class="check">
+            <input id="orch-cfg-exec" type="checkbox" checked>
+            Habilitar entorno de ejecución Python (sandbox aislado con acceso a <code>results/</code> y <code>NOTES.md</code>)
+          </label>
+          <div class="row-actions">
+            <button type="button" id="orch-close-config" class="ghost">Ocultar</button>
+            <button type="button" id="orch-save-config" class="primary">Guardar configuración por defecto</button>
+          </div>
+        </div>
+      </article>
+
+      <div class="orch-workbench">
+        <aside class="orch-rail">
+          <form id="orch-new-form" class="card orch-new-card">
+            <p class="kicker">Nueva misión</p>
+            <h3>Definir objetivo</h3>
+            <label class="orch-field">
+              <span>Objetivo a cumplir</span>
+              <textarea id="orch-objective" rows="3" placeholder="Ej. Implementar y verificar en Python un algoritmo para calcular Fibonacci y MCD, guardar los resultados JSON en results/ y validar casos borde."></textarea>
+            </label>
+            <div class="orch-presets" aria-label="Ejemplos rápidos">
+              <button type="button" class="orch-chip" data-preset="code">Algoritmo + pruebas</button>
+              <button type="button" class="orch-chip" data-preset="math">Cálculo verificable</button>
+              <button type="button" class="orch-chip" data-preset="report">Análisis + informe</button>
+            </div>
+            <label class="orch-field">
+              <span>Criterios de verificación (uno por línea, opcional)</span>
+              <textarea id="orch-criteria" rows="3" placeholder="Código ejecutado en sandbox sin errores&#10;Artefactos guardados en results/&#10;Validación cruzada completada"></textarea>
+            </label>
+            <div class="orch-launch-row">
+              <label class="orch-field orch-inline-pace">
+                <span>Ritmo de esta misión</span>
+                <select id="orch-launch-pacing">
+                  <option value="">Según configuración</option>
+                  <option value="auto">Automático</option>
+                  <option value="step">Paso a paso</option>
+                </select>
+              </label>
+              <button type="submit" id="orch-launch" class="primary">Lanzar objetivo</button>
+            </div>
+            <p id="orch-team-summary" class="meta"></p>
+          </form>
+
+          <section class="orch-history">
+            <div class="card-top">
+              <h3>Misiones</h3>
+              <span id="orch-runs-count" class="meta"></span>
+            </div>
+            <div id="orch-runs-list" class="stack"></div>
+          </section>
+        </aside>
+
+        <div class="orch-stage">
+          <article id="orch-empty" class="card orch-empty">
+            <p class="kicker">Flujo colaborativo por objetivos</p>
+            <h3>Lanza un objetivo o selecciona una misión</h3>
+            <p class="meta">Cada misión crea un espacio aislado en disco con un cuaderno compartido <code>NOTES.md</code> y una carpeta <code>results/</code> donde los agentes colaboran:</p>
+            <ol class="orch-steps">
+              <li><strong>Orquestador:</strong> lee <code>NOTES.md</code>, marca el ritmo y asigna tareas en cada ronda.</li>
+              <li><strong>Agentes de resultados + Sandbox:</strong> ejecutan código Python, leen lo que dejaron sus compañeros y depositan artefactos en <code>results/</code>.</li>
+              <li><strong>Verificador:</strong> contrasta evidencias, salidas y criterios para decidir si el objetivo se ha cumplido o qué ajustar en la siguiente ronda.</li>
+            </ol>
+          </article>
+
+          <div id="orch-mission" class="orch-mission" hidden>
+            <article class="card orch-mission-head">
+              <div class="card-top">
+                <div class="orch-mission-title">
+                  <p class="kicker" id="orch-m-id"></p>
+                  <h3 id="orch-m-objective"></h3>
+                </div>
+                <span id="orch-m-status" class="pill"></span>
+              </div>
+
+              <div class="orch-progress-row">
+                <span id="orch-m-phase" class="meta"></span>
+                <span id="orch-m-round" class="meta"></span>
+                <strong id="orch-m-pct">0%</strong>
+              </div>
+              <div class="meter" id="orch-m-meter"><span style="width:0%"></span></div>
+
+              <div id="orch-m-team" class="orch-team-strip"></div>
+
+              <div class="orch-controls">
+                <button type="button" id="orch-btn-pause">Pausar ritmo</button>
+                <button type="button" id="orch-btn-resume" class="primary">Reanudar</button>
+                <button type="button" id="orch-btn-step">Siguiente ronda</button>
+                <button type="button" id="orch-btn-extend">+2 rondas</button>
+                <button type="button" id="orch-btn-stop" class="danger">Detener</button>
+              </div>
+            </article>
+
+            <nav class="orch-subtabs" aria-label="Vistas de la misión">
+              <button type="button" class="orch-subtab is-on" data-subtab="timeline">Flujo y ritmo</button>
+              <button type="button" class="orch-subtab" data-subtab="notes">Cuaderno NOTES.md</button>
+              <button type="button" class="orch-subtab" data-subtab="results" id="orch-subtab-results">Resultados (results/)</button>
+            </nav>
+
+            <div id="orch-pane-timeline" class="orch-pane">
+              <div id="orch-timeline" class="orch-timeline" aria-live="polite"></div>
+            </div>
+
+            <div id="orch-pane-notes" class="orch-pane" hidden>
+              <article class="card orch-doc-card">
+                <div class="card-top">
+                  <div>
+                    <h4>Cuaderno compartido <code>NOTES.md</code></h4>
+                    <p id="orch-notes-path" class="meta"></p>
+                  </div>
+                  <button type="button" id="orch-copy-notes" class="ghost">Copiar NOTES.md</button>
+                </div>
+                <pre id="orch-notes-content" class="orch-doc"></pre>
+                <form id="orch-note-form" class="orch-note-form">
+                  <label class="sr" for="orch-note-input">Dejar nota en NOTES.md</label>
+                  <input id="orch-note-input" type="text" placeholder="Escribe una nota o indicación en NOTES.md (los agentes la leerán en el siguiente turno)…">
+                  <button type="submit" class="primary">Dejar nota</button>
+                </form>
+              </article>
+            </div>
+
+            <div id="orch-pane-results" class="orch-pane" hidden>
+              <div class="orch-results-grid">
+                <article class="card orch-files-card">
+                  <h4>Archivos en <code>results/</code></h4>
+                  <div id="orch-results-list" class="orch-file-list"></div>
+                  <details class="orch-deposit">
+                    <summary>+ Depositar archivo en results/</summary>
+                    <form id="orch-file-form" class="orch-file-form">
+                      <input id="orch-file-name" type="text" placeholder="ej. datos_entrada.txt">
+                      <textarea id="orch-file-content" rows="3" placeholder="Contenido disponible para todos los agentes…"></textarea>
+                      <button type="submit" class="primary">Guardar en results/</button>
+                    </form>
+                  </details>
+                </article>
+                <article class="card orch-viewer-card">
+                  <div class="card-top">
+                    <div>
+                      <h4 id="orch-viewer-name">Selecciona un resultado</h4>
+                      <p id="orch-viewer-meta" class="meta"></p>
+                    </div>
+                    <button type="button" id="orch-copy-file" class="ghost" disabled>Copiar</button>
+                  </div>
+                  <pre id="orch-viewer-content" class="orch-doc">Haz clic en cualquier archivo de la izquierda para inspeccionar su contenido.</pre>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <dialog id="access">
@@ -166,6 +395,7 @@
     </div>
   </dialog>
 
-  <script src="/static/app.js?v=20260929-mobile2"></script>
+  <script src="/static/app.js?v=20261124-orch1"></script>
+  <script src="/static/orchestrator.js?v=20261124-orch1"></script>
 </body>
 </html>
